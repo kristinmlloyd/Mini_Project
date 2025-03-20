@@ -1,0 +1,50 @@
+---
+title: "Humanitarian Aid Under Fire"
+subtitle: "Analyzing Global Patterns of Violence Against Aid Workers"
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+    page-layout: full
+---
+
+![](images/intro2.png){width=100% height=auto style="margin-bottom: 1.5rem; border-radius: 12px;"}
+
+## About This Project
+
+## 🔐 About This Dataset: Aid Worker Security Incidents
+
+This dataset [security_incidents.csv](data/security_incidents.csv) comes from the **Aid Worker Security Database (AWSD)**, a global resource that tracks major incidents of violence against humanitarian aid workers. Maintained by **Humanitarian Outcomes**, the AWSD is a leading source used by researchers, NGOs, and policy makers to understand risks faced by aid personnel in the field.
+
+## 📊 What’s Included in the Data?
+
+Each row in this dataset represents a documented security incident involving humanitarian organizations. Key information includes:
+
+- **Date and Location**: Year, Month, Country, Region, District, City, Coordinates  
+- **Organization Type**: UN, INGOs, NNGOs, ICRC/IFRC, Other aid actors  
+- **Incident Impact**: Number of nationals and internationals killed, wounded, or kidnapped  
+- **Attack Details**: Type of attack (e.g., shooting, kidnapping), context (e.g., ambush, raid), and actor information  
+- **Additional Fields**: Motive, actor type and name, description, and data verification status
+
+## Key Questions
+
+### mermaid diagram
+
+## 🌍 Why This Matters
+
+The AWSD is the only comprehensive global database that documents **targeted violence against aid workers**. It distinguishes between **national and international staff**, allowing deeper insights into the differential risks they face. The database supports **humanitarian access planning**, **risk assessment**, and **evidence-based security policy**.
+
+### 📂 Explore More
+- [Visualizations](data_cleaning.qmd)
+- [Methods](index.qmd)
+- [Data Summary](index.qmd)
+- [Download the Dataset](downloads/security_incidents.csv)
+
+## 📥 Source and Access
+
+This dataset was downloaded directly from: 👉 [Aid Worker Security Database (AWSD)](https://aidworkersecurity.org)
+
+Please cite as:  
+**Humanitarian Outcomes. Aid Worker Security Database (AWSD). https://aidworkersecurity.org**
+

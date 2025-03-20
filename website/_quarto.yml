@@ -1,0 +1,21 @@
+project:
+  type: website
+
+website:
+  title: "Site"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+  page-footer:
+    center: "© 2025 Kristin Lloyd"
+
+format:
+  html:
+    theme: 
+      - flatly
+    css: styles.css
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    code-overflow: wrap
