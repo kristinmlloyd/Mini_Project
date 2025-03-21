@@ -32,254 +32,6 @@ sns.set_theme(style="whitegrid")
 # Load the dataset
 df = pd.read_csv("data/security_incidents_cleaned.csv")
 
-# Display the first few rows
-print("Preview of the dataset:")
-df.head()
-```
-
-```{python}
-
-# Import necessary libraries for interactive plotting
-import plotly.express as px
-import plotly.graph_objects as go
-from IPython.display import display
-
-# Group data by year and country to prepare for animation
-incidents_by_year_country = df.groupby(['year', 'country']).size().reset_index(name='incidents')
-
-# Get total incidents by year for the animation frame sequence
-year_totals = incidents_by_year_country.groupby('year')['incidents'].sum().reset_index()
-year_totals = year_totals.sort_values('year')
-
-# Create animated choropleth map showing incidents by country over time
-fig = px.choropleth(incidents_by_year_country,
-                   locations='country',
-                   locationmode='country names',
-                   color='incidents',
-                   animation_frame='year',
-                   color_continuous_scale='Viridis',
-                   range_color=[0, incidents_by_year_country['incidents'].max()],
-                   title='Security Incidents by Country Over Time',
-                   labels={'incidents': 'Number of Incidents'},
-                   height=600)
-
-# Improve layout
-fig.update_layout(
-    coloraxis_colorbar=dict(
-        title='Number of Incidents'
-    ),
-    geo=dict(
-        showframe=False,
-        showcoastlines=True,
-        projection_type='natural earth'
-    )
-)
-
-# Add slider and play button settings
-fig.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = 1000
-fig.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 500
-
-# Add annotation for total incidents per year
-for year in year_totals['year'].unique():
-    year_total = year_totals.loc[year_totals['year'] == year, 'incidents'].values[0]
-    fig.frames[int(year-year_totals['year'].min())].layout.annotations = [
-        dict(
-            x=0.5,
-            y=1.05,
-            xref='paper',
-            yref='paper',
-            text=f'Total Incidents in {year}: {year_total}',
-            showarrow=False,
-            font=dict(
-                size=16
-            )
-        )
-    ]
-
-# For Quarto output, save as HTML
-fig.write_html("images/interactive_incidents_over_time.html")
-
-# Display for notebook viewing
-fig.show()
-
-# Create an alternative interactive bar chart with year slider
-year_incidents = df.groupby('year').size().reset_index(name='incidents')
-year_incidents['year'] = year_incidents['year'].astype(str)  # Convert year to string for better display
-
-fig2 = px.bar(year_incidents, 
-              x='year', 
-              y='incidents',
-              title='Interactive Security Incidents by Year',
-              labels={'incidents': 'Number of Incidents', 'year': 'Year'},
-              height=500)
-
-# Add range slider
-fig2.update_layout(
-    xaxis=dict(
-        rangeslider=dict(visible=True),
-        type='category'  # Use category type for discrete years
-    ),
-    bargap=0.1,
-    template='plotly_white'
-)
-
-# Save the interactive bar chart
-fig2.write_html("images/interactive_yearly_incidents_barchart.html")
-
-# Show the bar chart
-fig2.show()
-
-print("Interactive visualizations saved as HTML files in the images directory.")
-
-```
-
-```{python}
-
-# Filter data for Palestine, Ukraine, and South Sudan
-focus_countries = ['Occupied Palestinian Territories', 'Ukraine', 'South Sudan']
-focus_df = df[df['country'].isin(focus_countries)]
-
-# Check if we have data for these countries
-countries_found = focus_df['country'].unique()
-print(f"Found data for: {', '.join(countries_found)}")
-print(f"Total incidents: {len(focus_df)}")
-
-# Group data by year and country
-incidents_by_year_country = focus_df.groupby(['year', 'country']).size().reset_index(name='incidents')
-
-# Get available years range
-min_year = focus_df['year'].min()
-max_year = focus_df['year'].max()
-
-# Create line plot with markers
-plt.figure(figsize=(14, 7))
-
-# Define distinct colors for each country
-colors = {'Palestine': 'green', 'Ukraine': 'blue', 'South Sudan': 'red'}
-markers = {'Palestine': 'o', 'Ukraine': 's', 'South Sudan': '^'}
-
-for country in countries_found:
-    country_data = incidents_by_year_country[incidents_by_year_country['country'] == country]
-    plt.plot(country_data['year'], country_data['incidents'], 
-             marker=markers.get(country, 'o'), 
-             linewidth=2.5, 
-             color=colors.get(country),
-             label=country)
-
-plt.title('Security Incidents in Palestine, Ukraine, and South Sudan', fontsize=14)
-plt.xlabel('Year', fontsize=12)
-plt.ylabel('Number of Incidents', fontsize=12)
-plt.grid(True, alpha=0.3)
-plt.legend(fontsize=12)
-
-# Set x-axis to show all years
-plt.xticks(range(min_year, max_year+1), rotation=45)
-
-# Add annotations for key events
-key_events = {
-    'Ukraine': [
-        (2014, 'Crimea annexation'),
-        (2022, 'Full-scale invasion')
-    ],
-    'South Sudan': [
-        (2011, 'Independence'),
-        (2013, 'Civil war begins'),
-        (2018, 'Peace agreement')
-    ],
-    'Palestine': [
-        (2008, '2008-09 Gaza War'),
-        (2014, '2014 Gaza War'),
-        (2021, 'May 2021 conflict'),
-        (2023, 'Oct 2023 conflict')
-    ]
-}
-
-# Add annotations if the years are in our data
-for country in countries_found:
-    if country in key_events:
-        for year, event in key_events[country]:
-            # Check if this year exists in our data for this country
-            year_data = incidents_by_year_country[(incidents_by_year_country['country'] == country) & 
-                                                 (incidents_by_year_country['year'] == year)]
-            if not year_data.empty:
-                incidents_value = year_data['incidents'].values[0]
-                # Calculate vertical offset based on the data range
-                y_range = incidents_by_year_country['incidents'].max() - incidents_by_year_country['incidents'].min()
-                offset = y_range * 0.1  # 10% of the range
-                
-                plt.annotate(f'{event}', 
-                            xy=(year, incidents_value),
-                            xytext=(year, incidents_value + offset),
-                            arrowprops=dict(facecolor=colors.get(country), shrink=0.05, width=1, headwidth=5),
-                            fontsize=9,
-                            color=colors.get(country))
-
-plt.tight_layout()
-plt.savefig('images/three_countries_incidents_comparison.png', dpi=300)
-plt.show()
-
-# Add a bar chart showing casualties for these countries over time
-if 'total_affected' in focus_df.columns:
-    casualties_by_year = focus_df.groupby(['year', 'country'])['total_affected'].sum().reset_index()
-    
-    plt.figure(figsize=(14, 7))
-    
-    for country in countries_found:
-        country_data = casualties_by_year[casualties_by_year['country'] == country]
-        plt.plot(country_data['year'], country_data['total_affected'], 
-                marker=markers.get(country, 'o'), 
-                linewidth=2.5, 
-                color=colors.get(country),
-                label=country)
-    
-    plt.title('Casualties from Security Incidents in Palestine, Ukraine, and South Sudan', fontsize=14)
-    plt.xlabel('Year', fontsize=12)
-    plt.ylabel('Total Casualties', fontsize=12)
-    plt.grid(True, alpha=0.3)
-    plt.legend(fontsize=12)
-    plt.xticks(range(min_year, max_year+1), rotation=45)
-    plt.tight_layout()
-    plt.savefig('images/three_countries_casualties_comparison.png', dpi=300)
-    plt.show()
-
-# Create a stacked bar chart to show the composition of casualties
-if all(col in focus_df.columns for col in ['total_killed', 'total_wounded', 'total_kidnapped']):
-    # Group by year and country, summing up different types of casualties
-    casualty_types = focus_df.groupby(['year', 'country']).agg({
-        'total_killed': 'sum',
-        'total_wounded': 'sum',
-        'total_kidnapped': 'sum'
-    }).reset_index()
-    
-    # Create subplots, one for each country
-    fig, axes = plt.subplots(len(countries_found), 1, figsize=(14, 4*len(countries_found)), sharex=True)
-    
-    for i, country in enumerate(countries_found):
-        country_data = casualty_types[casualty_types['country'] == country]
-        
-        # Convert to wide format for stacked bar
-        country_data_stacked = country_data.set_index('year')
-        
-        # Plot stacked bar
-        country_data_stacked[['total_killed', 'total_wounded', 'total_kidnapped']].plot(
-            kind='bar', stacked=True, ax=axes[i] if len(countries_found) > 1 else axes,
-            color=['darkred', 'orange', 'purple']
-        )
-        
-        # Set title and labels
-        if len(countries_found) > 1:
-            axes[i].set_title(f'{country}: Casualties by Type', fontsize=12)
-            axes[i].set_ylabel('Number of Casualties', fontsize=10)
-            if i == len(countries_found) - 1:
-                axes[i].set_xlabel('Year', fontsize=10)
-        else:
-            axes.set_title(f'{country}: Casualties by Type', fontsize=12)
-            axes.set_ylabel('Number of Casualties', fontsize=10)
-            axes.set_xlabel('Year', fontsize=10)
-    
-    plt.tight_layout()
-    plt.savefig('images/three_countries_casualty_types.png', dpi=300)
-    plt.show()
 ```
 
 
@@ -287,40 +39,6 @@ if all(col in focus_df.columns for col in ['total_killed', 'total_wounded', 'tot
 
 
 
-
-
-
-```{python}
-
-# Get the count of incidents by year
-incidents_by_year = df['year'].value_counts().sort_index()
-
-# Print the number of incidents for each year
-print("Number of incidents by year:")
-for year, count in incidents_by_year.items():
-    print(f"{year}: {count} incidents")
-
-# Create a bar chart to visualize the trend
-plt.figure(figsize=(12, 6))
-sns.barplot(x=incidents_by_year.index, y=incidents_by_year.values, palette='viridis')
-plt.title('Number of Security Incidents by Year')
-plt.xlabel('Year')
-plt.ylabel('Number of Incidents')
-plt.xticks(rotation=45)
-plt.grid(axis='y', linestyle='--', alpha=0.7)
-plt.tight_layout()
-plt.show()
-
-# Get the total number of incidents
-total_incidents = len(df)
-print(f"\nTotal number of incidents in the dataset: {total_incidents}")
-
-# Calculate year range
-min_year = df['year'].min()
-max_year = df['year'].max()
-print(f"Dataset covers incidents from {min_year} to {max_year} ({max_year - min_year + 1} years)")
-
-```
 
 ```{python}
 # Create an interactive map of all incidents
@@ -385,70 +103,221 @@ global_incidents_map
 
 ```{python}
 
-# Filter data for incidents from 2015-2025
-recent_df = df[(df['year'] >= 2015) & (df['year'] <= 2025)]
+# Import necessary libraries for interactive plotting
+import plotly.express as px
+import plotly.graph_objects as go
+from IPython.display import display
 
-print(f"Number of incidents from 2015-2025: {len(recent_df)}")
+# Assuming df is your DataFrame with columns 'year', 'country', and incident data
+# Group data by year and country to prepare for animation
+incidents_by_year_country = df.groupby(['year', 'country']).size().reset_index(name='incidents')
 
-# Create an interactive map of recent incidents (2015-2025)
-def create_recent_incidents_map(data):
-    # Calculate center coordinates for the map (average of all points)
-    center_lat = data['latitude'].mean()
-    center_lon = data['longitude'].mean()
-    
-    # Create a map centered on the average coordinates
-    incidents_map = folium.Map(location=[center_lat, center_lon], zoom_start=2)
-    
-    # Add a marker cluster for better performance with many points
-    marker_cluster = MarkerCluster().add_to(incidents_map)
-    
-    # Add points for each incident with coordinates
-    valid_coords = data[data['latitude'].notna() & data['longitude'].notna()]
-    
-    # Create a color scale based on total_affected
-    def get_color(affected):
-        if pd.isna(affected) or affected == 0:
-            return 'blue'
-        elif affected <= 5:
-            return 'green'
-        elif affected <= 20:
-            return 'orange'
-        else:
-            return 'red'
-    
-    for idx, row in valid_coords.iterrows():
-        # Create popup text with incident details
-        popup_text = f"""
-        <b>Country:</b> {row['country']}<br>
-        <b>Year:</b> {row['year']}<br>
-        <b>Total Affected:</b> {row['total_affected']}<br>
-        <b>Attack Type:</b> {row['means_of_attack'] if 'means_of_attack' in row and pd.notna(row['means_of_attack']) else 'Unknown'}<br>
-        """
-        
-        # Add circle marker
-        folium.CircleMarker(
-            location=[row['latitude'], row['longitude']],
-            radius=5,
-            popup=folium.Popup(popup_text, max_width=300),
-            fill=True,
-            fill_opacity=0.7,
-            color=get_color(row['total_affected']),
-            fill_color=get_color(row['total_affected'])
-        ).add_to(marker_cluster)
-    
-    return incidents_map
+# Get total incidents by year for the animation frame sequence
+year_totals = incidents_by_year_country.groupby('year')['incidents'].sum().reset_index()
+year_totals = year_totals.sort_values('year')
 
-# Create the map for recent incidents
-recent_incidents_map = create_recent_incidents_map(recent_df)
+# Create animated choropleth map showing incidents by country over time
+fig = px.choropleth(incidents_by_year_country,
+                   locations='country',
+                   locationmode='country names',
+                   color='incidents',
+                   animation_frame='year',
+                   color_continuous_scale='Viridis',
+                   range_color=[0, incidents_by_year_country['incidents'].max()],
+                   height=600)
 
-# Save the map as HTML file
-map_filename = "images/recent_security_incidents_map_2015_2025.html"
-recent_incidents_map.save(map_filename)
+# Improve layout with better title spacing
+fig.update_layout(
+    title={
+        'text': 'Security Incidents by Country Over Time',
+        'y': 0.95,  # Move the title up
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top',
+        'font': {'size': 24}  # Increase title font size for better visibility
+    },
+    coloraxis_colorbar=dict(
+        title='Number of Incidents'
+    ),
+    geo=dict(
+        showframe=False,
+        showcoastlines=True,
+        projection_type='natural earth'
+    ),
+    margin=dict(t=100)  # Add extra top margin for spacing
+)
 
-print(f"Interactive map of recent incidents (2015-2025) saved as {map_filename}")
+# Add slider and play button settings
+fig.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = 1000
+fig.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 500
 
-# Display in notebook (if running in Jupyter)
-recent_incidents_map
+# Add annotation for total incidents per year with better spacing
+for i, year in enumerate(year_totals['year'].unique()):
+    year_total = year_totals.loc[year_totals['year'] == year, 'incidents'].values[0]
+    fig.frames[i].layout.annotations = [
+        dict(
+            x=0.5,
+            y=0.87,  # Position subtitle lower than title
+            xref='paper',
+            yref='paper',
+            text=f'Total Incidents in {year}: {year_total}',
+            showarrow=False,
+            font=dict(
+                size=18
+            )
+        )
+    ]
+
+# Also add the annotation to the base layout
+latest_year = year_totals['year'].max()
+latest_total = year_totals.loc[year_totals['year'] == latest_year, 'incidents'].values[0]
+fig.update_layout(
+    annotations=[
+        dict(
+            x=0.5,
+            y=0.87,  # Position subtitle lower than title
+            xref='paper',
+            yref='paper',
+            text=f'Total Incidents in {latest_year}: {latest_total}',
+            showarrow=False,
+            font=dict(
+                size=18
+            )
+        )
+    ]
+)
+
+# For Quarto output, save as HTML
+fig.write_html("images/interactive_incidents_over_time.html")
+
+# Display for notebook viewing
+fig.show()
+
+# Create an alternative interactive bar chart with year slider
+year_incidents = df.groupby('year').size().reset_index(name='incidents')
+year_incidents['year'] = year_incidents['year'].astype(str)  # Convert year to string for better display
+
+fig2 = px.bar(year_incidents,
+               x='year',
+               y='incidents',
+               title='Interactive Security Incidents by Year',
+               labels={'incidents': 'Number of Incidents', 'year': 'Year'},
+               height=500)
+
+# Add range slider
+fig2.update_layout(
+    title={
+        'text': 'Interactive Security Incidents by Year',
+        'y': 0.95,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top',
+    },
+    xaxis=dict(
+        rangeslider=dict(visible=True),
+        type='category'  # Use category type for discrete years
+    ),
+    bargap=0.1,
+    template='plotly_white'
+)
+
+# Save the interactive bar chart
+fig2.write_html("images/interactive_yearly_incidents_barchart.html")
+
+# Show the bar chart
+fig2.show()
 
 ```
 
+###
+
+```{python}
+
+import plotly.express as px
+import pandas as pd
+
+# Assuming df is your DataFrame with columns 'year', 'country', and incident data
+
+# CHART 1: Countries with most incidents over all time
+# Group by country to get total incidents across all years
+total_by_country = df.groupby('country').size().reset_index(name='total_incidents')
+total_by_country = total_by_country.sort_values('total_incidents', ascending=False)
+
+# Get top 15 countries by total incidents
+top15_countries = total_by_country.head(15)
+
+# Create bar chart for top countries over all time
+fig_top_all_time = px.bar(
+    top15_countries,
+    x='country',
+    y='total_incidents',
+    title='Top 15 Countries by Security Incidents (All Time)',
+    labels={'total_incidents': 'Number of Incidents', 'country': 'Country'},
+    color='total_incidents',
+    color_continuous_scale='Viridis',
+    height=600
+)
+
+fig_top_all_time.update_layout(
+    title={
+        'text': 'Top 15 Countries by Security Incidents (All Time)',
+        'y': 0.95,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top',
+        'font': {'size': 20}
+    },
+    xaxis={'categoryorder': 'total descending', 'tickangle': 45},  # Sort bars and angle labels
+    coloraxis_showscale=False  # Hide the color scale
+)
+
+# CHART 2: Countries with most incidents in the last 10 years
+current_year = df['year'].max()
+ten_years_ago = current_year - 10
+
+# Filter data for last 10 years
+recent_df = df[df['year'] >= ten_years_ago]
+
+# Group by country for the last 10 years
+recent_by_country = recent_df.groupby('country').size().reset_index(name='recent_incidents')
+recent_by_country = recent_by_country.sort_values('recent_incidents', ascending=False)
+
+# Get top 15 countries in the last 10 years
+top15_recent = recent_by_country.head(15)
+
+# Create bar chart for top countries in last 10 years
+fig_top_recent = px.bar(
+    top15_recent,
+    x='country',
+    y='recent_incidents',
+    title=f'Top 15 Countries by Security Incidents (Last 10 Years: {ten_years_ago}-{current_year})',
+    labels={'recent_incidents': 'Number of Incidents', 'country': 'Country'},
+    color='recent_incidents',
+    color_continuous_scale='Viridis',
+    height=600
+)
+
+fig_top_recent.update_layout(
+    title={
+        'text': f'Top 15 Countries by Security Incidents (Last 10 Years: {ten_years_ago}-{current_year})',
+        'y': 0.95,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top',
+        'font': {'size': 20}
+    },
+    xaxis={'categoryorder': 'total descending', 'tickangle': 45},  # Sort bars and angle labels
+    coloraxis_showscale=False  # Hide the color scale
+)
+
+# Display the visualizations
+fig_top_all_time.show()
+fig_top_recent.show()
+
+# Save the visualizations
+fig_top_all_time.write_html("images/top_countries_all_time.html")
+fig_top_recent.write_html("images/top_countries_recent.html")
+
+print("Bar chart visualizations saved as HTML files in the images directory.")
+
+```
