@@ -45,7 +45,7 @@ df = pd.read_csv("data/security_incidents.csv")
 df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 
 # Display the first few rows
-df.head()
+df.head(1)
 ```
 
 ```{python}
@@ -75,6 +75,30 @@ plt.xlabel("Percent Missing (%)")
 plt.tight_layout()
 plt.grid(axis='x', linestyle='--', alpha=0.5)
 plt.show()
+```
+
+```{python}
+# Check for missing values
+missing_values = df.isnull().sum()
+missing_percent = (missing_values / len(df) * 100).round(2)
+
+# Create a dataframe of missing values
+missing_df = pd.DataFrame({
+    'Missing Values': missing_values,
+    'Percentage': missing_percent
+})
+
+# Display columns with missing values
+print("Columns with missing values:")
+missing_df[missing_df['Missing Values'] > 0].sort_values('Missing Values', ascending=False)
+
+# Visualize missing values if any exist
+if missing_values.sum() > 0:
+    plt.figure(figsize=(12, 6))
+    sns.heatmap(df.isnull(), cbar=False, cmap='viridis', yticklabels=False)
+    plt.title('Missing Values Heatmap')
+    plt.tight_layout()
+    plt.show()
 ```
 
 ### 3.1 Strategy for Missing Values
@@ -108,6 +132,30 @@ plt.xlabel("Percent Missing (%)")
 plt.tight_layout()
 plt.grid(axis='x', linestyle='--', alpha=0.5)
 plt.show()
+```
+
+```{python}
+# Check for missing values
+missing_values = df.isnull().sum()
+missing_percent = (missing_values / len(df) * 100).round(2)
+
+# Create a dataframe of missing values
+missing_df = pd.DataFrame({
+    'Missing Values': missing_values,
+    'Percentage': missing_percent
+})
+
+# Display columns with missing values
+print("Columns with missing values:")
+missing_df[missing_df['Missing Values'] > 0].sort_values('Missing Values', ascending=False)
+
+# Visualize missing values if any exist
+if missing_values.sum() > 0:
+    plt.figure(figsize=(12, 6))
+    sns.heatmap(df.isnull(), cbar=False, cmap='viridis', yticklabels=False)
+    plt.title('Missing Values Heatmap')
+    plt.tight_layout()
+    plt.show()
 ```
 
 ### 3.2 Missing Values Decision
@@ -212,7 +260,8 @@ Let's identify and visualize outliers in the dataset to better understand extrem
 
 ```{python}
 #| label: outlier-summary
-
+import warnings
+warnings.filterwarnings('ignore', category=FutureWarning)
 # Function to detect outliers using IQR method
 def detect_outliers(df, column):
     q1 = df[column].quantile(0.25)

@@ -2,11 +2,29 @@ project:
   type: website
 
 website:
-  title: "Site"
+  title: "DSAN 5100"
+  favicon: "images/gu-logo.png"
   navbar:
+    search: true
     left:
       - href: index.qmd
-        text: Home
+        text: Introduction
+      - href: index.qmd
+        text: Statistical Methods
+      - text: Results
+        menu: 
+          - href: data_cleaning.qmd
+            text: Data Cleaning
+      - href: eda.qmd
+        text: Conclusion
+      - href: index.qmd
+        text: Bibliography
+      - href: index.qmd
+        text: Appendix
+
+    right:
+      - icon: github
+        href: "https://github.com/kristinmlloyd/Mini_Project.git"
   page-footer:
     center: "© 2025 Kristin Lloyd"
 
