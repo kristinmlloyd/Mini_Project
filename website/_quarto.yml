@@ -3,7 +3,7 @@ project:
 
 website:
   title: "DSAN 5100"
-  favicon: "images/gu-logo.png"
+  favicon: "images/palestine.png"
   navbar:
     search: true
     left:
@@ -15,8 +15,10 @@ website:
         menu: 
           - href: data_cleaning.qmd
             text: Data Cleaning
+          - href: palestine.qmd
+            text: Palestine
       - href: eda.qmd
-        text: Conclusion
+        text: EDA
       - href: index.qmd
         text: Bibliography
       - href: index.qmd

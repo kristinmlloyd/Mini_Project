@@ -1,0 +1,537 @@
+---
+title: "Security Incidents in Palestine: Trends Over Time"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-fold: true
+    number-sections: true
+execute:
+  warning: false
+  message: false
+---
+
+## Introduction
+
+This analysis examines security incidents in the Occupied Palestinian Territories, investigating patterns and trends over time. By examining detailed data on security incidents, this report provides insights into the changing nature of security challenges in the region, focusing on frequency, types of attacks, casualties, and organizations affected.
+
+The security situation in the Occupied Palestinian Territories has evolved significantly over the past two decades. Understanding these patterns is essential for humanitarian organizations, policymakers, and security professionals operating in the region. This analysis aims to provide a data-driven foundation for decision-making and planning.
+
+## What is happening in Palestine?
+
+![](images/palestine.png){width=200px}
+
+Palestine has experienced a complex and turbulent history of conflict that has significantly intensified in recent times. The current crisis stems from decades of territorial disputes and failed peace efforts.
+
+The foundation of the modern conflict began with Israel's creation in 1948, which displaced hundreds of thousands of Palestinians. The situation dramatically changed after the 1967 Six-Day War when Israel gained control of the Gaza Strip, West Bank, and East Jerusalem.
+
+Despite peace efforts through the Oslo Accords in the 1990s that established limited Palestinian self-governance, tensions have remained high, erupting periodically in Palestinian uprisings known as intifadas.
+
+A critical turning point occurred in 2006 when Hamas won Palestinian elections and took control of Gaza, leading to a political split between Gaza and the West Bank. This has resulted in periodic outbreaks of violence, including major confrontations in 2014 and 2021.
+
+The situation dramatically escalated on October 7, 2023, when Hamas launched a surprise attack on Israel, killing over 1,300 Israelis and taking hundreds hostage. Israel responded with a full-scale war, launching air campaigns and ground operations in Gaza.
+
+The humanitarian consequences have been devastating. By early 2025, about 90% of Gaza's population has been displaced, over 46,000 Gazans have died, and essential infrastructure including all hospitals has been destroyed. The region faces a severe humanitarian crisis with widespread food insecurity and limited access to aid.
+
+After fifteen months of fighting, a ceasefire was brokered in January 2025, but its implementation remains uncertain amid political tensions within Israel's government.
+
+```{python}
+#| label: setup
+#| include: false
+
+# Import required libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import folium
+from folium.plugins import MarkerCluster
+from matplotlib.colors import LinearSegmentedColormap
+import warnings
+import plotly.express as px
+import plotly.graph_objects as go
+from IPython.display import display
+from scipy import stats
+
+# Configure plot settings
+plt.rcParams['figure.figsize'] = (8, 5)
+warnings.filterwarnings('ignore', category=FutureWarning)
+sns.set_theme(style="whitegrid")
+
+# Load and prepare data
+df = pd.read_csv("data/security_incidents_cleaned.csv")
+```
+
+## Temporal Trends in Security Incidents
+
+### Overview of Incidents Over Time
+
+The frequency of security incidents provides a crucial indicator of the changing security landscape. The following analysis examines how incident rates have evolved over the years.
+
+```{python}
+
+palestine_data = df[df['country'] == 'Occupied Palestinian Territories']
+
+# Check if we have data
+if len(palestine_data) == 0:
+    print("No data found for 'Occupied Palestinian Territories'")
+else:
+    # Group incidents by year
+    yearly_incidents = palestine_data.groupby('year').size().reset_index(name='incidents')
+    
+    # Create line chart
+    fig = px.line(
+        yearly_incidents, 
+        x='year', 
+        y='incidents',
+        markers=True,
+        labels={'incidents': 'Number of Incidents', 'year': 'Year'},
+        height=400
+    )
+    
+    # Configure layout
+    fig.update_layout(
+        xaxis=dict(tickmode='linear', dtick=2),
+        yaxis=dict(zeroline=True),
+        hovermode='x unified',
+        template='plotly_white'
+    )
+    
+    # Add range slider
+    fig.update_xaxes(rangeslider_visible=True)
+    
+    # Add event annotations
+    events = [
+        {'year': 2006, 'event': 'Hamas takes control of Gaza', 'y_position': 5},
+        {'year': 2014, 'event': 'Israel-Hamas conflict', 'y_position': 10},
+        {'year': 2018, 'event': 'Gaza border protests', 'y_position': 8},
+        {'year': 2021, 'event': '11-day conflict', 'y_position': 7},
+        {'year': 2023, 'event': 'Oct 7 Hamas attack', 'y_position': 15},
+        {'year': 2024, 'event': 'Gaza war escalation', 'y_position': 65}
+    ]
+    
+    for event in events:
+        fig.add_annotation(
+            x=event['year'],
+            y=event['y_position'],
+            text=event['event'],
+            showarrow=True,
+            arrowhead=1,
+            ax=0,
+            ay=-20,  # Less vertical offset (was -30)
+            font=dict(size=9),  # Smaller font size
+            bgcolor="rgba(255,255,255,0.85)",
+            bordercolor="black",
+            borderwidth=1,
+            borderpad=3
+        )
+    
+    # Save and display the figure
+    fig.write_html("images/opt_incidents_overtime.html")
+    fig.show()
+```
+
+```{python}
+
+palestine_data = df[df['country'] == 'Occupied Palestinian Territories']
+
+# Check if we have data
+if len(palestine_data) == 0:
+    print("No data found for 'Occupied Palestinian Territories'")
+else:
+    # Group by year and sum total_affected
+    yearly_affected = (
+        palestine_data.groupby('year')['total_affected']
+        .sum()
+        .reset_index()
+        .rename(columns={'total_affected': 'affected'})
+    )
+    
+    # Create line chart
+    fig = px.line(
+        yearly_affected, 
+        x='year', 
+        y='affected',
+        markers=True,
+        labels={'affected': 'Total Affected Individuals', 'year': 'Year'},
+        height=400
+    )
+    
+    # Configure layout
+    fig.update_layout(
+        xaxis=dict(tickmode='linear', dtick=2),
+        yaxis=dict(zeroline=True),
+        hovermode='x unified',
+        template='plotly_white'
+    )
+    
+    # Add range slider
+    fig.update_xaxes(rangeslider_visible=True)
+    
+    # Save and display the figure
+    fig.write_html("images/opt_affected_overtime.html")
+    fig.show()
+
+```
+
+The line chart above reveals a striking pattern in security incidents in the Occupied Palestinian Territories. For nearly two decades, from 2002 to 2022, incident levels remained relatively stable, typically below 10 incidents per year with occasional modest spikes around 2010, 2014, and 2020, corresponding to periods of heightened tension and conflict.
+
+However, a dramatic shift occurred in 2024, when incidents surged to an unprecedented 68 incidents - representing approximately 43% of all recorded incidents (158 total) in the entire dataset. This extraordinary increase directly reflects the intense escalation following the October 7, 2023 Hamas attack and the subsequent Israeli military campaign in Gaza, which developed into a sustained conflict with severe humanitarian consequences.
+
+The pattern indicates that while periodic cycles of violence have occurred historically, the 2023-2024 escalation represents a significant departure from previous patterns in both scale and intensity. This finding highlights the unprecedented nature of the current conflict, which has resulted in massive civilian casualties, widespread displacement, and severe humanitarian crisis across Gaza. The data underscores how regional geopolitical developments, the collapse of ceasefire negotiations, and the expansion of the conflict beyond Gaza have fundamentally altered security dynamics throughout the Palestinian territories.
+
+## Nature of Security Incidents
+
+### Types of Attacks
+
+Understanding the methods used in security incidents provides insights into the tactics employed by various actors and helps security professionals develop appropriate countermeasures.
+
+```{python}
+#| label: attack-types
+
+# Analyzing means of attack
+attack_counts = palestine_data['means_of_attack'].value_counts().reset_index()
+attack_counts.columns = ['Attack Type', 'Count']
+attack_counts = attack_counts.sort_values('Count', ascending=False).head(10)
+
+# Create horizontal bar chart for better readability
+fig_attacks = px.bar(
+    attack_counts,
+    y='Attack Type',
+    x='Count',
+    title='Most Common Types of Attacks in Occupied Palestinian Territories',
+    color='Count',
+    height=400,
+    orientation='h'
+)
+
+# Configure layout
+fig_attacks.update_layout(
+    yaxis={'categoryorder': 'total ascending'},
+    xaxis_title="Number of Incidents",
+    yaxis_title="Attack Type"
+)
+
+fig_attacks.show()
+```
+
+The horizontal bar chart above shows that aerial bombardment is by far the most common type of attack in the Occupied Palestinian Territories, followed by shooting incidents. This distribution offers important insights into the nature of security threats in the region:
+
+1. **Aerial bombardment**: The predominance of this attack type suggests a significant role of military forces with air capabilities in the conflict.
+
+2. **Shooting incidents**: These represent the second most frequent attack type, indicating that armed confrontations with firearms are also a substantial threat.
+
+3. **Variety of methods**: The data shows a diverse range of attack methods beyond the top two, including shelling, bodily assault, and various forms of explosives and kidnapping.
+
+This information is crucial for security planning, as different types of attacks require different prevention strategies and response protocols. The high proportion of aerial attacks, in particular, highlights the asymmetrical nature of the conflict and the challenges this poses for civilian protection.
+
+## Human Impact of Security Incidents
+
+### Casualties by Category
+
+The human cost of security incidents can be measured in terms of casualties. The following analysis examines how these impacts differ between nationals (local Palestinians) and international personnel.
+
+```{python}
+#| label: casualties-analysis
+
+#| label: casualties-analysis
+
+# Create data for stacked bar chart
+stacked_data = {
+    'Category': ['Nationals', 'Internationals'],
+    'Killed': [
+        palestine_data['nationals_killed'].sum(),
+        palestine_data['internationals_killed'].sum()
+    ],
+    'Wounded': [
+        palestine_data['nationals_wounded'].sum(),
+        palestine_data['internationals_wounded'].sum()
+    ],
+    'Kidnapped': [
+        palestine_data['nationals_kidnapped'].sum(),
+        palestine_data['internationals_kidnapped'].sum()
+    ]
+}
+
+# Convert to DataFrame and reshape for stacking
+stacked_df = pd.DataFrame(stacked_data)
+stacked_df_long = pd.melt(
+    stacked_df,
+    id_vars=['Category'],
+    value_vars=['Killed', 'Wounded', 'Kidnapped'],
+    var_name='Status',
+    value_name='Count'
+)
+
+# Create a stacked bar chart
+fig_stacked = px.bar(
+    stacked_df_long,
+    x='Category',
+    y='Count',
+    color='Status',
+    title='Total Casualties in Occupied Palestinian Territories by Category',
+    barmode='stack',
+    height=450,
+    color_discrete_map={'Killed': '#FF5252', 'Wounded': '#FFBD59', 'Kidnapped': '#64C1FF'}
+)
+
+# Improve layout
+fig_stacked.update_layout(
+    xaxis_title="",
+    yaxis_title="Number of People",
+    legend_title_text=""
+)
+
+fig_stacked.show()
+```
+
+note just kidnapped is so neglible you cant even see it. internationals has 1 instance and nationals has 0.
+
+The stacked bar chart above reveals a stark disparity in the impact of security incidents on different population groups. Nationals (local Palestinians) have suffered significantly higher casualties compared to international personnel, in terms of both fatalities and injuries.
+
+This pattern is not unusual in conflict zones, where local populations typically bear the brunt of violence. However, the scale of the difference is notable and has important implications:
+
+1. **Protection needs**: The disproportionate impact on locals highlights the critical need for civilian protection measures.
+
+2. **Humanitarian considerations**: The high casualty rates among nationals underscore the humanitarian dimension of the conflict.
+
+3. **Risk differentials**: The relatively lower casualties among internationals may reflect differences in exposure, protection measures, or targeting patterns.
+
+These findings emphasize the importance of humanitarian programs that address the needs of local populations, who face the highest security risks in the region.
+
+### Gender Distribution of Affected Individuals
+
+Understanding how security incidents affect different gender groups provides additional insights into vulnerability patterns.
+
+```{python}
+#| label: gender-analysis
+
+# Check if we have gender data
+gender_cols = ['gender_male', 'gender_female']
+if all(col in palestine_data.columns for col in gender_cols):
+    # Sum up total counts by gender
+    gender_totals = {
+        'Gender': ['Male', 'Female'],
+        'Count': [
+            palestine_data['gender_male'].sum(),
+            palestine_data['gender_female'].sum()
+        ]
+    }
+    
+    # Convert to DataFrame
+    gender_df = pd.DataFrame(gender_totals)
+    
+    # Create simple bar chart with same color
+    fig_gender = px.bar(
+        gender_df,
+        x='Gender',
+        y='Count',
+        title='Gender Distribution of Affected Individuals',
+        color_discrete_sequence=['#4C78A8'] * len(gender_df)  # Same blue color for all bars
+    )
+    
+    # Improve layout
+    fig_gender.update_layout(
+        xaxis_title="",
+        yaxis_title="Number of Individuals"
+    )
+    
+    fig_gender.show()
+```
+
+The chart above shows the gender distribution of individuals affected by security incidents, focusing only on confirmed male and female casualties (excluding those of unknown gender). This analysis reveals notable gender disparities in the impact of security incidents.
+
+Males appear to be more frequently affected than females, which aligns with patterns observed in many conflict zones. This gender disparity can be influenced by several factors:
+
+1. **Gender roles**: In some contexts, males may have higher exposure to security risks due to mobility patterns or engagement in certain activities.
+
+2. **Targeting patterns**: Some types of security incidents may affect certain gender groups disproportionately.
+
+3. **Reporting biases**: It's important to acknowledge that data collection in conflict zones can sometimes undercount impacts on certain groups.
+
+Understanding these gender dimensions is crucial for developing gender-sensitive security protocols and humanitarian responses that address the specific protection needs of different groups.
+
+## Actors and Targets in Security Incidents
+
+### Comparison of Actor Types
+
+Identifying the actors responsible for security incidents helps in understanding the conflict dynamics and potential motivations.
+
+```{python}
+
+#| label: actor-analysis
+
+# Analyze actor types, focusing only on Host State vs Foreign
+if 'actor_type' in palestine_data.columns and not palestine_data['actor_type'].isna().all():
+    # Filter only for Host State and Foreign actors
+    relevant_actors = ['Host state', 'Foreign or coalition forces']
+    actor_data = palestine_data[palestine_data['actor_type'].isin(relevant_actors)]
+    
+    # Check if we have data for these specific actors
+    if len(actor_data) > 0:
+        actor_counts = actor_data['actor_type'].value_counts().reset_index()
+        actor_counts.columns = ['Actor Type', 'Count']
+        
+        # Create a column chart with same color
+        fig_actors = px.bar(
+            actor_counts,
+            x='Actor Type',
+            y='Count',
+            title='Host State vs Foreign Actors in Security Incidents',
+            color_discrete_sequence=['#4C78A8'] * len(actor_counts)
+        )
+        
+        # Improve layout
+        fig_actors.update_layout(
+            xaxis_title="",
+            yaxis_title="Number of Incidents"
+        )
+        
+        fig_actors.show()
+    else:
+        print("No data found for Host State or Foreign actors")
+        
+```
+
+This analysis focuses specifically on two major actor types responsible for security incidents: Host State forces and Foreign/coalition forces. Other actor categories were excluded due to their smaller numbers and to enable a clear comparison between these two primary groups.
+
+The chart reveals a notable difference in the frequency of incidents attributed to each actor type. This comparison provides important context for understanding the sources of security threats in the region:
+
+1. **Responsibility patterns**: The data shows which forces are associated with more security incidents, helping to identify key actors in the conflict.
+
+2. **Conflict dynamics**: The relative role of host state versus foreign forces offers insights into the nature of the conflict and external involvement.
+
+3. **Accountability implications**: Understanding which actors are responsible for incidents has implications for accountability and human rights monitoring.
+
+Statistical testing helps determine whether the observed difference between actor types is significant or could have occurred by chance, providing additional rigor to the analysis.
+
+### Organizations Affected by Security Incidents
+
+Different types of organizations operating in the Occupied Palestinian Territories face varying levels of security risk. This analysis examines which organizations are most frequently affected by incidents.
+
+```{python}
+#| label: organization-analysis
+
+# Count incidents affecting different organization types
+org_cols = ['un', 'ingo', 'icrc', 'nrcs_and_ifrc', 'nngo', 'other']
+
+# Create a summary of total incidents by organization type
+org_totals = palestine_data[org_cols].sum().reset_index()
+org_totals.columns = ['Organization Type', 'Total Incidents']
+
+# Sort by total incidents for better visualization
+org_totals = org_totals.sort_values('Total Incidents', ascending=False)
+
+# Create better labels for organization types
+org_labels = {
+    'un': 'United Nations',
+    'ingo': 'International NGO',
+    'icrc': 'Int. Committee of Red Cross',
+    'nrcs_and_ifrc': 'National Red Cross/Red Crescent',
+    'nngo': 'National NGO',
+    'other': 'Other Organizations'
+}
+
+# Map the short names to full names
+org_totals['Organization'] = org_totals['Organization Type'].map(org_labels)
+
+# Create a horizontal bar chart with uniform color
+fig_orgs = px.bar(
+    org_totals,
+    y='Organization',
+    x='Total Incidents',
+    title='Security Incidents by Organization Type in Occupied Palestinian Territories',
+    height=450,
+    orientation='h',
+    color_discrete_sequence=['#4C78A8'] * len(org_totals)
+)
+
+# Improve layout
+fig_orgs.update_layout(
+    yaxis_title="",
+    xaxis_title="Number of Incidents",
+    yaxis={'categoryorder': 'total ascending'}
+)
+
+fig_orgs.show()
+```
+
+The chart above shows how security incidents have affected different types of organizations operating in the Occupied Palestinian Territories. This distribution reveals several important patterns:
+
+1. **Organizational vulnerability**: Some organizations appear to be more frequently affected by security incidents than others, which may reflect differences in their operational footprint, visibility, or targeting patterns.
+
+2. **International vs. local exposure**: The data allows comparison between international organizations (UN, INGOs, ICRC) and local entities, highlighting any disparities in security risks.
+
+3. **Humanitarian access challenges**: Organizations providing humanitarian assistance face varying levels of security threats, which has implications for service delivery to vulnerable populations.
+
+These findings can help organizations develop security strategies tailored to their specific risk profiles and improve coordination between different actors operating in the region.
+
+## attack context
+
+```{python}
+
+# Analyze attack contexts
+if 'attack_context' in palestine_data.columns:
+    # Get counts of incidents by attack context
+    context_counts = palestine_data['attack_context'].value_counts().reset_index()
+    context_counts.columns = ['Attack Context', 'Count']
+    
+    # Sort by count for better visualization
+    context_counts = context_counts.sort_values('Count', ascending=False)
+    
+    # Create a column chart
+    fig_context = px.bar(
+        context_counts,
+        x='Attack Context',
+        y='Count',
+        title='Security Incidents by Attack Context in Occupied Palestinian Territories',
+        color_discrete_sequence=['#4C78A8'] * len(context_counts)  # Same blue color for all bars
+    )
+    
+    # Improve layout
+    fig_context.update_layout(
+        xaxis_title="",
+        yaxis_title="Number of Incidents",
+        xaxis={'categoryorder': 'total descending', 'tickangle': 45}  # Angled labels for better readability
+    )
+    
+    fig_context.show()
+else:
+    print("Attack context data not available")
+
+```
+
+"Combat/Crossfire" is overwhelmingly the most common context for security incidents, accounting for over 100 incidents - far more than all other contexts combined. This suggests that most security incidents occur during active combat situations where individuals are caught between opposing forces.
+The second and third most common contexts are "Individual attack" and "Unknown," each accounting for approximately 15-20 incidents. "Individual attack" likely refers to targeted incidents against specific people or small groups, as opposed to broader combat situations.
+Less frequent contexts include "Ambush" (about 7 incidents), "Raid" (approximately 3 incidents), and "Detention" (just 1 incident).
+This distribution has important implications for security planning in the region:
+
+The predominance of combat/crossfire incidents suggests that being caught in active conflict zones represents the greatest security risk.
+The significant gap between combat-related incidents and other types indicates that conflict avoidance should be a primary security strategy.
+Individual attacks, while less common than combat incidents, still represent a notable security threat that requires different mitigation approaches than those for combat situations.
+
+## Conclusion
+
+This analysis of security incidents in the Occupied Palestinian Territories reveals several critical patterns and trends:
+
+1. **Dramatic recent escalation**: After nearly two decades of relatively stable incident levels, 2024 saw an unprecedented surge in security incidents, accounting for 43% of all recorded incidents in the dataset.
+
+2. **Predominant attack methods**: Aerial bombardment and shooting incidents emerge as the most common types of attacks, highlighting the nature of military operations in the region.
+
+3. **Disproportionate impact on locals**: Palestinian nationals have suffered significantly higher casualties compared to international personnel, underscoring the humanitarian dimension of the conflict.
+
+4. **Gender disparities**: Males appear to be more frequently affected by security incidents than females, though this pattern requires careful interpretation.
+
+5. **Actor dynamics**: The analysis reveals differences in the frequency of incidents attributed to host state versus foreign forces, providing context on responsibility patterns.
+
+6. **Organizational vulnerability**: Various organizations operating in the region face different levels of security risk, which has implications for humanitarian access and service delivery.
+
+These findings have important implications for security planning, humanitarian programming, and policy development. They highlight the need for:
+
+- Enhanced civilian protection measures, particularly for local populations
+- Targeted security protocols based on the most common types of attacks
+- Gender-sensitive approaches to security and humanitarian assistance
+- Improved coordination among organizations operating in the region
+- Continued monitoring of security trends, especially given the recent escalation
+
+By providing a data-driven understanding of security patterns in the Occupied Palestinian Territories, this analysis aims to contribute to safer and more effective operations in this challenging environment.
