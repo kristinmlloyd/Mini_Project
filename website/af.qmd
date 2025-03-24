@@ -1,5 +1,5 @@
 ---
-title: "Security Incidents in Palestine: Trends and Patterns (2002-2025)"
+title: "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)"
 format:
   html:
     toc: true
@@ -14,7 +14,6 @@ format:
 execute:
   warning: false
   message: false
-editor: visual
 ---
 
 ```{python}
@@ -53,16 +52,30 @@ country_data = df[df['country'] == 'Afghanistan']
 
 # Background: The Conflict
 
-```{python}
-
-from IPython.display import Image
-Image("images/african.png", width=500)
-
-```
+![](images/af2.png)
 
 ## Historical Context
 
+Afghanistan has experienced over four decades of continuous conflict since the Soviet invasion in 1979. Following the Soviet withdrawal in 1989, the country descended into civil war, eventually leading to Taliban rule from 1996 to 2001. After the September 11, 2001 attacks, a US-led coalition overthrew the Taliban regime, establishing the Islamic Republic of Afghanistan.
+The subsequent two decades saw ongoing insurgency, with the Taliban gradually regaining control of territory despite the presence of international forces. Key developments included:
+
+2001-2014: NATO-led International Security Assistance Force (ISAF) mission
+2014-2021: NATO Resolute Support Mission focused on training Afghan forces
+2020: US-Taliban peace agreement signed in Doha, Qatar
+August 2021: Taliban takeover following US and NATO withdrawal
+
 ## Recent Escalation
+
+Following the Taliban's return to power in August 2021, Afghanistan has faced multiple interconnected crises:
+
+Political transformation under Taliban governance
+Economic collapse and banking sector crisis
+Severe humanitarian emergency with over 28 million people needing assistance
+Increasing security threats from ISIS-Khorasan (ISIS-K)
+Natural disasters including earthquakes and drought
+International isolation and sanctions affecting aid delivery
+
+These factors have created a challenging operational environment for humanitarian organizations, with significant implications for security risk management.
 
 # Temporal Trends in Security Incidents {#sec-temporal}
 
@@ -70,7 +83,7 @@ Image("images/african.png", width=500)
 
 ```{python}
 #| label: fig-yearly-incidents
-#| fig-cap: "Security incidents in Palestine from 2002 to 2025"
+#| fig-cap: "Security incidents in Afghanistan from 2002 to 2025"
 #| echo: false
 
 # Group incidents by year
@@ -98,14 +111,13 @@ fig.update_layout(
 # Add range slider
 fig.update_xaxes(rangeslider_visible=True)
 
-# Add event annotations
+# Add Afghanistan-specific event annotations
 events = [
-    {'year': 2006, 'event': 'Hamas takes control of Gaza', 'y_position': 5},
-    {'year': 2014, 'event': 'Israel-Hamas conflict', 'y_position': 10},
-    {'year': 2018, 'event': 'Gaza border protests', 'y_position': 8},
-    {'year': 2021, 'event': '11-day conflict', 'y_position': 7},
-    {'year': 2023, 'event': 'Oct 7 Hamas attack', 'y_position': 15},
-    {'year': 2024, 'event': 'Gaza war escalation', 'y_position': 65}
+    {'year': 2001, 'event': 'US invasion after 9/11', 'y_position': 5},
+    {'year': 2009, 'event': 'US troop surge', 'y_position': 12},
+    {'year': 2014, 'event': 'NATO combat mission ends', 'y_position': 15},
+    {'year': 2018, 'event': 'First peace talks with Taliban', 'y_position': 10},
+    {'year': 2021, 'event': 'US withdrawal, Taliban return', 'y_position': 18}
 ]
 
 for event in events:
@@ -128,6 +140,15 @@ fig.show()
 ```
 
 ### Analysis of Incident Trends
+
+The line chart illustrates how security incidents in Afghanistan have evolved over time, with several notable patterns:
+
+Fluctuations correspond closely with major political and military developments
+Peak periods align with heightened conflict intensity and expanded insurgent activity
+Decreases often coincide with ceasefire periods or reduced international military presence
+The post-2021 Taliban takeover period shows changed security dynamics
+
+These temporal patterns reflect Afghanistan's complex conflict landscape, where multiple factors—including seasonal fighting patterns, political negotiations, and changes in military strategy—influence security incident frequency. Understanding these trends helps organizations anticipate periods of potentially increased risk and adapt their security postures accordingly.
 
 ## Effected Indivudals Over Time
 
@@ -171,6 +192,16 @@ fig.show()
 
 ### Analysis of Humans Impacted
 
+The chart above tracks the total number of individuals affected by security incidents over time, highlighting years of particularly severe human impact. While incident frequency provides insight into the overall security situation, this measurement of affected individuals captures the humanitarian toll of these incidents.
+Several noteworthy patterns emerge:
+
+The human impact does not always directly correlate with incident frequency
+Some years show fewer but more devastating incidents
+Others display many incidents with comparatively lower human impact
+Major spikes often coincide with shifts in conflict dynamics or tactics
+
+This metric helps organizations understand not just how often incidents occur, but their severity and human cost—crucial information for both security planning and humanitarian response programming.
+
 # Nature of Security Incidents {#sec-nature}
 
 ## Predominant Attack Types
@@ -210,9 +241,24 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
+The horizontal bar chart reveals that kidnapping is the most prevalent method used in security incidents in Afghanistan, followed closely by shooting incidents. This distribution provides important insights into the nature of security threats in the region:
+
+1. **Kidnapping dominance**: The high frequency of kidnapping incidents reflects Afghanistan's complex security environment where abductions serve multiple purposes - from financial gain through ransoms to political leverage. This creates significant risks for both international and local personnel.
+
+2. **Armed violence**: Shooting incidents represent the second most frequent attack type, indicating the widespread availability of firearms and their regular use in security incidents. This aligns with Afghanistan's history of armed conflict and the proliferation of weapons.
+
+3. **IED threat**: Both vehicle-borne and roadside IEDs appear in the mid-range of attack methods, representing a significant but not dominant threat. These sophisticated attack methods typically indicate organized armed group activity.
+
 ## Attack Contexts
 
 ### Analysis of Attack Contexts
+
+Key Findings:
+
+- Combat/crossfire represents a significant proportion of incidents, indicating the ongoing active conflict environment
+- Direct targeted attacks account for many incidents, showing deliberate targeting rather than collateral impact
+- Ambushes feature prominently, highlighting risks along travel routes and during movements
+- Raids on facilities demonstrate vulnerabilities of fixed installations and compounds
 
 # Human Impact of Security Incidents {#sec-impact}
 
@@ -279,6 +325,20 @@ fig_stacked.show()
 
 ### Analysis of Casualty Patterns
 
+The stacked bar chart reveals a stark disparity in how security incidents affect different population groups in Afghanistan:
+
+- Afghan nationals have suffered significantly higher casualties across all categories, with roughly 440 killed, 350 wounded, and 430 kidnapped
+- International personnel have experienced far fewer casualties, approximately 90 total across all categories
+- The ratio of nationals to internationals affected is about 10:1
+
+This pattern is not unusual in conflict zones, where local populations typically bear the brunt of violence. However, the scale of the difference is notable and has important implications:
+
+1. **Protection needs**: The disproportionate impact on locals highlights the critical need for civilian protection measures that extend beyond international personnel.
+
+2. **Humanitarian considerations**: The high casualty rates among Afghan nationals underscore the humanitarian dimension of the conflict, beyond the security of aid workers.
+
+3. **Risk differentials**: The relatively lower casualties among internationals may reflect differences in exposure, protection measures, or targeting patterns.
+
 ## Gender Distribution of Affected Individuals
 
 ```{python}
@@ -323,6 +383,12 @@ if all(col in country_data.columns for col in gender_cols):
 ```
 
 ### Analysis of Gender Patterns
+
+The gender distribution of individuals affected by security incidents in Afghanistan shows a pronounced disparity:
+
+- Males account for approximately 88% of all affected individuals (around 670 victims)
+- Females represent about 12% of affected individuals (approximately 90 victims)
+- The male-to-female ratio of roughly 7.5:1 is substantial
 
 # Organizations and Actors {#sec-organizations}
 
@@ -381,6 +447,13 @@ fig_orgs.show()
 
 ### Analysis of Organizational Impact
 
+The horizontal bar chart reveals which types of organizations are most frequently affected by security incidents in Afghanistan:
+
+- International NGOs (INGOs) have experienced the highest number of incidents (approximately 600)
+- National NGOs follow with around 400 incidents
+- United Nations entities rank third with about 200 incidents
+- ICRC, National Red Cross/Red Crescent, and other organizations face significantly fewer incidents
+
 ## Comparison of Actor Types
 
 ```{python}
@@ -420,6 +493,16 @@ if len(actor_data) > 0:
 
 ### Analysis of Actor Responsibility
 
+The comparison between host state and foreign/coalition forces reveals that foreign or coalition forces were associated with more security incidents (approximately 8) than host state forces (about 3) in Afghanistan. This pattern is noteworthy and requires careful interpretation:
+
+1. **Foreign military presence**: The higher number of incidents attributed to foreign forces likely reflects the significant international military presence in Afghanistan over two decades, particularly NATO and US forces.
+
+2. **Operational tempo**: Foreign forces may have conducted more operations in areas where humanitarian organizations were present, increasing the likelihood of security incidents.
+
+3. **Reporting factors**: The difference might also reflect reporting patterns, with incidents involving foreign forces potentially more likely to be documented.
+
+4. **Time period consideration**: This pattern may vary significantly depending on the specific years covered in the dataset, as foreign military presence and tactics changed substantially over time in Afghanistan.
+
 # Major Incidents {#sec-major}
 
 ## Top 5 Most Impactful Security Incidents
@@ -450,16 +533,54 @@ if not country_data.empty and 'total_affected' in country_data.columns:
 
 ### Analysis of Major Incidents
 
+The table above highlights the five most impactful security incidents in Afghanistan based on the total number of people affected. These high-casualty events reveal several important patterns:
+
+- The most severe incident occurred in 2015 at a project site, resulting in 49 casualties (14 killed and 35 wounded), indicating the vulnerability of development projects in Afghanistan
+- Office/compound locations feature prominently in the data, appearing twice in the top five incidents (in 2021 and 2009), suggesting that fixed facilities remain high-value targets
+- Road incidents also pose significant risks, as shown by the 2009 incident with 16 affected individuals, likely representing a kidnapping event given the absence of killed or wounded
+- The incidents span from 2009 to 2021, demonstrating that high-impact security events have been a persistent feature of the Afghan security landscape across different phases of the conflict
+- Three of the five incidents resulted in fatalities, while two incidents (both with 12 affected individuals) show no deaths or injuries, suggesting these were likely kidnapping incidents
+
+These high-impact events, while relatively rare, account for a disproportionate share of total casualties. 
+
+For more detailed information on the Israeli-Palestinian conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/war-afghanistan).
+
 # Conclusions and Recommendations {#sec-conclusions}
 
 ## Key Findings
+
+- Kidnapping and shooting dominate Afghanistan's security incident landscape
+- Afghan nationals suffer casualties at rates approximately 10 times higher than internationals
+- Males account for nearly 90% of all affected individuals
+- International NGOs experience the highest number of security incidents
+- Office compounds and project sites are particularly vulnerable to high-casualty events
 
 ## Recommendations
 
 ### For Security Planning
 
+- Implement robust kidnapping prevention protocols and staff training
+- Strengthen office/compound security with enhanced physical barriers
+- Develop context-specific standard operating procedures for high-risk areas
+- Establish clear communication channels and early warning systems
+
 ### For Humanitarian Organizations
+
+- Prioritize protection measures for Afghan national staff
+- Create gender-sensitive security plans acknowledging different risk profiles
+- Share security information across organizations operating in the same areas
+- Document incidents thoroughly to improve collective understanding
 
 ### For Policy Development
 
+- Advocate for enhanced civilian protection, especially for humanitarian workers
+- Support accountability mechanisms for security incidents
+- Promote conflict resolution initiatives addressing root causes of violence
+- Strengthen coordination between security actors and humanitarian organizations
+
 ### For Future Research
+
+- Examine regional variations in security risks across Afghanistan
+- Analyze how the 2021 Taliban takeover has shifted security patterns
+- Study the effectiveness of various risk reduction measures
+- Investigate linkages between development activities and security risks

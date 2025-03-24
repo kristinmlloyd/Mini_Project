@@ -53,12 +53,7 @@ country_data = df[df['country'] == 'DR Congo']
 
 # Background: The Conflict
 
-```{python}
-
-from IPython.display import Image
-Image("images/african.png", width=500)
-
-```
+![](images/dr.png)
 
 ## Historical Context
 

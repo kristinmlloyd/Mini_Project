@@ -14,7 +14,6 @@ format:
 execute:
   warning: false
   message: false
-editor: visual
 ---
 
 ```{python}
@@ -52,44 +51,43 @@ if len(palestine_data) == 0:
     print("No data found for 'Occupied Palestinian Territories'")
 ```
 
+![](images/palestine.png)
+
 # Executive Summary
 
 This analysis examines security incidents in the Occupied Palestinian Territories from 2002 to 2025, revealing significant patterns and trends. Key findings include:
 
-- **Dramatic escalation in 2023-2024**: Following the October 7, 2023 Hamas attack and subsequent Israeli military campaign, security incidents surged to unprecedented levels in 2024.
-- **Aerial bombardment** is the predominant attack method, reflecting the nature of military operations in the region.
-- **Palestinians bear the brunt** of the conflict, with nationals suffering significantly higher casualties than international personnel.
-- **Combat/crossfire** contexts account for the majority of incidents, highlighting the risks of active conflict zones.
+-   **Dramatic escalation in 2023-2024**: Following the October 7, 2023 Hamas attack and subsequent Israeli military campaign, security incidents surged to unprecedented levels in 2024.
+-   **Aerial bombardment** is the predominant attack method, reflecting the nature of military operations in the region.
+-   **Palestinians bear the brunt** of the conflict, with nationals suffering significantly higher casualties than international personnel.
+-   **Combat/crossfire** contexts account for the majority of incidents, highlighting the risks of active conflict zones.
 
 These findings have critical implications for humanitarian operations, civilian protection strategies, and policy development in the region.
 
 # Background: The Palestinian Conflict
 
-```{python}
-
-from IPython.display import Image
-Image("images/palestine.png", width=500)
+```{}
 ```
 
 ## Historical Context
 
 Palestine has experienced a complex and turbulent history of conflict that has significantly intensified in recent times. The current crisis stems from decades of territorial disputes and failed peace efforts:
 
-- **1948**: Israel's creation displaced hundreds of thousands of Palestinians
-- **1967**: Six-Day War led to Israeli control of Gaza Strip, West Bank, and East Jerusalem
-- **1990s**: Oslo Accords established limited Palestinian self-governance
-- **2006**: Hamas won Palestinian elections and took control of Gaza
-- **2014 & 2021**: Major confrontations between Hamas and Israel
+-   **1948**: Israel's creation displaced hundreds of thousands of Palestinians
+-   **1967**: Six-Day War led to Israeli control of Gaza Strip, West Bank, and East Jerusalem
+-   **1990s**: Oslo Accords established limited Palestinian self-governance
+-   **2006**: Hamas won Palestinian elections and took control of Gaza
+-   **2014 & 2021**: Major confrontations between Hamas and Israel
 
 ## Recent Escalation (2023-2025)
 
 The situation dramatically escalated on October 7, 2023, when Hamas launched a surprise attack on Israel, killing over 1,300 Israelis and taking hundreds hostage. Israel responded with a full-scale war in Gaza that has had devastating humanitarian consequences:
 
-- Approximately 90% of Gaza's population displaced
-- Over 46,000 Palestinian casualties reported
-- Destruction of essential infrastructure including hospitals
-- Severe humanitarian crisis with widespread food insecurity
-- Limited access to humanitarian aid
+-   Approximately 90% of Gaza's population displaced
+-   Over 46,000 Palestinian casualties reported
+-   Destruction of essential infrastructure including hospitals
+-   Severe humanitarian crisis with widespread food insecurity
+-   Limited access to humanitarian aid
 
 A ceasefire was brokered in January 2025, but its implementation remains uncertain amid ongoing political tensions.
 
@@ -160,11 +158,11 @@ fig.show()
 
 The line chart reveals a striking pattern in security incidents in the Occupied Palestinian Territories:
 
-- **Relative stability (2002-2022)**: For nearly two decades, incident levels remained relatively stable, typically below 10 incidents per year with occasional modest spikes around 2010, 2014, and 2020, corresponding to periods of heightened tension.
+-   **Relative stability (2002-2022)**: For nearly two decades, incident levels remained relatively stable, typically below 10 incidents per year with occasional modest spikes around 2010, 2014, and 2020, corresponding to periods of heightened tension.
 
-- **Unprecedented surge (2023-2024)**: A dramatic shift occurred after the October 7, 2023 Hamas attack, with incidents surging to 68 in 2024 - representing approximately 43% of all recorded incidents in the entire dataset.
+-   **Unprecedented surge (2023-2024)**: A dramatic shift occurred after the October 7, 2023 Hamas attack, with incidents surging to 68 in 2024 - representing approximately 43% of all recorded incidents in the entire dataset.
 
-- **Historical context**: While periodic cycles of violence have occurred historically, the 2023-2024 escalation represents a significant departure from previous patterns in both scale and intensity.
+-   **Historical context**: While periodic cycles of violence have occurred historically, the 2023-2024 escalation represents a significant departure from previous patterns in both scale and intensity.
 
 This finding highlights the unprecedented nature of the current conflict, which has fundamentally altered security dynamics throughout the Palestinian territories.
 
@@ -253,11 +251,11 @@ fig_attacks.show()
 
 The horizontal bar chart reveals that **aerial bombardment** is by far the most common type of attack in the Occupied Palestinian Territories, followed by shooting incidents. This distribution offers important insights:
 
-1. **Military nature of conflict**: The predominance of aerial bombardment suggests a significant role of military forces with air capabilities in the conflict.
+1.  **Military nature of conflict**: The predominance of aerial bombardment suggests a significant role of military forces with air capabilities in the conflict.
 
-2. **Diversity of threats**: Beyond the top two methods, the data shows a range of attack types including shelling, bodily assault, and various forms of explosives.
+2.  **Diversity of threats**: Beyond the top two methods, the data shows a range of attack types including shelling, bodily assault, and various forms of explosives.
 
-3. **Civilian vulnerability**: Many of these attack types affect wide areas, putting civilians at significant risk even when not directly targeted.
+3.  **Civilian vulnerability**: Many of these attack types affect wide areas, putting civilians at significant risk even when not directly targeted.
 
 This information is crucial for security planning, as different types of attacks require different prevention strategies and response protocols.
 
@@ -301,11 +299,11 @@ fig_context.show()
 
 "Combat/Crossfire" is overwhelmingly the most common context for security incidents, accounting for over 100 incidents - far more than all other contexts combined. This finding has important implications:
 
-1. **Collateral impact**: Many incidents occur during active combat situations where individuals are caught between opposing forces rather than being directly targeted.
+1.  **Collateral impact**: Many incidents occur during active combat situations where individuals are caught between opposing forces rather than being directly targeted.
 
-2. **Conflict zone risks**: Being in or near active conflict zones represents the greatest security risk in the region.
+2.  **Conflict zone risks**: Being in or near active conflict zones represents the greatest security risk in the region.
 
-3. **Security planning**: Different contexts require different security approaches - avoiding combat zones entirely may be more effective than other security measures.
+3.  **Security planning**: Different contexts require different security approaches - avoiding combat zones entirely may be more effective than other security measures.
 
 The significant number of "Individual attack" incidents (second most common) also suggests that targeted violence remains a notable security concern, requiring different mitigation strategies.
 
@@ -375,11 +373,11 @@ fig_stacked.show()
 
 The stacked bar chart reveals a stark disparity in the impact of security incidents on different population groups:
 
-- **Disproportionate local impact**: Nationals (local Palestinians) have suffered significantly higher casualties compared to international personnel, in both fatalities and injuries.
+-   **Disproportionate local impact**: Nationals (local Palestinians) have suffered significantly higher casualties compared to international personnel, in both fatalities and injuries.
 
-- **Minimal kidnapping incidents**: Kidnapping appears to be exceedingly rare, with only one recorded case involving international personnel and none for nationals.
+-   **Minimal kidnapping incidents**: Kidnapping appears to be exceedingly rare, with only one recorded case involving international personnel and none for nationals.
 
-- **Scale of humanitarian crisis**: The high casualty figures for nationals underscore the severe humanitarian impact of the conflict on local populations.
+-   **Scale of humanitarian crisis**: The high casualty figures for nationals underscore the severe humanitarian impact of the conflict on local populations.
 
 This pattern is not unusual in conflict zones, where local populations typically bear the brunt of violence. However, the scale of the difference is notable and has important implications for civilian protection and humanitarian programming.
 
@@ -430,11 +428,11 @@ if all(col in palestine_data.columns for col in gender_cols):
 
 The chart shows the gender distribution of individuals affected by security incidents, focusing only on confirmed male and female casualties. Males appear to be more frequently affected than females, which aligns with patterns observed in many conflict zones. This gender disparity can be influenced by several factors:
 
-1. **Gender roles and mobility**: Males may have higher exposure to security risks due to mobility patterns or engagement in certain activities.
+1.  **Gender roles and mobility**: Males may have higher exposure to security risks due to mobility patterns or engagement in certain activities.
 
-2. **Targeting patterns**: Some types of security incidents may affect certain gender groups disproportionately.
+2.  **Targeting patterns**: Some types of security incidents may affect certain gender groups disproportionately.
 
-3. **Data limitations**: It's important to note that data collection in conflict zones can sometimes undercount impacts on specific groups.
+3.  **Data limitations**: It's important to note that data collection in conflict zones can sometimes undercount impacts on specific groups.
 
 Understanding these gender dimensions is crucial for developing gender-sensitive security protocols and humanitarian responses.
 
@@ -497,11 +495,11 @@ fig_orgs.show()
 
 The chart shows how security incidents have affected different types of organizations operating in the Occupied Palestinian Territories. This distribution reveals several important patterns:
 
-1. **United Nations vulnerability**: UN organizations have been affected by the highest number of incidents, potentially reflecting their widespread presence and high visibility in the region.
+1.  **United Nations vulnerability**: UN organizations have been affected by the highest number of incidents, potentially reflecting their widespread presence and high visibility in the region.
 
-2. **International vs. local exposure**: International organizations appear more frequently affected than local entities, which may reflect differences in operational footprint, reporting practices, or targeting patterns.
+2.  **International vs. local exposure**: International organizations appear more frequently affected than local entities, which may reflect differences in operational footprint, reporting practices, or targeting patterns.
 
-3. **Humanitarian access challenges**: The significant impact on humanitarian organizations has implications for service delivery to vulnerable populations.
+3.  **Humanitarian access challenges**: The significant impact on humanitarian organizations has implications for service delivery to vulnerable populations.
 
 These findings can help organizations develop security strategies tailored to their specific risk profiles and improve coordination between different actors operating in the region.
 
@@ -546,13 +544,7 @@ if len(actor_data) > 0:
 
 This analysis focuses specifically on two major actor types responsible for security incidents: Host State forces and Foreign/coalition forces. Other actor categories were excluded to enable a clear comparison between these two primary groups.
 
-The chart reveals differences in the frequency of incidents attributed to each actor type, which provides important context for understanding the sources of security threats in the region. This has implications for:
-
-1. **Responsibility patterns**: The data helps identify key actors in the conflict based on incident attribution.
-
-2. **Conflict dynamics**: The relative role of host state versus foreign forces offers insights into the nature of the conflict and external involvement.
-
-3. **Accountability**: Understanding which actors are responsible for incidents has implications for accountability and human rights monitoring.
+The chart clearly shows that host state forces are behind most of the security incidents.
 
 # Major Incidents {#sec-major}
 
@@ -588,11 +580,11 @@ The table above highlights the five most impactful security incidents in the Occ
 
 These major incidents share several characteristics:
 
-1. **Recent escalation**: Most of the high-impact incidents occurred during the 2023-2024 conflict escalation.
+1.  **Recent escalation**: Most of the high-impact incidents occurred during the 2023-2024 conflict escalation.
 
-2. **High casualty rates**: These incidents resulted in significant casualties, underscoring the intensity of the recent conflict.
+2.  **High casualty rates**: These incidents resulted in significant casualties, underscoring the intensity of the recent conflict.
 
-3. **Combat contexts**: Most occurred in combat/crossfire situations, consistent with the broader pattern of incidents in the region.
+3.  **Combat contexts**: Most occurred in combat/crossfire situations, consistent with the broader pattern of incidents in the region.
 
 For more detailed information on the Israeli-Palestinian conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict).
 
@@ -602,38 +594,42 @@ For more detailed information on the Israeli-Palestinian conflict timeline, see 
 
 This analysis of security incidents in the Occupied Palestinian Territories reveals several critical patterns and trends:
 
-1. **Unprecedented recent escalation**: After nearly two decades of relatively stable incident levels, 2023-2024 saw a dramatic surge in security incidents, reflecting the intensity of the conflict following the October 7th attack.
+1.  **Unprecedented recent escalation**: After nearly two decades of relatively stable incident levels, 2023-2024 saw a dramatic surge in security incidents, reflecting the intensity of the conflict following the October 7th attack.
 
-2. **Predominant attack methods**: Aerial bombardment and shooting incidents emerge as the most common types of attacks, highlighting the nature of military operations in the region.
+2.  **Predominant attack methods**: Aerial bombardment and shooting incidents emerge as the most common types of attacks, highlighting the nature of military operations in the region.
 
-3. **Disproportionate impact on locals**: Palestinian nationals have suffered significantly higher casualties compared to international personnel, underscoring the humanitarian dimension of the conflict.
+3.  **Disproportionate impact on locals**: Palestinian nationals have suffered significantly higher casualties compared to international personnel, underscoring the humanitarian dimension of the conflict.
 
-4. **Combat as primary context**: Most incidents occur during active combat situations, suggesting that conflict avoidance is a critical security strategy.
+4.  **Combat as primary context**: Most incidents occur during active combat situations, suggesting that conflict avoidance is a critical security strategy.
 
-5. **Organizational vulnerability**: Various organizations operating in the region face different levels of security risk, with UN entities being most frequently affected.
+5.  **Organizational vulnerability**: Various organizations operating in the region face different levels of security risk, with UN entities being most frequently affected.
 
 ## Recommendations
 
 These findings have important implications for security planning, humanitarian programming, and policy development:
 
 ### For Security Planning
-- Develop robust protocols specifically addressing risks from aerial bombardment and crossfire situations
-- Implement enhanced early warning systems to monitor combat zone developments
-- Establish clear evacuation procedures for areas at high risk of becoming combat zones
+
+-   Develop robust protocols specifically addressing risks from aerial bombardment and crossfire situations
+-   Implement enhanced early warning systems to monitor combat zone developments
+-   Establish clear evacuation procedures for areas at high risk of becoming combat zones
 
 ### For Humanitarian Organizations
-- Prioritize protection measures for local staff, who face disproportionate security risks
-- Develop gender-sensitive security protocols that address the different risk profiles of male and female personnel
-- Strengthen coordination among different organizations to share security information and resources
+
+-   Prioritize protection measures for local staff, who face disproportionate security risks
+-   Develop gender-sensitive security protocols that address the different risk profiles of male and female personnel
+-   Strengthen coordination among different organizations to share security information and resources
 
 ### For Policy Development
-- Advocate for strengthened civilian protection measures, particularly in areas prone to combat/crossfire
-- Support accountability mechanisms for documenting and addressing security incidents
-- Promote conflict resolution initiatives to address the root causes of the escalating violence
+
+-   Advocate for strengthened civilian protection measures, particularly in areas prone to combat/crossfire
+-   Support accountability mechanisms for documenting and addressing security incidents
+-   Promote conflict resolution initiatives to address the root causes of the escalating violence
 
 ### For Future Research
-- Continue monitoring security trends, especially given the recent escalation
-- Investigate the specific factors contributing to the disproportionate impact on local populations
-- Examine the effectiveness of different security measures in reducing casualties
+
+-   Continue monitoring security trends, especially given the recent escalation
+-   Investigate the specific factors contributing to the disproportionate impact on local populations
+-   Examine the effectiveness of different security measures in reducing casualties
 
 By providing a data-driven understanding of security patterns in the Occupied Palestinian Territories, this analysis aims to contribute to safer and more effective operations in this challenging environment.

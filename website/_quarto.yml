@@ -9,8 +9,6 @@ website:
     left:
       - href: index.qmd
         text: Introduction
-      - href: index.qmd
-        text: Statistical Methods
       - text: Results
         menu: 
           - href: data_cleaning.qmd
@@ -23,15 +21,15 @@ website:
             text: Central African Republic
           - href: af.qmd
             text: Afghanistan
-          - href: af.qmd
+          - href: dr.qmd
             text: DR Congo
-          - href: dr.qmd
-            text: Sudan
           - href: sudan.qmd
+            text: Sudan
+          - href: syria.qmd
             text: Syrian Arab Republic
-          - href: syrian.qmd
+          - href: somolia.qmd
             text: Somolia
-          - href: dr.qmd
+          - href: mali.qmd
             text: Mali
       - href: eda.qmd
         text: EDA

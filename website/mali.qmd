@@ -14,6 +14,7 @@ format:
 execute:
   warning: false
   message: false
+editor: visual
 ---
 
 ```{python}
@@ -52,12 +53,7 @@ country_data = df[df['country'] == 'Mali']
 
 # Background: The Conflict
 
-```{python}
-
-from IPython.display import Image
-Image("images/african.png", width=500)
-
-```
+![](images/mali.png)
 
 ## Historical Context
 

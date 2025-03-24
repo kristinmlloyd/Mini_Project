@@ -14,7 +14,6 @@ format:
 execute:
   warning: false
   message: false
-editor: visual
 ---
 
 ```{python}
@@ -54,10 +53,10 @@ Security incidents can range from physical attacks to cyber threats, and their d
 
 The following analysis uses data visualization techniques to uncover insights about:
 
-- The geographic distribution of security incidents
-- How incident patterns have changed over time
-- Which countries represent security hotspots, both historically and recently
-- The nature and impact of different incident types
+-   The geographic distribution of security incidents
+-   How incident patterns have changed over time
+-   Which countries represent security hotspots, both historically and recently
+-   The nature and impact of different incident types
 
 ## Dataset Overview
 
@@ -80,10 +79,10 @@ Security incidents aren't distributed evenly across the world. Some regions expe
 
 The map below displays incidents across the globe, with colors indicating the severity based on the number of people affected:
 
-- Blue: No reported casualties
-- Green: 1-5 affected individuals
-- Orange: 6-20 affected individuals
-- Red: More than 20 affected individuals
+-   Blue: No reported casualties
+-   Green: 1-5 affected individuals
+-   Orange: 6-20 affected individuals
+-   Red: More than 20 affected individuals
 
 Clustering is used to manage dense areas where multiple incidents occurred in close proximity.
 
@@ -158,9 +157,9 @@ global_incidents_map
 
 The interactive map reveals several important patterns:
 
-- Incidents tend to cluster in certain regions, particularly in conflict zones and areas with political instability
-- Urban centers often show higher concentrations of incidents
-- The distribution of high-severity incidents (red markers) isn't uniform, suggesting regional differences in the nature of security threats
+-   Incidents tend to cluster in certain regions, particularly in conflict zones and areas with political instability
+-   Urban centers often show higher concentrations of incidents
+-   The distribution of high-severity incidents (red markers) isn't uniform, suggesting regional differences in the nature of security threats
 
 You can zoom in on specific regions and click on individual markers to get more details about each incident.
 
@@ -247,10 +246,10 @@ fig.show()
 
 This visualization reveals several key insights:
 
-- The global distribution of security incidents has shifted significantly over time
-- Some countries that were previously security hotspots have shown improvement
-- New areas of concern have emerged in recent years
-- The total number of recorded incidents shows notable year-to-year variation
+-   The global distribution of security incidents has shifted significantly over time
+-   Some countries that were previously security hotspots have shown improvement
+-   New areas of concern have emerged in recent years
+-   The total number of recorded incidents shows notable year-to-year variation
 
 You can use the play button to animate the map through time, or manually select specific years using the slider.
 
@@ -298,16 +297,16 @@ fig2.show()
 
 The interactive bar chart shows:
 
-- Years with notable spikes in security incidents
-- Overall trends in global security over time
-- Periods of relative stability and instability
+-   Years with notable spikes in security incidents
+-   Overall trends in global security over time
+-   Periods of relative stability and instability
 
 The rangeslider at the bottom allows you to focus on specific time periods for more detailed analysis. Several factors might explain the patterns observed, including:
 
-- Major global events and conflicts
-- Changes in reporting practices
-- Implementation of new security measures
-- Shifts in geopolitical landscapes
+-   Major global events and conflicts
+-   Changes in reporting practices
+-   Implementation of new security measures
+-   Shifts in geopolitical landscapes
 
 # Identifying Security Hotspots
 
@@ -359,10 +358,10 @@ fig_top_all_time.write_html("images/top_countries_all_time.html")
 
 This visualization highlights the countries that have historically been most affected by security incidents. Several factors might contribute to a country appearing on this list:
 
-- Long-standing regional conflicts
-- Political instability
-- Higher population (which can increase the absolute number of incidents)
-- More comprehensive reporting of incidents
+-   Long-standing regional conflicts
+-   Political instability
+-   Higher population (which can increase the absolute number of incidents)
+-   More comprehensive reporting of incidents
 
 ## Countries with Most Incidents: Recent Trends
 
@@ -415,9 +414,9 @@ fig_top_recent.write_html("images/top_countries_recent.html")
 
 This recent trends analysis shows:
 
-- Countries that have experienced deteriorating security situations in the past decade
-- Nations that continue to face persistent security challenges
-- Emerging hotspots that may not have appeared in historical data
+-   Countries that have experienced deteriorating security situations in the past decade
+-   Nations that continue to face persistent security challenges
+-   Emerging hotspots that may not have appeared in historical data
 
 By comparing this visualization with the all-time analysis, we can identify significant shifts in global security patterns.
 
@@ -469,45 +468,45 @@ if 'means_of_attack' in df.columns:
 Different attack methods produce distinct injury patterns that require specific medical responses:
 
 ### Explosive-Related Injuries
-- **Blast Injuries**: Primary blast injuries affect air-filled organs (lungs, ears, GI tract) through pressure waves
-- **Fragmentation Wounds**: Secondary blast injuries from flying debris cause penetrating trauma
-- **Blunt Trauma**: Tertiary blast injuries from being thrown by blast wind
-- **Burns**: Quaternary blast injuries from heat and flames
-- **Common contexts**: Suicide bombings, IEDs, landmines, aerial bombardment
+
+-   **Blast Injuries**: Primary blast injuries affect air-filled organs (lungs, ears, GI tract) through pressure waves
+-   **Fragmentation Wounds**: Secondary blast injuries from flying debris cause penetrating trauma
+-   **Blunt Trauma**: Tertiary blast injuries from being thrown by blast wind
+-   **Burns**: Quaternary blast injuries from heat and flames
+-   **Common contexts**: Suicide bombings, IEDs, landmines, aerial bombardment
 
 ### Gunshot Wounds
-- **Ballistic Trauma**: High-velocity projectiles create cavitation and tissue destruction
-- **Penetrating Wounds**: Damage to vital organs, vessels, and structures
-- **Orthopedic Injuries**: Bone fractures and joint destruction
-- **Common contexts**: Armed conflict, targeted attacks, crossfire situations
+
+-   **Ballistic Trauma**: High-velocity projectiles create cavitation and tissue destruction
+-   **Penetrating Wounds**: Damage to vital organs, vessels, and structures
+-   **Orthopedic Injuries**: Bone fractures and joint destruction
+-   **Common contexts**: Armed conflict, targeted attacks, crossfire situations
 
 ### Blunt Force Trauma
-- **Contusions and Lacerations**: Soft tissue injuries
-- **Orthopedic Injuries**: Fractures, dislocations, and crush injuries
-- **Internal Injuries**: Damage to internal organs without external wounds
-- **Common contexts**: Physical assaults, vehicle attacks, detention
+
+-   **Contusions and Lacerations**: Soft tissue injuries
+-   **Orthopedic Injuries**: Fractures, dislocations, and crush injuries
+-   **Internal Injuries**: Damage to internal organs without external wounds
+-   **Common contexts**: Physical assaults, vehicle attacks, detention
 
 ### Chemical/Biological Injuries
-- **Respiratory Damage**: Pulmonary edema, airway burns
-- **Skin and Eye Irritation**: Chemical burns, blistering
-- **Systemic Toxicity**: Organ failure, neurological symptoms
-- **Common contexts**: Chemical weapons deployment, industrial accidents
+
+-   **Respiratory Damage**: Pulmonary edema, airway burns
+-   **Skin and Eye Irritation**: Chemical burns, blistering
+-   **Systemic Toxicity**: Organ failure, neurological symptoms
+-   **Common contexts**: Chemical weapons deployment, industrial accidents
 
 ## When Different Injury Types Occur
 
 Certain injury patterns are more likely in specific contexts:
 
-1. **Combat/Crossfire Situations**: Predominantly ballistic trauma and explosive injuries
-2. **Targeted Attacks**: Often involve firearms or explosive devices
-3. **Civil Unrest**: Combination of blunt trauma, less-lethal weapons effects
-4. **Terrorist Incidents**: Complex injury patterns from explosives and multiple attack methods
-5. **Detention**: Predominantly blunt trauma and torture-related injuries
+1.  **Combat/Crossfire Situations**: Predominantly ballistic trauma and explosive injuries
+2.  **Targeted Attacks**: Often involve firearms or explosive devices
+3.  **Civil Unrest**: Combination of blunt trauma, less-lethal weapons effects
+4.  **Terrorist Incidents**: Complex injury patterns from explosives and multiple attack methods
+5.  **Detention**: Predominantly blunt trauma and torture-related injuries
 
-Understanding these patterns allows for appropriate medical preparedness, including:
-- Proper training of medical personnel
-- Stockpiling appropriate medical supplies
-- Developing contextually appropriate evacuation protocols
-- Creating specialized treatment facilities in high-risk areas
+Understanding these patterns allows for appropriate medical preparedness, including: - Proper training of medical personnel - Stockpiling appropriate medical supplies - Developing contextually appropriate evacuation protocols - Creating specialized treatment facilities in high-risk areas
 
 # Attack Contexts
 
@@ -550,35 +549,36 @@ fig_context.show()
 The distribution of security incidents across different attack contexts reveals important patterns:
 
 ### Combat/Crossfire
-- Most common context for security incidents globally
-- Indicates that being caught between opposing forces represents the highest risk
-- Often leads to complex injury patterns and challenging evacuation scenarios
+
+-   Most common context for security incidents globally
+-   Indicates that being caught between opposing forces represents the highest risk
+-   Often leads to complex injury patterns and challenging evacuation scenarios
 
 ### Individual Attacks
-- Targeted violence against specific individuals or small groups
-- May be politically, criminally, or personally motivated
-- Requires different security approaches than combat avoidance
+
+-   Targeted violence against specific individuals or small groups
+-   May be politically, criminally, or personally motivated
+-   Requires different security approaches than combat avoidance
 
 ### Ambushes
-- Planned attacks often targeting mobile personnel
-- Particularly dangerous due to the element of surprise
-- Can be mitigated through route analysis and convoy procedures
+
+-   Planned attacks often targeting mobile personnel
+-   Particularly dangerous due to the element of surprise
+-   Can be mitigated through route analysis and convoy procedures
 
 ### Raids
-- Organized attacks against specific facilities or compounds
-- Often involve multiple attackers and coordinated tactics
-- Physical security measures and response protocols are critical countermeasures
+
+-   Organized attacks against specific facilities or compounds
+-   Often involve multiple attackers and coordinated tactics
+-   Physical security measures and response protocols are critical countermeasures
 
 ### Detention
-- Formal or informal holding of personnel by various actors
-- May involve legal or extra-legal processes
-- Can lead to prolonged security incidents with complex resolution requirements
 
-This understanding of attack contexts helps security managers develop appropriate:
-- Training programs tailored to likely threat scenarios
-- Standard operating procedures for different contexts
-- Resource allocation based on context-specific risks
-- Coordination mechanisms with relevant security actors
+-   Formal or informal holding of personnel by various actors
+-   May involve legal or extra-legal processes
+-   Can lead to prolonged security incidents with complex resolution requirements
+
+This understanding of attack contexts helps security managers develop appropriate: - Training programs tailored to likely threat scenarios - Standard operating procedures for different contexts - Resource allocation based on context-specific risks - Coordination mechanisms with relevant security actors
 
 # Nationals vs. Internationals: Casualty Patterns
 
@@ -651,28 +651,32 @@ fig_casualties.show()
 The comparison between nationals and internationals reveals several important patterns:
 
 ### Disparity in Impact
-- Local nationals typically suffer significantly higher casualties than international personnel
-- This disparity applies across all types of harm (killed, wounded, kidnapped)
-- The ratio of nationals to internationals affected often exceeds 10:1 in many contexts
+
+-   Local nationals typically suffer significantly higher casualties than international personnel
+-   This disparity applies across all types of harm (killed, wounded, kidnapped)
+-   The ratio of nationals to internationals affected often exceeds 10:1 in many contexts
 
 ### Factors Contributing to Disparity
-1. **Numbers and Exposure**: Locals far outnumber internationals in most areas
-2. **Access to Protection**: Internationals often have enhanced security measures and evacuation options
-3. **Targeting Patterns**: Some actors specifically avoid targeting internationals due to potential international consequences
-4. **Risk Profiles**: Internationals may have more restricted movement in high-threat areas
+
+1.  **Numbers and Exposure**: Locals far outnumber internationals in most areas
+2.  **Access to Protection**: Internationals often have enhanced security measures and evacuation options
+3.  **Targeting Patterns**: Some actors specifically avoid targeting internationals due to potential international consequences
+4.  **Risk Profiles**: Internationals may have more restricted movement in high-threat areas
 
 ### Kidnapping Trends
-- Kidnapping represents a relatively small proportion of overall casualties
-- However, internationals face a disproportionate kidnapping risk in many contexts due to:
-  - Higher perceived ransom value
-  - Political leverage potential
-  - Media attention
+
+-   Kidnapping represents a relatively small proportion of overall casualties
+-   However, internationals face a disproportionate kidnapping risk in many contexts due to:
+    -   Higher perceived ransom value
+    -   Political leverage potential
+    -   Media attention
 
 ### Implications for Security Planning
-- Different security protocols may be needed for national and international staff
-- Equity considerations in providing security resources
-- Need for context-specific risk assessments
-- Importance of inclusive security measures that protect all personnel
+
+-   Different security protocols may be needed for national and international staff
+-   Equity considerations in providing security resources
+-   Need for context-specific risk assessments
+-   Importance of inclusive security measures that protect all personnel
 
 # Gender Distribution of Affected Individuals
 
@@ -722,21 +726,24 @@ fig_gender.show()
 The gender distribution of individuals affected by security incidents reveals several significant patterns:
 
 ### Male Predominance
-- Males constitute the majority of individuals affected by security incidents
-- This pattern is consistent across different regions and incident types
-- The disparity may reflect different exposure levels due to gender roles in some contexts
+
+-   Males constitute the majority of individuals affected by security incidents
+-   This pattern is consistent across different regions and incident types
+-   The disparity may reflect different exposure levels due to gender roles in some contexts
 
 ### Contributing Factors
-1. **Occupational Exposure**: Males may be overrepresented in certain high-risk professions
-2. **Mobility Patterns**: Gender differences in freedom of movement may affect exposure to risks
-3. **Targeting Patterns**: In some contexts, males may be specifically targeted in certain types of attacks
-4. **Reporting Biases**: Incidents affecting females may be underreported in some settings
+
+1.  **Occupational Exposure**: Males may be overrepresented in certain high-risk professions
+2.  **Mobility Patterns**: Gender differences in freedom of movement may affect exposure to risks
+3.  **Targeting Patterns**: In some contexts, males may be specifically targeted in certain types of attacks
+4.  **Reporting Biases**: Incidents affecting females may be underreported in some settings
 
 ### Implications for Protection
-- Gender-sensitive security protocols are essential
-- Protection strategies should account for different risk profiles by gender
-- Gender analysis should be incorporated into security assessments
-- Training should address the specific needs and vulnerabilities of different gender groups
+
+-   Gender-sensitive security protocols are essential
+-   Protection strategies should account for different risk profiles by gender
+-   Gender analysis should be incorporated into security assessments
+-   Training should address the specific needs and vulnerabilities of different gender groups
 
 Understanding these gender dimensions helps organizations develop more effective and inclusive security strategies that protect all personnel regardless of gender.
 
@@ -805,40 +812,46 @@ if all(col in df.columns for col in org_cols):
 Different organizations face varying security risks based on numerous factors:
 
 ### United Nations (UN)
-- **Risk Profile**: High visibility, operates in conflict areas, associated with political mandates
-- **Common Threats**: Direct targeting, collateral damage in conflict, complex attacks
-- **Vulnerabilities**: Large footprint, political associations, high visibility
-- **Protective Factors**: Robust security apparatus, international legal protections
+
+-   **Risk Profile**: High visibility, operates in conflict areas, associated with political mandates
+-   **Common Threats**: Direct targeting, collateral damage in conflict, complex attacks
+-   **Vulnerabilities**: Large footprint, political associations, high visibility
+-   **Protective Factors**: Robust security apparatus, international legal protections
 
 ### International NGOs (INGOs)
-- **Risk Profile**: Variable based on mandate, widespread operations in insecure environments
-- **Common Threats**: Robbery, collateral damage, kidnapping, targeted attacks based on perceived values
-- **Vulnerabilities**: Limited security resources compared to UN, often work in remote locations
-- **Protective Factors**: Community acceptance, perceived neutrality (for some)
+
+-   **Risk Profile**: Variable based on mandate, widespread operations in insecure environments
+-   **Common Threats**: Robbery, collateral damage, kidnapping, targeted attacks based on perceived values
+-   **Vulnerabilities**: Limited security resources compared to UN, often work in remote locations
+-   **Protective Factors**: Community acceptance, perceived neutrality (for some)
 
 ### International Committee of the Red Cross (ICRC)
-- **Risk Profile**: Works directly in conflict zones, protected emblem status
-- **Common Threats**: Misidentification, deliberate targeting despite protected status
-- **Vulnerabilities**: Proximity to conflict, access to detained persons
-- **Protective Factors**: Protected status under IHL, recognized emblem, long history of neutrality
+
+-   **Risk Profile**: Works directly in conflict zones, protected emblem status
+-   **Common Threats**: Misidentification, deliberate targeting despite protected status
+-   **Vulnerabilities**: Proximity to conflict, access to detained persons
+-   **Protective Factors**: Protected status under IHL, recognized emblem, long history of neutrality
 
 ### National Red Cross/Red Crescent Societies
-- **Risk Profile**: Local presence in high-risk areas, first responders
-- **Common Threats**: Similar to ICRC but with higher exposure due to continuous local presence
-- **Vulnerabilities**: Less international protection than ICRC in practice
-- **Protective Factors**: Community integration, protected emblem
+
+-   **Risk Profile**: Local presence in high-risk areas, first responders
+-   **Common Threats**: Similar to ICRC but with higher exposure due to continuous local presence
+-   **Vulnerabilities**: Less international protection than ICRC in practice
+-   **Protective Factors**: Community integration, protected emblem
 
 ### National NGOs (NNGOs)
-- **Risk Profile**: Deep community ties but often limited security resources
-- **Common Threats**: Criminality, being perceived as aligned with certain factions
-- **Vulnerabilities**: Limited evacuation options, resource constraints
-- **Protective Factors**: Strong local knowledge, community acceptance
+
+-   **Risk Profile**: Deep community ties but often limited security resources
+-   **Common Threats**: Criminality, being perceived as aligned with certain factions
+-   **Vulnerabilities**: Limited evacuation options, resource constraints
+-   **Protective Factors**: Strong local knowledge, community acceptance
 
 ### Security Implications by Organization Type
-1. **Organization-specific protocols**: Security measures should be tailored to each organization's unique risk profile
-2. **Resource allocation**: Security resources should be distributed equitably based on risk
-3. **Coordination mechanisms**: Inter-organizational security collaboration enhances protection for all
-4. **Training requirements**: Staff need organization-specific security training
+
+1.  **Organization-specific protocols**: Security measures should be tailored to each organization's unique risk profile
+2.  **Resource allocation**: Security resources should be distributed equitably based on risk
+3.  **Coordination mechanisms**: Inter-organizational security collaboration enhances protection for all
+4.  **Training requirements**: Staff need organization-specific security training
 
 # Comparison of Actor Types
 
@@ -882,15 +895,17 @@ if len(actor_data) > 0:
 This analysis focuses specifically on two major actor types responsible for security incidents: Host State forces and Foreign/coalition forces. This comparison reveals important patterns:
 
 ### Host State vs. Foreign Forces
-- The relative frequency of incidents attributed to each actor type varies significantly by context
-- Understanding these patterns helps identify which forces represent the primary security concern in different areas
+
+-   The relative frequency of incidents attributed to each actor type varies significantly by context
+-   Understanding these patterns helps identify which forces represent the primary security concern in different areas
 
 ### Implications for Security Planning
-1. **Context-specific approaches**: Security strategies should reflect the predominant actor types in each area
-2. **Engagement strategies**: Different approaches may be needed when engaging with different security
+
+1.  **Context-specific approaches**: Security strategies should reflect the predominant actor types in each area
+2.  **Engagement strategies**: Different approaches may be needed when engaging with different security
 
 # Conclusion
 
 # Analyze individual countries
 
-- [Palestine](palestine.qmd)
+-   [Palestine](palestine.qmd)

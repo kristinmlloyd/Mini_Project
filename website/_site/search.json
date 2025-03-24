@@ -1,171 +1,374 @@
 [
   {
-    "objectID": "data_cleaning.html",
-    "href": "data_cleaning.html",
-    "title": "Security Incidents Data Cleaning",
-    "section": "",
-    "text": "This document outlines the data cleaning process for the security incidents dataset. We’ll examine the data structure, identify and address missing values, and prepare the dataset for analysis of broad trends in aid worker incidents by country, year, and organization type.\nThe cleaning process follows a systematic approach:\n\nLoading and initial inspection\nHandling missing values\nDuplicate detection and removal\nData type optimization\nOutlier analysis and handling\nGeographic data validation\nFinal dataset preparation"
+    "objectID": "af.html#historical-context",
+    "href": "af.html#historical-context",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "2.1 Historical Context",
+    "text": "2.1 Historical Context\nAfghanistan has experienced over four decades of continuous conflict since the Soviet invasion in 1979. Following the Soviet withdrawal in 1989, the country descended into civil war, eventually leading to Taliban rule from 1996 to 2001. After the September 11, 2001 attacks, a US-led coalition overthrew the Taliban regime, establishing the Islamic Republic of Afghanistan. The subsequent two decades saw ongoing insurgency, with the Taliban gradually regaining control of territory despite the presence of international forces. Key developments included:\n2001-2014: NATO-led International Security Assistance Force (ISAF) mission 2014-2021: NATO Resolute Support Mission focused on training Afghan forces 2020: US-Taliban peace agreement signed in Doha, Qatar August 2021: Taliban takeover following US and NATO withdrawal"
   },
   {
-    "objectID": "data_cleaning.html#introduction",
-    "href": "data_cleaning.html#introduction",
-    "title": "Security Incidents Data Cleaning",
-    "section": "",
-    "text": "This document outlines the data cleaning process for the security incidents dataset. We’ll examine the data structure, identify and address missing values, and prepare the dataset for analysis of broad trends in aid worker incidents by country, year, and organization type.\nThe cleaning process follows a systematic approach:\n\nLoading and initial inspection\nHandling missing values\nDuplicate detection and removal\nData type optimization\nOutlier analysis and handling\nGeographic data validation\nFinal dataset preparation"
+    "objectID": "af.html#recent-escalation",
+    "href": "af.html#recent-escalation",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "2.2 Recent Escalation",
+    "text": "2.2 Recent Escalation\nFollowing the Taliban’s return to power in August 2021, Afghanistan has faced multiple interconnected crises:\nPolitical transformation under Taliban governance Economic collapse and banking sector crisis Severe humanitarian emergency with over 28 million people needing assistance Increasing security threats from ISIS-Khorasan (ISIS-K) Natural disasters including earthquakes and drought International isolation and sanctions affecting aid delivery\nThese factors have created a challenging operational environment for humanitarian organizations, with significant implications for security risk management."
   },
   {
-    "objectID": "data_cleaning.html#loading-and-initial-inspection",
-    "href": "data_cleaning.html#loading-and-initial-inspection",
-    "title": "Security Incidents Data Cleaning",
-    "section": "2. Loading and Initial Inspection",
-    "text": "2. Loading and Initial Inspection\nFirst, let’s load the dataset and standardize the column names for consistency.\n\n\nCode\n# Import required libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport seaborn as sns\n\n# Load the security incidents dataset\ndf = pd.read_csv(\"data/security_incidents.csv\")\n\n# Standardize column names (lowercase, replace spaces with underscores)\ndf.columns = df.columns.str.strip().str.lower().str.replace(\" \", \"_\")\n\n# Display the first few rows\ndf.head(1)\n\n\n\n\n\n\n\n\n\nincident_id\nyear\nmonth\nday\ncountry_code\ncountry\nregion\ndistrict\ncity\nun\n...\nattack_context\nlocation\nlatitude\nlongitude\nmotive\nactor_type\nactor_name\ndetails\nverified\nsource\n\n\n\n\n0\n1\n1997\n1.0\nNaN\nKH\nCambodia\nBanteay Meanchey\nNaN\nNaN\n0\n...\nUnknown\nUnknown\n14.070929\n103.099916\nUnknown\nUnknown\nUnknown\n1 ICRC national staff killed while working in ...\nArchived\nArchived\n\n\n\n\n1 rows × 41 columns\n\n\n\n\n\nCode\n# Get basic dataset information\nrows, cols = df.shape\nprint(f\"The dataset contains {rows} rows and {cols} columns.\")\n\n\nThe dataset contains 4337 rows and 41 columns."
+    "objectID": "af.html#incident-frequency-over-time",
+    "href": "af.html#incident-frequency-over-time",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "3.1 Incident Frequency Over Time",
+    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n                                                \n\n\nFigure 1: Security incidents in Afghanistan from 2002 to 2025\n\n\n\n\n\n3.1.1 Analysis of Incident Trends\nThe line chart illustrates how security incidents in Afghanistan have evolved over time, with several notable patterns:\nFluctuations correspond closely with major political and military developments Peak periods align with heightened conflict intensity and expanded insurgent activity Decreases often coincide with ceasefire periods or reduced international military presence The post-2021 Taliban takeover period shows changed security dynamics\nThese temporal patterns reflect Afghanistan’s complex conflict landscape, where multiple factors—including seasonal fighting patterns, political negotiations, and changes in military strategy—influence security incident frequency. Understanding these trends helps organizations anticipate periods of potentially increased risk and adapt their security postures accordingly."
   },
   {
-    "objectID": "data_cleaning.html#handling-missing-values",
-    "href": "data_cleaning.html#handling-missing-values",
-    "title": "Security Incidents Data Cleaning",
-    "section": "3. Handling Missing Values",
-    "text": "3. Handling Missing Values\nTo better understand which variables have missing values, we’ll create a visualization showing the percentage of missing values per column.\n\n\nCode\n# Calculate percent of missing values per column\nmissing_percent = (df.isna().sum() / len(df)) * 100\nmissing_percent = missing_percent[missing_percent &gt; 0].sort_values(ascending=True)\n\n# Create a horizontal bar plot of missing values\nplt.figure(figsize=(7, 4))\nmissing_percent.plot(kind='barh')\nplt.title(\"Percentage of Missing Values per Column\")\nplt.xlabel(\"Percent Missing (%)\")\nplt.tight_layout()\nplt.grid(axis='x', linestyle='--', alpha=0.5)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Check for missing values\nmissing_values = df.isnull().sum()\nmissing_percent = (missing_values / len(df) * 100).round(2)\n\n# Create a dataframe of missing values\nmissing_df = pd.DataFrame({\n    'Missing Values': missing_values,\n    'Percentage': missing_percent\n})\n\n# Display columns with missing values\nprint(\"Columns with missing values:\")\nmissing_df[missing_df['Missing Values'] &gt; 0].sort_values('Missing Values', ascending=False)\n\n# Visualize missing values if any exist\nif missing_values.sum() &gt; 0:\n    plt.figure(figsize=(12, 6))\n    sns.heatmap(df.isnull(), cbar=False, cmap='viridis', yticklabels=False)\n    plt.title('Missing Values Heatmap')\n    plt.tight_layout()\n    plt.show()\n\n\nColumns with missing values:\n\n\n\n\n\n\n\n\n\n\n3.1 Strategy for Missing Values\nBased on our exploration, we have identified several columns with high proportions of missing values:\n\nCity (over 20% missing)\nDistrict, Day, and Region (significant proportions missing)\n\nSince our analysis focus is on broad trends by country, year, and organization type, we will:\n\nRemove granular fields with limited analytical value for our specific goals\nLeave the remaining minimal missing values as-is, as they’re sparse and likely random\n\n\n\nCode\n# Remove columns with limited analytical value for our specific analysis goals\ncolumns_to_drop = ['day', 'month', 'district', 'city', 'region', 'country_code', 'incident_id']\ndf.drop(columns=columns_to_drop, inplace=True)\n\n# Recalculate missing values after dropping columns\nmissing_percent = (df.isna().sum() / len(df)) * 100\nmissing_percent = missing_percent[missing_percent &gt; 0].sort_values(ascending=True)\n\n# Visualize the remaining missing values\nplt.figure(figsize=(7, 4))\nmissing_percent.plot(kind='barh')\nplt.title(\"Percentage of Missing Values After Column Removal\")\nplt.xlabel(\"Percent Missing (%)\")\nplt.tight_layout()\nplt.grid(axis='x', linestyle='--', alpha=0.5)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Check for missing values\nmissing_values = df.isnull().sum()\nmissing_percent = (missing_values / len(df) * 100).round(2)\n\n# Create a dataframe of missing values\nmissing_df = pd.DataFrame({\n    'Missing Values': missing_values,\n    'Percentage': missing_percent\n})\n\n# Display columns with missing values\nprint(\"Columns with missing values:\")\nmissing_df[missing_df['Missing Values'] &gt; 0].sort_values('Missing Values', ascending=False)\n\n# Visualize missing values if any exist\nif missing_values.sum() &gt; 0:\n    plt.figure(figsize=(12, 6))\n    sns.heatmap(df.isnull(), cbar=False, cmap='viridis', yticklabels=False)\n    plt.title('Missing Values Heatmap')\n    plt.tight_layout()\n    plt.show()\n\n\nColumns with missing values:\n\n\n\n\n\n\n\n\n\n\n\n3.2 Missing Values Decision\nSince the highest missing value percentage is now less than 0.5%, and the remaining missing data is sparse, likely random, and not concentrated in critical columns, we’ve decided:\n\nNo imputation is necessary\nLeave these values as-is (NaN), as most analysis tools handle them gracefully\nImputing could introduce unnecessary bias given the small percentage"
+    "objectID": "af.html#effected-indivudals-over-time",
+    "href": "af.html#effected-indivudals-over-time",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "3.2 Effected Indivudals Over Time",
+    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                                                \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted\nThe chart above tracks the total number of individuals affected by security incidents over time, highlighting years of particularly severe human impact. While incident frequency provides insight into the overall security situation, this measurement of affected individuals captures the humanitarian toll of these incidents. Several noteworthy patterns emerge:\nThe human impact does not always directly correlate with incident frequency Some years show fewer but more devastating incidents Others display many incidents with comparatively lower human impact Major spikes often coincide with shifts in conflict dynamics or tactics\nThis metric helps organizations understand not just how often incidents occur, but their severity and human cost—crucial information for both security planning and humanitarian response programming."
   },
   {
-    "objectID": "data_cleaning.html#handling-duplicates",
-    "href": "data_cleaning.html#handling-duplicates",
-    "title": "Security Incidents Data Cleaning",
-    "section": "4. Handling Duplicates",
-    "text": "4. Handling Duplicates\nLet’s identify and remove duplicate records that could skew our analysis.\n\n\nCode\n# Identify rows that are duplicated\nduplicated_mask = df.duplicated(keep=False)\nduplicates = df[duplicated_mask]\n\n# Count total number of duplicated rows\nduplicate_count = len(duplicates)\nprint(f\"Total number of duplicated rows: {duplicate_count}\")\n\n# Count unique duplicate patterns\nduplicate_patterns = df[duplicated_mask].groupby(df.columns.tolist()).size().reset_index()\nduplicate_patterns = duplicate_patterns.rename(columns={0: 'occurrence_count'})\n\n# Sort by occurrence count (most duplicated first)\nduplicate_patterns = duplicate_patterns.sort_values('occurrence_count', ascending=False)\n\n# Count the number of unique duplicate patterns\nunique_duplicate_patterns = len(duplicate_patterns)\nprint(f\"Number of unique duplicate patterns: {unique_duplicate_patterns}\")\n\n# Display occurrence counts (how many records appear 2 times, 3 times, etc.)\noccurrence_summary = duplicate_patterns['occurrence_count'].value_counts().sort_index()\nprint(\"\\nOccurrence pattern summary:\")\nfor count, frequency in occurrence_summary.items():\n    print(f\"  {frequency} record(s) appear {count} times each\")\n\n\nTotal number of duplicated rows: 28\nNumber of unique duplicate patterns: 5\n\nOccurrence pattern summary:\n  3 record(s) appear 2 times each\n  1 record(s) appear 9 times each\n  1 record(s) appear 13 times each\n\n\nBased on the duplicate analysis results, we need to remove duplicates from the dataset. The pattern of duplications (with some records appearing up to 13 times) suggests systematic duplication issues that could significantly skew our analysis.\n\n\nCode\n# Store original row count\noriginal_count = len(df)\n\n# Remove duplicates, keeping only the first occurrence\ndf = df.drop_duplicates()\n\n# Calculate how many rows were removed\nremoved_count = original_count - len(df)\nremoval_percentage = (removed_count / original_count) * 100\n\nprint(f\"Removed {removed_count} duplicate rows ({removal_percentage:.2f}% of dataset)\")\nprint(f\"Dataset now contains {len(df)} unique records\")\n\n\nRemoved 23 duplicate rows (0.53% of dataset)\nDataset now contains 4314 unique records"
+    "objectID": "af.html#predominant-attack-types",
+    "href": "af.html#predominant-attack-types",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "4.1 Predominant Attack Types",
+    "text": "4.1 Predominant Attack Types\n\n\n\n\n                                                \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods\nThe horizontal bar chart reveals that kidnapping is the most prevalent method used in security incidents in Afghanistan, followed closely by shooting incidents. This distribution provides important insights into the nature of security threats in the region:\n\nKidnapping dominance: The high frequency of kidnapping incidents reflects Afghanistan’s complex security environment where abductions serve multiple purposes - from financial gain through ransoms to political leverage. This creates significant risks for both international and local personnel.\nArmed violence: Shooting incidents represent the second most frequent attack type, indicating the widespread availability of firearms and their regular use in security incidents. This aligns with Afghanistan’s history of armed conflict and the proliferation of weapons.\nIED threat: Both vehicle-borne and roadside IEDs appear in the mid-range of attack methods, representing a significant but not dominant threat. These sophisticated attack methods typically indicate organized armed group activity."
   },
   {
-    "objectID": "data_cleaning.html#data-type-optimization",
-    "href": "data_cleaning.html#data-type-optimization",
-    "title": "Security Incidents Data Cleaning",
-    "section": "5. Data Type Optimization",
-    "text": "5. Data Type Optimization\nMost data types in this dataset are appropriate, but there are a few minor adjustments that could be made for consistency:\n\n\nCode\n# Display current data types\ndf.dtypes\n\n\nyear                          int64\ncountry                      object\nun                            int64\ningo                          int64\nicrc                        float64\nnrcs_and_ifrc               float64\nnngo                        float64\nother                         int64\nnationals_killed              int64\nnationals_wounded             int64\nnationals_kidnapped           int64\ntotal_nationals               int64\ninternationals_killed         int64\ninternationals_wounded        int64\ninternationals_kidnapped      int64\ntotal_internationals          int64\ntotal_killed                  int64\ntotal_wounded                 int64\ntotal_kidnapped               int64\ntotal_affected                int64\ngender_male                   int64\ngender_female                 int64\ngender_unknown                int64\nmeans_of_attack              object\nattack_context               object\nlocation                     object\nlatitude                    float64\nlongitude                   float64\nmotive                       object\nactor_type                   object\nactor_name                   object\ndetails                      object\nverified                     object\nsource                       object\ndtype: object\n\n\n\n5.1 Data Type Conversion\nThe following columns could benefit from data type conversion:\n\n\n\n\n\n\n\n\n\nColumn\nCurrent\nSuggested\nReason\n\n\n\n\nicrc\nfloat64\nint64\nCounts should be integers\n\n\nnrcs_and_ifrc\nfloat64\nint64\nCounts should be integers\n\n\nnngo\nfloat64\nint64\nCounts should be integers\n\n\n\n\n\nCode\n# Convert float columns representing counts to integers\n# Note: This will replace any NaN values with 0 during conversion\ncount_columns = ['icrc', 'nrcs_and_ifrc', 'nngo']\nfor col in count_columns:\n    if col in df.columns:\n        # Fill NaN values with 0 before converting to integer\n        df[col] = df[col].fillna(0).astype(int)\n\n# Verify the conversions\ndf[count_columns].dtypes\n\n\nicrc             int64\nnrcs_and_ifrc    int64\nnngo             int64\ndtype: object"
+    "objectID": "af.html#attack-contexts",
+    "href": "af.html#attack-contexts",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "4.2 Attack Contexts",
+    "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts\nKey Findings:\n\nCombat/crossfire represents a significant proportion of incidents, indicating the ongoing active conflict environment\nDirect targeted attacks account for many incidents, showing deliberate targeting rather than collateral impact\nAmbushes feature prominently, highlighting risks along travel routes and during movements\nRaids on facilities demonstrate vulnerabilities of fixed installations and compounds"
   },
   {
-    "objectID": "data_cleaning.html#outlier-analysis-and-handling",
-    "href": "data_cleaning.html#outlier-analysis-and-handling",
-    "title": "Security Incidents Data Cleaning",
-    "section": "6. Outlier Analysis and Handling",
-    "text": "6. Outlier Analysis and Handling\nLet’s identify and visualize outliers in the dataset to better understand extreme values in our security incidents data.\n\n\nCode\nimport warnings\nwarnings.filterwarnings('ignore', category=FutureWarning)\n# Function to detect outliers using IQR method\ndef detect_outliers(df, column):\n    q1 = df[column].quantile(0.25)\n    q3 = df[column].quantile(0.75)\n    iqr = q3 - q1\n    lower_bound = q1 - 1.5 * iqr\n    upper_bound = q3 + 1.5 * iqr\n    \n    outliers = df[(df[column] &lt; lower_bound) | (df[column] &gt; upper_bound)]\n    return outliers, lower_bound, upper_bound\n\n# Get list of numeric columns (excluding some that don't need outlier analysis)\nexcluded_cols = ['year']\nnumeric_cols = df.select_dtypes(include=['int64', 'float64']).columns\nnumeric_cols = [col for col in numeric_cols if col not in excluded_cols]\n\n# Create a DataFrame to store outlier summary\noutlier_summary = pd.DataFrame(columns=['Column', 'Total', 'Outliers', 'Percentage'])\n\n# Collect outlier information\nfor col in numeric_cols:\n    outliers, _, _ = detect_outliers(df, col)\n    \n    # Add to summary DataFrame\n    new_row = {\n        'Column': col,\n        'Total': len(df),\n        'Outliers': len(outliers),\n        'Percentage': len(outliers) / len(df) * 100\n    }\n    outlier_summary = pd.concat([outlier_summary, pd.DataFrame([new_row])], ignore_index=True)\n\n# Sort by percentage of outliers (descending)\noutlier_summary = outlier_summary.sort_values('Percentage', ascending=False)\n\n# Visualize outlier percentages\nplt.figure(figsize=(7,4))\nsns.barplot(x='Percentage', y='Column', data=outlier_summary, palette='viridis')\nplt.title('Percentage of Outliers by Column')\nplt.xlabel('Percentage of Values Identified as Outliers')\nplt.grid(axis='x', linestyle='--', alpha=0.7)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\n6.1 Visualization of Key Outliers\nLet’s visualize the distribution and outliers for the most important columns:\n\n\nCode\n# Select top 6 columns with the most outliers for detailed visualization\ntop_cols = outlier_summary.head(6)['Column'].tolist()\n\n# Create boxplots for top outlier columns\nplt.figure(figsize=(10, 6))\nfor i, col in enumerate(top_cols, 1):\n    plt.subplot(2, 3, i)\n    sns.boxplot(y=df[col])\n    plt.title(f'Box Plot: {col}')\n    plt.grid(linestyle='--', alpha=0.7)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n6.2 Outlier Handling Strategy\nIn security incident data, outliers often represent real extreme events (like major attacks) rather than errors. For our analysis:\n\nWe’ll flag high-impact incidents rather than removing them\nThis allows us to analyze with or without extreme events as needed\n\n\n\nCode\n# Create flags for high-impact incidents\ndf['high_impact'] = False\n\n# Flag incidents with casualties in the top 1% of any category\nfor col in ['total_killed', 'total_wounded', 'total_kidnapped', 'total_affected']:\n    if col in df.columns:\n        threshold = df[col].quantile(0.99)\n        df.loc[df[col] &gt; threshold, 'high_impact'] = True\n\n# Print summary of flagged high-impact incidents\nhigh_impact_count = df['high_impact'].sum()\nprint(f\"Flagged {high_impact_count} high-impact incidents ({high_impact_count/len(df)*100:.2f}% of dataset)\")\n\n# Example: Look at the top 5 most severe incidents by total casualties\nif 'total_affected' in df.columns:\n    print(\"\\nTop 5 most severe incidents:\")\n    display(df.sort_values('total_affected', ascending=False).head(5)[\n        ['year', 'country', 'total_affected', 'total_killed', 'total_wounded', 'total_kidnapped']])\n\n\nFlagged 123 high-impact incidents (2.85% of dataset)\n\nTop 5 most severe incidents:\n\n\n\n\n\n\n\n\n\nyear\ncountry\ntotal_affected\ntotal_killed\ntotal_wounded\ntotal_kidnapped\n\n\n\n\n3857\n2023\nOccupied Palestinian Territories\n92\n70\n22\n0\n\n\n1989\n2015\nAfghanistan\n49\n14\n35\n0\n\n\n3920\n2023\nOccupied Palestinian Territories\n46\n41\n5\n0\n\n\n1189\n2011\nNigeria\n46\n9\n37\n0\n\n\n3936\n2023\nOccupied Palestinian Territories\n31\n31\n0\n0"
+    "objectID": "af.html#casualties-by-category",
+    "href": "af.html#casualties-by-category",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "5.1 Casualties by Category",
+    "text": "5.1 Casualties by Category\n\n\n\n\n                                                \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns\nThe stacked bar chart reveals a stark disparity in how security incidents affect different population groups in Afghanistan:\n\nAfghan nationals have suffered significantly higher casualties across all categories, with roughly 440 killed, 350 wounded, and 430 kidnapped\nInternational personnel have experienced far fewer casualties, approximately 90 total across all categories\nThe ratio of nationals to internationals affected is about 10:1\n\nThis pattern is not unusual in conflict zones, where local populations typically bear the brunt of violence. However, the scale of the difference is notable and has important implications:\n\nProtection needs: The disproportionate impact on locals highlights the critical need for civilian protection measures that extend beyond international personnel.\nHumanitarian considerations: The high casualty rates among Afghan nationals underscore the humanitarian dimension of the conflict, beyond the security of aid workers.\nRisk differentials: The relatively lower casualties among internationals may reflect differences in exposure, protection measures, or targeting patterns."
   },
   {
-    "objectID": "data_cleaning.html#geographic-data-validation",
-    "href": "data_cleaning.html#geographic-data-validation",
-    "title": "Security Incidents Data Cleaning",
-    "section": "7. Geographic Data Validation",
-    "text": "7. Geographic Data Validation\nLet’s verify that our latitude and longitude values are within valid ranges.\n\n\nCode\n# Check if latitude and longitude values are within valid ranges\n# Valid ranges: Latitude (-90 to 90), Longitude (-180 to 180)\n\n# Count invalid coordinates\ninvalid_lat = df[(df['latitude'] &lt; -90) | (df['latitude'] &gt; 90)].shape[0]\ninvalid_lon = df[(df['longitude'] &lt; -180) | (df['longitude'] &gt; 180)].shape[0]\n\nprint(f\"Invalid latitude values (outside -90 to 90): {invalid_lat}\")\nprint(f\"Invalid longitude values (outside -180 to 180): {invalid_lon}\")\n\n# Get overall ranges to see extreme values\nlat_min, lat_max = df['latitude'].min(), df['latitude'].max()\nlon_min, lon_max = df['longitude'].min(), df['longitude'].max()\n\nprint(f\"\\nLatitude range: {lat_min} to {lat_max}\")\nprint(f\"Longitude range: {lon_min} to {lon_max}\")\n\n# Create a scatter plot to visualize coordinate distribution\nplt.figure(figsize=(7,4))\nplt.scatter(df['longitude'], df['latitude'], alpha=0.5, s=3)\nplt.title('Geographic Distribution of Incidents')\nplt.xlabel('Longitude')\nplt.ylabel('Latitude')\nplt.xlim(-180, 180)\nplt.ylim(-90, 90)\nplt.grid(True)\nplt.tight_layout()\nplt.show()\n\n\nInvalid latitude values (outside -90 to 90): 0\nInvalid longitude values (outside -180 to 180): 0\n\nLatitude range: -34.883611 to 52.253183\nLongitude range: -102.283333 to 179.0122737\n\n\n\n\n\n\n\n\n\nThere are 0 invalid latitudes and longitudes, so we do not have to handle those outliers. All geographic coordinates are within valid ranges and suitable for mapping and spatial analysis."
+    "objectID": "af.html#gender-distribution-of-affected-individuals",
+    "href": "af.html#gender-distribution-of-affected-individuals",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "5.2 Gender Distribution of Affected Individuals",
+    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                                                \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns\nThe gender distribution of individuals affected by security incidents in Afghanistan shows a pronounced disparity:\n\nMales account for approximately 88% of all affected individuals (around 670 victims)\nFemales represent about 12% of affected individuals (approximately 90 victims)\nThe male-to-female ratio of roughly 7.5:1 is substantial"
   },
   {
-    "objectID": "data_cleaning.html#final-dataset-summary",
-    "href": "data_cleaning.html#final-dataset-summary",
-    "title": "Security Incidents Data Cleaning",
-    "section": "8. Final Dataset Summary",
-    "text": "8. Final Dataset Summary\nLet’s examine our cleaned dataset:\n\n\nCode\n# Display basic information about the cleaned dataset\nprint(f\"Final dataset shape: {df.shape}\")\nprint(\"\\nColumns in the cleaned dataset:\")\nprint(df.columns.tolist())\n\n# Display summary statistics for numeric columns\nprint(\"\\nSummary statistics:\")\ndf.describe()\n\n\nFinal dataset shape: (4314, 35)\n\nColumns in the cleaned dataset:\n['year', 'country', 'un', 'ingo', 'icrc', 'nrcs_and_ifrc', 'nngo', 'other', 'nationals_killed', 'nationals_wounded', 'nationals_kidnapped', 'total_nationals', 'internationals_killed', 'internationals_wounded', 'internationals_kidnapped', 'total_internationals', 'total_killed', 'total_wounded', 'total_kidnapped', 'total_affected', 'gender_male', 'gender_female', 'gender_unknown', 'means_of_attack', 'attack_context', 'location', 'latitude', 'longitude', 'motive', 'actor_type', 'actor_name', 'details', 'verified', 'source', 'high_impact']\n\nSummary statistics:\n\n\n\n\n\n\n\n\n\nyear\nun\ningo\nicrc\nnrcs_and_ifrc\nnngo\nother\nnationals_killed\nnationals_wounded\nnationals_kidnapped\n...\ntotal_internationals\ntotal_killed\ntotal_wounded\ntotal_kidnapped\ntotal_affected\ngender_male\ngender_female\ngender_unknown\nlatitude\nlongitude\n\n\n\n\ncount\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n...\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4301.000000\n4301.000000\n\n\nmean\n2015.245712\n0.411683\n0.812471\n0.051229\n0.116365\n0.476124\n0.024339\n0.645109\n0.631433\n0.410987\n...\n0.204682\n0.701205\n0.695874\n0.495132\n1.892211\n0.894529\n0.139314\n0.857904\n16.693709\n36.486580\n\n\nstd\n6.804200\n2.107963\n1.651766\n0.420239\n0.780231\n1.192180\n0.224018\n1.772060\n1.464470\n1.242489\n...\n0.772268\n1.818565\n1.517728\n1.366215\n2.665913\n1.217483\n0.471608\n2.531503\n14.481132\n30.046441\n\n\nmin\n1997.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n...\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n-34.883611\n-102.283333\n\n\n25%\n2010.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n...\n0.000000\n0.000000\n0.000000\n0.000000\n1.000000\n0.000000\n0.000000\n0.000000\n5.835800\n28.729977\n\n\n50%\n2016.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n...\n0.000000\n0.000000\n0.000000\n0.000000\n1.000000\n1.000000\n0.000000\n0.000000\n13.426301\n34.450000\n\n\n75%\n2021.000000\n0.000000\n1.000000\n0.000000\n0.000000\n1.000000\n0.000000\n1.000000\n1.000000\n0.000000\n...\n0.000000\n1.000000\n1.000000\n0.000000\n2.000000\n1.000000\n0.000000\n1.000000\n32.887222\n45.400000\n\n\nmax\n2025.000000\n92.000000\n49.000000\n8.000000\n19.000000\n15.000000\n5.000000\n70.000000\n37.000000\n19.000000\n...\n15.000000\n70.000000\n37.000000\n20.000000\n92.000000\n17.000000\n7.000000\n92.000000\n52.253183\n179.012274\n\n\n\n\n8 rows × 24 columns"
+    "objectID": "af.html#organizations-affected-by-security-incidents",
+    "href": "af.html#organizations-affected-by-security-incidents",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "6.1 Organizations Affected by Security Incidents",
+    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                                                \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact\nThe horizontal bar chart reveals which types of organizations are most frequently affected by security incidents in Afghanistan:\n\nInternational NGOs (INGOs) have experienced the highest number of incidents (approximately 600)\nNational NGOs follow with around 400 incidents\nUnited Nations entities rank third with about 200 incidents\nICRC, National Red Cross/Red Crescent, and other organizations face significantly fewer incidents"
   },
   {
-    "objectID": "data_cleaning.html#conclusion",
-    "href": "data_cleaning.html#conclusion",
-    "title": "Security Incidents Data Cleaning",
-    "section": "9. Conclusion",
-    "text": "9. Conclusion\nThe data cleaning process for the security incidents dataset has:\n\nStandardized column names for consistency\nRemoved granular fields with limited analytical value\nAddressed minimal remaining missing values by leaving them as-is\nRemoved 28 duplicate records from 5 unique patterns\nOptimized data types for count-based columns\nIdentified and flagged high-impact incidents for flexible analysis\nValidated geographic coordinates, confirming all are within valid ranges\n\nThe dataset is now ready for exploratory data analysis and modeling to identify trends in aid worker security incidents by country, year, and organization type.\n\n\nCode\n# Save the cleaned dataset\ndf.to_csv(\"data/security_incidents_cleaned.csv\", index=False)"
+    "objectID": "af.html#comparison-of-actor-types",
+    "href": "af.html#comparison-of-actor-types",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "6.2 Comparison of Actor Types",
+    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                                                \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility\nThe comparison between host state and foreign/coalition forces reveals that foreign or coalition forces were associated with more security incidents (approximately 8) than host state forces (about 3) in Afghanistan. This pattern is noteworthy and requires careful interpretation:\n\nForeign military presence: The higher number of incidents attributed to foreign forces likely reflects the significant international military presence in Afghanistan over two decades, particularly NATO and US forces.\nOperational tempo: Foreign forces may have conducted more operations in areas where humanitarian organizations were present, increasing the likelihood of security incidents.\nReporting factors: The difference might also reflect reporting patterns, with incidents involving foreign forces potentially more likely to be documented.\nTime period consideration: This pattern may vary significantly depending on the specific years covered in the dataset, as foreign military presence and tactics changed substantially over time in Afghanistan."
   },
   {
-    "objectID": "palestine.html",
-    "href": "palestine.html",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "",
-    "text": "This analysis examines security incidents in the Occupied Palestinian Territories from 2002 to 2025, revealing significant patterns and trends. Key findings include:\n\nDramatic escalation in 2023-2024: Following the October 7, 2023 Hamas attack and subsequent Israeli military campaign, security incidents surged to unprecedented levels in 2024.\nAerial bombardment is the predominant attack method, reflecting the nature of military operations in the region.\nPalestinians bear the brunt of the conflict, with nationals suffering significantly higher casualties than international personnel.\nCombat/crossfire contexts account for the majority of incidents, highlighting the risks of active conflict zones.\n\nThese findings have critical implications for humanitarian operations, civilian protection strategies, and policy development in the region."
+    "objectID": "af.html#top-5-most-impactful-security-incidents",
+    "href": "af.html#top-5-most-impactful-security-incidents",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "7.1 Top 5 Most Impactful Security Incidents",
+    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n1967\n2015\nProject site\n49\n14\n35\nCombat/Crossfire\nForeign or coalition forces\n\n\n3233\n2021\nOffice/compound\n26\n10\n16\nRaid\nNon-state armed group: Global\n\n\n897\n2009\nRoad\n16\n0\n0\nAmbush\nUnknown\n\n\n941\n2009\nOffice/compound\n12\n3\n9\nRaid\nNon-state armed group: National\n\n\n2476\n2018\nProject site\n12\n0\n0\nRaid\nNon-state armed group: Global\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents\nThe table above highlights the five most impactful security incidents in Afghanistan based on the total number of people affected. These high-casualty events reveal several important patterns:\n\nThe most severe incident occurred in 2015 at a project site, resulting in 49 casualties (14 killed and 35 wounded), indicating the vulnerability of development projects in Afghanistan\nOffice/compound locations feature prominently in the data, appearing twice in the top five incidents (in 2021 and 2009), suggesting that fixed facilities remain high-value targets\nRoad incidents also pose significant risks, as shown by the 2009 incident with 16 affected individuals, likely representing a kidnapping event given the absence of killed or wounded\nThe incidents span from 2009 to 2021, demonstrating that high-impact security events have been a persistent feature of the Afghan security landscape across different phases of the conflict\nThree of the five incidents resulted in fatalities, while two incidents (both with 12 affected individuals) show no deaths or injuries, suggesting these were likely kidnapping incidents\n\nThese high-impact events, while relatively rare, account for a disproportionate share of total casualties.\nFor more detailed information on the Israeli-Palestinian conflict timeline, see the Council on Foreign Relations Conflict Tracker."
   },
   {
-    "objectID": "palestine.html#historical-context",
-    "href": "palestine.html#historical-context",
+    "objectID": "af.html#key-findings",
+    "href": "af.html#key-findings",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "8.1 Key Findings",
+    "text": "8.1 Key Findings\n\nKidnapping and shooting dominate Afghanistan’s security incident landscape\nAfghan nationals suffer casualties at rates approximately 10 times higher than internationals\nMales account for nearly 90% of all affected individuals\nInternational NGOs experience the highest number of security incidents\nOffice compounds and project sites are particularly vulnerable to high-casualty events"
+  },
+  {
+    "objectID": "af.html#recommendations",
+    "href": "af.html#recommendations",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns (2002-2025)",
+    "section": "8.2 Recommendations",
+    "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\nImplement robust kidnapping prevention protocols and staff training\nStrengthen office/compound security with enhanced physical barriers\nDevelop context-specific standard operating procedures for high-risk areas\nEstablish clear communication channels and early warning systems\n\n\n\n8.2.2 For Humanitarian Organizations\n\nPrioritize protection measures for Afghan national staff\nCreate gender-sensitive security plans acknowledging different risk profiles\nShare security information across organizations operating in the same areas\nDocument incidents thoroughly to improve collective understanding\n\n\n\n8.2.3 For Policy Development\n\nAdvocate for enhanced civilian protection, especially for humanitarian workers\nSupport accountability mechanisms for security incidents\nPromote conflict resolution initiatives addressing root causes of violence\nStrengthen coordination between security actors and humanitarian organizations\n\n\n\n8.2.4 For Future Research\n\nExamine regional variations in security risks across Afghanistan\nAnalyze how the 2021 Taliban takeover has shifted security patterns\nStudy the effectiveness of various risk reduction measures\nInvestigate linkages between development activities and security risks"
+  },
+  {
+    "objectID": "sudan.html#historical-context",
+    "href": "sudan.html#historical-context",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "2.1 Historical Context",
-    "text": "2.1 Historical Context\nPalestine has experienced a complex and turbulent history of conflict that has significantly intensified in recent times. The current crisis stems from decades of territorial disputes and failed peace efforts:\n\n1948: Israel’s creation displaced hundreds of thousands of Palestinians\n1967: Six-Day War led to Israeli control of Gaza Strip, West Bank, and East Jerusalem\n1990s: Oslo Accords established limited Palestinian self-governance\n2006: Hamas won Palestinian elections and took control of Gaza\n2014 & 2021: Major confrontations between Hamas and Israel"
+    "text": "2.1 Historical Context"
   },
   {
-    "objectID": "palestine.html#recent-escalation-2023-2025",
-    "href": "palestine.html#recent-escalation-2023-2025",
+    "objectID": "sudan.html#recent-escalation",
+    "href": "sudan.html#recent-escalation",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "2.2 Recent Escalation (2023-2025)",
-    "text": "2.2 Recent Escalation (2023-2025)\nThe situation dramatically escalated on October 7, 2023, when Hamas launched a surprise attack on Israel, killing over 1,300 Israelis and taking hundreds hostage. Israel responded with a full-scale war in Gaza that has had devastating humanitarian consequences:\n\nApproximately 90% of Gaza’s population displaced\nOver 46,000 Palestinian casualties reported\nDestruction of essential infrastructure including hospitals\nSevere humanitarian crisis with widespread food insecurity\nLimited access to humanitarian aid\n\nA ceasefire was brokered in January 2025, but its implementation remains uncertain amid ongoing political tensions."
+    "section": "2.2 Recent Escalation",
+    "text": "2.2 Recent Escalation"
   },
   {
-    "objectID": "palestine.html#incident-frequency-over-time",
-    "href": "palestine.html#incident-frequency-over-time",
+    "objectID": "sudan.html#incident-frequency-over-time",
+    "href": "sudan.html#incident-frequency-over-time",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "3.1 Incident Frequency Over Time",
-    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n                                                \n\n\nFigure 1: Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n3.1.1 Analysis of Incident Trends\nThe line chart reveals a striking pattern in security incidents in the Occupied Palestinian Territories:\n\nRelative stability (2002-2022): For nearly two decades, incident levels remained relatively stable, typically below 10 incidents per year with occasional modest spikes around 2010, 2014, and 2020, corresponding to periods of heightened tension.\nUnprecedented surge (2023-2024): A dramatic shift occurred after the October 7, 2023 Hamas attack, with incidents surging to 68 in 2024 - representing approximately 43% of all recorded incidents in the entire dataset.\nHistorical context: While periodic cycles of violence have occurred historically, the 2023-2024 escalation represents a significant departure from previous patterns in both scale and intensity.\n\nThis finding highlights the unprecedented nature of the current conflict, which has fundamentally altered security dynamics throughout the Palestinian territories."
+    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n\n\n\n        \n        \n        \n\n\n(a) Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n\n                            \n                                            \n\n\n(b)\n\n\n\n\n\nFigure 1\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
   },
   {
-    "objectID": "palestine.html#effected-indivudals-over-time",
-    "href": "palestine.html#effected-indivudals-over-time",
+    "objectID": "sudan.html#effected-indivudals-over-time",
+    "href": "sudan.html#effected-indivudals-over-time",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "3.2 Effected Indivudals Over Time",
-    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                                                \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted\nThe chart above shows the total number of individuals affected by security incidents each year. The pattern closely mirrors the incident frequency trend, with a dramatic spike in 2023-2024 that dwarfs all previous years combined. This underscores the unprecedented humanitarian impact of the recent conflict."
+    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                            \n                                            \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
   },
   {
-    "objectID": "palestine.html#predominant-attack-types",
-    "href": "palestine.html#predominant-attack-types",
+    "objectID": "sudan.html#predominant-attack-types",
+    "href": "sudan.html#predominant-attack-types",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "4.1 Predominant Attack Types",
-    "text": "4.1 Predominant Attack Types\n\n\n\n\n                                                \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods\nThe horizontal bar chart reveals that aerial bombardment is by far the most common type of attack in the Occupied Palestinian Territories, followed by shooting incidents. This distribution offers important insights:\n\nMilitary nature of conflict: The predominance of aerial bombardment suggests a significant role of military forces with air capabilities in the conflict.\nDiversity of threats: Beyond the top two methods, the data shows a range of attack types including shelling, bodily assault, and various forms of explosives.\nCivilian vulnerability: Many of these attack types affect wide areas, putting civilians at significant risk even when not directly targeted.\n\nThis information is crucial for security planning, as different types of attacks require different prevention strategies and response protocols."
+    "text": "4.1 Predominant Attack Types\n\n\n\n\n                            \n                                            \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
   },
   {
-    "objectID": "palestine.html#attack-contexts",
-    "href": "palestine.html#attack-contexts",
+    "objectID": "sudan.html#attack-contexts",
+    "href": "sudan.html#attack-contexts",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "4.2 Attack Contexts",
-    "text": "4.2 Attack Contexts\n\n\n\n\n                                                \n\n\nFigure 4: Security incidents by attack context\n\n\n\n\n\n4.2.1 Analysis of Attack Contexts\n“Combat/Crossfire” is overwhelmingly the most common context for security incidents, accounting for over 100 incidents - far more than all other contexts combined. This finding has important implications:\n\nCollateral impact: Many incidents occur during active combat situations where individuals are caught between opposing forces rather than being directly targeted.\nConflict zone risks: Being in or near active conflict zones represents the greatest security risk in the region.\nSecurity planning: Different contexts require different security approaches - avoiding combat zones entirely may be more effective than other security measures.\n\nThe significant number of “Individual attack” incidents (second most common) also suggests that targeted violence remains a notable security concern, requiring different mitigation strategies."
+    "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts"
   },
   {
-    "objectID": "palestine.html#casualties-by-category",
-    "href": "palestine.html#casualties-by-category",
+    "objectID": "sudan.html#casualties-by-category",
+    "href": "sudan.html#casualties-by-category",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "5.1 Casualties by Category",
-    "text": "5.1 Casualties by Category\n\n\n\n\n                                                \n\n\nFigure 5: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns\nThe stacked bar chart reveals a stark disparity in the impact of security incidents on different population groups:\n\nDisproportionate local impact: Nationals (local Palestinians) have suffered significantly higher casualties compared to international personnel, in both fatalities and injuries.\nMinimal kidnapping incidents: Kidnapping appears to be exceedingly rare, with only one recorded case involving international personnel and none for nationals.\nScale of humanitarian crisis: The high casualty figures for nationals underscore the severe humanitarian impact of the conflict on local populations.\n\nThis pattern is not unusual in conflict zones, where local populations typically bear the brunt of violence. However, the scale of the difference is notable and has important implications for civilian protection and humanitarian programming."
+    "text": "5.1 Casualties by Category\n\n\n\n\n                            \n                                            \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
   },
   {
-    "objectID": "palestine.html#gender-distribution-of-affected-individuals",
-    "href": "palestine.html#gender-distribution-of-affected-individuals",
+    "objectID": "sudan.html#gender-distribution-of-affected-individuals",
+    "href": "sudan.html#gender-distribution-of-affected-individuals",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "5.2 Gender Distribution of Affected Individuals",
-    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                                                \n\n\nFigure 6: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns\nThe chart shows the gender distribution of individuals affected by security incidents, focusing only on confirmed male and female casualties. Males appear to be more frequently affected than females, which aligns with patterns observed in many conflict zones. This gender disparity can be influenced by several factors:\n\nGender roles and mobility: Males may have higher exposure to security risks due to mobility patterns or engagement in certain activities.\nTargeting patterns: Some types of security incidents may affect certain gender groups disproportionately.\nData limitations: It’s important to note that data collection in conflict zones can sometimes undercount impacts on specific groups.\n\nUnderstanding these gender dimensions is crucial for developing gender-sensitive security protocols and humanitarian responses."
+    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                            \n                                            \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
   },
   {
-    "objectID": "palestine.html#organizations-affected-by-security-incidents",
-    "href": "palestine.html#organizations-affected-by-security-incidents",
+    "objectID": "sudan.html#organizations-affected-by-security-incidents",
+    "href": "sudan.html#organizations-affected-by-security-incidents",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "6.1 Organizations Affected by Security Incidents",
-    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                                                \n\n\nFigure 7: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact\nThe chart shows how security incidents have affected different types of organizations operating in the Occupied Palestinian Territories. This distribution reveals several important patterns:\n\nUnited Nations vulnerability: UN organizations have been affected by the highest number of incidents, potentially reflecting their widespread presence and high visibility in the region.\nInternational vs. local exposure: International organizations appear more frequently affected than local entities, which may reflect differences in operational footprint, reporting practices, or targeting patterns.\nHumanitarian access challenges: The significant impact on humanitarian organizations has implications for service delivery to vulnerable populations.\n\nThese findings can help organizations develop security strategies tailored to their specific risk profiles and improve coordination between different actors operating in the region."
+    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                            \n                                            \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
   },
   {
-    "objectID": "palestine.html#comparison-of-actor-types",
-    "href": "palestine.html#comparison-of-actor-types",
+    "objectID": "sudan.html#comparison-of-actor-types",
+    "href": "sudan.html#comparison-of-actor-types",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "6.2 Comparison of Actor Types",
-    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                                                \n\n\nFigure 8: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility\nThis analysis focuses specifically on two major actor types responsible for security incidents: Host State forces and Foreign/coalition forces. Other actor categories were excluded to enable a clear comparison between these two primary groups.\nThe chart reveals differences in the frequency of incidents attributed to each actor type, which provides important context for understanding the sources of security threats in the region. This has implications for:\n\nResponsibility patterns: The data helps identify key actors in the conflict based on incident attribution.\nConflict dynamics: The relative role of host state versus foreign forces offers insights into the nature of the conflict and external involvement.\nAccountability: Understanding which actors are responsible for incidents has implications for accountability and human rights monitoring."
+    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                            \n                                            \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility"
   },
   {
-    "objectID": "palestine.html#top-5-most-impactful-security-incidents",
-    "href": "palestine.html#top-5-most-impactful-security-incidents",
+    "objectID": "sudan.html#top-5-most-impactful-security-incidents",
+    "href": "sudan.html#top-5-most-impactful-security-incidents",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "7.1 Top 5 Most Impactful Security Incidents",
-    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n3834\n2023\nUnknown\n92\n70\n22\nCombat/Crossfire\nUnknown\n\n\n3897\n2023\nUnknown\n46\n41\n5\nCombat/Crossfire\nUnknown\n\n\n3913\n2023\nUnknown\n31\n31\n0\nCombat/Crossfire\nUnknown\n\n\n3969\n2024\nOffice/compound\n23\n1\n22\nCombat/Crossfire\nHost state\n\n\n3876\n2023\nUnknown\n19\n0\n19\nUnknown\nHost state\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents\nThe table above highlights the five most impactful security incidents in the Occupied Palestinian Territories based on the total number of people affected. The most severe incident occurred in October 2023, coinciding with the Hamas attack on October 7th and the subsequent Israeli military response.\nThese major incidents share several characteristics:\n\nRecent escalation: Most of the high-impact incidents occurred during the 2023-2024 conflict escalation.\nHigh casualty rates: These incidents resulted in significant casualties, underscoring the intensity of the recent conflict.\nCombat contexts: Most occurred in combat/crossfire situations, consistent with the broader pattern of incidents in the region.\n\nFor more detailed information on the Israeli-Palestinian conflict timeline, see the Council on Foreign Relations Conflict Tracker."
+    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n3778\n2023\nRoad\n18\n0\n18\nAmbush\nUnknown\n\n\n384\n2005\nRoad\n17\n0\n17\nAmbush\nUnknown\n\n\n377\n2005\nProject site\n15\n0\n15\nMob violence\nAid recipient\n\n\n260\n2003\nRoad\n10\n8\n2\nAmbush\nUnknown\n\n\n507\n2006\nUnknown\n8\n0\n8\nAmbush\nUnknown\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents"
   },
   {
-    "objectID": "palestine.html#key-findings",
-    "href": "palestine.html#key-findings",
+    "objectID": "sudan.html#key-findings",
+    "href": "sudan.html#key-findings",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "8.1 Key Findings",
-    "text": "8.1 Key Findings\nThis analysis of security incidents in the Occupied Palestinian Territories reveals several critical patterns and trends:\n\nUnprecedented recent escalation: After nearly two decades of relatively stable incident levels, 2023-2024 saw a dramatic surge in security incidents, reflecting the intensity of the conflict following the October 7th attack.\nPredominant attack methods: Aerial bombardment and shooting incidents emerge as the most common types of attacks, highlighting the nature of military operations in the region.\nDisproportionate impact on locals: Palestinian nationals have suffered significantly higher casualties compared to international personnel, underscoring the humanitarian dimension of the conflict.\nCombat as primary context: Most incidents occur during active combat situations, suggesting that conflict avoidance is a critical security strategy.\nOrganizational vulnerability: Various organizations operating in the region face different levels of security risk, with UN entities being most frequently affected."
+    "text": "8.1 Key Findings"
   },
   {
-    "objectID": "palestine.html#recommendations",
-    "href": "palestine.html#recommendations",
+    "objectID": "sudan.html#recommendations",
+    "href": "sudan.html#recommendations",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "8.2 Recommendations",
-    "text": "8.2 Recommendations\nThese findings have important implications for security planning, humanitarian programming, and policy development:\n\n8.2.1 For Security Planning\n\nDevelop robust protocols specifically addressing risks from aerial bombardment and crossfire situations\nImplement enhanced early warning systems to monitor combat zone developments\nEstablish clear evacuation procedures for areas at high risk of becoming combat zones\n\n\n\n8.2.2 For Humanitarian Organizations\n\nPrioritize protection measures for local staff, who face disproportionate security risks\nDevelop gender-sensitive security protocols that address the different risk profiles of male and female personnel\nStrengthen coordination among different organizations to share security information and resources\n\n\n\n8.2.3 For Policy Development\n\nAdvocate for strengthened civilian protection measures, particularly in areas prone to combat/crossfire\nSupport accountability mechanisms for documenting and addressing security incidents\nPromote conflict resolution initiatives to address the root causes of the escalating violence\n\n\n\n8.2.4 For Future Research\n\nContinue monitoring security trends, especially given the recent escalation\nInvestigate the specific factors contributing to the disproportionate impact on local populations\nExamine the effectiveness of different security measures in reducing casualties\n\nBy providing a data-driven understanding of security patterns in the Occupied Palestinian Territories, this analysis aims to contribute to safer and more effective operations in this challenging environment."
+    "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\n\n8.2.2 For Humanitarian Organizations\n\n\n8.2.3 For Policy Development\n\n\n8.2.4 For Future Research"
+  },
+  {
+    "objectID": "mali.html#historical-context",
+    "href": "mali.html#historical-context",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "2.1 Historical Context",
+    "text": "2.1 Historical Context"
+  },
+  {
+    "objectID": "mali.html#recent-escalation",
+    "href": "mali.html#recent-escalation",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "2.2 Recent Escalation",
+    "text": "2.2 Recent Escalation"
+  },
+  {
+    "objectID": "mali.html#incident-frequency-over-time",
+    "href": "mali.html#incident-frequency-over-time",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "3.1 Incident Frequency Over Time",
+    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n\n\n\n        \n        \n        \n\n\n(a) Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n\n                            \n                                            \n\n\n(b)\n\n\n\n\n\nFigure 1\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
+  },
+  {
+    "objectID": "mali.html#effected-indivudals-over-time",
+    "href": "mali.html#effected-indivudals-over-time",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "3.2 Effected Indivudals Over Time",
+    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                            \n                                            \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
+  },
+  {
+    "objectID": "mali.html#predominant-attack-types",
+    "href": "mali.html#predominant-attack-types",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "4.1 Predominant Attack Types",
+    "text": "4.1 Predominant Attack Types\n\n\n\n\n                            \n                                            \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
+  },
+  {
+    "objectID": "mali.html#attack-contexts",
+    "href": "mali.html#attack-contexts",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "4.2 Attack Contexts",
+    "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts"
+  },
+  {
+    "objectID": "mali.html#casualties-by-category",
+    "href": "mali.html#casualties-by-category",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "5.1 Casualties by Category",
+    "text": "5.1 Casualties by Category\n\n\n\n\n                            \n                                            \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
+  },
+  {
+    "objectID": "mali.html#gender-distribution-of-affected-individuals",
+    "href": "mali.html#gender-distribution-of-affected-individuals",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "5.2 Gender Distribution of Affected Individuals",
+    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                            \n                                            \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
+  },
+  {
+    "objectID": "mali.html#organizations-affected-by-security-incidents",
+    "href": "mali.html#organizations-affected-by-security-incidents",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "6.1 Organizations Affected by Security Incidents",
+    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                            \n                                            \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
+  },
+  {
+    "objectID": "mali.html#comparison-of-actor-types",
+    "href": "mali.html#comparison-of-actor-types",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "6.2 Comparison of Actor Types",
+    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                            \n                                            \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility"
+  },
+  {
+    "objectID": "mali.html#top-5-most-impactful-security-incidents",
+    "href": "mali.html#top-5-most-impactful-security-incidents",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "7.1 Top 5 Most Impactful Security Incidents",
+    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n2537\n2018\nPublic location\n9\n0\n9\nRaid\nNon-state armed group: Regional\n\n\n3489\n2022\nProject site\n9\n0\n0\nRaid\nNon-state armed group: Unknown\n\n\n3232\n2021\nUnknown\n8\n0\n0\nUnknown\nNon-state armed group: Regional\n\n\n2859\n2020\nRoad\n6\n0\n0\nAmbush\nNon-state armed group: Unknown\n\n\n3950\n2024\nRoad\n6\n0\n0\nAmbush\nNon-state armed group: Regional\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents"
+  },
+  {
+    "objectID": "mali.html#key-findings",
+    "href": "mali.html#key-findings",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "8.1 Key Findings",
+    "text": "8.1 Key Findings"
+  },
+  {
+    "objectID": "mali.html#recommendations",
+    "href": "mali.html#recommendations",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "8.2 Recommendations",
+    "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\n\n8.2.2 For Humanitarian Organizations\n\n\n8.2.3 For Policy Development\n\n\n8.2.4 For Future Research"
+  },
+  {
+    "objectID": "african.html#historical-context",
+    "href": "african.html#historical-context",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "2.1 Historical Context",
+    "text": "2.1 Historical Context"
+  },
+  {
+    "objectID": "african.html#recent-escalation",
+    "href": "african.html#recent-escalation",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "2.2 Recent Escalation",
+    "text": "2.2 Recent Escalation"
+  },
+  {
+    "objectID": "african.html#incident-frequency-over-time",
+    "href": "african.html#incident-frequency-over-time",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "3.1 Incident Frequency Over Time",
+    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n\n\n\n        \n        \n        \n\n\n(a) Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n\n                            \n                                            \n\n\n(b)\n\n\n\n\n\nFigure 1\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
+  },
+  {
+    "objectID": "african.html#effected-indivudals-over-time",
+    "href": "african.html#effected-indivudals-over-time",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "3.2 Effected Indivudals Over Time",
+    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                            \n                                            \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
+  },
+  {
+    "objectID": "african.html#predominant-attack-types",
+    "href": "african.html#predominant-attack-types",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "4.1 Predominant Attack Types",
+    "text": "4.1 Predominant Attack Types\n\n\n\n\n                            \n                                            \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
+  },
+  {
+    "objectID": "african.html#attack-contexts",
+    "href": "african.html#attack-contexts",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "4.2 Attack Contexts",
+    "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts"
+  },
+  {
+    "objectID": "african.html#casualties-by-category",
+    "href": "african.html#casualties-by-category",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "5.1 Casualties by Category",
+    "text": "5.1 Casualties by Category\n\n\n\n\n                            \n                                            \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
+  },
+  {
+    "objectID": "african.html#gender-distribution-of-affected-individuals",
+    "href": "african.html#gender-distribution-of-affected-individuals",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "5.2 Gender Distribution of Affected Individuals",
+    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                            \n                                            \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
+  },
+  {
+    "objectID": "african.html#organizations-affected-by-security-incidents",
+    "href": "african.html#organizations-affected-by-security-incidents",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "6.1 Organizations Affected by Security Incidents",
+    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                            \n                                            \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
+  },
+  {
+    "objectID": "african.html#comparison-of-actor-types",
+    "href": "african.html#comparison-of-actor-types",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "6.2 Comparison of Actor Types",
+    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                            \n                                            \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility"
+  },
+  {
+    "objectID": "african.html#top-5-most-impactful-security-incidents",
+    "href": "african.html#top-5-most-impactful-security-incidents",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "7.1 Top 5 Most Impactful Security Incidents",
+    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n2253\n2017\nProject site\n10\n10\n0\nRaid\nNon-state armed group: Unknown\n\n\n931\n2009\nRoad\n8\n3\n2\nAmbush\nNon-state armed group: Regional\n\n\n1811\n2014\nProject site\n7\n0\n7\nCombat/Crossfire\nUnknown\n\n\n2366\n2018\nRoad\n6\n6\n0\nAmbush\nNon-state armed group: National\n\n\n3632\n2022\nProject site\n6\n0\n6\nIndividual attack\nUnknown\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents"
+  },
+  {
+    "objectID": "african.html#key-findings",
+    "href": "african.html#key-findings",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "8.1 Key Findings",
+    "text": "8.1 Key Findings"
+  },
+  {
+    "objectID": "african.html#recommendations",
+    "href": "african.html#recommendations",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "8.2 Recommendations",
+    "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\n\n8.2.2 For Humanitarian Organizations\n\n\n8.2.3 For Policy Development\n\n\n8.2.4 For Future Research"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
   },
   {
     "objectID": "eda.html",
@@ -266,92 +469,442 @@
     "text": "10.1 Analysis of Actor Responsibility\nThis analysis focuses specifically on two major actor types responsible for security incidents: Host State forces and Foreign/coalition forces. This comparison reveals important patterns:\n\n10.1.1 Host State vs. Foreign Forces\n\nThe relative frequency of incidents attributed to each actor type varies significantly by context\nUnderstanding these patterns helps identify which forces represent the primary security concern in different areas\n\n\n\n10.1.2 Implications for Security Planning\n\nContext-specific approaches: Security strategies should reflect the predominant actor types in each area\nEngagement strategies: Different approaches may be needed when engaging with different security"
   },
   {
-    "objectID": "southsudan.html#historical-context",
-    "href": "southsudan.html#historical-context",
+    "objectID": "syria.html#historical-context",
+    "href": "syria.html#historical-context",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "2.1 Historical Context",
     "text": "2.1 Historical Context"
   },
   {
-    "objectID": "southsudan.html#recent-escalation",
-    "href": "southsudan.html#recent-escalation",
+    "objectID": "syria.html#recent-escalation",
+    "href": "syria.html#recent-escalation",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "2.2 Recent Escalation",
     "text": "2.2 Recent Escalation"
   },
   {
-    "objectID": "southsudan.html#incident-frequency-over-time",
-    "href": "southsudan.html#incident-frequency-over-time",
+    "objectID": "syria.html#incident-frequency-over-time",
+    "href": "syria.html#incident-frequency-over-time",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "3.1 Incident Frequency Over Time",
-    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n                                                \n\n\nFigure 1: Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
+    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n\n\n\n        \n        \n        \n\n\n(a) Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n\n                            \n                                            \n\n\n(b)\n\n\n\n\n\nFigure 1\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
   },
   {
-    "objectID": "southsudan.html#effected-indivudals-over-time",
-    "href": "southsudan.html#effected-indivudals-over-time",
+    "objectID": "syria.html#effected-indivudals-over-time",
+    "href": "syria.html#effected-indivudals-over-time",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "3.2 Effected Indivudals Over Time",
-    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                                                \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
+    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                            \n                                            \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
   },
   {
-    "objectID": "southsudan.html#predominant-attack-types",
-    "href": "southsudan.html#predominant-attack-types",
+    "objectID": "syria.html#predominant-attack-types",
+    "href": "syria.html#predominant-attack-types",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "4.1 Predominant Attack Types",
-    "text": "4.1 Predominant Attack Types\n\n\n\n\n                                                \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
+    "text": "4.1 Predominant Attack Types\n\n\n\n\n                            \n                                            \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
   },
   {
-    "objectID": "southsudan.html#attack-contexts",
-    "href": "southsudan.html#attack-contexts",
+    "objectID": "syria.html#attack-contexts",
+    "href": "syria.html#attack-contexts",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "4.2 Attack Contexts",
     "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts"
   },
   {
-    "objectID": "southsudan.html#casualties-by-category",
-    "href": "southsudan.html#casualties-by-category",
+    "objectID": "syria.html#casualties-by-category",
+    "href": "syria.html#casualties-by-category",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "5.1 Casualties by Category",
-    "text": "5.1 Casualties by Category\n\n\n\n\n                                                \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
+    "text": "5.1 Casualties by Category\n\n\n\n\n                            \n                                            \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
   },
   {
-    "objectID": "southsudan.html#gender-distribution-of-affected-individuals",
-    "href": "southsudan.html#gender-distribution-of-affected-individuals",
+    "objectID": "syria.html#gender-distribution-of-affected-individuals",
+    "href": "syria.html#gender-distribution-of-affected-individuals",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "5.2 Gender Distribution of Affected Individuals",
-    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                                                \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
+    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                            \n                                            \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
   },
   {
-    "objectID": "southsudan.html#organizations-affected-by-security-incidents",
-    "href": "southsudan.html#organizations-affected-by-security-incidents",
+    "objectID": "syria.html#organizations-affected-by-security-incidents",
+    "href": "syria.html#organizations-affected-by-security-incidents",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "6.1 Organizations Affected by Security Incidents",
-    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                                                \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
+    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                            \n                                            \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
   },
   {
-    "objectID": "southsudan.html#comparison-of-actor-types",
-    "href": "southsudan.html#comparison-of-actor-types",
+    "objectID": "syria.html#comparison-of-actor-types",
+    "href": "syria.html#comparison-of-actor-types",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "6.2 Comparison of Actor Types",
-    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                                                \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility"
+    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                            \n                                            \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility"
   },
   {
-    "objectID": "southsudan.html#top-5-most-impactful-security-incidents",
-    "href": "southsudan.html#top-5-most-impactful-security-incidents",
+    "objectID": "syria.html#top-5-most-impactful-security-incidents",
+    "href": "syria.html#top-5-most-impactful-security-incidents",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "7.1 Top 5 Most Impactful Security Incidents",
-    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n2148\n2016\nProject site\n20\n0\n0\nRaid\nNon-state armed group: National\n\n\n2091\n2016\nPublic location\n16\n1\n15\nRaid\nHost State\n\n\n2426\n2018\nRoad\n12\n0\n0\nAmbush\nNon-state armed group: Unknown\n\n\n2526\n2018\nRoad\n11\n1\n0\nAmbush\nNon-state armed group: Unknown\n\n\n2412\n2018\nRoad\n10\n0\n0\nAmbush\nNon-state armed group: Unknown\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents"
+    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n1546\n2013\nProject site\n11\n0\n11\nCombat/Crossfire\nUnknown\n\n\n2020\n2016\nProject site\n9\n9\n0\nCombat/Crossfire\nForeign or coalition forces\n\n\n2216\n2017\nOffice/compound\n9\n9\n0\nCombat/Crossfire\nForeign or coalition forces\n\n\n3234\n2021\nProject site\n8\n4\n4\nCombat/Crossfire\nUnknown\n\n\n1604\n2013\nRoad\n7\n0\n0\nAmbush\nNon-state armed group: Global\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents"
   },
   {
-    "objectID": "southsudan.html#key-findings",
-    "href": "southsudan.html#key-findings",
+    "objectID": "syria.html#key-findings",
+    "href": "syria.html#key-findings",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "8.1 Key Findings",
     "text": "8.1 Key Findings"
   },
   {
-    "objectID": "southsudan.html#recommendations",
-    "href": "southsudan.html#recommendations",
+    "objectID": "syria.html#recommendations",
+    "href": "syria.html#recommendations",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "8.2 Recommendations",
+    "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\n\n8.2.2 For Humanitarian Organizations\n\n\n8.2.3 For Policy Development\n\n\n8.2.4 For Future Research"
+  },
+  {
+    "objectID": "palestine.html",
+    "href": "palestine.html",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "",
+    "text": "This analysis examines security incidents in the Occupied Palestinian Territories from 2002 to 2025, revealing significant patterns and trends. Key findings include:\n\nDramatic escalation in 2023-2024: Following the October 7, 2023 Hamas attack and subsequent Israeli military campaign, security incidents surged to unprecedented levels in 2024.\nAerial bombardment is the predominant attack method, reflecting the nature of military operations in the region.\nPalestinians bear the brunt of the conflict, with nationals suffering significantly higher casualties than international personnel.\nCombat/crossfire contexts account for the majority of incidents, highlighting the risks of active conflict zones.\n\nThese findings have critical implications for humanitarian operations, civilian protection strategies, and policy development in the region."
+  },
+  {
+    "objectID": "palestine.html#historical-context",
+    "href": "palestine.html#historical-context",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "2.1 Historical Context",
+    "text": "2.1 Historical Context\nPalestine has experienced a complex and turbulent history of conflict that has significantly intensified in recent times. The current crisis stems from decades of territorial disputes and failed peace efforts:\n\n1948: Israel’s creation displaced hundreds of thousands of Palestinians\n1967: Six-Day War led to Israeli control of Gaza Strip, West Bank, and East Jerusalem\n1990s: Oslo Accords established limited Palestinian self-governance\n2006: Hamas won Palestinian elections and took control of Gaza\n2014 & 2021: Major confrontations between Hamas and Israel"
+  },
+  {
+    "objectID": "palestine.html#recent-escalation-2023-2025",
+    "href": "palestine.html#recent-escalation-2023-2025",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "2.2 Recent Escalation (2023-2025)",
+    "text": "2.2 Recent Escalation (2023-2025)\nThe situation dramatically escalated on October 7, 2023, when Hamas launched a surprise attack on Israel, killing over 1,300 Israelis and taking hundreds hostage. Israel responded with a full-scale war in Gaza that has had devastating humanitarian consequences:\n\nApproximately 90% of Gaza’s population displaced\nOver 46,000 Palestinian casualties reported\nDestruction of essential infrastructure including hospitals\nSevere humanitarian crisis with widespread food insecurity\nLimited access to humanitarian aid\n\nA ceasefire was brokered in January 2025, but its implementation remains uncertain amid ongoing political tensions."
+  },
+  {
+    "objectID": "palestine.html#incident-frequency-over-time",
+    "href": "palestine.html#incident-frequency-over-time",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "3.1 Incident Frequency Over Time",
+    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n                                                \n\n\nFigure 1: Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n3.1.1 Analysis of Incident Trends\nThe line chart reveals a striking pattern in security incidents in the Occupied Palestinian Territories:\n\nRelative stability (2002-2022): For nearly two decades, incident levels remained relatively stable, typically below 10 incidents per year with occasional modest spikes around 2010, 2014, and 2020, corresponding to periods of heightened tension.\nUnprecedented surge (2023-2024): A dramatic shift occurred after the October 7, 2023 Hamas attack, with incidents surging to 68 in 2024 - representing approximately 43% of all recorded incidents in the entire dataset.\nHistorical context: While periodic cycles of violence have occurred historically, the 2023-2024 escalation represents a significant departure from previous patterns in both scale and intensity.\n\nThis finding highlights the unprecedented nature of the current conflict, which has fundamentally altered security dynamics throughout the Palestinian territories."
+  },
+  {
+    "objectID": "palestine.html#effected-indivudals-over-time",
+    "href": "palestine.html#effected-indivudals-over-time",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "3.2 Effected Indivudals Over Time",
+    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                                                \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted\nThe chart above shows the total number of individuals affected by security incidents each year. The pattern closely mirrors the incident frequency trend, with a dramatic spike in 2023-2024 that dwarfs all previous years combined. This underscores the unprecedented humanitarian impact of the recent conflict."
+  },
+  {
+    "objectID": "palestine.html#predominant-attack-types",
+    "href": "palestine.html#predominant-attack-types",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "4.1 Predominant Attack Types",
+    "text": "4.1 Predominant Attack Types\n\n\n\n\n                                                \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods\nThe horizontal bar chart reveals that aerial bombardment is by far the most common type of attack in the Occupied Palestinian Territories, followed by shooting incidents. This distribution offers important insights:\n\nMilitary nature of conflict: The predominance of aerial bombardment suggests a significant role of military forces with air capabilities in the conflict.\nDiversity of threats: Beyond the top two methods, the data shows a range of attack types including shelling, bodily assault, and various forms of explosives.\nCivilian vulnerability: Many of these attack types affect wide areas, putting civilians at significant risk even when not directly targeted.\n\nThis information is crucial for security planning, as different types of attacks require different prevention strategies and response protocols."
+  },
+  {
+    "objectID": "palestine.html#attack-contexts",
+    "href": "palestine.html#attack-contexts",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "4.2 Attack Contexts",
+    "text": "4.2 Attack Contexts\n\n\n\n\n                                                \n\n\nFigure 4: Security incidents by attack context\n\n\n\n\n\n4.2.1 Analysis of Attack Contexts\n“Combat/Crossfire” is overwhelmingly the most common context for security incidents, accounting for over 100 incidents - far more than all other contexts combined. This finding has important implications:\n\nCollateral impact: Many incidents occur during active combat situations where individuals are caught between opposing forces rather than being directly targeted.\nConflict zone risks: Being in or near active conflict zones represents the greatest security risk in the region.\nSecurity planning: Different contexts require different security approaches - avoiding combat zones entirely may be more effective than other security measures.\n\nThe significant number of “Individual attack” incidents (second most common) also suggests that targeted violence remains a notable security concern, requiring different mitigation strategies."
+  },
+  {
+    "objectID": "palestine.html#casualties-by-category",
+    "href": "palestine.html#casualties-by-category",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "5.1 Casualties by Category",
+    "text": "5.1 Casualties by Category\n\n\n\n\n                                                \n\n\nFigure 5: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns\nThe stacked bar chart reveals a stark disparity in the impact of security incidents on different population groups:\n\nDisproportionate local impact: Nationals (local Palestinians) have suffered significantly higher casualties compared to international personnel, in both fatalities and injuries.\nMinimal kidnapping incidents: Kidnapping appears to be exceedingly rare, with only one recorded case involving international personnel and none for nationals.\nScale of humanitarian crisis: The high casualty figures for nationals underscore the severe humanitarian impact of the conflict on local populations.\n\nThis pattern is not unusual in conflict zones, where local populations typically bear the brunt of violence. However, the scale of the difference is notable and has important implications for civilian protection and humanitarian programming."
+  },
+  {
+    "objectID": "palestine.html#gender-distribution-of-affected-individuals",
+    "href": "palestine.html#gender-distribution-of-affected-individuals",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "5.2 Gender Distribution of Affected Individuals",
+    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                                                \n\n\nFigure 6: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns\nThe chart shows the gender distribution of individuals affected by security incidents, focusing only on confirmed male and female casualties. Males appear to be more frequently affected than females, which aligns with patterns observed in many conflict zones. This gender disparity can be influenced by several factors:\n\nGender roles and mobility: Males may have higher exposure to security risks due to mobility patterns or engagement in certain activities.\nTargeting patterns: Some types of security incidents may affect certain gender groups disproportionately.\nData limitations: It’s important to note that data collection in conflict zones can sometimes undercount impacts on specific groups.\n\nUnderstanding these gender dimensions is crucial for developing gender-sensitive security protocols and humanitarian responses."
+  },
+  {
+    "objectID": "palestine.html#organizations-affected-by-security-incidents",
+    "href": "palestine.html#organizations-affected-by-security-incidents",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "6.1 Organizations Affected by Security Incidents",
+    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                                                \n\n\nFigure 7: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact\nThe chart shows how security incidents have affected different types of organizations operating in the Occupied Palestinian Territories. This distribution reveals several important patterns:\n\nUnited Nations vulnerability: UN organizations have been affected by the highest number of incidents, potentially reflecting their widespread presence and high visibility in the region.\nInternational vs. local exposure: International organizations appear more frequently affected than local entities, which may reflect differences in operational footprint, reporting practices, or targeting patterns.\nHumanitarian access challenges: The significant impact on humanitarian organizations has implications for service delivery to vulnerable populations.\n\nThese findings can help organizations develop security strategies tailored to their specific risk profiles and improve coordination between different actors operating in the region."
+  },
+  {
+    "objectID": "palestine.html#comparison-of-actor-types",
+    "href": "palestine.html#comparison-of-actor-types",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "6.2 Comparison of Actor Types",
+    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                                                \n\n\nFigure 8: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility\nThis analysis focuses specifically on two major actor types responsible for security incidents: Host State forces and Foreign/coalition forces. Other actor categories were excluded to enable a clear comparison between these two primary groups.\nThe chart clearly shows that host state forces are behind most of the security incidents."
+  },
+  {
+    "objectID": "palestine.html#top-5-most-impactful-security-incidents",
+    "href": "palestine.html#top-5-most-impactful-security-incidents",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "7.1 Top 5 Most Impactful Security Incidents",
+    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n3834\n2023\nUnknown\n92\n70\n22\nCombat/Crossfire\nUnknown\n\n\n3897\n2023\nUnknown\n46\n41\n5\nCombat/Crossfire\nUnknown\n\n\n3913\n2023\nUnknown\n31\n31\n0\nCombat/Crossfire\nUnknown\n\n\n3969\n2024\nOffice/compound\n23\n1\n22\nCombat/Crossfire\nHost state\n\n\n3876\n2023\nUnknown\n19\n0\n19\nUnknown\nHost state\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents\nThe table above highlights the five most impactful security incidents in the Occupied Palestinian Territories based on the total number of people affected. The most severe incident occurred in October 2023, coinciding with the Hamas attack on October 7th and the subsequent Israeli military response.\nThese major incidents share several characteristics:\n\nRecent escalation: Most of the high-impact incidents occurred during the 2023-2024 conflict escalation.\nHigh casualty rates: These incidents resulted in significant casualties, underscoring the intensity of the recent conflict.\nCombat contexts: Most occurred in combat/crossfire situations, consistent with the broader pattern of incidents in the region.\n\nFor more detailed information on the Israeli-Palestinian conflict timeline, see the Council on Foreign Relations Conflict Tracker."
+  },
+  {
+    "objectID": "palestine.html#key-findings",
+    "href": "palestine.html#key-findings",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "8.1 Key Findings",
+    "text": "8.1 Key Findings\nThis analysis of security incidents in the Occupied Palestinian Territories reveals several critical patterns and trends:\n\nUnprecedented recent escalation: After nearly two decades of relatively stable incident levels, 2023-2024 saw a dramatic surge in security incidents, reflecting the intensity of the conflict following the October 7th attack.\nPredominant attack methods: Aerial bombardment and shooting incidents emerge as the most common types of attacks, highlighting the nature of military operations in the region.\nDisproportionate impact on locals: Palestinian nationals have suffered significantly higher casualties compared to international personnel, underscoring the humanitarian dimension of the conflict.\nCombat as primary context: Most incidents occur during active combat situations, suggesting that conflict avoidance is a critical security strategy.\nOrganizational vulnerability: Various organizations operating in the region face different levels of security risk, with UN entities being most frequently affected."
+  },
+  {
+    "objectID": "palestine.html#recommendations",
+    "href": "palestine.html#recommendations",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "8.2 Recommendations",
+    "text": "8.2 Recommendations\nThese findings have important implications for security planning, humanitarian programming, and policy development:\n\n8.2.1 For Security Planning\n\nDevelop robust protocols specifically addressing risks from aerial bombardment and crossfire situations\nImplement enhanced early warning systems to monitor combat zone developments\nEstablish clear evacuation procedures for areas at high risk of becoming combat zones\n\n\n\n8.2.2 For Humanitarian Organizations\n\nPrioritize protection measures for local staff, who face disproportionate security risks\nDevelop gender-sensitive security protocols that address the different risk profiles of male and female personnel\nStrengthen coordination among different organizations to share security information and resources\n\n\n\n8.2.3 For Policy Development\n\nAdvocate for strengthened civilian protection measures, particularly in areas prone to combat/crossfire\nSupport accountability mechanisms for documenting and addressing security incidents\nPromote conflict resolution initiatives to address the root causes of the escalating violence\n\n\n\n8.2.4 For Future Research\n\nContinue monitoring security trends, especially given the recent escalation\nInvestigate the specific factors contributing to the disproportionate impact on local populations\nExamine the effectiveness of different security measures in reducing casualties\n\nBy providing a data-driven understanding of security patterns in the Occupied Palestinian Territories, this analysis aims to contribute to safer and more effective operations in this challenging environment."
+  },
+  {
+    "objectID": "data_cleaning.html",
+    "href": "data_cleaning.html",
+    "title": "Security Incidents Data Cleaning",
+    "section": "",
+    "text": "This document outlines the data cleaning process for the security incidents dataset. We’ll examine the data structure, identify and address missing values, and prepare the dataset for analysis of broad trends in aid worker incidents by country, year, and organization type.\nThe cleaning process follows a systematic approach:\n\nLoading and initial inspection\nHandling missing values\nDuplicate detection and removal\nData type optimization\nOutlier analysis and handling\nGeographic data validation\nFinal dataset preparation"
+  },
+  {
+    "objectID": "data_cleaning.html#introduction",
+    "href": "data_cleaning.html#introduction",
+    "title": "Security Incidents Data Cleaning",
+    "section": "",
+    "text": "This document outlines the data cleaning process for the security incidents dataset. We’ll examine the data structure, identify and address missing values, and prepare the dataset for analysis of broad trends in aid worker incidents by country, year, and organization type.\nThe cleaning process follows a systematic approach:\n\nLoading and initial inspection\nHandling missing values\nDuplicate detection and removal\nData type optimization\nOutlier analysis and handling\nGeographic data validation\nFinal dataset preparation"
+  },
+  {
+    "objectID": "data_cleaning.html#loading-and-initial-inspection",
+    "href": "data_cleaning.html#loading-and-initial-inspection",
+    "title": "Security Incidents Data Cleaning",
+    "section": "2. Loading and Initial Inspection",
+    "text": "2. Loading and Initial Inspection\nFirst, let’s load the dataset and standardize the column names for consistency.\n\n\nCode\n# Import required libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport seaborn as sns\n\n# Load the security incidents dataset\ndf = pd.read_csv(\"data/security_incidents.csv\")\n\n# Standardize column names (lowercase, replace spaces with underscores)\ndf.columns = df.columns.str.strip().str.lower().str.replace(\" \", \"_\")\n\n# Display the first few rows\ndf.head(1)\n\n\n\n\n\n\n\n\n\nincident_id\nyear\nmonth\nday\ncountry_code\ncountry\nregion\ndistrict\ncity\nun\n...\nattack_context\nlocation\nlatitude\nlongitude\nmotive\nactor_type\nactor_name\ndetails\nverified\nsource\n\n\n\n\n0\n1\n1997\n1.0\nNaN\nKH\nCambodia\nBanteay Meanchey\nNaN\nNaN\n0\n...\nUnknown\nUnknown\n14.070929\n103.099916\nUnknown\nUnknown\nUnknown\n1 ICRC national staff killed while working in ...\nArchived\nArchived\n\n\n\n\n1 rows × 41 columns\n\n\n\n\n\nCode\n# Get basic dataset information\nrows, cols = df.shape\nprint(f\"The dataset contains {rows} rows and {cols} columns.\")\n\n\nThe dataset contains 4337 rows and 41 columns."
+  },
+  {
+    "objectID": "data_cleaning.html#handling-missing-values",
+    "href": "data_cleaning.html#handling-missing-values",
+    "title": "Security Incidents Data Cleaning",
+    "section": "3. Handling Missing Values",
+    "text": "3. Handling Missing Values\nTo better understand which variables have missing values, we’ll create a visualization showing the percentage of missing values per column.\n\n\nCode\n# Calculate percent of missing values per column\nmissing_percent = (df.isna().sum() / len(df)) * 100\nmissing_percent = missing_percent[missing_percent &gt; 0].sort_values(ascending=True)\n\n# Create a horizontal bar plot of missing values\nplt.figure(figsize=(7, 4))\nmissing_percent.plot(kind='barh')\nplt.title(\"Percentage of Missing Values per Column\")\nplt.xlabel(\"Percent Missing (%)\")\nplt.tight_layout()\nplt.grid(axis='x', linestyle='--', alpha=0.5)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Check for missing values\nmissing_values = df.isnull().sum()\nmissing_percent = (missing_values / len(df) * 100).round(2)\n\n# Create a dataframe of missing values\nmissing_df = pd.DataFrame({\n    'Missing Values': missing_values,\n    'Percentage': missing_percent\n})\n\n# Display columns with missing values\nprint(\"Columns with missing values:\")\nmissing_df[missing_df['Missing Values'] &gt; 0].sort_values('Missing Values', ascending=False)\n\n# Visualize missing values if any exist\nif missing_values.sum() &gt; 0:\n    plt.figure(figsize=(12, 6))\n    sns.heatmap(df.isnull(), cbar=False, cmap='viridis', yticklabels=False)\n    plt.title('Missing Values Heatmap')\n    plt.tight_layout()\n    plt.show()\n\n\nColumns with missing values:\n\n\n\n\n\n\n\n\n\n\n3.1 Strategy for Missing Values\nBased on our exploration, we have identified several columns with high proportions of missing values:\n\nCity (over 20% missing)\nDistrict, Day, and Region (significant proportions missing)\n\nSince our analysis focus is on broad trends by country, year, and organization type, we will:\n\nRemove granular fields with limited analytical value for our specific goals\nLeave the remaining minimal missing values as-is, as they’re sparse and likely random\n\n\n\nCode\n# Remove columns with limited analytical value for our specific analysis goals\ncolumns_to_drop = ['day', 'month', 'district', 'city', 'region', 'country_code', 'incident_id']\ndf.drop(columns=columns_to_drop, inplace=True)\n\n# Recalculate missing values after dropping columns\nmissing_percent = (df.isna().sum() / len(df)) * 100\nmissing_percent = missing_percent[missing_percent &gt; 0].sort_values(ascending=True)\n\n# Visualize the remaining missing values\nplt.figure(figsize=(7, 4))\nmissing_percent.plot(kind='barh')\nplt.title(\"Percentage of Missing Values After Column Removal\")\nplt.xlabel(\"Percent Missing (%)\")\nplt.tight_layout()\nplt.grid(axis='x', linestyle='--', alpha=0.5)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Check for missing values\nmissing_values = df.isnull().sum()\nmissing_percent = (missing_values / len(df) * 100).round(2)\n\n# Create a dataframe of missing values\nmissing_df = pd.DataFrame({\n    'Missing Values': missing_values,\n    'Percentage': missing_percent\n})\n\n# Display columns with missing values\nprint(\"Columns with missing values:\")\nmissing_df[missing_df['Missing Values'] &gt; 0].sort_values('Missing Values', ascending=False)\n\n# Visualize missing values if any exist\nif missing_values.sum() &gt; 0:\n    plt.figure(figsize=(12, 6))\n    sns.heatmap(df.isnull(), cbar=False, cmap='viridis', yticklabels=False)\n    plt.title('Missing Values Heatmap')\n    plt.tight_layout()\n    plt.show()\n\n\nColumns with missing values:\n\n\n\n\n\n\n\n\n\n\n\n3.2 Missing Values Decision\nSince the highest missing value percentage is now less than 0.5%, and the remaining missing data is sparse, likely random, and not concentrated in critical columns, we’ve decided:\n\nNo imputation is necessary\nLeave these values as-is (NaN), as most analysis tools handle them gracefully\nImputing could introduce unnecessary bias given the small percentage"
+  },
+  {
+    "objectID": "data_cleaning.html#handling-duplicates",
+    "href": "data_cleaning.html#handling-duplicates",
+    "title": "Security Incidents Data Cleaning",
+    "section": "4. Handling Duplicates",
+    "text": "4. Handling Duplicates\nLet’s identify and remove duplicate records that could skew our analysis.\n\n\nCode\n# Identify rows that are duplicated\nduplicated_mask = df.duplicated(keep=False)\nduplicates = df[duplicated_mask]\n\n# Count total number of duplicated rows\nduplicate_count = len(duplicates)\nprint(f\"Total number of duplicated rows: {duplicate_count}\")\n\n# Count unique duplicate patterns\nduplicate_patterns = df[duplicated_mask].groupby(df.columns.tolist()).size().reset_index()\nduplicate_patterns = duplicate_patterns.rename(columns={0: 'occurrence_count'})\n\n# Sort by occurrence count (most duplicated first)\nduplicate_patterns = duplicate_patterns.sort_values('occurrence_count', ascending=False)\n\n# Count the number of unique duplicate patterns\nunique_duplicate_patterns = len(duplicate_patterns)\nprint(f\"Number of unique duplicate patterns: {unique_duplicate_patterns}\")\n\n# Display occurrence counts (how many records appear 2 times, 3 times, etc.)\noccurrence_summary = duplicate_patterns['occurrence_count'].value_counts().sort_index()\nprint(\"\\nOccurrence pattern summary:\")\nfor count, frequency in occurrence_summary.items():\n    print(f\"  {frequency} record(s) appear {count} times each\")\n\n\nTotal number of duplicated rows: 28\nNumber of unique duplicate patterns: 5\n\nOccurrence pattern summary:\n  3 record(s) appear 2 times each\n  1 record(s) appear 9 times each\n  1 record(s) appear 13 times each\n\n\nBased on the duplicate analysis results, we need to remove duplicates from the dataset. The pattern of duplications (with some records appearing up to 13 times) suggests systematic duplication issues that could significantly skew our analysis.\n\n\nCode\n# Store original row count\noriginal_count = len(df)\n\n# Remove duplicates, keeping only the first occurrence\ndf = df.drop_duplicates()\n\n# Calculate how many rows were removed\nremoved_count = original_count - len(df)\nremoval_percentage = (removed_count / original_count) * 100\n\nprint(f\"Removed {removed_count} duplicate rows ({removal_percentage:.2f}% of dataset)\")\nprint(f\"Dataset now contains {len(df)} unique records\")\n\n\nRemoved 23 duplicate rows (0.53% of dataset)\nDataset now contains 4314 unique records"
+  },
+  {
+    "objectID": "data_cleaning.html#data-type-optimization",
+    "href": "data_cleaning.html#data-type-optimization",
+    "title": "Security Incidents Data Cleaning",
+    "section": "5. Data Type Optimization",
+    "text": "5. Data Type Optimization\nMost data types in this dataset are appropriate, but there are a few minor adjustments that could be made for consistency:\n\n\nCode\n# Display current data types\ndf.dtypes\n\n\nyear                          int64\ncountry                      object\nun                            int64\ningo                          int64\nicrc                        float64\nnrcs_and_ifrc               float64\nnngo                        float64\nother                         int64\nnationals_killed              int64\nnationals_wounded             int64\nnationals_kidnapped           int64\ntotal_nationals               int64\ninternationals_killed         int64\ninternationals_wounded        int64\ninternationals_kidnapped      int64\ntotal_internationals          int64\ntotal_killed                  int64\ntotal_wounded                 int64\ntotal_kidnapped               int64\ntotal_affected                int64\ngender_male                   int64\ngender_female                 int64\ngender_unknown                int64\nmeans_of_attack              object\nattack_context               object\nlocation                     object\nlatitude                    float64\nlongitude                   float64\nmotive                       object\nactor_type                   object\nactor_name                   object\ndetails                      object\nverified                     object\nsource                       object\ndtype: object\n\n\n\n5.1 Data Type Conversion\nThe following columns could benefit from data type conversion:\n\n\n\n\n\n\n\n\n\nColumn\nCurrent\nSuggested\nReason\n\n\n\n\nicrc\nfloat64\nint64\nCounts should be integers\n\n\nnrcs_and_ifrc\nfloat64\nint64\nCounts should be integers\n\n\nnngo\nfloat64\nint64\nCounts should be integers\n\n\n\n\n\nCode\n# Convert float columns representing counts to integers\n# Note: This will replace any NaN values with 0 during conversion\ncount_columns = ['icrc', 'nrcs_and_ifrc', 'nngo']\nfor col in count_columns:\n    if col in df.columns:\n        # Fill NaN values with 0 before converting to integer\n        df[col] = df[col].fillna(0).astype(int)\n\n# Verify the conversions\ndf[count_columns].dtypes\n\n\nicrc             int64\nnrcs_and_ifrc    int64\nnngo             int64\ndtype: object"
+  },
+  {
+    "objectID": "data_cleaning.html#outlier-analysis-and-handling",
+    "href": "data_cleaning.html#outlier-analysis-and-handling",
+    "title": "Security Incidents Data Cleaning",
+    "section": "6. Outlier Analysis and Handling",
+    "text": "6. Outlier Analysis and Handling\nLet’s identify and visualize outliers in the dataset to better understand extreme values in our security incidents data.\n\n\nCode\nimport warnings\nwarnings.filterwarnings('ignore', category=FutureWarning)\n# Function to detect outliers using IQR method\ndef detect_outliers(df, column):\n    q1 = df[column].quantile(0.25)\n    q3 = df[column].quantile(0.75)\n    iqr = q3 - q1\n    lower_bound = q1 - 1.5 * iqr\n    upper_bound = q3 + 1.5 * iqr\n    \n    outliers = df[(df[column] &lt; lower_bound) | (df[column] &gt; upper_bound)]\n    return outliers, lower_bound, upper_bound\n\n# Get list of numeric columns (excluding some that don't need outlier analysis)\nexcluded_cols = ['year']\nnumeric_cols = df.select_dtypes(include=['int64', 'float64']).columns\nnumeric_cols = [col for col in numeric_cols if col not in excluded_cols]\n\n# Create a DataFrame to store outlier summary\noutlier_summary = pd.DataFrame(columns=['Column', 'Total', 'Outliers', 'Percentage'])\n\n# Collect outlier information\nfor col in numeric_cols:\n    outliers, _, _ = detect_outliers(df, col)\n    \n    # Add to summary DataFrame\n    new_row = {\n        'Column': col,\n        'Total': len(df),\n        'Outliers': len(outliers),\n        'Percentage': len(outliers) / len(df) * 100\n    }\n    outlier_summary = pd.concat([outlier_summary, pd.DataFrame([new_row])], ignore_index=True)\n\n# Sort by percentage of outliers (descending)\noutlier_summary = outlier_summary.sort_values('Percentage', ascending=False)\n\n# Visualize outlier percentages\nplt.figure(figsize=(7,4))\nsns.barplot(x='Percentage', y='Column', data=outlier_summary, palette='viridis')\nplt.title('Percentage of Outliers by Column')\nplt.xlabel('Percentage of Values Identified as Outliers')\nplt.grid(axis='x', linestyle='--', alpha=0.7)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\n6.1 Visualization of Key Outliers\nLet’s visualize the distribution and outliers for the most important columns:\n\n\nCode\n# Select top 6 columns with the most outliers for detailed visualization\ntop_cols = outlier_summary.head(6)['Column'].tolist()\n\n# Create boxplots for top outlier columns\nplt.figure(figsize=(10, 6))\nfor i, col in enumerate(top_cols, 1):\n    plt.subplot(2, 3, i)\n    sns.boxplot(y=df[col])\n    plt.title(f'Box Plot: {col}')\n    plt.grid(linestyle='--', alpha=0.7)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n6.2 Outlier Handling Strategy\nIn security incident data, outliers often represent real extreme events (like major attacks) rather than errors. For our analysis:\n\nWe’ll flag high-impact incidents rather than removing them\nThis allows us to analyze with or without extreme events as needed\n\n\n\nCode\n# Create flags for high-impact incidents\ndf['high_impact'] = False\n\n# Flag incidents with casualties in the top 1% of any category\nfor col in ['total_killed', 'total_wounded', 'total_kidnapped', 'total_affected']:\n    if col in df.columns:\n        threshold = df[col].quantile(0.99)\n        df.loc[df[col] &gt; threshold, 'high_impact'] = True\n\n# Print summary of flagged high-impact incidents\nhigh_impact_count = df['high_impact'].sum()\nprint(f\"Flagged {high_impact_count} high-impact incidents ({high_impact_count/len(df)*100:.2f}% of dataset)\")\n\n# Example: Look at the top 5 most severe incidents by total casualties\nif 'total_affected' in df.columns:\n    print(\"\\nTop 5 most severe incidents:\")\n    display(df.sort_values('total_affected', ascending=False).head(5)[\n        ['year', 'country', 'total_affected', 'total_killed', 'total_wounded', 'total_kidnapped']])\n\n\nFlagged 123 high-impact incidents (2.85% of dataset)\n\nTop 5 most severe incidents:\n\n\n\n\n\n\n\n\n\nyear\ncountry\ntotal_affected\ntotal_killed\ntotal_wounded\ntotal_kidnapped\n\n\n\n\n3857\n2023\nOccupied Palestinian Territories\n92\n70\n22\n0\n\n\n1989\n2015\nAfghanistan\n49\n14\n35\n0\n\n\n3920\n2023\nOccupied Palestinian Territories\n46\n41\n5\n0\n\n\n1189\n2011\nNigeria\n46\n9\n37\n0\n\n\n3936\n2023\nOccupied Palestinian Territories\n31\n31\n0\n0"
+  },
+  {
+    "objectID": "data_cleaning.html#geographic-data-validation",
+    "href": "data_cleaning.html#geographic-data-validation",
+    "title": "Security Incidents Data Cleaning",
+    "section": "7. Geographic Data Validation",
+    "text": "7. Geographic Data Validation\nLet’s verify that our latitude and longitude values are within valid ranges.\n\n\nCode\n# Check if latitude and longitude values are within valid ranges\n# Valid ranges: Latitude (-90 to 90), Longitude (-180 to 180)\n\n# Count invalid coordinates\ninvalid_lat = df[(df['latitude'] &lt; -90) | (df['latitude'] &gt; 90)].shape[0]\ninvalid_lon = df[(df['longitude'] &lt; -180) | (df['longitude'] &gt; 180)].shape[0]\n\nprint(f\"Invalid latitude values (outside -90 to 90): {invalid_lat}\")\nprint(f\"Invalid longitude values (outside -180 to 180): {invalid_lon}\")\n\n# Get overall ranges to see extreme values\nlat_min, lat_max = df['latitude'].min(), df['latitude'].max()\nlon_min, lon_max = df['longitude'].min(), df['longitude'].max()\n\nprint(f\"\\nLatitude range: {lat_min} to {lat_max}\")\nprint(f\"Longitude range: {lon_min} to {lon_max}\")\n\n# Create a scatter plot to visualize coordinate distribution\nplt.figure(figsize=(7,4))\nplt.scatter(df['longitude'], df['latitude'], alpha=0.5, s=3)\nplt.title('Geographic Distribution of Incidents')\nplt.xlabel('Longitude')\nplt.ylabel('Latitude')\nplt.xlim(-180, 180)\nplt.ylim(-90, 90)\nplt.grid(True)\nplt.tight_layout()\nplt.show()\n\n\nInvalid latitude values (outside -90 to 90): 0\nInvalid longitude values (outside -180 to 180): 0\n\nLatitude range: -34.883611 to 52.253183\nLongitude range: -102.283333 to 179.0122737\n\n\n\n\n\n\n\n\n\nThere are 0 invalid latitudes and longitudes, so we do not have to handle those outliers. All geographic coordinates are within valid ranges and suitable for mapping and spatial analysis."
+  },
+  {
+    "objectID": "data_cleaning.html#final-dataset-summary",
+    "href": "data_cleaning.html#final-dataset-summary",
+    "title": "Security Incidents Data Cleaning",
+    "section": "8. Final Dataset Summary",
+    "text": "8. Final Dataset Summary\nLet’s examine our cleaned dataset:\n\n\nCode\n# Display basic information about the cleaned dataset\nprint(f\"Final dataset shape: {df.shape}\")\nprint(\"\\nColumns in the cleaned dataset:\")\nprint(df.columns.tolist())\n\n# Display summary statistics for numeric columns\nprint(\"\\nSummary statistics:\")\ndf.describe()\n\n\nFinal dataset shape: (4314, 35)\n\nColumns in the cleaned dataset:\n['year', 'country', 'un', 'ingo', 'icrc', 'nrcs_and_ifrc', 'nngo', 'other', 'nationals_killed', 'nationals_wounded', 'nationals_kidnapped', 'total_nationals', 'internationals_killed', 'internationals_wounded', 'internationals_kidnapped', 'total_internationals', 'total_killed', 'total_wounded', 'total_kidnapped', 'total_affected', 'gender_male', 'gender_female', 'gender_unknown', 'means_of_attack', 'attack_context', 'location', 'latitude', 'longitude', 'motive', 'actor_type', 'actor_name', 'details', 'verified', 'source', 'high_impact']\n\nSummary statistics:\n\n\n\n\n\n\n\n\n\nyear\nun\ningo\nicrc\nnrcs_and_ifrc\nnngo\nother\nnationals_killed\nnationals_wounded\nnationals_kidnapped\n...\ntotal_internationals\ntotal_killed\ntotal_wounded\ntotal_kidnapped\ntotal_affected\ngender_male\ngender_female\ngender_unknown\nlatitude\nlongitude\n\n\n\n\ncount\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n...\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4314.000000\n4301.000000\n4301.000000\n\n\nmean\n2015.245712\n0.411683\n0.812471\n0.051229\n0.116365\n0.476124\n0.024339\n0.645109\n0.631433\n0.410987\n...\n0.204682\n0.701205\n0.695874\n0.495132\n1.892211\n0.894529\n0.139314\n0.857904\n16.693709\n36.486580\n\n\nstd\n6.804200\n2.107963\n1.651766\n0.420239\n0.780231\n1.192180\n0.224018\n1.772060\n1.464470\n1.242489\n...\n0.772268\n1.818565\n1.517728\n1.366215\n2.665913\n1.217483\n0.471608\n2.531503\n14.481132\n30.046441\n\n\nmin\n1997.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n...\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n-34.883611\n-102.283333\n\n\n25%\n2010.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n...\n0.000000\n0.000000\n0.000000\n0.000000\n1.000000\n0.000000\n0.000000\n0.000000\n5.835800\n28.729977\n\n\n50%\n2016.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n0.000000\n...\n0.000000\n0.000000\n0.000000\n0.000000\n1.000000\n1.000000\n0.000000\n0.000000\n13.426301\n34.450000\n\n\n75%\n2021.000000\n0.000000\n1.000000\n0.000000\n0.000000\n1.000000\n0.000000\n1.000000\n1.000000\n0.000000\n...\n0.000000\n1.000000\n1.000000\n0.000000\n2.000000\n1.000000\n0.000000\n1.000000\n32.887222\n45.400000\n\n\nmax\n2025.000000\n92.000000\n49.000000\n8.000000\n19.000000\n15.000000\n5.000000\n70.000000\n37.000000\n19.000000\n...\n15.000000\n70.000000\n37.000000\n20.000000\n92.000000\n17.000000\n7.000000\n92.000000\n52.253183\n179.012274\n\n\n\n\n8 rows × 24 columns"
+  },
+  {
+    "objectID": "data_cleaning.html#conclusion",
+    "href": "data_cleaning.html#conclusion",
+    "title": "Security Incidents Data Cleaning",
+    "section": "9. Conclusion",
+    "text": "9. Conclusion\nThe data cleaning process for the security incidents dataset has:\n\nStandardized column names for consistency\nRemoved granular fields with limited analytical value\nAddressed minimal remaining missing values by leaving them as-is\nRemoved 28 duplicate records from 5 unique patterns\nOptimized data types for count-based columns\nIdentified and flagged high-impact incidents for flexible analysis\nValidated geographic coordinates, confirming all are within valid ranges\n\nThe dataset is now ready for exploratory data analysis and modeling to identify trends in aid worker security incidents by country, year, and organization type.\n\n\nCode\n# Save the cleaned dataset\ndf.to_csv(\"data/security_incidents_cleaned.csv\", index=False)"
+  },
+  {
+    "objectID": "somolia.html#historical-context",
+    "href": "somolia.html#historical-context",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "2.1 Historical Context",
+    "text": "2.1 Historical Context"
+  },
+  {
+    "objectID": "somolia.html#recent-escalation",
+    "href": "somolia.html#recent-escalation",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "2.2 Recent Escalation",
+    "text": "2.2 Recent Escalation"
+  },
+  {
+    "objectID": "somolia.html#incident-frequency-over-time",
+    "href": "somolia.html#incident-frequency-over-time",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "3.1 Incident Frequency Over Time",
+    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n                                                \n\n\nFigure 1: Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
+  },
+  {
+    "objectID": "somolia.html#effected-indivudals-over-time",
+    "href": "somolia.html#effected-indivudals-over-time",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "3.2 Effected Indivudals Over Time",
+    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                                                \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
+  },
+  {
+    "objectID": "somolia.html#predominant-attack-types",
+    "href": "somolia.html#predominant-attack-types",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "4.1 Predominant Attack Types",
+    "text": "4.1 Predominant Attack Types\n\n\n\n\n                                                \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
+  },
+  {
+    "objectID": "somolia.html#attack-contexts",
+    "href": "somolia.html#attack-contexts",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "4.2 Attack Contexts",
+    "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts"
+  },
+  {
+    "objectID": "somolia.html#casualties-by-category",
+    "href": "somolia.html#casualties-by-category",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "5.1 Casualties by Category",
+    "text": "5.1 Casualties by Category\n\n\n\n\n                                                \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
+  },
+  {
+    "objectID": "somolia.html#gender-distribution-of-affected-individuals",
+    "href": "somolia.html#gender-distribution-of-affected-individuals",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "5.2 Gender Distribution of Affected Individuals",
+    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                                                \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
+  },
+  {
+    "objectID": "somolia.html#organizations-affected-by-security-incidents",
+    "href": "somolia.html#organizations-affected-by-security-incidents",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "6.1 Organizations Affected by Security Incidents",
+    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                                                \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
+  },
+  {
+    "objectID": "somolia.html#comparison-of-actor-types",
+    "href": "somolia.html#comparison-of-actor-types",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "6.2 Comparison of Actor Types",
+    "text": "6.2 Comparison of Actor Types\n\n6.2.1 Analysis of Actor Responsibility"
+  },
+  {
+    "objectID": "somolia.html#top-5-most-impactful-security-incidents",
+    "href": "somolia.html#top-5-most-impactful-security-incidents",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "7.1 Top 5 Most Impactful Security Incidents",
+    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n7.1.1 Analysis of Major Incidents"
+  },
+  {
+    "objectID": "somolia.html#key-findings",
+    "href": "somolia.html#key-findings",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "8.1 Key Findings",
+    "text": "8.1 Key Findings"
+  },
+  {
+    "objectID": "somolia.html#recommendations",
+    "href": "somolia.html#recommendations",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "8.2 Recommendations",
+    "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\n\n8.2.2 For Humanitarian Organizations\n\n\n8.2.3 For Policy Development\n\n\n8.2.4 For Future Research"
+  },
+  {
+    "objectID": "dr.html#historical-context",
+    "href": "dr.html#historical-context",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "2.1 Historical Context",
+    "text": "2.1 Historical Context"
+  },
+  {
+    "objectID": "dr.html#recent-escalation",
+    "href": "dr.html#recent-escalation",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "2.2 Recent Escalation",
+    "text": "2.2 Recent Escalation"
+  },
+  {
+    "objectID": "dr.html#incident-frequency-over-time",
+    "href": "dr.html#incident-frequency-over-time",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "3.1 Incident Frequency Over Time",
+    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n\n\n\n        \n        \n        \n\n\n(a) Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n\n                            \n                                            \n\n\n(b)\n\n\n\n\n\nFigure 1\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
+  },
+  {
+    "objectID": "dr.html#effected-indivudals-over-time",
+    "href": "dr.html#effected-indivudals-over-time",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "3.2 Effected Indivudals Over Time",
+    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                            \n                                            \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
+  },
+  {
+    "objectID": "dr.html#predominant-attack-types",
+    "href": "dr.html#predominant-attack-types",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "4.1 Predominant Attack Types",
+    "text": "4.1 Predominant Attack Types\n\n\n\n\n                            \n                                            \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
+  },
+  {
+    "objectID": "dr.html#attack-contexts",
+    "href": "dr.html#attack-contexts",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "4.2 Attack Contexts",
+    "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts"
+  },
+  {
+    "objectID": "dr.html#casualties-by-category",
+    "href": "dr.html#casualties-by-category",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "5.1 Casualties by Category",
+    "text": "5.1 Casualties by Category\n\n\n\n\n                            \n                                            \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
+  },
+  {
+    "objectID": "dr.html#gender-distribution-of-affected-individuals",
+    "href": "dr.html#gender-distribution-of-affected-individuals",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "5.2 Gender Distribution of Affected Individuals",
+    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                            \n                                            \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
+  },
+  {
+    "objectID": "dr.html#organizations-affected-by-security-incidents",
+    "href": "dr.html#organizations-affected-by-security-incidents",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "6.1 Organizations Affected by Security Incidents",
+    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                            \n                                            \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
+  },
+  {
+    "objectID": "dr.html#comparison-of-actor-types",
+    "href": "dr.html#comparison-of-actor-types",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "6.2 Comparison of Actor Types",
+    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                            \n                                            \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility"
+  },
+  {
+    "objectID": "dr.html#top-5-most-impactful-security-incidents",
+    "href": "dr.html#top-5-most-impactful-security-incidents",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "7.1 Top 5 Most Impactful Security Incidents",
+    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n1978\n2015\nRoad\n14\n0\n0\nAmbush\nUnknown\n\n\n5\n1997\nUnknown\n10\n10\n0\nCombat/Crossfire\nNon-state armed group: National\n\n\n821\n2009\nHome\n8\n0\n8\nRaid\nUnknown\n\n\n985\n2010\nUnknown\n8\n0\n0\nUnknown\nNon-state armed group: Subnational\n\n\n2220\n2017\nRoad\n7\n0\n1\nAmbush\nNon-state armed group: Unknown\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents"
+  },
+  {
+    "objectID": "dr.html#key-findings",
+    "href": "dr.html#key-findings",
+    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
+    "section": "8.1 Key Findings",
+    "text": "8.1 Key Findings"
+  },
+  {
+    "objectID": "dr.html#recommendations",
+    "href": "dr.html#recommendations",
     "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
     "section": "8.2 Recommendations",
     "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\n\n8.2.2 For Humanitarian Organizations\n\n\n8.2.3 For Policy Development\n\n\n8.2.4 For Future Research"
@@ -397,376 +950,5 @@
     "title": "Humanitarian Aid Under Fire",
     "section": "📥 Source and Access",
     "text": "📥 Source and Access\nThis dataset was downloaded directly from: 👉 Aid Worker Security Database (AWSD)\nPlease cite as:\nHumanitarian Outcomes. Aid Worker Security Database (AWSD). https://aidworkersecurity.org"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "african.html#historical-context",
-    "href": "african.html#historical-context",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "2.1 Historical Context",
-    "text": "2.1 Historical Context"
-  },
-  {
-    "objectID": "african.html#recent-escalation",
-    "href": "african.html#recent-escalation",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "2.2 Recent Escalation",
-    "text": "2.2 Recent Escalation"
-  },
-  {
-    "objectID": "african.html#incident-frequency-over-time",
-    "href": "african.html#incident-frequency-over-time",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "3.1 Incident Frequency Over Time",
-    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n                                                \n\n\nFigure 1: Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
-  },
-  {
-    "objectID": "african.html#effected-indivudals-over-time",
-    "href": "african.html#effected-indivudals-over-time",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "3.2 Effected Indivudals Over Time",
-    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                                                \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
-  },
-  {
-    "objectID": "african.html#predominant-attack-types",
-    "href": "african.html#predominant-attack-types",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "4.1 Predominant Attack Types",
-    "text": "4.1 Predominant Attack Types\n\n\n\n\n                                                \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
-  },
-  {
-    "objectID": "african.html#attack-contexts",
-    "href": "african.html#attack-contexts",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "4.2 Attack Contexts",
-    "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts"
-  },
-  {
-    "objectID": "african.html#casualties-by-category",
-    "href": "african.html#casualties-by-category",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "5.1 Casualties by Category",
-    "text": "5.1 Casualties by Category\n\n\n\n\n                                                \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
-  },
-  {
-    "objectID": "african.html#gender-distribution-of-affected-individuals",
-    "href": "african.html#gender-distribution-of-affected-individuals",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "5.2 Gender Distribution of Affected Individuals",
-    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                                                \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
-  },
-  {
-    "objectID": "african.html#organizations-affected-by-security-incidents",
-    "href": "african.html#organizations-affected-by-security-incidents",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "6.1 Organizations Affected by Security Incidents",
-    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                                                \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
-  },
-  {
-    "objectID": "african.html#comparison-of-actor-types",
-    "href": "african.html#comparison-of-actor-types",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "6.2 Comparison of Actor Types",
-    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                                                \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility"
-  },
-  {
-    "objectID": "african.html#top-5-most-impactful-security-incidents",
-    "href": "african.html#top-5-most-impactful-security-incidents",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "7.1 Top 5 Most Impactful Security Incidents",
-    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n2253\n2017\nProject site\n10\n10\n0\nRaid\nNon-state armed group: Unknown\n\n\n931\n2009\nRoad\n8\n3\n2\nAmbush\nNon-state armed group: Regional\n\n\n1811\n2014\nProject site\n7\n0\n7\nCombat/Crossfire\nUnknown\n\n\n2366\n2018\nRoad\n6\n6\n0\nAmbush\nNon-state armed group: National\n\n\n3632\n2022\nProject site\n6\n0\n6\nIndividual attack\nUnknown\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents"
-  },
-  {
-    "objectID": "african.html#key-findings",
-    "href": "african.html#key-findings",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "8.1 Key Findings",
-    "text": "8.1 Key Findings"
-  },
-  {
-    "objectID": "african.html#recommendations",
-    "href": "african.html#recommendations",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "8.2 Recommendations",
-    "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\n\n8.2.2 For Humanitarian Organizations\n\n\n8.2.3 For Policy Development\n\n\n8.2.4 For Future Research"
-  },
-  {
-    "objectID": "af.html#historical-context",
-    "href": "af.html#historical-context",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "2.1 Historical Context",
-    "text": "2.1 Historical Context"
-  },
-  {
-    "objectID": "af.html#recent-escalation",
-    "href": "af.html#recent-escalation",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "2.2 Recent Escalation",
-    "text": "2.2 Recent Escalation"
-  },
-  {
-    "objectID": "af.html#incident-frequency-over-time",
-    "href": "af.html#incident-frequency-over-time",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "3.1 Incident Frequency Over Time",
-    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n                                                \n\n\nFigure 1: Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
-  },
-  {
-    "objectID": "af.html#effected-indivudals-over-time",
-    "href": "af.html#effected-indivudals-over-time",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "3.2 Effected Indivudals Over Time",
-    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                                                \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
-  },
-  {
-    "objectID": "af.html#predominant-attack-types",
-    "href": "af.html#predominant-attack-types",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "4.1 Predominant Attack Types",
-    "text": "4.1 Predominant Attack Types\n\n\n\n\n                                                \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
-  },
-  {
-    "objectID": "af.html#attack-contexts",
-    "href": "af.html#attack-contexts",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "4.2 Attack Contexts",
-    "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts"
-  },
-  {
-    "objectID": "af.html#casualties-by-category",
-    "href": "af.html#casualties-by-category",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "5.1 Casualties by Category",
-    "text": "5.1 Casualties by Category\n\n\n\n\n                                                \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
-  },
-  {
-    "objectID": "af.html#gender-distribution-of-affected-individuals",
-    "href": "af.html#gender-distribution-of-affected-individuals",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "5.2 Gender Distribution of Affected Individuals",
-    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                                                \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
-  },
-  {
-    "objectID": "af.html#organizations-affected-by-security-incidents",
-    "href": "af.html#organizations-affected-by-security-incidents",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "6.1 Organizations Affected by Security Incidents",
-    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                                                \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
-  },
-  {
-    "objectID": "af.html#comparison-of-actor-types",
-    "href": "af.html#comparison-of-actor-types",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "6.2 Comparison of Actor Types",
-    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                                                \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility"
-  },
-  {
-    "objectID": "af.html#top-5-most-impactful-security-incidents",
-    "href": "af.html#top-5-most-impactful-security-incidents",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "7.1 Top 5 Most Impactful Security Incidents",
-    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n1967\n2015\nProject site\n49\n14\n35\nCombat/Crossfire\nForeign or coalition forces\n\n\n3233\n2021\nOffice/compound\n26\n10\n16\nRaid\nNon-state armed group: Global\n\n\n897\n2009\nRoad\n16\n0\n0\nAmbush\nUnknown\n\n\n941\n2009\nOffice/compound\n12\n3\n9\nRaid\nNon-state armed group: National\n\n\n2476\n2018\nProject site\n12\n0\n0\nRaid\nNon-state armed group: Global\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents"
-  },
-  {
-    "objectID": "af.html#key-findings",
-    "href": "af.html#key-findings",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "8.1 Key Findings",
-    "text": "8.1 Key Findings"
-  },
-  {
-    "objectID": "af.html#recommendations",
-    "href": "af.html#recommendations",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "8.2 Recommendations",
-    "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\n\n8.2.2 For Humanitarian Organizations\n\n\n8.2.3 For Policy Development\n\n\n8.2.4 For Future Research"
-  },
-  {
-    "objectID": "sudan.html#historical-context",
-    "href": "sudan.html#historical-context",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "2.1 Historical Context",
-    "text": "2.1 Historical Context"
-  },
-  {
-    "objectID": "sudan.html#recent-escalation",
-    "href": "sudan.html#recent-escalation",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "2.2 Recent Escalation",
-    "text": "2.2 Recent Escalation"
-  },
-  {
-    "objectID": "sudan.html#incident-frequency-over-time",
-    "href": "sudan.html#incident-frequency-over-time",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "3.1 Incident Frequency Over Time",
-    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n\n\n\n        \n        \n        \n\n\n(a) Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n\n                            \n                                            \n\n\n(b)\n\n\n\n\n\nFigure 1\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
-  },
-  {
-    "objectID": "sudan.html#effected-indivudals-over-time",
-    "href": "sudan.html#effected-indivudals-over-time",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "3.2 Effected Indivudals Over Time",
-    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                            \n                                            \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
-  },
-  {
-    "objectID": "sudan.html#predominant-attack-types",
-    "href": "sudan.html#predominant-attack-types",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "4.1 Predominant Attack Types",
-    "text": "4.1 Predominant Attack Types\n\n\n\n\n                            \n                                            \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
-  },
-  {
-    "objectID": "sudan.html#attack-contexts",
-    "href": "sudan.html#attack-contexts",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "4.2 Attack Contexts",
-    "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts"
-  },
-  {
-    "objectID": "sudan.html#casualties-by-category",
-    "href": "sudan.html#casualties-by-category",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "5.1 Casualties by Category",
-    "text": "5.1 Casualties by Category\n\n\n\n\n                            \n                                            \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
-  },
-  {
-    "objectID": "sudan.html#gender-distribution-of-affected-individuals",
-    "href": "sudan.html#gender-distribution-of-affected-individuals",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "5.2 Gender Distribution of Affected Individuals",
-    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                            \n                                            \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
-  },
-  {
-    "objectID": "sudan.html#organizations-affected-by-security-incidents",
-    "href": "sudan.html#organizations-affected-by-security-incidents",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "6.1 Organizations Affected by Security Incidents",
-    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                            \n                                            \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
-  },
-  {
-    "objectID": "sudan.html#comparison-of-actor-types",
-    "href": "sudan.html#comparison-of-actor-types",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "6.2 Comparison of Actor Types",
-    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                            \n                                            \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility"
-  },
-  {
-    "objectID": "sudan.html#top-5-most-impactful-security-incidents",
-    "href": "sudan.html#top-5-most-impactful-security-incidents",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "7.1 Top 5 Most Impactful Security Incidents",
-    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n3778\n2023\nRoad\n18\n0\n18\nAmbush\nUnknown\n\n\n384\n2005\nRoad\n17\n0\n17\nAmbush\nUnknown\n\n\n377\n2005\nProject site\n15\n0\n15\nMob violence\nAid recipient\n\n\n260\n2003\nRoad\n10\n8\n2\nAmbush\nUnknown\n\n\n507\n2006\nUnknown\n8\n0\n8\nAmbush\nUnknown\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents"
-  },
-  {
-    "objectID": "sudan.html#key-findings",
-    "href": "sudan.html#key-findings",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "8.1 Key Findings",
-    "text": "8.1 Key Findings"
-  },
-  {
-    "objectID": "sudan.html#recommendations",
-    "href": "sudan.html#recommendations",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "8.2 Recommendations",
-    "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\n\n8.2.2 For Humanitarian Organizations\n\n\n8.2.3 For Policy Development\n\n\n8.2.4 For Future Research"
-  },
-  {
-    "objectID": "dr.html#historical-context",
-    "href": "dr.html#historical-context",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "2.1 Historical Context",
-    "text": "2.1 Historical Context"
-  },
-  {
-    "objectID": "dr.html#recent-escalation",
-    "href": "dr.html#recent-escalation",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "2.2 Recent Escalation",
-    "text": "2.2 Recent Escalation"
-  },
-  {
-    "objectID": "dr.html#incident-frequency-over-time",
-    "href": "dr.html#incident-frequency-over-time",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "3.1 Incident Frequency Over Time",
-    "text": "3.1 Incident Frequency Over Time\n\n\n\n\n                                                \n\n\nFigure 1: Security incidents in Palestine from 2002 to 2025\n\n\n\n\n\n3.1.1 Analysis of Incident Trends"
-  },
-  {
-    "objectID": "dr.html#effected-indivudals-over-time",
-    "href": "dr.html#effected-indivudals-over-time",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "3.2 Effected Indivudals Over Time",
-    "text": "3.2 Effected Indivudals Over Time\n\n\n\n\n                                                \n\n\nFigure 2: Total affected individuals in Palestine from 2002 to 2025\n\n\n\n\n\n3.2.1 Analysis of Humans Impacted"
-  },
-  {
-    "objectID": "dr.html#predominant-attack-types",
-    "href": "dr.html#predominant-attack-types",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "4.1 Predominant Attack Types",
-    "text": "4.1 Predominant Attack Types\n\n\n\n\n                                                \n\n\nFigure 3: Most common types of attacks in Palestine\n\n\n\n\n\n4.1.1 Analysis of Attack Methods"
-  },
-  {
-    "objectID": "dr.html#attack-contexts",
-    "href": "dr.html#attack-contexts",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "4.2 Attack Contexts",
-    "text": "4.2 Attack Contexts\n\n4.2.1 Analysis of Attack Contexts"
-  },
-  {
-    "objectID": "dr.html#casualties-by-category",
-    "href": "dr.html#casualties-by-category",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "5.1 Casualties by Category",
-    "text": "5.1 Casualties by Category\n\n\n\n\n                                                \n\n\nFigure 4: Total casualties in Palestine by category\n\n\n\n\n\n5.1.1 Analysis of Casualty Patterns"
-  },
-  {
-    "objectID": "dr.html#gender-distribution-of-affected-individuals",
-    "href": "dr.html#gender-distribution-of-affected-individuals",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "5.2 Gender Distribution of Affected Individuals",
-    "text": "5.2 Gender Distribution of Affected Individuals\n\n\n\n\n                                                \n\n\nFigure 5: Gender distribution of affected individuals\n\n\n\n\n\n5.2.1 Analysis of Gender Patterns"
-  },
-  {
-    "objectID": "dr.html#organizations-affected-by-security-incidents",
-    "href": "dr.html#organizations-affected-by-security-incidents",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "6.1 Organizations Affected by Security Incidents",
-    "text": "6.1 Organizations Affected by Security Incidents\n\n\n\n\n                                                \n\n\nFigure 6: Security incidents by organization type\n\n\n\n\n\n6.1.1 Analysis of Organizational Impact"
-  },
-  {
-    "objectID": "dr.html#comparison-of-actor-types",
-    "href": "dr.html#comparison-of-actor-types",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "6.2 Comparison of Actor Types",
-    "text": "6.2 Comparison of Actor Types\n\n\n\n\n                                                \n\n\nFigure 7: Host State vs Foreign Actors in Security Incidents\n\n\n\n\n\n6.2.1 Analysis of Actor Responsibility"
-  },
-  {
-    "objectID": "dr.html#top-5-most-impactful-security-incidents",
-    "href": "dr.html#top-5-most-impactful-security-incidents",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "7.1 Top 5 Most Impactful Security Incidents",
-    "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents in Palestine (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n1978\n2015\nRoad\n14\n0\n0\nAmbush\nUnknown\n\n\n5\n1997\nUnknown\n10\n10\n0\nCombat/Crossfire\nNon-state armed group: National\n\n\n821\n2009\nHome\n8\n0\n8\nRaid\nUnknown\n\n\n985\n2010\nUnknown\n8\n0\n0\nUnknown\nNon-state armed group: Subnational\n\n\n2220\n2017\nRoad\n7\n0\n1\nAmbush\nNon-state armed group: Unknown\n\n\n\n\n\n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents"
-  },
-  {
-    "objectID": "dr.html#key-findings",
-    "href": "dr.html#key-findings",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "8.1 Key Findings",
-    "text": "8.1 Key Findings"
-  },
-  {
-    "objectID": "dr.html#recommendations",
-    "href": "dr.html#recommendations",
-    "title": "Security Incidents in Palestine: Trends and Patterns (2002-2025)",
-    "section": "8.2 Recommendations",
-    "text": "8.2 Recommendations\n\n8.2.1 For Security Planning\n\n\n8.2.2 For Humanitarian Organizations\n\n\n8.2.3 For Policy Development\n\n\n8.2.4 For Future Research"
   }
 ]
