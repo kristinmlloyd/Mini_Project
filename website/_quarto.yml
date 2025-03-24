@@ -17,6 +17,8 @@ website:
             text: Data Cleaning
           - href: palestine.qmd
             text: Palestine
+          - href: southsudan.qmd
+            text: South Sudan
       - href: eda.qmd
         text: EDA
       - href: index.qmd
