@@ -1,5 +1,5 @@
 ---
-title: "Security Incidents in Palestine: Trends and Patterns (2002-2025)"
+title: "Security Incidents: Trends and Patterns"
 format:
   html:
     toc: true
@@ -14,14 +14,12 @@ format:
 execute:
   warning: false
   message: false
-editor: visual
 ---
 
 ```{python}
 #| label: setup
 #| include: false
 
-# Import required libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -35,29 +33,32 @@ import plotly.graph_objects as go
 from IPython.display import display
 from scipy import stats
 
-# Configure plot settings
 plt.rcParams['figure.figsize'] = (10, 6)
 warnings.filterwarnings('ignore', category=FutureWarning)
 sns.set_theme(style="whitegrid")
 
-# Set consistent color palette
 palette = {"primary": "#FFBD59", "secondary": "#64C1FF", "danger": "#FF5252"}
 
-# Load and prepare data
 df = pd.read_csv("data/security_incidents_cleaned.csv")
 country_data = df[df['country'] == 'Mali']
 
 ```
 
+![](images/palestine.png){width=200px}
+
 # Executive Summary
 
 # Background: The Conflict
 
-![](images/mali.png)
+Mali stands at the epicenter of the Sahel's security crisis, with violent extremist organizations expanding their control across the country's northern and central regions. Following the 2021 military coup and subsequent withdrawal of French forces and UN peacekeepers, Mali's security situation has deteriorated dramatically. The military junta's pivot to Russian Wagner Group mercenaries has coincided with increased civilian casualties and human rights abuses, including the Moura massacre where over 300 civilians were killed. Violence has surged, with JNIM gaining territory in northern Mali and blockading Timbuktu, while renewed fighting with Tuareg separatists threatens to reignite civil war. This instability has displaced hundreds of thousands of Malians and threatens to spread to neighboring countries, creating one of Africa's most urgent humanitarian and security crises.
 
 ## Historical Context
 
-## Recent Escalation
+Mali's crisis began with the 2012 Tuareg rebellion, triggered by fighters and weapons flowing from Libya after Gaddafi's fall. The Tuareg MNLA briefly allied with Islamist groups to capture northern cities and declare the independent Azawad state. A military coup in March 2012 further destabilized Mali, until French intervention in 2013 pushed back the Islamists. Mali transitioned to civilian rule under President Keïta and signed a 2015 peace agreement with Tuareg groups, but excluded Islamists who then expanded into central Mali. Years of marginalization in northern regions, weak governance, and corruption created fertile ground for extremist recruitment among disenfranchised populations.
+
+## Recent Escalation 
+
+Mali's security has deteriorated rapidly since the 2020-2021 military coups. The junta cut ties with France in 2022 and hired Wagner Group mercenaries, coinciding with increased violence including the Moura massacre where over 300 civilians died. In 2023, Mali expelled UN peacekeepers, creating a security vacuum that extremist groups immediately exploited. Attacks have more than doubled since the UN withdrawal began, with JNIM now controlling northern territories and blockading Timbuktu. Simultaneously, fighting has reignited with Tuareg separatists in the northeast. With international support gone and violence surging on multiple fronts, Mali now stands on the brink of civil war.
 
 # Temporal Trends in Security Incidents {#sec-temporal}
 
@@ -65,13 +66,11 @@ country_data = df[df['country'] == 'Mali']
 
 ```{python}
 #| label: fig-yearly-incidents
-#| fig-cap: "Security incidents in Palestine from 2002 to 2025"
+#| fig-cap: "Security incidents in Mali"
 #| echo: false
 
-# Group incidents by year
 yearly_incidents = country_data.groupby('year').size().reset_index(name='incidents')
 
-# Create line chart
 fig = px.line(
     yearly_incidents, 
     x='year', 
@@ -81,7 +80,6 @@ fig = px.line(
     height=500
 )
 
-# Configure layout
 fig.update_layout(
     title=None,
     xaxis=dict(tickmode='linear', dtick=2),
@@ -90,17 +88,15 @@ fig.update_layout(
     template='plotly_white'
 )
 
-# Add range slider
 fig.update_xaxes(rangeslider_visible=True)
 
-# Add event annotations
 events = [
-    {'year': 2006, 'event': 'Hamas takes control of Gaza', 'y_position': 5},
-    {'year': 2014, 'event': 'Israel-Hamas conflict', 'y_position': 10},
-    {'year': 2018, 'event': 'Gaza border protests', 'y_position': 8},
-    {'year': 2021, 'event': '11-day conflict', 'y_position': 7},
-    {'year': 2023, 'event': 'Oct 7 Hamas attack', 'y_position': 15},
-    {'year': 2024, 'event': 'Gaza war escalation', 'y_position': 65}
+    {'year': 2012, 'event': 'Tuareg rebellion and coup', 'y_position': 5},
+    {'year': 2013, 'event': 'French intervention', 'y_position': 10},
+    {'year': 2015, 'event': 'Peace agreement with Tuaregs', 'y_position': 8},
+    {'year': 2020, 'event': 'Military coup', 'y_position': 7},
+    {'year': 2022, 'event': 'French withdrawal', 'y_position': 15},
+    {'year': 2023, 'event': 'UN peacekeepers expelled', 'y_position': 65}
 ]
 
 for event in events:
@@ -128,10 +124,9 @@ fig.show()
 
 ```{python}
 #| label: fig-yearly-affected
-#| fig-cap: "Total affected individuals in Palestine from 2002 to 2025"
+#| fig-cap: "Total affected individuals"
 #| echo: false
 
-# Group by year and sum total_affected
 yearly_affected = (
     country_data.groupby('year')['total_affected']
     .sum()
@@ -139,7 +134,6 @@ yearly_affected = (
     .rename(columns={'total_affected': 'affected'})
 )
 
-# Create line chart
 fig = px.line(
     yearly_affected, 
     x='year', 
@@ -149,7 +143,6 @@ fig = px.line(
     height=500
 )
 
-# Configure layout
 fig.update_layout(
     title=None,
     xaxis=dict(tickmode='linear', dtick=2),
@@ -158,13 +151,10 @@ fig.update_layout(
     template='plotly_white'
 )
 
-# Add range slider
 fig.update_xaxes(rangeslider_visible=True)
 
 fig.show()
 ```
-
-### Analysis of Humans Impacted
 
 # Nature of Security Incidents {#sec-nature}
 
@@ -172,15 +162,13 @@ fig.show()
 
 ```{python}
 #| label: fig-attack-types
-#| fig-cap: "Most common types of attacks in Palestine"
+#| fig-cap: "Most common types of attacks"
 #| echo: false
 
-# Analyzing means of attack
 attack_counts = country_data['means_of_attack'].value_counts().reset_index()
 attack_counts.columns = ['Attack Type', 'Count']
 attack_counts = attack_counts.sort_values('Count', ascending=False).head(10)
 
-# Create horizontal bar chart with uniform color
 fig_attacks = px.bar(
     attack_counts,
     y='Attack Type',
@@ -190,10 +178,8 @@ fig_attacks = px.bar(
     orientation='h'
 )
 
-# Set all bars to primary color
 fig_attacks.update_traces(marker_color=palette["primary"])
 
-# Configure layout
 fig_attacks.update_layout(
     yaxis={'categoryorder': 'total ascending'},
     xaxis_title="Number of Incidents",
@@ -205,9 +191,42 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
+The significant disparity between kidnapping and other attack methods highlights how extremist groups have adapted their strategies, focusing on operations that require minimal resources while maximizing psychological impact and financial gain.
+
 ## Attack Contexts
 
+```{python}
+#| label: fig-attack-contexts
+#| fig-cap: "Security incidents by attack context"
+#| echo: false
+
+context_counts = country_data['attack_context'].value_counts().reset_index()
+context_counts.columns = ['Attack Context', 'Count']
+
+context_counts = context_counts.sort_values('Count', ascending=False)
+
+fig_context = px.bar(
+    context_counts,
+    x='Attack Context',
+    y='Count',
+    title=None,
+    height=450
+)
+
+fig_context.update_traces(marker_color=palette["primary"])
+
+fig_context.update_layout(
+    xaxis_title=None,
+    yaxis_title="Number of Incidents",
+    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
+)
+
+fig_context.show()
+```
+
 ### Analysis of Attack Contexts
+
+There is a significant gap between ambushes and the second most common category. This disparity highlights how armed groups in Mali have strategically prioritized ambush tactics, likely due to their effectiveness along the country's limited road networks. *source*
 
 # Human Impact of Security Incidents {#sec-impact}
 
@@ -215,10 +234,9 @@ fig_attacks.show()
 
 ```{python}
 #| label: fig-casualties
-#| fig-cap: "Total casualties in Palestine by category"
+#| fig-cap: "Total casualties by category"
 #| echo: false
 
-# Create data for stacked bar chart
 stacked_data = {
     'Category': ['Nationals', 'Internationals'],
     'Killed': [
@@ -235,7 +253,6 @@ stacked_data = {
     ]
 }
 
-# Convert to DataFrame and reshape for stacking
 stacked_df = pd.DataFrame(stacked_data)
 stacked_df_long = pd.melt(
     stacked_df,
@@ -245,7 +262,6 @@ stacked_df_long = pd.melt(
     value_name='Count'
 )
 
-# Create a stacked bar chart
 fig_stacked = px.bar(
     stacked_df_long,
     x='Category',
@@ -261,7 +277,6 @@ fig_stacked = px.bar(
     }
 )
 
-# Improve layout
 fig_stacked.update_layout(
     xaxis_title=None,
     yaxis_title="Number of People",
@@ -269,10 +284,11 @@ fig_stacked.update_layout(
 )
 
 fig_stacked.show()
-
 ```
 
 ### Analysis of Casualty Patterns
+
+This chart shows that Malian nationals suffer far more from conflict than internationals. Kidnapping is the most common form of violence against locals, showing how armed groups target communities to gain control and extract ransoms. This data highlights that Malians themselves bear the overwhelming burden of the country's ongoing security crisis.
 
 ## Gender Distribution of Affected Individuals
 
@@ -281,10 +297,8 @@ fig_stacked.show()
 #| fig-cap: "Gender distribution of affected individuals"
 #| echo: false
 
-# Check if we have gender data
 gender_cols = ['gender_male', 'gender_female']
 if all(col in country_data.columns for col in gender_cols):
-    # Sum up total counts by gender
     gender_totals = {
         'Gender': ['Male', 'Female'],
         'Count': [
@@ -293,10 +307,8 @@ if all(col in country_data.columns for col in gender_cols):
         ]
     }
 
-    # Convert to DataFrame
     gender_df = pd.DataFrame(gender_totals)
 
-    # Create simple bar chart
     fig_gender = px.bar(
         gender_df,
         x='Gender',
@@ -305,10 +317,8 @@ if all(col in country_data.columns for col in gender_cols):
         height=450
     )
 
-    # Set primary color for bars
     fig_gender.update_traces(marker_color=palette["primary"])
 
-    # Improve layout
     fig_gender.update_layout(
         xaxis_title=None,
         yaxis_title="Number of Individuals"
@@ -319,6 +329,8 @@ if all(col in country_data.columns for col in gender_cols):
 
 ### Analysis of Gender Patterns
 
+This chart shows a significant gender disparity in conflict casualties in Mali, with approximately 115 males affected compared to only about 13 females. The roughly 9:1 male-to-female ratio likely reflects how armed groups specifically target men for recruitment, detention, or elimination as potential security threats.
+
 # Organizations and Actors {#sec-organizations}
 
 ## Organizations Affected by Security Incidents
@@ -328,14 +340,11 @@ if all(col in country_data.columns for col in gender_cols):
 #| fig-cap: "Security incidents by organization type"
 #| echo: false
 
-# Count incidents affecting different organization types
 org_cols = ['un', 'ingo', 'icrc', 'nrcs_and_ifrc', 'nngo', 'other']
 
-# Create a summary of total incidents by organization type
 org_totals = country_data[org_cols].sum().reset_index()
 org_totals.columns = ['Organization Type', 'Total Incidents']
 
-# Better labels for organization types
 org_labels = {
     'un': 'United Nations',
     'ingo': 'International NGO',
@@ -345,13 +354,10 @@ org_labels = {
     'other': 'Other Organizations'
 }
 
-# Map the short names to full names
 org_totals['Organization'] = org_totals['Organization Type'].map(org_labels)
 
-# Sort by total incidents
 org_totals = org_totals.sort_values('Total Incidents', ascending=False)
 
-# Create a horizontal bar chart
 fig_orgs = px.bar(
     org_totals,
     y='Organization',
@@ -361,10 +367,8 @@ fig_orgs = px.bar(
     orientation='h'
 )
 
-# Set all bars to primary color
 fig_orgs.update_traces(marker_color=palette["primary"])
 
-# Improve layout
 fig_orgs.update_layout(
     yaxis_title=None,
     xaxis_title="Number of Incidents",
@@ -376,6 +380,8 @@ fig_orgs.show()
 
 ### Analysis of Organizational Impact
 
+This chart shows that International NGOs face the highest number of security incidents in Mali (approximately 150), followed by National NGOs (about 100). United Nations entities experience significantly fewer incidents (around 25), while Red Cross organizations and others report minimal incidents. This pattern reflects the extensive field presence of NGOs in conflict-affected areas where state authority has receded, particularly following the withdrawal of international forces and UN peacekeepers. *source*
+
 ## Comparison of Actor Types
 
 ```{python}
@@ -383,16 +389,13 @@ fig_orgs.show()
 #| fig-cap: "Host State vs Foreign Actors in Security Incidents"
 #| echo: false
 
-# Filter only for Host State and Foreign actors
 relevant_actors = ['Host state', 'Foreign or coalition forces']
 actor_data = country_data[country_data['actor_type'].isin(relevant_actors)]
 
-# Check if we have data for these specific actors
 if len(actor_data) > 0:
     actor_counts = actor_data['actor_type'].value_counts().reset_index()
     actor_counts.columns = ['Actor Type', 'Count']
     
-    # Create a column chart
     fig_actors = px.bar(
         actor_counts,
         x='Actor Type',
@@ -401,10 +404,8 @@ if len(actor_data) > 0:
         height=450
     )
     
-    # Set primary color for all bars
     fig_actors.update_traces(marker_color=palette["primary"])
     
-    # Improve layout
     fig_actors.update_layout(
         xaxis_title=None,
         yaxis_title="Number of Incidents"
@@ -415,19 +416,20 @@ if len(actor_data) > 0:
 
 ### Analysis of Actor Responsibility
 
+The chart shows that all documented incidents occurred within the host state (DRC), but the scale maxing out at only 1 incident suggests significant data limitations. This unusually low incident count likely indicates substantial gaps in data collection or attribution rather than reflecting the true security situation. 
+
 # Major Incidents {#sec-major}
 
 ## Top 5 Most Impactful Security Incidents
 
 ```{python}
 #| label: tbl-top-incidents
-#| tbl-cap: "Most impactful security incidents in Palestine (by total affected)"
+#| tbl-cap: "Most impactful security incidents (by total affected)"
 #| echo: false
 
 if not country_data.empty and 'total_affected' in country_data.columns:
     top5_incidents = country_data.sort_values(by='total_affected', ascending=False).head(5)
     
-    # Select and rename columns for display
     display_cols = ['year', 'location', 'total_affected', 'total_killed', 'total_wounded', 'attack_context', 'actor_type']
     column_names = {
         'year': 'Year', 
@@ -445,16 +447,45 @@ if not country_data.empty and 'total_affected' in country_data.columns:
 
 ### Analysis of Major Incidents
 
+This table displays five significant security incidents in Mali from 2018 to 2024, highlighting the evolution of the conflict. The incidents in public locations (2018) and at project sites (2022) each affected 9 individuals, suggesting targeted attacks on civilian gatherings and humanitarian operations. Road incidents in 2020 and 2024 each affected 6 people. 
+
+For more detailed information on the Israeli-Palestinian conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict).
+
 # Conclusions and Recommendations {#sec-conclusions}
 
 ## Key Findings
+
+- Security incidents in Mali have doubled since UN peacekeepers began withdrawing in 2023
+- Kidnapping is the dominant attack method, used for ransoms and population control
+- Ambushes occur at four times the rate of other tactics, severely limiting road movement
+- Malian nationals suffer eight times more casualties than internationals
+International NGOs face the highest security risks, followed by national NGOs
 
 ## Recommendations
 
 ### For Security Planning
 
+- Conduct regular route risk assessments focusing on ambush-prone road sections
+- Develop convoy protocols with community-based early warning systems
+- Create distinct security protocols for project sites and public locations
+- Set clear thresholds for program suspension based on incident patterns
+
 ### For Humanitarian Organizations
+
+- Improve security information sharing between international and national NGOs
+- Deploy communications systems that function in areas controlled by armed groups
+- Plan for service delivery when road movement is impossible
+- Support staff mental health, particularly for nationals facing kidnapping threats
 
 ### For Policy Development
 
+- Support community protection in areas where state authority has receded
+- Address Mali's crisis regionally, recognizing links with Burkina Faso and Niger
+
 ### For Future Research
+
+- Continue monitoring security trends, especially given the recent escalation
+- Investigate the specific factors contributing to the disproportionate impact on local populations
+- Examine the effectiveness of different security measures in reducing casualties
+
+By providing a data-driven understanding of security patterns in the ____, this analysis aims to contribute to safer and more effective operations in this challenging environment.

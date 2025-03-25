@@ -4818,11 +4818,15 @@ font-size: 0.95rem;
     <a class="nav-link active" href="./data_cleaning.html" aria-current="page"> 
 <span class="menu-text">Data Cleaning</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./eda.html"> 
+<span class="menu-text">International Analysis</span></a>
+  </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-results" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Results</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-individual-country-analysis" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Individual Country Analysis</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-results">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-individual-country-analysis">    
         <li>
     <a class="dropdown-item" href="./palestine.html">
  <span class="dropdown-text">Palestine</span></a>
@@ -4857,10 +4861,6 @@ font-size: 0.95rem;
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./eda.html"> 
-<span class="menu-text">EDA</span></a>
-  </li>  
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Bibliography</span></a>
@@ -5045,7 +5045,7 @@ font-size: 0.95rem;
 <section id="handling-missing-values" class="level2">
 <h2 class="anchored" data-anchor-id="handling-missing-values">3. Handling Missing Values</h2>
 <p>To better understand which variables have missing values, we’ll create a visualization showing the percentage of missing values per column.</p>
-<div id="7203e72d" class="cell" data-execution_count="3">
+<div id="4ec84477" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>missing_values <span class="op">=</span> df.isnull().<span class="bu">sum</span>()</span>
@@ -5138,7 +5138,7 @@ font-size: 0.95rem;
 </div>
 </div>
 </div>
-<div id="992ee7f1" class="cell" data-execution_count="6">
+<div id="9e9b48d7" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>missing_values <span class="op">=</span> df.isnull().<span class="bu">sum</span>()</span>

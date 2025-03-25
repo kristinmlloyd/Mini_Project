@@ -1,5 +1,5 @@
 ---
-title: "Security Incidents in Palestine: Trends and Patterns (2002-2025)"
+title: "Security Incidents in Democratic Republic of Congo: Trends and Patterns"
 format:
   html:
     toc: true
@@ -14,14 +14,12 @@ format:
 execute:
   warning: false
   message: false
-editor: visual
 ---
 
 ```{python}
 #| label: setup
 #| include: false
 
-# Import required libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -35,29 +33,30 @@ import plotly.graph_objects as go
 from IPython.display import display
 from scipy import stats
 
-# Configure plot settings
 plt.rcParams['figure.figsize'] = (10, 6)
 warnings.filterwarnings('ignore', category=FutureWarning)
 sns.set_theme(style="whitegrid")
 
-# Set consistent color palette
 palette = {"primary": "#FFBD59", "secondary": "#64C1FF", "danger": "#FF5252"}
 
-# Load and prepare data
 df = pd.read_csv("data/security_incidents_cleaned.csv")
 country_data = df[df['country'] == 'DR Congo']
 
 ```
 
+![](images/dr.png){width=200px}
+
 # Executive Summary
 
 # Background: The Conflict
 
-![](images/dr.png)
-
 ## Historical Context
 
+The conflict in the Democratic Republic of Congo represents one of Africa's most complex and enduring crises. Rooted in the aftermath of the 1994 Rwandan Genocide, the violence has evolved through two major regional wars—the First Congo War (1996-1997) and the Second Congo War (1998-2003)—which collectively resulted in millions of deaths. Despite formal peace agreements, eastern DRC has remained unstable, with over 120 different armed groups competing for territory, resources, and influence in the mineral-rich regions of North Kivu, South Kivu, and Ituri provinces.
+
 ## Recent Escalation
+
+In early 2025, M23 rebels, backed by Rwandan troops, captured Goma in eastern DRC, killing between 900-2,000 civilians and triggering mass displacement. This represented the culmination of escalating violence that began with M23's resurgence in 2022 and their steady territorial gains throughout 2023. The situation had already deteriorated significantly following DRC's contested December 2023 elections, which sparked nationwide unrest. During 2024, the humanitarian situation worsened dramatically, with 358,000 newly displaced people and a 30% rise in violations against children. The U.S.-brokered peace agreement in late 2023 failed to prevent the conflict's intensification,
 
 # Temporal Trends in Security Incidents {#sec-temporal}
 
@@ -65,13 +64,11 @@ country_data = df[df['country'] == 'DR Congo']
 
 ```{python}
 #| label: fig-yearly-incidents
-#| fig-cap: "Security incidents in Palestine from 2002 to 2025"
+#| fig-cap: "Security incidents"
 #| echo: false
 
-# Group incidents by year
 yearly_incidents = country_data.groupby('year').size().reset_index(name='incidents')
 
-# Create line chart
 fig = px.line(
     yearly_incidents, 
     x='year', 
@@ -81,7 +78,6 @@ fig = px.line(
     height=500
 )
 
-# Configure layout
 fig.update_layout(
     title=None,
     xaxis=dict(tickmode='linear', dtick=2),
@@ -90,17 +86,16 @@ fig.update_layout(
     template='plotly_white'
 )
 
-# Add range slider
 fig.update_xaxes(rangeslider_visible=True)
 
-# Add event annotations
 events = [
-    {'year': 2006, 'event': 'Hamas takes control of Gaza', 'y_position': 5},
-    {'year': 2014, 'event': 'Israel-Hamas conflict', 'y_position': 10},
-    {'year': 2018, 'event': 'Gaza border protests', 'y_position': 8},
-    {'year': 2021, 'event': '11-day conflict', 'y_position': 7},
-    {'year': 2023, 'event': 'Oct 7 Hamas attack', 'y_position': 15},
-    {'year': 2024, 'event': 'Gaza war escalation', 'y_position': 65}
+    {'year': 2003, 'event': 'End of Second Congo War', 'y_position': 5},
+    {'year': 2012, 'event': 'First M23 rebellion', 'y_position': 10},
+    {'year': 2013, 'event': 'M23 defeated by UN forces', 'y_position': 8},
+    {'year': 2019, 'event': 'Tshisekedi takes power', 'y_position': 7},
+    {'year': 2022, 'event': 'M23 resurgence', 'y_position': 15},
+    {'year': 2023, 'event': 'Contested elections', 'y_position': 45},
+    {'year': 2025, 'event': 'M23 captures Goma', 'y_position': 65}
 ]
 
 for event in events:
@@ -124,14 +119,15 @@ fig.show()
 
 ### Analysis of Incident Trends
 
+This temporal analysis visually confirms the cyclical nature of conflict in the DRC, with periods of relative calm followed by sharp escalations often triggered by political events or renewed militant activity. The 2023-2025 period shows the most dramatic increase in security incidents, reflecting the recent crisis described in your background sections.
+
 ## Effected Indivudals Over Time
 
 ```{python}
 #| label: fig-yearly-affected
-#| fig-cap: "Total affected individuals in Palestine from 2002 to 2025"
+#| fig-cap: "Total affected individuals"
 #| echo: false
 
-# Group by year and sum total_affected
 yearly_affected = (
     country_data.groupby('year')['total_affected']
     .sum()
@@ -139,7 +135,6 @@ yearly_affected = (
     .rename(columns={'total_affected': 'affected'})
 )
 
-# Create line chart
 fig = px.line(
     yearly_affected, 
     x='year', 
@@ -149,7 +144,6 @@ fig = px.line(
     height=500
 )
 
-# Configure layout
 fig.update_layout(
     title=None,
     xaxis=dict(tickmode='linear', dtick=2),
@@ -158,13 +152,10 @@ fig.update_layout(
     template='plotly_white'
 )
 
-# Add range slider
 fig.update_xaxes(rangeslider_visible=True)
 
 fig.show()
 ```
-
-### Analysis of Humans Impacted
 
 # Nature of Security Incidents {#sec-nature}
 
@@ -172,15 +163,13 @@ fig.show()
 
 ```{python}
 #| label: fig-attack-types
-#| fig-cap: "Most common types of attacks in Palestine"
+#| fig-cap: "Most common types of attacks"
 #| echo: false
 
-# Analyzing means of attack
 attack_counts = country_data['means_of_attack'].value_counts().reset_index()
 attack_counts.columns = ['Attack Type', 'Count']
 attack_counts = attack_counts.sort_values('Count', ascending=False).head(10)
 
-# Create horizontal bar chart with uniform color
 fig_attacks = px.bar(
     attack_counts,
     y='Attack Type',
@@ -190,10 +179,8 @@ fig_attacks = px.bar(
     orientation='h'
 )
 
-# Set all bars to primary color
 fig_attacks.update_traces(marker_color=palette["primary"])
 
-# Configure layout
 fig_attacks.update_layout(
     yaxis={'categoryorder': 'total ascending'},
     xaxis_title="Number of Incidents",
@@ -205,9 +192,42 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
+This bar chart reveals that kidnapping and shooting are the predominant attack methods in the DRC conflict. Bodily assault represents the third most common tactic. The high prevalence of kidnappings aligns with documented tactics by armed groups in eastern DRC, particularly by militia groups seeking ransom or using abductions to intimidate local populations and establish territorial control.
+
 ## Attack Contexts
 
+```{python}
+#| label: fig-attack-contexts
+#| fig-cap: "Security incidents by attack context"
+#| echo: false
+
+context_counts = country_data['attack_context'].value_counts().reset_index()
+context_counts.columns = ['Attack Context', 'Count']
+
+context_counts = context_counts.sort_values('Count', ascending=False)
+
+fig_context = px.bar(
+    context_counts,
+    x='Attack Context',
+    y='Count',
+    title=None,
+    height=450
+)
+
+fig_context.update_traces(marker_color=palette["primary"])
+
+fig_context.update_layout(
+    xaxis_title=None,
+    yaxis_title="Number of Incidents",
+    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
+)
+
+fig_context.show()
+```
+
 ### Analysis of Attack Contexts
+
+The prevalence of ambushes reflects the tactical approach of armed groups operating in the DRC. The high number of ambushes aligns with the geographical characteristics of the conflict zone, where dense forests and limited road infrastructure create ideal conditions for surprise attacks by M23 rebels and other armed groups. The substantial number of unknown contexts points to the challenges in documenting incidents in remote areas with limited monitoring presence.
 
 # Human Impact of Security Incidents {#sec-impact}
 
@@ -215,10 +235,9 @@ fig_attacks.show()
 
 ```{python}
 #| label: fig-casualties
-#| fig-cap: "Total casualties in Palestine by category"
+#| fig-cap: "Total casualties by category"
 #| echo: false
 
-# Create data for stacked bar chart
 stacked_data = {
     'Category': ['Nationals', 'Internationals'],
     'Killed': [
@@ -235,7 +254,6 @@ stacked_data = {
     ]
 }
 
-# Convert to DataFrame and reshape for stacking
 stacked_df = pd.DataFrame(stacked_data)
 stacked_df_long = pd.melt(
     stacked_df,
@@ -245,7 +263,6 @@ stacked_df_long = pd.melt(
     value_name='Count'
 )
 
-# Create a stacked bar chart
 fig_stacked = px.bar(
     stacked_df_long,
     x='Category',
@@ -261,7 +278,6 @@ fig_stacked = px.bar(
     }
 )
 
-# Improve layout
 fig_stacked.update_layout(
     xaxis_title=None,
     yaxis_title="Number of People",
@@ -274,6 +290,8 @@ fig_stacked.show()
 
 ### Analysis of Casualty Patterns
 
+The significantly higher rate of kidnappings among nationals compared to other casualty types reflects a tactical choice by armed groups in eastern DRC, who frequently use abductions to control territory, extract resources, and recruit fighters. This pattern aligns with reports from UN agencies documenting extensive use of kidnapping by the various groups. The disproportionate impact on nationals versus internationals highlights how Congolese civilians bear the overwhelming burden of the conflict. *source*
+
 ## Gender Distribution of Affected Individuals
 
 ```{python}
@@ -281,7 +299,6 @@ fig_stacked.show()
 #| fig-cap: "Gender distribution of affected individuals"
 #| echo: false
 
-# Check if we have gender data
 gender_cols = ['gender_male', 'gender_female']
 if all(col in country_data.columns for col in gender_cols):
     # Sum up total counts by gender
@@ -293,10 +310,8 @@ if all(col in country_data.columns for col in gender_cols):
         ]
     }
 
-    # Convert to DataFrame
     gender_df = pd.DataFrame(gender_totals)
 
-    # Create simple bar chart
     fig_gender = px.bar(
         gender_df,
         x='Gender',
@@ -305,10 +320,8 @@ if all(col in country_data.columns for col in gender_cols):
         height=450
     )
 
-    # Set primary color for bars
     fig_gender.update_traces(marker_color=palette["primary"])
 
-    # Improve layout
     fig_gender.update_layout(
         xaxis_title=None,
         yaxis_title="Number of Individuals"
@@ -319,6 +332,8 @@ if all(col in country_data.columns for col in gender_cols):
 
 ### Analysis of Gender Patterns
 
+The pronounced overrepresentation of males in the casualty data can be attributed to several factors characteristic of the DRC conflict. Men are more frequently recruited or forcibly conscripted into armed groups. Additionally, men are often specifically targeted in attacks based on their perceived potential to join opposing armed groups or resist territorial control.
+
 # Organizations and Actors {#sec-organizations}
 
 ## Organizations Affected by Security Incidents
@@ -328,14 +343,11 @@ if all(col in country_data.columns for col in gender_cols):
 #| fig-cap: "Security incidents by organization type"
 #| echo: false
 
-# Count incidents affecting different organization types
 org_cols = ['un', 'ingo', 'icrc', 'nrcs_and_ifrc', 'nngo', 'other']
 
-# Create a summary of total incidents by organization type
 org_totals = country_data[org_cols].sum().reset_index()
 org_totals.columns = ['Organization Type', 'Total Incidents']
 
-# Better labels for organization types
 org_labels = {
     'un': 'United Nations',
     'ingo': 'International NGO',
@@ -345,13 +357,10 @@ org_labels = {
     'other': 'Other Organizations'
 }
 
-# Map the short names to full names
 org_totals['Organization'] = org_totals['Organization Type'].map(org_labels)
 
-# Sort by total incidents
 org_totals = org_totals.sort_values('Total Incidents', ascending=False)
 
-# Create a horizontal bar chart
 fig_orgs = px.bar(
     org_totals,
     y='Organization',
@@ -361,10 +370,8 @@ fig_orgs = px.bar(
     orientation='h'
 )
 
-# Set all bars to primary color
 fig_orgs.update_traces(marker_color=palette["primary"])
 
-# Improve layout
 fig_orgs.update_layout(
     yaxis_title=None,
     xaxis_title="Number of Incidents",
@@ -376,6 +383,8 @@ fig_orgs.show()
 
 ### Analysis of Organizational Impact
 
+International NGOs face the highest security risks in the DRC, far exceeding those experienced by National NGOs and UN entities. This disproportionate targeting reflects their extensive operations in conflict zones, particularly in M23-controlled territories where armed groups deliberately restrict humanitarian access as part of territorial control strategies. *source*
+
 ## Comparison of Actor Types
 
 ```{python}
@@ -383,16 +392,13 @@ fig_orgs.show()
 #| fig-cap: "Host State vs Foreign Actors in Security Incidents"
 #| echo: false
 
-# Filter only for Host State and Foreign actors
 relevant_actors = ['Host state', 'Foreign or coalition forces']
 actor_data = country_data[country_data['actor_type'].isin(relevant_actors)]
 
-# Check if we have data for these specific actors
 if len(actor_data) > 0:
     actor_counts = actor_data['actor_type'].value_counts().reset_index()
     actor_counts.columns = ['Actor Type', 'Count']
     
-    # Create a column chart
     fig_actors = px.bar(
         actor_counts,
         x='Actor Type',
@@ -401,10 +407,8 @@ if len(actor_data) > 0:
         height=450
     )
     
-    # Set primary color for all bars
     fig_actors.update_traces(marker_color=palette["primary"])
     
-    # Improve layout
     fig_actors.update_layout(
         xaxis_title=None,
         yaxis_title="Number of Incidents"
@@ -415,19 +419,20 @@ if len(actor_data) > 0:
 
 ### Analysis of Actor Responsibility
 
+The chart shows that all documented incidents occurred within the host state (DRC), but the scale maxing out at only 4 incidents suggests significant data limitations. This unusually low incident count likely indicates substantial gaps in data collection or attribution rather than reflecting the true security situation. Complete incident data from eastern DRC is notoriously difficult to obtain due to access constraints, communication challenges in remote areas, and the nature of the conflict.
+
 # Major Incidents {#sec-major}
 
 ## Top 5 Most Impactful Security Incidents
 
 ```{python}
 #| label: tbl-top-incidents
-#| tbl-cap: "Most impactful security incidents in Palestine (by total affected)"
+#| tbl-cap: "Most impactful security incidents (by total affected)"
 #| echo: false
 
 if not country_data.empty and 'total_affected' in country_data.columns:
     top5_incidents = country_data.sort_values(by='total_affected', ascending=False).head(5)
     
-    # Select and rename columns for display
     display_cols = ['year', 'location', 'total_affected', 'total_killed', 'total_wounded', 'attack_context', 'actor_type']
     column_names = {
         'year': 'Year', 
@@ -445,16 +450,38 @@ if not country_data.empty and 'total_affected' in country_data.columns:
 
 ### Analysis of Major Incidents
 
+The table reveals a pattern of security incidents in the DRC spanning two decades (1997-2017), with road attacks being most frequent, suggesting the particular vulnerability of transportation routes in the conflict zone, while the deadliest incident occurred during the 1997 First Congo War period with 10 fatalities.
+
 # Conclusions and Recommendations {#sec-conclusions}
 
 ## Key Findings
+
+- Security incidents in the DRC follow cyclical patterns tied to political events, with major escalations during M23 rebellions (2012-2013, 2022) and peaking with the capture of Goma in 2025.
+- Ambushes are the predominant attack context, while kidnapping and shooting are the most common attack methods, creating significant challenges for movement along transportation corridors.
+- Congolese nationals suffer approximately 14 times more casualties than internationals, with males disproportionately represented in casualty data, though gender-based violence is likely underreported.
+- International NGOs face the highest security risks, particularly during road travel, which has been the site of multiple significant incidents between 2015-2017.
 
 ## Recommendations
 
 ### For Security Planning
 
+- Implement comprehensive route risk assessments with regular updates based on local intelligence networks, focusing particularly on roads connecting major population centers to rural areas.
+- Develop convoy protocols that incorporate lessons from documented ambush incidents, including appropriate vehicle spacing, communications procedures, and checkpoint management.
+- Establish clear thresholds for program suspension and evacuation based on the timing and nature of political developments, given the correlation between events like elections and violence escalation.
+- Create specialized security protocols for different operational contexts, recognizing the distinct risk profiles associated with road movement versus fixed locations.
+
 ### For Humanitarian Organizations
+
+- Improve information sharing and security coordination between international and national NGOs working in the same areas.
+- Build capacity of national organizations to manage security threats, as they often have fewer resources than international counterparts.
+- Create backup plans to maintain essential services during high-risk periods, especially during elections or after M23 advances.
+- Provide mental health support for all staff, particularly national personnel who cannot easily evacuate during crises.
+- Strengthen data collection systems to better document incidents, especially those affecting women and in remote areas, to improve understanding of the full scope of violence.
 
 ### For Policy Development
 
+- Advocate for humanitarian access guarantees from all armed groups, with special focus on securing transportation corridors where ambushes are prevalent and establishing neutral zones around humanitarian facilities.
+
 ### For Future Research
+
+- Investigate the significant gender disparity in casualty data to determine whether this reflects reporting biases or genuine differences in targeting patterns.

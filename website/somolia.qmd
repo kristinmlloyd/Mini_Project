@@ -14,7 +14,6 @@ format:
 execute:
   warning: false
   message: false
-editor: visual
 ---
 
 ```{python}
@@ -45,18 +44,15 @@ palette = {"primary": "#FFBD59", "secondary": "#64C1FF", "danger": "#FF5252"}
 
 # Load and prepare data
 df = pd.read_csv("data/security_incidents_cleaned.csv")
-country_data = df[df['country'] == 'Somolia']
+country_data = df[df['country'] == 'Somalia']
 
 ```
+
+![](images/somolia.png)
 
 # Executive Summary
 
 # Background: The Conflict
-
-![](images/somolia.png)
-
-```         
-```
 
 ## Historical Context
 

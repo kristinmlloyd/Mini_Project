@@ -1,5 +1,5 @@
 ---
-title: "Security Incidents in Palestine: Trends and Patterns (2002-2025)"
+title: "Security Incidents in South Sudan: Trends and Patterns"
 format:
   html:
     toc: true
@@ -15,12 +15,10 @@ execute:
   warning: false
   message: false
 ---
-
 ```{python}
 #| label: setup
 #| include: false
 
-# Import required libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -34,17 +32,14 @@ import plotly.graph_objects as go
 from IPython.display import display
 from scipy import stats
 
-# Configure plot settings
 plt.rcParams['figure.figsize'] = (10, 6)
 warnings.filterwarnings('ignore', category=FutureWarning)
 sns.set_theme(style="whitegrid")
 
-# Set consistent color palette
 palette = {"primary": "#FFBD59", "secondary": "#64C1FF", "danger": "#FF5252"}
 
-# Load and prepare data
 df = pd.read_csv("data/security_incidents_cleaned.csv")
-sudan_data = df[df['country'] == 'South Sudan']
+country_data = df[df['country'] == 'South Sudan']
 
 ```
 
@@ -52,9 +47,11 @@ sudan_data = df[df['country'] == 'South Sudan']
 
 # Executive Summary
 
-Despite multiple peace agreements since 2015, South Sudan continues to face political instability. The unity government formed in 2020 between President Kiir and opposition leader Machar has made little progress implementing the 2018 peace agreement. Violence escalated in early 2025, with Machar placed under house arrest in March. Two-thirds of the population faces severe food insecurity, worsened by flooding and spillover from Sudan's civil war. Elections have been postponed to December 2026, while ongoing violence and fiscal crisis from disrupted oil exports threaten the fragile peace.
+key findings and what the thing is about
 
 # Background: The Conflict
+
+Despite multiple peace agreements since 2015, South Sudan continues to face political instability. The unity government formed in 2020 between President Kiir and opposition leader Machar has made little progress implementing the 2018 peace agreement. Violence escalated in early 2025, with Machar placed under house arrest in March. Two-thirds of the population faces severe food insecurity, worsened by flooding and spillover from Sudan's civil war. Elections have been postponed to December 2026, while ongoing violence and fiscal crisis from disrupted oil exports threaten the fragile peace.
 
 ## Historical Context
 
@@ -76,13 +73,11 @@ The situation is compounded by a fiscal crisis that began when fighting in Sudan
 
 ```{python}
 #| label: fig-yearly-incidents
-#| fig-cap: "Security incidents in South Sudan from 2011 to 2025"
+#| fig-cap: "Security incidents"
 #| echo: false
 
-# Group incidents by year
-yearly_incidents = sudan_data.groupby('year').size().reset_index(name='incidents')
+yearly_incidents = country_data.groupby('year').size().reset_index(name='incidents')
 
-# Create line chart
 fig = px.line(
     yearly_incidents, 
     x='year', 
@@ -90,10 +85,8 @@ fig = px.line(
     markers=True,
     labels={'incidents': 'Number of Incidents', 'year': 'Year'},
     height=500,
-    # Using the default color scheme
 )
 
-# Configure layout
 fig.update_layout(
     title=None,
     xaxis=dict(tickmode='linear', dtick=2),
@@ -102,10 +95,8 @@ fig.update_layout(
     template='plotly_white'
 )
 
-# Add range slider
 fig.update_xaxes(rangeslider_visible=True)
 
-# Add event annotations for South Sudan
 events = [
     {'year': 2011, 'event': 'South Sudan independence', 'y_position': 20},
     {'year': 2013, 'event': 'Civil war begins', 'y_position': 10},
@@ -141,18 +132,16 @@ fig.show()
 
 ```{python}
 #| label: fig-yearly-affected
-#| fig-cap: "Total affected individuals in Palestine from 2002 to 2025"
+#| fig-cap: "Total affected individuals"
 #| echo: false
 
-# Group by year and sum total_affected
 yearly_affected = (
-    sudan_data.groupby('year')['total_affected']
+    country_data.groupby('year')['total_affected']
     .sum()
     .reset_index()
     .rename(columns={'total_affected': 'affected'})
 )
 
-# Create line chart
 fig = px.line(
     yearly_affected, 
     x='year', 
@@ -162,7 +151,6 @@ fig = px.line(
     height=500
 )
 
-# Configure layout
 fig.update_layout(
     title=None,
     xaxis=dict(tickmode='linear', dtick=2),
@@ -171,7 +159,6 @@ fig.update_layout(
     template='plotly_white'
 )
 
-# Add range slider
 fig.update_xaxes(rangeslider_visible=True)
 
 fig.show()
@@ -185,15 +172,13 @@ fig.show()
 
 ```{python}
 #| label: fig-attack-types
-#| fig-cap: "Most common types of attacks in Palestine"
+#| fig-cap: "Most common types of attacks"
 #| echo: false
 
-# Analyzing means of attack
-attack_counts = sudan_data['means_of_attack'].value_counts().reset_index()
+attack_counts = country_data['means_of_attack'].value_counts().reset_index()
 attack_counts.columns = ['Attack Type', 'Count']
 attack_counts = attack_counts.sort_values('Count', ascending=False).head(10)
 
-# Create horizontal bar chart with uniform color
 fig_attacks = px.bar(
     attack_counts,
     y='Attack Type',
@@ -203,10 +188,8 @@ fig_attacks = px.bar(
     orientation='h'
 )
 
-# Set all bars to primary color
 fig_attacks.update_traces(marker_color=palette["primary"])
 
-# Configure layout
 fig_attacks.update_layout(
     yaxis={'categoryorder': 'total ascending'},
     xaxis_title="Number of Incidents",
@@ -227,14 +210,11 @@ The predominance of shootings and bodily assaults reflects the nature of the con
 #| fig-cap: "Security incidents by attack context"
 #| echo: false
 
-# Get counts of incidents by attack context
-context_counts = sudan_data['attack_context'].value_counts().reset_index()
+context_counts = country_data['attack_context'].value_counts().reset_index()
 context_counts.columns = ['Attack Context', 'Count']
 
-# Sort by count for better visualization
 context_counts = context_counts.sort_values('Count', ascending=False)
 
-# Create a column chart
 fig_context = px.bar(
     context_counts,
     x='Attack Context',
@@ -243,10 +223,8 @@ fig_context = px.bar(
     height=450
 )
 
-# Set primary color for all bars
 fig_context.update_traces(marker_color=palette["primary"])
 
-# Improve layout
 fig_context.update_layout(
     xaxis_title=None,
     yaxis_title="Number of Incidents",
@@ -266,27 +244,25 @@ The prevalence of ambushes highlights the tactical nature of much of the violenc
 
 ```{python}
 #| label: fig-casualties
-#| fig-cap: "Total casualties in Palestine by category"
+#| fig-cap: "Total casualties by category"
 #| echo: false
 
-# Create data for stacked bar chart
 stacked_data = {
     'Category': ['Nationals', 'Internationals'],
     'Killed': [
-        sudan_data['nationals_killed'].sum(),
-        sudan_data['internationals_killed'].sum()
+        country_data['nationals_killed'].sum(),
+        country_data['internationals_killed'].sum()
     ],
     'Wounded': [
-        sudan_data['nationals_wounded'].sum(),
-        sudan_data['internationals_wounded'].sum()
+        country_data['nationals_wounded'].sum(),
+        country_data['internationals_wounded'].sum()
     ],
     'Kidnapped': [
-        sudan_data['nationals_kidnapped'].sum(),
-        sudan_data['internationals_kidnapped'].sum()
+        country_data['nationals_kidnapped'].sum(),
+        country_data['internationals_kidnapped'].sum()
     ]
 }
 
-# Convert to DataFrame and reshape for stacking
 stacked_df = pd.DataFrame(stacked_data)
 stacked_df_long = pd.melt(
     stacked_df,
@@ -296,7 +272,6 @@ stacked_df_long = pd.melt(
     value_name='Count'
 )
 
-# Create a stacked bar chart
 fig_stacked = px.bar(
     stacked_df_long,
     x='Category',
@@ -312,7 +287,6 @@ fig_stacked = px.bar(
     }
 )
 
-# Improve layout
 fig_stacked.update_layout(
     xaxis_title=None,
     yaxis_title="Number of People",
@@ -334,22 +308,18 @@ The dramatic disparity highlights how South Sudanese civilians bear the overwhel
 #| fig-cap: "Gender distribution of affected individuals"
 #| echo: false
 
-# Check if we have gender data
 gender_cols = ['gender_male', 'gender_female']
-if all(col in sudan_data.columns for col in gender_cols):
-    # Sum up total counts by gender
+if all(col in country_data.columns for col in gender_cols):
     gender_totals = {
         'Gender': ['Male', 'Female'],
         'Count': [
-            sudan_data['gender_male'].sum(),
-            sudan_data['gender_female'].sum()
+            country_data['gender_male'].sum(),
+            country_data['gender_female'].sum()
         ]
     }
 
-    # Convert to DataFrame
     gender_df = pd.DataFrame(gender_totals)
 
-    # Create simple bar chart
     fig_gender = px.bar(
         gender_df,
         x='Gender',
@@ -358,10 +328,8 @@ if all(col in sudan_data.columns for col in gender_cols):
         height=450
     )
 
-    # Set primary color for bars
     fig_gender.update_traces(marker_color=palette["primary"])
 
-    # Improve layout
     fig_gender.update_layout(
         xaxis_title=None,
         yaxis_title="Number of Individuals"
@@ -383,14 +351,11 @@ This bar chart displays the gender distribution of individuals affected by confl
 #| fig-cap: "Security incidents by organization type"
 #| echo: false
 
-# Count incidents affecting different organization types
 org_cols = ['un', 'ingo', 'icrc', 'nrcs_and_ifrc', 'nngo', 'other']
 
-# Create a summary of total incidents by organization type
-org_totals = sudan_data[org_cols].sum().reset_index()
+org_totals = country_data[org_cols].sum().reset_index()
 org_totals.columns = ['Organization Type', 'Total Incidents']
 
-# Better labels for organization types
 org_labels = {
     'un': 'United Nations',
     'ingo': 'International NGO',
@@ -400,13 +365,10 @@ org_labels = {
     'other': 'Other Organizations'
 }
 
-# Map the short names to full names
 org_totals['Organization'] = org_totals['Organization Type'].map(org_labels)
 
-# Sort by total incidents
 org_totals = org_totals.sort_values('Total Incidents', ascending=False)
 
-# Create a horizontal bar chart
 fig_orgs = px.bar(
     org_totals,
     y='Organization',
@@ -416,10 +378,8 @@ fig_orgs = px.bar(
     orientation='h'
 )
 
-# Set all bars to primary color
 fig_orgs.update_traces(marker_color=palette["primary"])
 
-# Improve layout
 fig_orgs.update_layout(
     yaxis_title=None,
     xaxis_title="Number of Incidents",
@@ -442,16 +402,13 @@ International NGOs maintain the largest operational footprint in South Sudan's h
 #| fig-cap: "Host State vs Foreign Actors in Security Incidents"
 #| echo: false
 
-# Filter only for Host State and Foreign actors
 relevant_actors = ['Host state', 'Foreign or coalition forces']
-actor_data = sudan_data[sudan_data['actor_type'].isin(relevant_actors)]
+actor_data = country_data[country_data['actor_type'].isin(relevant_actors)]
 
-# Check if we have data for these specific actors
 if len(actor_data) > 0:
     actor_counts = actor_data['actor_type'].value_counts().reset_index()
     actor_counts.columns = ['Actor Type', 'Count']
     
-    # Create a column chart
     fig_actors = px.bar(
         actor_counts,
         x='Actor Type',
@@ -460,10 +417,8 @@ if len(actor_data) > 0:
         height=450
     )
     
-    # Set primary color for all bars
     fig_actors.update_traces(marker_color=palette["primary"])
     
-    # Improve layout
     fig_actors.update_layout(
         xaxis_title=None,
         yaxis_title="Number of Incidents"
@@ -482,13 +437,12 @@ All incidents occur in the host state.
 
 ```{python}
 #| label: tbl-top-incidents
-#| tbl-cap: "Most impactful security incidents in Palestine (by total affected)"
+#| tbl-cap: "Most impactful security incidents (by total affected)"
 #| echo: false
 
-if not sudan_data.empty and 'total_affected' in sudan_data.columns:
-    top5_incidents = sudan_data.sort_values(by='total_affected', ascending=False).head(5)
+if not country_data.empty and 'total_affected' in country_data.columns:
+    top5_incidents = country_data.sort_values(by='total_affected', ascending=False).head(5)
     
-    # Select and rename columns for display
     display_cols = ['year', 'location', 'total_affected', 'total_killed', 'total_wounded', 'attack_context', 'actor_type']
     column_names = {
         'year': 'Year', 
@@ -565,3 +519,5 @@ Road ambushes appear to be a common tactic, with three significant incidents on 
 - Examine the relationship between humanitarian funding levels, operational presence, and security incidents to inform resource allocation decisions.
 
 - Assess the effectiveness of various security management approaches in reducing incident frequency and severity across different organization types.
+
+By providing a data-driven understanding of security patterns in the ____, this analysis aims to contribute to safer and more effective operations in this challenging environment.

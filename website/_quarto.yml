@@ -11,7 +11,9 @@ website:
         text: Introduction
       - href: data_cleaning.qmd
         text: Data Cleaning
-      - text: Results
+      - href: eda.qmd
+        text: International Analysis
+      - text: Individual Country Analysis
         menu: 
           - href: palestine.qmd
             text: Palestine
@@ -29,8 +31,6 @@ website:
             text: Somolia
           - href: mali.qmd
             text: Mali
-      - href: eda.qmd
-        text: EDA
       - href: index.qmd
         text: Bibliography
       - href: index.qmd
