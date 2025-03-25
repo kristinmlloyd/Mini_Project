@@ -9,16 +9,14 @@ website:
     left:
       - href: index.qmd
         text: Introduction
+      - href: data_cleaning.qmd
+        text: Data Cleaning
       - text: Results
         menu: 
-          - href: data_cleaning.qmd
-            text: Data Cleaning
           - href: palestine.qmd
             text: Palestine
           - href: southsudan.qmd
             text: South Sudan
-          - href: african.qmd
-            text: Central African Republic
           - href: af.qmd
             text: Afghanistan
           - href: dr.qmd

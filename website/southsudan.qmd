@@ -14,7 +14,6 @@ format:
 execute:
   warning: false
   message: false
-editor: visual
 ---
 
 ```{python}
@@ -49,20 +48,27 @@ sudan_data = df[df['country'] == 'South Sudan']
 
 ```
 
+![](images/southsudan2.png){width=200px}
+
 # Executive Summary
+
+Despite multiple peace agreements since 2015, South Sudan continues to face political instability. The unity government formed in 2020 between President Kiir and opposition leader Machar has made little progress implementing the 2018 peace agreement. Violence escalated in early 2025, with Machar placed under house arrest in March. Two-thirds of the population faces severe food insecurity, worsened by flooding and spillover from Sudan's civil war. Elections have been postponed to December 2026, while ongoing violence and fiscal crisis from disrupted oil exports threaten the fragile peace.
 
 # Background: The Conflict
 
-```{python}
-
-from IPython.display import Image
-Image("images/palestine.png", width=500)
-
-```
-
 ## Historical Context
 
+Sudan gained independence in 1956, but divisions between the wealthier north and less-developed south led to decades of conflict. Following two civil wars, South Sudan gained independence in 2011 after 99 percent voted for separation. The new state quickly descended into turmoil as weak governance and ethnic tensions erupted. In December 2013, conflict broke out when President Kiir accused Vice President Machar of plotting a coup and removed him from office. Violence spread between the Dinka (aligned with Kiir) and Nuer (supporting Machar) ethnic groups.
+
+The conflict resulted in approximately 400,000 deaths and displaced four million people. Armed groups targeted civilians along ethnic lines, committed sexual violence, and recruited child soldiers. After several failed peace attempts, Kiir and Machar signed a revitalized peace agreement in 2018, establishing a unity government in 2020.
+
 ## Recent Escalation
+
+In 2024, additional peacekeepers were deployed to South Sudan following an escalation in intercommunal violence that increased civilian deaths, abductions, and displacements. The country also experienced the beginning of a fiscal crisis when fighting in neighboring Sudan damaged a critical oil pipeline, cutting nearly two-thirds of state revenue.
+
+Violence has significantly intensified since early 2025. Clashes between government forces (SSPDF) and opposition forces (SPLA/IO) began in January and escalated in February with fighting in Upper Nile state. On March 4, militia forces overran an army base in Nasir, leading to the arrest of opposition leaders and Machar being placed under house arrest. A failed UN extraction attempt on March 7 resulted in the death of a prominent general and dozens of soldiers. Ugandan troops have reportedly deployed to protect President Kiir.
+
+The situation is compounded by a fiscal crisis that began when fighting in Sudan damaged a critical oil pipeline in 2024, cutting two-thirds of state revenue. Over 7.7 million people face severe food insecurity—the worst in the country's history—with flooding since May 2024 threatening millions more. The postponement of elections to 2026 and growing tensions raise concerns of further violence, while fighting from Sudan threatens to spill over into South Sudan's territory.
 
 # Temporal Trends in Security Incidents {#sec-temporal}
 
@@ -70,7 +76,7 @@ Image("images/palestine.png", width=500)
 
 ```{python}
 #| label: fig-yearly-incidents
-#| fig-cap: "Security incidents in Palestine from 2002 to 2025"
+#| fig-cap: "Security incidents in South Sudan from 2011 to 2025"
 #| echo: false
 
 # Group incidents by year
@@ -83,7 +89,8 @@ fig = px.line(
     y='incidents',
     markers=True,
     labels={'incidents': 'Number of Incidents', 'year': 'Year'},
-    height=500
+    height=500,
+    # Using the default color scheme
 )
 
 # Configure layout
@@ -98,14 +105,15 @@ fig.update_layout(
 # Add range slider
 fig.update_xaxes(rangeslider_visible=True)
 
-# Add event annotations
+# Add event annotations for South Sudan
 events = [
-    {'year': 2006, 'event': 'Hamas takes control of Gaza', 'y_position': 5},
-    {'year': 2014, 'event': 'Israel-Hamas conflict', 'y_position': 10},
-    {'year': 2018, 'event': 'Gaza border protests', 'y_position': 8},
-    {'year': 2021, 'event': '11-day conflict', 'y_position': 7},
-    {'year': 2023, 'event': 'Oct 7 Hamas attack', 'y_position': 15},
-    {'year': 2024, 'event': 'Gaza war escalation', 'y_position': 65}
+    {'year': 2011, 'event': 'South Sudan independence', 'y_position': 20},
+    {'year': 2013, 'event': 'Civil war begins', 'y_position': 10},
+    {'year': 2015, 'event': 'First peace agreement', 'y_position': 8},
+    {'year': 2018, 'event': 'Revitalized peace agreement', 'y_position': 4},
+    {'year': 2020, 'event': 'Unity government formed', 'y_position': 15},
+    {'year': 2024, 'event': 'Increased intercommunal violence', 'y_position': 60},
+    {'year': 2025, 'event': 'Machar placed under house arrest', 'y_position': 12}
 ]
 
 for event in events:
@@ -117,7 +125,7 @@ for event in events:
         arrowhead=1,
         ax=0,
         ay=-20,
-        font=dict(size=10),
+        font=dict(size=8),  # Reduced font size from 10 to 8
         bgcolor="rgba(255,255,255,0.85)",
         bordercolor="black",
         borderwidth=1,
@@ -210,9 +218,47 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
+The predominance of shootings and bodily assaults reflects the nature of the conflict in South Sudan, characterized by armed confrontations between government forces, opposition forces, and communal militias.
+
 ## Attack Contexts
 
+```{python}
+#| label: fig-attack-contexts
+#| fig-cap: "Security incidents by attack context"
+#| echo: false
+
+# Get counts of incidents by attack context
+context_counts = sudan_data['attack_context'].value_counts().reset_index()
+context_counts.columns = ['Attack Context', 'Count']
+
+# Sort by count for better visualization
+context_counts = context_counts.sort_values('Count', ascending=False)
+
+# Create a column chart
+fig_context = px.bar(
+    context_counts,
+    x='Attack Context',
+    y='Count',
+    title=None,
+    height=450
+)
+
+# Set primary color for all bars
+fig_context.update_traces(marker_color=palette["primary"])
+
+# Improve layout
+fig_context.update_layout(
+    xaxis_title=None,
+    yaxis_title="Number of Incidents",
+    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
+)
+
+fig_context.show()
+```
+
 ### Analysis of Attack Contexts
+
+The prevalence of ambushes highlights the tactical nature of much of the violence in South Sudan, suggesting organized planning rather than spontaneous outbreaks. Ambushes are typically employed by armed groups with some level of military training and coordination, which aligns with the involvement of both formal military forces (SSPDF) and organized opposition groups (SPLA/IO).
 
 # Human Impact of Security Incidents {#sec-impact}
 
@@ -279,6 +325,8 @@ fig_stacked.show()
 
 ### Analysis of Casualty Patterns
 
+The dramatic disparity highlights how South Sudanese civilians bear the overwhelming burden of the conflict. While international aid workers and peacekeepers face significant risks (as shown by the approximately 75 casualties), the impact on the local population is more than ten times greater.
+
 ## Gender Distribution of Affected Individuals
 
 ```{python}
@@ -323,6 +371,8 @@ if all(col in sudan_data.columns for col in gender_cols):
 ```
 
 ### Analysis of Gender Patterns
+
+This bar chart displays the gender distribution of individuals affected by conflict in South Sudan, showing approximately 500 males compared to about 60 females. 
 
 # Organizations and Actors {#sec-organizations}
 
@@ -381,6 +431,10 @@ fig_orgs.show()
 
 ### Analysis of Organizational Impact
 
+International NGOs have experienced the highest number of incidents, followed by National NGOs and United Nations entities. The National Red Cross/Red Crescent, International Committee of Red Cross, and other organizations have recorded significantly fewer incidents.
+
+International NGOs maintain the largest operational footprint in South Sudan's humanitarian response, with extensive field presence in conflict-affected areas. Since 2013, they have been the primary implementers of humanitarian aid addressing the food security crisis that has affected up to 7.7 million people. *add source*
+
 ## Comparison of Actor Types
 
 ```{python}
@@ -420,6 +474,8 @@ if len(actor_data) > 0:
 
 ### Analysis of Actor Responsibility
 
+All incidents occur in the host state.
+
 # Major Incidents {#sec-major}
 
 ## Top 5 Most Impactful Security Incidents
@@ -450,16 +506,62 @@ if not sudan_data.empty and 'total_affected' in sudan_data.columns:
 
 ### Analysis of Major Incidents
 
+Road ambushes appear to be a common tactic, with three significant incidents on roads in 2018 affecting 10-12 people each. This aligns with the earlier analysis showing ambushes as the most frequent attack method. The sample shows multiple significant incidents in 2018, which aligns with the period following the signing of the Revitalized Peace Agreement. This suggests that despite political agreements at the national level, security incidents continued to threaten civilians and aid operations on the ground.
+
 # Conclusions and Recommendations {#sec-conclusions}
 
 ## Key Findings
+
+- Security incidents in South Sudan have increased significantly since the outbreak of civil war in 2013, with peaks corresponding to political developments including the 2015 peace agreement, 2018 revitalized peace agreement, and 2020 unity government formation.
+
+- Ambushes (225+ incidents) represent the most common attack method, followed by individual attacks (155+ incidents) and raids (80+ incidents), reflecting the tactical nature of violence and prevalence of organized armed groups.
+
+- South Sudanese nationals bear the overwhelming burden of the conflict, with approximately 800 casualties compared to 75 for internationals, and a fatality rate of approximately 30% among affected nationals.
+
+- Males are disproportionately represented in casualty data (8:1 male-to-female ratio), though this likely underrepresents violence affecting women, particularly sexual violence which is chronically underreported.
+
+- International NGOs experience the highest number of security incidents (400+), followed by national NGOs and UN entities (200+ each), reflecting their operational footprint in conflict-affected areas.
+
+- Road travel presents particular security risks, with multiple documented ambushes targeting vehicles along key routes, limiting humanitarian access and civilian movement.
 
 ## Recommendations
 
 ### For Security Planning
 
+- Implement comprehensive route risk assessments with regular updates based on local intelligence networks to mitigate the high incidence of road ambushes.
+
+- Develop gender-sensitive security protocols that address the different risk profiles for male and female staff, recognizing the targeting patterns evident in the data.
+
+- Establish clear thresholds for program suspension and evacuation based on the timing and nature of political developments, given the correlation between political events and violence escalation.
+
+- Create specialized security protocols for project sites and compounds, which face distinct risks from raids compared to the ambush threats on roads.
+
 ### For Humanitarian Organizations
+
+- Strengthen coordination between international and national NGOs on security information sharing, given their similar incident profiles but potentially different access to security resources.
+
+- Prioritize capacity building for national organizations, who face substantial security threats but may have less robust security management systems than international counterparts.
+
+- Develop contingency plans for continued service delivery during periods of heightened risk, particularly following political developments that historically correlate with violence.
+
+- Implement staff care and mental health support systems that address the psychological impact of operating in a high-threat environment, particularly for national staff who cannot readily evacuate.
 
 ### For Policy Development
 
+- Advocate for humanitarian access guarantees with all parties to the conflict, with specific protections for humanitarian movements along key road corridors.
+
+- Support community-based protection mechanisms in areas where formal security forces are absent, ineffective, or themselves pose threats to civilians.
+
+- Engage with UNMISS and other protection actors to align civilian protection strategies with documented incident patterns, particularly in areas with high concentrations of ambushes and raids.
+
+- Promote accountability for attacks against humanitarian personnel and civilians through documentation and advocacy with relevant justice mechanisms.
+
 ### For Future Research
+
+- Investigate the significant gender disparity in casualty data to determine whether this reflects reporting biases or genuine differences in targeting patterns.
+
+- Analyze temporal and geographic variations in incident types to identify potential correlations with specific armed groups or political developments.
+
+- Examine the relationship between humanitarian funding levels, operational presence, and security incidents to inform resource allocation decisions.
+
+- Assess the effectiveness of various security management approaches in reducing incident frequency and severity across different organization types.
