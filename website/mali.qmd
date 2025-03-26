@@ -60,6 +60,44 @@ Mali's crisis began with the 2012 Tuareg rebellion, triggered by fighters and we
 
 Mali's security has deteriorated rapidly since the 2020-2021 military coups. The junta cut ties with France in 2022 and hired Wagner Group mercenaries, coinciding with increased violence including the Moura massacre where over 300 civilians died. In 2023, Mali expelled UN peacekeepers, creating a security vacuum that extremist groups immediately exploited. Attacks have more than doubled since the UN withdrawal began, with JNIM now controlling northern territories and blockading Timbuktu. Simultaneously, fighting has reignited with Tuareg separatists in the northeast. With international support gone and violence surging on multiple fronts, Mali now stands on the brink of civil war.
 
+# Map of Incidents
+
+```{python}
+# icon_path = "images/hazard2.png"
+# valid_points = country_data[country_data['latitude'].notna() & country_data['longitude'].notna()]
+
+# country_map = folium.Map(location=[31.9, 35.2], zoom_start=8)
+
+# coords = []
+
+# for _, row in valid_points.iterrows():
+#     coords.append((row['latitude'], row['longitude']))
+    
+#     popup_html = f"""
+#     <b>Location:</b> {row['location']}, {row['country']}<br>
+#     <b>Year:</b> {row['year']}<br>
+#     <b>Total Affected:</b> {row['total_affected']}<br>
+#     <b>Attack Type:</b> {row.get('means_of_attack', 'Unknown')}
+#     """
+
+#     icon = folium.CustomIcon(
+#         icon_image=icon_path,
+#         icon_size=(20, 20)
+#     )
+
+#     folium.Marker(
+#         location=[row['latitude'], row['longitude']],
+#         popup=folium.Popup(popup_html, max_width=300),
+#         icon=icon
+#     ).add_to(country_map)
+
+# if coords:
+#     country_map.fit_bounds(coords)
+
+# country_map
+
+```
+
 # Temporal Trends in Security Incidents {#sec-temporal}
 
 ## Incident Frequency Over Time

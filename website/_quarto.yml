@@ -17,24 +17,28 @@ website:
         menu: 
           - href: palestine.qmd
             text: Palestine
-          - href: southsudan.qmd
-            text: South Sudan
           - href: af.qmd
             text: Afghanistan
           - href: dr.qmd
             text: DR Congo
-          - href: sudan.qmd
-            text: Sudan
           - href: syria.qmd
             text: Syrian Arab Republic
           - href: somolia.qmd
             text: Somolia
           - href: mali.qmd
             text: Mali
+          - href: southsudan.qmd
+            text: South Sudan
+          - href: sudan.qmd
+            text: Sudan
+      - href: index.qmd
+        text: Exploring the Unknown
       - href: index.qmd
         text: Bibliography
       - href: index.qmd
         text: Appendix
+      - href: delete.qmd
+        text: LLM Log
 
     right:
       - icon: github

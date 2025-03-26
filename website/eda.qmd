@@ -157,7 +157,7 @@ The interactive map reveals several important patterns:
 -   Urban centers often show higher concentrations of incidents
 -   The distribution of high-severity incidents (red markers) isn't uniform, suggesting regional differences in the nature of security threats
 
-You can zoom in on specific regions and click on individual markers to get more details about each incidents location.
+You can zoom in on specific regions and click on individual markers to get more details about each incident, such as the country, year, total affected, and attack type. 
 
 # Temporal Trends in Security Incidents
 
@@ -624,6 +624,47 @@ The comparison between nationals and internationals reveals several important pa
 -   Need for context-specific risk assessments
 -   Importance of inclusive security measures that protect all personnel
 
+# Location Trends
+
+```{python}
+#| label: location
+
+context_counts = df['location'].value_counts().reset_index()
+context_counts.columns = ['Location', 'Count']
+
+context_counts = context_counts.sort_values('Count', ascending=False)
+
+fig_context = px.bar(
+    context_counts,
+    x='Location',
+    y='Count',
+    title='Security Incidents by Location',
+    height=450
+)
+
+fig_context.update_traces(marker_color=palette["primary"])
+
+fig_context.update_layout(
+    xaxis_title=None,
+    yaxis_title="Number of Incidents",
+    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
+)
+
+fig_context.show()
+```
+
+I'll provide some insights into why these security incidents might be distributed this way:
+
+**Road**: The high number of incidents on roads could be due to several factors, such as more exposure and visibility of potential targets, less controlled environment compared to other locations, vulnerable transportation of valuable goods or information, etc.
+
+**Unknown Locations**: The significant number of incidents with unknown locations indicates challenges in tracking and documenting security breaches.
+
+**Public Locations**: These areas are prone to security incidents because high foot traffic increases opportunities for theft or disruption, multiple entry and exit points, or diverse and unpredictable crowd dynamics.
+
+**Protect Sites**: Despite being designated as protected, these locations still experience incidents.
+
+These explanations highlight the complex nature of security incidents and the varied challenges across different location types.
+
 # Gender Distribution of Affected Individuals
 
 Understanding how security incidents affect different gender groups provides important insights into vulnerability patterns and protection needs.
@@ -801,8 +842,6 @@ This analysis focuses specifically on two major actor types responsible for secu
 
 1.  **Context-specific approaches**: Security strategies should reflect the predominant actor types in each area
 2.  **Engagement strategies**: Different approaches may be needed when engaging with different security
-
-# Comparison of Actor Types
 
 # Conclusion
 

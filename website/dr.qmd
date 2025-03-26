@@ -56,7 +56,45 @@ The conflict in the Democratic Republic of Congo represents one of Africa's most
 
 ## Recent Escalation
 
-In early 2025, M23 rebels, backed by Rwandan troops, captured Goma in eastern DRC, killing between 900-2,000 civilians and triggering mass displacement. This represented the culmination of escalating violence that began with M23's resurgence in 2022 and their steady territorial gains throughout 2023. The situation had already deteriorated significantly following DRC's contested December 2023 elections, which sparked nationwide unrest. During 2024, the humanitarian situation worsened dramatically, with 358,000 newly displaced people and a 30% rise in violations against children. The U.S.-brokered peace agreement in late 2023 failed to prevent the conflict's intensification,
+In early 2025, M23 rebels, backed by Rwandan troops, captured Goma in eastern DRC, killing between 900-2,000 civilians and triggering mass displacement. This represented the culmination of escalating violence that began with M23's resurgence in 2022 and their steady territorial gains throughout 2023. The situation had already deteriorated significantly following DRC's contested December 2023 elections, which sparked nationwide unrest. During 2024, the humanitarian situation worsened dramatically, with 358,000 newly displaced people and a 30% rise in violations against children. The U.S.-brokered peace agreement in late 2023 failed to prevent the conflict's intensification.
+
+# Map of Incidents
+
+```{python}
+# icon_path = "images/hazard2.png"
+# valid_points = country_data[country_data['latitude'].notna() & country_data['longitude'].notna()]
+
+# country_map = folium.Map(location=[31.9, 35.2], zoom_start=8)
+
+# coords = []
+
+# for _, row in valid_points.iterrows():
+#     coords.append((row['latitude'], row['longitude']))
+    
+#     popup_html = f"""
+#     <b>Location:</b> {row['location']}, {row['country']}<br>
+#     <b>Year:</b> {row['year']}<br>
+#     <b>Total Affected:</b> {row['total_affected']}<br>
+#     <b>Attack Type:</b> {row.get('means_of_attack', 'Unknown')}
+#     """
+
+#     icon = folium.CustomIcon(
+#         icon_image=icon_path,
+#         icon_size=(20, 20)
+#     )
+
+#     folium.Marker(
+#         location=[row['latitude'], row['longitude']],
+#         popup=folium.Popup(popup_html, max_width=300),
+#         icon=icon
+#     ).add_to(country_map)
+
+# if coords:
+#     country_map.fit_bounds(coords)
+
+# country_map
+
+```
 
 # Temporal Trends in Security Incidents {#sec-temporal}
 

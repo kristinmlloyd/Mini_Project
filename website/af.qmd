@@ -77,6 +77,44 @@ International isolation and sanctions affecting aid delivery
 
 These factors have created a challenging operational environment for humanitarian organizations, with significant implications for security risk management.
 
+# Map of Incidents
+
+```{python}
+# icon_path = "images/hazard2.png"
+# valid_points = country_data[country_data['latitude'].notna() & country_data['longitude'].notna()]
+
+# country_map = folium.Map(location=[31.9, 35.2], zoom_start=8)
+
+# coords = []
+
+# for _, row in valid_points.iterrows():
+#     coords.append((row['latitude'], row['longitude']))
+    
+#     popup_html = f"""
+#     <b>Location:</b> {row['location']}, {row['country']}<br>
+#     <b>Year:</b> {row['year']}<br>
+#     <b>Total Affected:</b> {row['total_affected']}<br>
+#     <b>Attack Type:</b> {row.get('means_of_attack', 'Unknown')}
+#     """
+
+#     icon = folium.CustomIcon(
+#         icon_image=icon_path,
+#         icon_size=(20, 20)
+#     )
+
+#     folium.Marker(
+#         location=[row['latitude'], row['longitude']],
+#         popup=folium.Popup(popup_html, max_width=300),
+#         icon=icon
+#     ).add_to(country_map)
+
+# if coords:
+#     country_map.fit_bounds(coords)
+
+# country_map
+
+```
+
 # Temporal Trends in Security Incidents {#sec-temporal}
 
 ## Incident Frequency Over Time
