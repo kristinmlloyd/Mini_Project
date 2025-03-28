@@ -44,7 +44,7 @@ website:
       - icon: github
         href: "https://github.com/kristinmlloyd/Mini_Project.git"
   page-footer:
-    center: "© 2025 Kristin Lloyd"
+    center: "© 2025 Scholarship Project"
 
 format:
   html:

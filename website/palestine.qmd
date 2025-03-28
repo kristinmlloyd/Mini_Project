@@ -283,13 +283,13 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
-**Aerial bombardment** is the most common type of attack in the Occupied Palestinian Territories, followed by shooting incidents. This distribution offers important insights:
+1. **Aerial bombardment** is the most common type of attack in the Occupied Palestinian Territories, followed by shooting incidents. This distribution offers important insights:
 
-1.  **Military nature of conflict**: The predominance of aerial bombardment suggests a significant role of military forces with air capabilities in the conflict.
+2.  **Military nature of conflict**: The predominance of aerial bombardment suggests a significant role of military forces with air capabilities in the conflict.
 
-2.  **Diversity of threats**: Beyond the top two methods, the data shows a range of attack types including shelling, bodily assault, and various forms of explosives.
+3.  **Diversity of threats**: Beyond the top two methods, the data shows a range of attack types including shelling, bodily assault, and various forms of explosives.
 
-3.  **Civilian vulnerability**: Many of these attack types affect wide areas, putting civilians at significant risk even when not directly targeted.
+4.  **Civilian vulnerability**: Many of these attack types affect wide areas, putting civilians at significant risk even when not directly targeted.
 
 ## Attack Contexts
 

@@ -1,5 +1,5 @@
 ---
-title: "Security Incidents in Palestine: Trends and Patterns (2002-2025)"
+title: "Security Incidents in Syrian Arab Republic: Trends and Patterns"
 format:
   html:
     toc: true
@@ -16,11 +16,41 @@ execute:
   message: false
 ---
 
+<style>
+.typing-line {
+  font-family: monospace;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: .15em solid #000;
+  width: 0;
+  display: block;
+  animation: typing 2s steps(20, end) forwards;
+  /* Only type, no infinite blinking */
+}
+
+.typing-line:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.typing-line:nth-child(3) {
+  animation-delay: 4s;
+}
+
+.typing-line:nth-child(4) {
+  animation-delay: 6s;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+</style>
+
 ```{python}
 #| label: setup
 #| include: false
+#| echo: false
 
-# Import required libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -34,34 +64,75 @@ import plotly.graph_objects as go
 from IPython.display import display
 from scipy import stats
 
-# Configure plot settings
 plt.rcParams['figure.figsize'] = (10, 6)
 warnings.filterwarnings('ignore', category=FutureWarning)
 sns.set_theme(style="whitegrid")
 
-# Set consistent color palette
 palette = {"primary": "#FFBD59", "secondary": "#64C1FF", "danger": "#FF5252"}
 
-# Load and prepare data
 df = pd.read_csv("data/security_incidents_cleaned.csv")
 country_data = df[df['country'] == 'Syrian Arab Republic']
 
 ```
 
+![](images/syriapic.png)
+
+```{python}
+#| echo: false
+
+from IPython.display import HTML
+
+killed = int(country_data['nationals_killed'].sum() + country_data['internationals_killed'].sum())
+wounded = int(country_data['nationals_wounded'].sum() + country_data['internationals_wounded'].sum())
+kidnapped = int(country_data['nationals_kidnapped'].sum() + country_data['internationals_kidnapped'].sum())
+
+from IPython.display import HTML
+
+html = f"""
+<div>
+  <span class="typing-line">In the Syrian Arab Republic...</span>
+  <span class="typing-line">{killed} humanitarian workers have died,</span>
+  <span class="typing-line">{wounded} humanitarian workers have been wounded,</span>
+  <span class="typing-line">{kidnapped} humanitarian workers have been kidnapped.</span>
+</div>
+"""
+
+HTML(html)
+
+```      
+
 # Executive Summary
+
+![](images/african.png){width=200px}
 
 # Background: The Conflict
 
-```{python}
-
-from IPython.display import Image
-Image("images/african.png", width=500)
-
-```
-
 ## Historical Context
 
+The Syrian conflict represents one of the most devastating and complex crises of the 21st century. Beginning as peaceful pro-democracy protests in 2011 during the Arab Spring, it rapidly escalated into a full-scale civil war when the Bashar al-Assad regime responded with violent crackdowns. The conflict evolved into a multi-sided proxy war with international powers backing different factions:
+
+-   **2011**: Protests against Assad's authoritarian regime met with violent government response
+-   **2012-2013**: Formation of rebel groups and escalation to full civil war
+-   **2014-2015**: Rise of ISIS capturing significant Syrian territory
+-   **2015**: Russian military intervention supporting the Assad regime
+-   **2016-2019**: Government forces recapture key cities including Aleppo and eastern Ghouta
+-   **2019-2020**: Turkish operations against Kurdish forces in northern Syria
+-   **2020-2023**: Relatively frozen conflict lines with occasional flare-ups
+
 ## Recent Escalation
+
+The Syrian conflict entered a dramatic new phase in late 2024 with the sudden collapse of the Assad regime after 50 years of family rule. This upheaval has fundamentally altered the dynamics of the war:
+
+-   **November 30, 2024**: Rebel forces led by Hayat Tahrir al-Sham (HTS) and the Turkish-backed Syrian National Army (SNA) seized Aleppo
+-   **December 8, 2024**: Damascus fell to rebel forces, ending the Assad dynasty with Bashar al-Assad fleeing to Moscow
+-   **600,000+** estimated deaths since the beginning of the conflict
+-   **6.9 million** internally displaced persons
+-   **5.4 million** refugees abroad
+-   Multiple concurrent conflicts continuing across Syrian territory:
+    - Kurdish forces clashing with Arab tribes in northeast
+    - Islamic State maintaining presence and launching attacks
+    - Israeli strikes against Iranian and Syrian military positions
+    - Iran-backed militias targeting U.S. forces in eastern Syria
 
 # Map of Incidents
 
@@ -166,47 +237,7 @@ fig.show()
 
 ### Analysis of Incident Trends
 
-## Effected Indivudals Over Time
 
-```{python}
-#| label: fig-yearly-affected
-#| fig-cap: "Total affected individuals in Palestine from 2002 to 2025"
-#| echo: false
-
-# Group by year and sum total_affected
-yearly_affected = (
-    country_data.groupby('year')['total_affected']
-    .sum()
-    .reset_index()
-    .rename(columns={'total_affected': 'affected'})
-)
-
-# Create line chart
-fig = px.line(
-    yearly_affected, 
-    x='year', 
-    y='affected',
-    markers=True,
-    labels={'affected': 'Total Affected Individuals', 'year': 'Year'},
-    height=500
-)
-
-# Configure layout
-fig.update_layout(
-    title=None,
-    xaxis=dict(tickmode='linear', dtick=2),
-    yaxis=dict(zeroline=True),
-    hovermode='x unified',
-    template='plotly_white'
-)
-
-# Add range slider
-fig.update_xaxes(rangeslider_visible=True)
-
-fig.show()
-```
-
-### Analysis of Humans Impacted
 
 # Nature of Security Incidents {#sec-nature}
 
@@ -315,147 +346,6 @@ fig_stacked.show()
 ```
 
 ### Analysis of Casualty Patterns
-
-## Gender Distribution of Affected Individuals
-
-```{python}
-#| label: fig-gender
-#| fig-cap: "Gender distribution of affected individuals"
-#| echo: false
-
-# Check if we have gender data
-gender_cols = ['gender_male', 'gender_female']
-if all(col in country_data.columns for col in gender_cols):
-    # Sum up total counts by gender
-    gender_totals = {
-        'Gender': ['Male', 'Female'],
-        'Count': [
-            country_data['gender_male'].sum(),
-            country_data['gender_female'].sum()
-        ]
-    }
-
-    # Convert to DataFrame
-    gender_df = pd.DataFrame(gender_totals)
-
-    # Create simple bar chart
-    fig_gender = px.bar(
-        gender_df,
-        x='Gender',
-        y='Count',
-        title=None,
-        height=450
-    )
-
-    # Set primary color for bars
-    fig_gender.update_traces(marker_color=palette["primary"])
-
-    # Improve layout
-    fig_gender.update_layout(
-        xaxis_title=None,
-        yaxis_title="Number of Individuals"
-    )
-
-    fig_gender.show()
-```
-
-### Analysis of Gender Patterns
-
-# Organizations and Actors {#sec-organizations}
-
-## Organizations Affected by Security Incidents
-
-```{python}
-#| label: fig-organizations
-#| fig-cap: "Security incidents by organization type"
-#| echo: false
-
-# Count incidents affecting different organization types
-org_cols = ['un', 'ingo', 'icrc', 'nrcs_and_ifrc', 'nngo', 'other']
-
-# Create a summary of total incidents by organization type
-org_totals = country_data[org_cols].sum().reset_index()
-org_totals.columns = ['Organization Type', 'Total Incidents']
-
-# Better labels for organization types
-org_labels = {
-    'un': 'United Nations',
-    'ingo': 'International NGO',
-    'icrc': 'Int. Committee of Red Cross',
-    'nrcs_and_ifrc': 'National Red Cross/Red Crescent',
-    'nngo': 'National NGO',
-    'other': 'Other Organizations'
-}
-
-# Map the short names to full names
-org_totals['Organization'] = org_totals['Organization Type'].map(org_labels)
-
-# Sort by total incidents
-org_totals = org_totals.sort_values('Total Incidents', ascending=False)
-
-# Create a horizontal bar chart
-fig_orgs = px.bar(
-    org_totals,
-    y='Organization',
-    x='Total Incidents',
-    title=None,
-    height=500,
-    orientation='h'
-)
-
-# Set all bars to primary color
-fig_orgs.update_traces(marker_color=palette["primary"])
-
-# Improve layout
-fig_orgs.update_layout(
-    yaxis_title=None,
-    xaxis_title="Number of Incidents",
-    yaxis={'categoryorder': 'total ascending'}
-)
-
-fig_orgs.show()
-```
-
-### Analysis of Organizational Impact
-
-## Comparison of Actor Types
-
-```{python}
-#| label: fig-actors
-#| fig-cap: "Host State vs Foreign Actors in Security Incidents"
-#| echo: false
-
-# Filter only for Host State and Foreign actors
-relevant_actors = ['Host state', 'Foreign or coalition forces']
-actor_data = country_data[country_data['actor_type'].isin(relevant_actors)]
-
-# Check if we have data for these specific actors
-if len(actor_data) > 0:
-    actor_counts = actor_data['actor_type'].value_counts().reset_index()
-    actor_counts.columns = ['Actor Type', 'Count']
-    
-    # Create a column chart
-    fig_actors = px.bar(
-        actor_counts,
-        x='Actor Type',
-        y='Count',
-        title=None,
-        height=450
-    )
-    
-    # Set primary color for all bars
-    fig_actors.update_traces(marker_color=palette["primary"])
-    
-    # Improve layout
-    fig_actors.update_layout(
-        xaxis_title=None,
-        yaxis_title="Number of Incidents"
-    )
-    
-    fig_actors.show()
-```
-
-### Analysis of Actor Responsibility
 
 # Major Incidents {#sec-major}
 
