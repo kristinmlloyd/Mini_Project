@@ -134,38 +134,38 @@ In early 2025, M23 rebels, backed by Rwandan troops, captured Goma in eastern DR
 <h1>Map of Incidents <img src="images/map.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h1>
 
 ```{python}
-# icon_path = "images/hazard2.png"
-# valid_points = country_data[country_data['latitude'].notna() & country_data['longitude'].notna()]
+icon_path = "images/hazard2.png"
+valid_points = country_data[country_data['latitude'].notna() & country_data['longitude'].notna()]
 
-# country_map = folium.Map(location=[31.9, 35.2], zoom_start=8)
+country_map = folium.Map(location=[31.9, 35.2], zoom_start=8)
 
-# coords = []
+coords = []
 
-# for _, row in valid_points.iterrows():
-#     coords.append((row['latitude'], row['longitude']))
+for _, row in valid_points.iterrows():
+    coords.append((row['latitude'], row['longitude']))
     
-#     popup_html = f"""
-#     <b>Location:</b> {row['location']}, {row['country']}<br>
-#     <b>Year:</b> {row['year']}<br>
-#     <b>Total Affected:</b> {row['total_affected']}<br>
-#     <b>Attack Type:</b> {row.get('means_of_attack', 'Unknown')}
-#     """
+    popup_html = f"""
+    <b>Location:</b> {row['location']}, {row['country']}<br>
+    <b>Year:</b> {row['year']}<br>
+    <b>Total Affected:</b> {row['total_affected']}<br>
+    <b>Attack Type:</b> {row.get('means_of_attack', 'Unknown')}
+    """
 
-#     icon = folium.CustomIcon(
-#         icon_image=icon_path,
-#         icon_size=(20, 20)
-#     )
+    icon = folium.CustomIcon(
+        icon_image=icon_path,
+        icon_size=(20, 20)
+    )
 
-#     folium.Marker(
-#         location=[row['latitude'], row['longitude']],
-#         popup=folium.Popup(popup_html, max_width=300),
-#         icon=icon
-#     ).add_to(country_map)
+    folium.Marker(
+        location=[row['latitude'], row['longitude']],
+        popup=folium.Popup(popup_html, max_width=300),
+        icon=icon
+    ).add_to(country_map)
 
-# if coords:
-#     country_map.fit_bounds(coords)
+if coords:
+    country_map.fit_bounds(coords)
 
-# country_map
+country_map
 
 ```
 
@@ -203,7 +203,7 @@ events = [
     {'year': 2003, 'event': 'End of Second Congo War', 'y_position': 6},
     {'year': 2012, 'event': 'First M23 rebellion', 'y_position': 2},
     {'year': 2013, 'event': 'M23 defeated by UN forces', 'y_position': 8},
-    {'year': 2019, 'event': 'Tshisekedi takes power', 'y_position': 30},
+    {'year': 2019, 'event': 'Tshisekedi takes power', 'y_position': 28},
     {'year': 2022, 'event': 'M23 resurgence', 'y_position': 20},
     {'year': 2023, 'event': 'Contested elections', 'y_position': 15},
     {'year': 2025, 'event': 'M23 captures Goma', 'y_position': 5}

@@ -16,9 +16,40 @@ execute:
   message: false
 ---
 
+<style>
+.typing-line {
+  font-family: monospace;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: .15em solid #000;
+  width: 0;
+  display: block;
+  animation: typing 2s steps(20, end) forwards;
+  /* Only type, no infinite blinking */
+}
+
+.typing-line:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.typing-line:nth-child(3) {
+  animation-delay: 4s;
+}
+
+.typing-line:nth-child(4) {
+  animation-delay: 6s;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+</style>
+
 ```{python}
 #| label: setup
 #| include: false
+#| echo: false
 
 import pandas as pd
 import numpy as np
@@ -44,9 +75,35 @@ country_data = df[df['country'] == 'Sudan']
 
 ```
 
-![](images/palestine.png){width=200px}
+![](images/sudanpic.png)
+
+```{python}
+#| echo: false
+
+from IPython.display import HTML
+
+killed = int(country_data['nationals_killed'].sum() + country_data['internationals_killed'].sum())
+wounded = int(country_data['nationals_wounded'].sum() + country_data['internationals_wounded'].sum())
+kidnapped = int(country_data['nationals_kidnapped'].sum() + country_data['internationals_kidnapped'].sum())
+
+from IPython.display import HTML
+
+html = f"""
+<div>
+  <span class="typing-line">In Sudan...</span>
+  <span class="typing-line">{killed} humanitarian workers have died,</span>
+  <span class="typing-line">{wounded} humanitarian workers have been wounded,</span>
+  <span class="typing-line">{kidnapped} humanitarian workers have been kidnapped.</span>
+</div>
+"""
+
+HTML(html)
+
+```
 
 # Executive Summary
+
+![](images/sudanflag.png){width=200px}
 
 # Background: The Conflict
 
@@ -67,6 +124,46 @@ SAF counteroffensive (2024-2025):
 - SAF recaptured much of Khartoum area by early 2025
 - SAF successfully ended the blockade around the city of Obeid that had been maintained by the RSF for two years.
 - Key gains include Omdurman city and a strategic oil refinery
+
+<h1>Map of Incidents <img src="images/map.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h1>
+
+```{python}
+#| echo: false
+
+icon_path = "images/hazard2.png"
+valid_points = country_data[country_data['latitude'].notna() & country_data['longitude'].notna()]
+
+country_map = folium.Map(location=[31.9, 35.2], zoom_start=8)
+
+coords = []
+
+for _, row in valid_points.iterrows():
+    coords.append((row['latitude'], row['longitude']))
+    
+    popup_html = f"""
+    <b>Location:</b> {row['location']}, {row['country']}<br>
+    <b>Year:</b> {row['year']}<br>
+    <b>Total Affected:</b> {row['total_affected']}<br>
+    <b>Attack Type:</b> {row.get('means_of_attack', 'Unknown')}
+    """
+
+    icon = folium.CustomIcon(
+        icon_image=icon_path,
+        icon_size=(20, 20)
+    )
+
+    folium.Marker(
+        location=[row['latitude'], row['longitude']],
+        popup=folium.Popup(popup_html, max_width=300),
+        icon=icon
+    ).add_to(country_map)
+
+if coords:
+    country_map.fit_bounds(coords)
+
+country_map
+
+```
 
 # Temporal Trends in Security Incidents {#sec-temporal}
 
@@ -100,11 +197,11 @@ fig.update_xaxes(rangeslider_visible=True)
 
 events = [
     {'year': 2019, 'event': 'Bashir overthrown', 'y_position': 5},
-    {'year': 2021, 'event': 'Military coup', 'y_position': 10},
-    {'year': 2023, 'event': 'Civil war begins', 'y_position': 15},
-    {'year': 2023, 'event': 'Darfur governor assassinated', 'y_position': 20},
-    {'year': 2024, 'event': 'SAF counteroffensive', 'y_position': 30},
-    {'year': 2025, 'event': 'SAF recaptures Khartoum areas', 'y_position': 65}
+    {'year': 2021, 'event': 'Military coup', 'y_position': 8},
+    {'year': 2023, 'event': 'Civil war begins', 'y_position': 30},
+    {'year': 2023, 'event': 'Darfur governor assassinated', 'y_position': 36},
+    {'year': 2024, 'event': 'SAF counteroffensive', 'y_position': 55},
+    {'year': 2025, 'event': 'SAF recaptures Khartoum areas', 'y_position': 11}
 ]
 
 for event in events:
@@ -128,41 +225,17 @@ fig.show()
 
 ### Analysis of Incident Trends
 
-## Effected Indivudals Over Time
+### Analysis of Incident Trends
 
-```{python}
-#| label: fig-yearly-affected
-#| fig-cap: "Total affected individuals"
-#| echo: false
+The time-series plot illustrates clear peaks in humanitarian security incidents in Sudan, aligning with key political and military events:
 
-yearly_affected = (
-    country_data.groupby('year')['total_affected']
-    .sum()
-    .reset_index()
-    .rename(columns={'total_affected': 'affected'})
-)
+- **2004–2006:** A sharp rise in incidents coincides with the height of the Darfur conflict, reaching a peak of over 40 incidents in 2005.
+- **2019:** A brief uptick follows the ousting of President Omar al-Bashir, reflecting the instability during Sudan’s political transition.
+- **2021:** The military coup is marked by a modest increase in violence, likely due to the power vacuum and shifting control structures.
+- **2023–2024:** The most dramatic escalation occurs with the outbreak of civil war between the SAF and RSF. Incidents surge, peaking in 2024 with the **SAF counteroffensive** and high-profile events like the **assassination of the Darfur governor**.
+- **2025:** Incident numbers drop significantly following the **SAF’s recapture of Khartoum areas**, suggesting a potential shift in conflict intensity or a redistribution of control.
 
-fig = px.line(
-    yearly_affected, 
-    x='year', 
-    y='affected',
-    markers=True,
-    labels={'affected': 'Total Affected Individuals', 'year': 'Year'},
-    height=500
-)
-
-fig.update_layout(
-    title=None,
-    xaxis=dict(tickmode='linear', dtick=2),
-    yaxis=dict(zeroline=True),
-    hovermode='x unified',
-    template='plotly_white'
-)
-
-fig.update_xaxes(rangeslider_visible=True)
-
-fig.show()
-```
+These patterns indicate that spikes in violence are closely tied to leadership changes, territorial contests, and transitions in power, reinforcing the need for real-time monitoring during political turning points.
 
 # Nature of Security Incidents {#sec-nature}
 
@@ -199,7 +272,7 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
-Shooting is the most common attack method, followed by kidnapping, bodily assault, and unknown attack types. 
+The most prevalent method of attack is shooting, underscoring the militarized nature of the conflict. Kidnapping and bodily assault are also common, reflecting tactics aimed at intimidation and disruption of humanitarian work. A significant portion of incidents are recorded as "unknown," highlighting data gaps and the opacity of conflict environments. These attack types reflect the dangers posed to aid workers not only from crossfire but also from deliberate targeting.
 
 ## Attack Contexts
 
@@ -234,7 +307,7 @@ fig_context.show()
 
 ### Analysis of Attack Contexts
 
-Ambushes are the predominant attack context, significantly higher than other categories. This suggests both sides employ surprise attacks.
+Ambushes are by far the most frequent attack context, significantly surpassing other categories. This suggests both SAF and RSF frequently utilize element-of-surprise tactics, particularly along transport routes. The prevalence of ambushes indicates high risks associated with road travel, reinforcing the need for dynamic security planning, route risk assessments, and protection protocols, especially for humanitarian convoys.
 
 # Human Impact of Security Incidents {#sec-impact}
 
@@ -296,135 +369,7 @@ fig_stacked.show()
 
 ### Analysis of Casualty Patterns
 
-This illustrates the severe impact on Sudanese nationals compared to internationals. The casualty data reveals a significant death toll, with the high proportion of fatalities indicating the lethal nature of the conflict.
-
-## Gender Distribution of Affected Individuals
-
-```{python}
-#| label: fig-gender
-#| fig-cap: "Gender distribution of affected individuals"
-#| echo: false
-
-gender_cols = ['gender_male', 'gender_female']
-if all(col in country_data.columns for col in gender_cols):
-    gender_totals = {
-        'Gender': ['Male', 'Female'],
-        'Count': [
-            country_data['gender_male'].sum(),
-            country_data['gender_female'].sum()
-        ]
-    }
-
-    gender_df = pd.DataFrame(gender_totals)
-
-    fig_gender = px.bar(
-        gender_df,
-        x='Gender',
-        y='Count',
-        title=None,
-        height=450
-    )
-
-    fig_gender.update_traces(marker_color=palette["primary"])
-
-    fig_gender.update_layout(
-        xaxis_title=None,
-        yaxis_title="Number of Individuals"
-    )
-
-    fig_gender.show()
-```
-
-### Analysis of Gender Patterns
-
-This chart shows a significant gender disparity in conflict casualties in Sudan, with approximately 250 males affected compared to only 30 females.
-
-# Organizations and Actors {#sec-organizations}
-
-## Organizations Affected by Security Incidents
-
-```{python}
-#| label: fig-organizations
-#| fig-cap: "Security incidents by organization type"
-#| echo: false
-
-org_cols = ['un', 'ingo', 'icrc', 'nrcs_and_ifrc', 'nngo', 'other']
-
-org_totals = country_data[org_cols].sum().reset_index()
-org_totals.columns = ['Organization Type', 'Total Incidents']
-
-org_labels = {
-    'un': 'United Nations',
-    'ingo': 'International NGO',
-    'icrc': 'Int. Committee of Red Cross',
-    'nrcs_and_ifrc': 'National Red Cross/Red Crescent',
-    'nngo': 'National NGO',
-    'other': 'Other Organizations'
-}
-
-org_totals['Organization'] = org_totals['Organization Type'].map(org_labels)
-
-org_totals = org_totals.sort_values('Total Incidents', ascending=False)
-
-fig_orgs = px.bar(
-    org_totals,
-    y='Organization',
-    x='Total Incidents',
-    title=None,
-    height=500,
-    orientation='h'
-)
-
-fig_orgs.update_traces(marker_color=palette["primary"])
-
-fig_orgs.update_layout(
-    yaxis_title=None,
-    xaxis_title="Number of Incidents",
-    yaxis={'categoryorder': 'total ascending'}
-)
-
-fig_orgs.show()
-```
-
-### Analysis of Organizational Impact
-
-This chart shows that International NGOs face the highest number of security incidents in Sudan, followed by National United Nations and National NGO. 
-
-## Comparison of Actor Types
-
-```{python}
-#| label: fig-actors
-#| fig-cap: "Host State vs Foreign Actors in Security Incidents"
-#| echo: false
-
-relevant_actors = ['Host state', 'Foreign or coalition forces']
-actor_data = country_data[country_data['actor_type'].isin(relevant_actors)]
-
-if len(actor_data) > 0:
-    actor_counts = actor_data['actor_type'].value_counts().reset_index()
-    actor_counts.columns = ['Actor Type', 'Count']
-    
-    fig_actors = px.bar(
-        actor_counts,
-        x='Actor Type',
-        y='Count',
-        title=None,
-        height=450
-    )
-    
-    fig_actors.update_traces(marker_color=palette["primary"])
-    
-    fig_actors.update_layout(
-        xaxis_title=None,
-        yaxis_title="Number of Incidents"
-    )
-    
-    fig_actors.show()
-```
-
-### Analysis of Actor Responsibility
-
-The chart shows that all documented incidents occurred within the host state, but the scale maxing out at only 10 incidents suggests significant data limitations. This unusually low incident count likely indicates substantial gaps in data collection or attribution rather than reflecting the true security situation. 
+The impact of the conflict is disproportionately borne by Sudanese nationals, who account for the vast majority of those killed, wounded, and kidnapped. Nationals face nearly ten times more fatalities than international staff, emphasizing the local toll of the crisis. The high proportion of fatalities relative to injuries also suggests that many attacks are deliberately lethal. This underscores the need for context-specific strategies that prioritize national staff safety and psychological support.
 
 # Major Incidents {#sec-major}
 
@@ -455,7 +400,7 @@ if not country_data.empty and 'total_affected' in country_data.columns:
 
 ### Analysis of Major Incidents
 
-The most recent incident in 2023 affected 18 people on a road. Earlier incidents from 2003-2006 show the long-running nature of violence in Sudan, corresponding to the height of the Darfur conflict.
+The top five most impactful incidents span a wide timeframe—from the early 2000s during the height of the Darfur conflict to a recent event in 2023. Notably, several of the deadliest incidents occurred during roadside ambushes, highlighting the sustained vulnerability of transportation routes over decades. These high-impact events demonstrate the long-running and geographically dispersed nature of conflict in Sudan, with implications for both historical accountability and forward-looking risk mitigation.
 
 For more detailed information on the Sudan conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/power-struggle-sudan).
 
@@ -463,43 +408,45 @@ For more detailed information on the Sudan conflict timeline, see the [Council o
 
 ## Key Findings
 
-- The Sudan conflict follows historical patterns of violence but has escalated dramatically since April 2023, creating the world's largest displacement crisis with 14 million displaced people.
-- Shooting is the predominant attack method, followed by kidnapping and bodily assault, reflecting the conventional military nature of the conflict between the SAF and RSF.
-- Ambushes represent the most common attack context, occurring more than twice as frequently as other tactics, creating severe dangers for movement throughout the country.
-- Sudanese nationals bear the overwhelming burden of violence, suffering approximately ten times more casualties than internationals, with a high proportion of fatalities.
-- Road travel presents persistent risks across different time periods (2003-2023), demonstrating a consistent vulnerability pattern throughout Sudan's conflicts.
+## Key Findings
+
+- **Incident spikes align with political turmoil**: Major increases in attacks correspond to events like the Darfur conflict (2004–2006), Bashir’s removal (2019), the 2021 military coup, and the 2023 civil war.
+- **2024 marks the deadliest year**: The SAF counteroffensive resulted in the highest number of incidents recorded, reflecting intense territorial battles and large-scale attacks.
+- **Shooting is the most common attack method**: Followed by kidnapping and bodily assault, indicating a mix of military-style violence and targeted intimidation.
+- **Ambushes dominate attack contexts**: The high frequency of ambushes suggests road travel is particularly dangerous and systematically targeted.
+- **Sudanese nationals suffer the most**: Nationals face significantly higher casualties than international staff, with a disproportionate number of deaths.
+- **Long-term risk on transport routes**: From 2003 to 2023, major incidents consistently occur along roads, showing persistent vulnerability to roadside attacks across decades.
+
+## Recommendations
 
 ## Recommendations
 
 ### For Security Planning
 
-- Implement comprehensive route risk assessments with frequent updates, focusing on identifying ambush-prone sections of major roads linking key population centers.
-- Develop convoy protocols that incorporate armed escorts where possible, recognizing the high incidence of attacks on transportation corridors.
-- Create specialized security plans for different operational contexts, acknowledging the distinct risks in Khartoum (urban warfare) versus Darfur (ethnic targeting).
-- Establish clear relocation and evacuation thresholds based on territorial control shifts between SAF and RSF forces.
+- Conduct regular route risk assessments, especially on roads with a history of ambushes.
+- Use armed escorts for convoys in high-risk areas.
+- Tailor security protocols by region—urban areas like Khartoum vs. rural areas like Darfur.
+- Set evacuation thresholds based on real-time shifts in territorial control.
 
 ### For Humanitarian Organizations
 
-- Strengthen coordination between international and national organizations on security information sharing and joint protection strategies.
-- Prioritize stockpiling of essential supplies in key locations to mitigate the impact of access constraints during periods of intense fighting.
-- Develop remote programming approaches for areas under RSF control where international presence is especially high-risk due to targeting patterns.
-- Implement staff care systems that address the psychological impact of operating in areas with widespread ethnic violence and civilian targeting.
+- Enhance security info-sharing between national and international partners.
+- Pre-position essential supplies in hard-to-reach regions.
+- Use remote programming in RSF-held areas to reduce staff exposure.
+- Provide mental health support for staff affected by violence.
 
 ### For Policy Development
 
-- Advocate for humanitarian corridors guaranteed by both SAF and RSF leadership, with specific protection for road movements between major population centers.
-- Support community-based protection mechanisms in areas of Darfur where ethnic targeting creates specific vulnerabilities for non-Arab groups.
-- Promote accountability for attacks against civilians and humanitarian personnel through documentation and evidence preservation.
-- Develop targeted sanctions against external actors providing weapons to conflict parties, particularly those supplied to RSF forces in Darfur.
+- Advocate for SAF–RSF-agreed humanitarian corridors, especially for road movements.
+- Support community protection in ethnically targeted zones.
+- Push for accountability through documentation of attacks on civilians and aid workers.
+- Enforce targeted sanctions against external suppliers of arms to RSF.
 
 ### For Future Research
 
-- Investigate the relationship between attack patterns and territorial control shifts to develop more accurate security forecasting models.
-- Analyze the different risks for national versus international personnel to better tailor protection strategies for both groups.
-- Examine the impact of the conflict on infrastructure, particularly healthcare facilities, to inform reconstruction priorities.
-- Assess the effectiveness of various diplomatic interventions to identify which approaches might create opportunities for humanitarian access.
-- Continue monitoring security trends, especially given the recent escalation
-- Investigate the specific factors contributing to the disproportionate impact on local populations
-- Examine the effectiveness of different security measures in reducing casualties
+- Study how shifts in control affect attack frequency and location.
+- Compare risks faced by national vs. international staff.
+- Assess damage to infrastructure like hospitals and clinics.
+- Evaluate which diplomatic efforts improve humanitarian access.
 
 By providing a data-driven understanding of security patterns in Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment.

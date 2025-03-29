@@ -1,5 +1,5 @@
 ---
-title: "Security Incidents: Trends and Patterns"
+title: "Security Incidents in Palestine: Trends and Patterns"
 format:
   html:
     toc: true

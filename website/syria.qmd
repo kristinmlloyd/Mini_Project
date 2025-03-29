@@ -103,7 +103,21 @@ HTML(html)
 
 # Executive Summary
 
-![](images/african.png){width=200px}
+![](images/syria.png){width=200px}
+
+## Executive Summary
+
+This report examines humanitarian security incidents in the Syrian Arab Republic, highlighting how violence against aid workers has evolved alongside key moments in the civil war.
+
+Key findings include:
+
+- **Incident spikes align with major conflict milestones**, including ISIS expansion, the Russian intervention, U.S. troop withdrawal, and the fall of the Assad regime.
+- **Shooting and kidnapping are the most common attack types**, reflecting both militarized conflict and deliberate targeting of humanitarian personnel.
+- **Ambushes are the predominant context**, especially during road movements, posing high risks to staff mobility.
+- **National staff are disproportionately affected**, experiencing far more fatalities, injuries, and kidnappings than international staff.
+- **Top-impact incidents occur at project sites and compounds**, often amid combat or crossfire, highlighting the risks of operating in or near active conflict zones.
+
+These patterns emphasize the need for localized, real-time security planning, stronger protections for national staff, and policy-level engagement to ensure safer humanitarian access across Syria.
 
 # Background: The Conflict
 
@@ -134,41 +148,43 @@ The Syrian conflict entered a dramatic new phase in late 2024 with the sudden co
     - Israeli strikes against Iranian and Syrian military positions
     - Iran-backed militias targeting U.S. forces in eastern Syria
 
-# Map of Incidents
+<h1>Map of Incidents <img src="images/map.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h1>
 
 ```{python}
-# icon_path = "images/hazard2.png"
-# valid_points = country_data[country_data['latitude'].notna() & country_data['longitude'].notna()]
+#| echo: false
 
-# country_map = folium.Map(location=[31.9, 35.2], zoom_start=8)
+icon_path = "images/hazard2.png"
+valid_points = country_data[country_data['latitude'].notna() & country_data['longitude'].notna()]
 
-# coords = []
+country_map = folium.Map(location=[31.9, 35.2], zoom_start=8)
 
-# for _, row in valid_points.iterrows():
-#     coords.append((row['latitude'], row['longitude']))
+coords = []
+
+for _, row in valid_points.iterrows():
+    coords.append((row['latitude'], row['longitude']))
     
-#     popup_html = f"""
-#     <b>Location:</b> {row['location']}, {row['country']}<br>
-#     <b>Year:</b> {row['year']}<br>
-#     <b>Total Affected:</b> {row['total_affected']}<br>
-#     <b>Attack Type:</b> {row.get('means_of_attack', 'Unknown')}
-#     """
+    popup_html = f"""
+    <b>Location:</b> {row['location']}, {row['country']}<br>
+    <b>Year:</b> {row['year']}<br>
+    <b>Total Affected:</b> {row['total_affected']}<br>
+    <b>Attack Type:</b> {row.get('means_of_attack', 'Unknown')}
+    """
 
-#     icon = folium.CustomIcon(
-#         icon_image=icon_path,
-#         icon_size=(20, 20)
-#     )
+    icon = folium.CustomIcon(
+        icon_image=icon_path,
+        icon_size=(20, 20)
+    )
 
-#     folium.Marker(
-#         location=[row['latitude'], row['longitude']],
-#         popup=folium.Popup(popup_html, max_width=300),
-#         icon=icon
-#     ).add_to(country_map)
+    folium.Marker(
+        location=[row['latitude'], row['longitude']],
+        popup=folium.Popup(popup_html, max_width=300),
+        icon=icon
+    ).add_to(country_map)
 
-# if coords:
-#     country_map.fit_bounds(coords)
+if coords:
+    country_map.fit_bounds(coords)
 
-# country_map
+country_map
 
 ```
 
@@ -178,7 +194,7 @@ The Syrian conflict entered a dramatic new phase in late 2024 with the sudden co
 
 ```{python}
 #| label: fig-yearly-incidents
-#| fig-cap: "Security incidents in Palestine from 2002 to 2025"
+#| fig-cap: "Security incidents in Syria from 2011 to 2025"
 #| echo: false
 
 # Group incidents by year
@@ -208,12 +224,14 @@ fig.update_xaxes(rangeslider_visible=True)
 
 # Add event annotations
 events = [
-    {'year': 2006, 'event': 'Hamas takes control of Gaza', 'y_position': 5},
-    {'year': 2014, 'event': 'Israel-Hamas conflict', 'y_position': 10},
-    {'year': 2018, 'event': 'Gaza border protests', 'y_position': 8},
-    {'year': 2021, 'event': '11-day conflict', 'y_position': 7},
-    {'year': 2023, 'event': 'Oct 7 Hamas attack', 'y_position': 15},
-    {'year': 2024, 'event': 'Gaza war escalation', 'y_position': 65}
+    {'year': 2011, 'event': 'Syrian uprising begins', 'y_position': 3},
+    {'year': 2013, 'event': 'Chemical weapons attack', 'y_position': 35},
+    {'year': 2014, 'event': 'ISIS territorial expansion', 'y_position': 28},
+    {'year': 2015, 'event': 'Russian intervention begins', 'y_position': 12},
+    {'year': 2016, 'event': 'Fall of Aleppo to regime', 'y_position': 24},
+    {'year': 2019, 'event': 'US withdraws from northeast', 'y_position': 48},
+    {'year': 2023, 'event': 'Devastating earthquake', 'y_position': 12},
+    {'year': 2024, 'event': 'Assad regime collapses', 'y_position': 17}
 ]
 
 for event in events:
@@ -237,7 +255,17 @@ fig.show()
 
 ### Analysis of Incident Trends
 
+### Analysis of Incident Trends
 
+The incident timeline in Syria reveals a strong link between major geopolitical events and spikes in humanitarian security threats:
+
+- **2011–2013:** The Syrian uprising and subsequent use of chemical weapons mark a dramatic rise in conflict intensity, with incidents peaking during ISIS’s territorial expansion.
+- **2015:** A sharp drop in incidents follows, coinciding with the **start of Russian intervention**, likely signaling a shift in control and tactics.
+- **2016–2018:** Conflict intensifies again with the **fall of Aleppo** and the **US withdrawal from northeast Syria**, resulting in the highest recorded incident levels.
+- **2020–2021:** A steep decline occurs as territorial control consolidates.
+- **2023–2024:** A brief resurgence follows the **devastating earthquake** and eventual **collapse of the Assad regime**, reflecting renewed instability.
+
+These trends highlight how international involvement, regime change, and territorial shifts consistently shape the security landscape for humanitarian operations in Syria.
 
 # Nature of Security Incidents {#sec-nature}
 
@@ -245,7 +273,7 @@ fig.show()
 
 ```{python}
 #| label: fig-attack-types
-#| fig-cap: "Most common types of attacks in Palestine"
+#| fig-cap: "Most common types of attacks"
 #| echo: false
 
 # Analyzing means of attack
@@ -279,6 +307,35 @@ fig_attacks.show()
 ### Analysis of Attack Methods
 
 ## Attack Contexts
+
+```{python}
+#| label: fig-attack-contexts
+#| fig-cap: "Security incidents by attack context"
+#| echo: false
+
+context_counts = country_data['attack_context'].value_counts().reset_index()
+context_counts.columns = ['Attack Context', 'Count']
+
+context_counts = context_counts.sort_values('Count', ascending=False)
+
+fig_context = px.bar(
+    context_counts,
+    x='Attack Context',
+    y='Count',
+    title=None,
+    height=450
+)
+
+fig_context.update_traces(marker_color=palette["primary"])
+
+fig_context.update_layout(
+    xaxis_title=None,
+    yaxis_title="Number of Incidents",
+    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
+)
+
+fig_context.show()
+```
 
 ### Analysis of Attack Contexts
 
@@ -347,13 +404,19 @@ fig_stacked.show()
 
 ### Analysis of Casualty Patterns
 
+The overwhelming majority of casualties in Syria are **nationals**, who account for nearly all reported deaths, injuries, and kidnappings. This reflects their greater exposure to conflict zones and frontline operations compared to international staff, who typically work in more secure or urban environments.
+
+The high number of **national fatalities** suggests that many incidents are either highly lethal or occur in areas with limited access to emergency care. In contrast, **international casualties remain minimal**, likely due to stronger protection protocols, lower deployment in high-risk zones, and more rapid evacuation options.
+
+These disparities highlight the urgent need for equitable duty-of-care policies and enhanced security measures for national staff, who remain the backbone of humanitarian efforts in Syria’s most dangerous regions.
+
 # Major Incidents {#sec-major}
 
 ## Top 5 Most Impactful Security Incidents
 
 ```{python}
 #| label: tbl-top-incidents
-#| tbl-cap: "Most impactful security incidents in Palestine (by total affected)"
+#| tbl-cap: "Most impactful security incidents (by total affected)"
 #| echo: false
 
 if not country_data.empty and 'total_affected' in country_data.columns:
@@ -377,16 +440,49 @@ if not country_data.empty and 'total_affected' in country_data.columns:
 
 ### Analysis of Major Incidents
 
+The most severe incidents in Syria primarily occurred at **project sites** and **compounds**, with nearly all involving **combat or crossfire**:
+
+- The deadliest incidents occurred in **2016 and 2017**, each resulting in 9 fatalities with no survivors—highlighting the intensity of direct armed clashes.
+- The highest total casualty incident in **2013** left 11 people wounded at a project site, suggesting exposure to indiscriminate violence rather than targeted attack.
+- While most top incidents occurred in work-related facilities, one 2013 **ambush on a road** highlights persistent risks during movement, even when fatalities were avoided.
+- All incidents involved **combat zones**, underscoring the blurred lines between humanitarian operations and active conflict environments in Syria.
+
+These events emphasize the critical need for conflict-sensitive planning, real-time situational awareness, and investment in protective infrastructure at operational sites.
+
+For more detailed information on the Syrian conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/conflict-syria).
+
 # Conclusions and Recommendations {#sec-conclusions}
 
 ## Key Findings
+
+- **Incident frequency closely follows major conflict events**, with peaks during ISIS expansion, U.S. withdrawal, and the Assad regime collapse.
+- **Shooting and kidnapping dominate the attack types**, indicating both military engagement and targeted intimidation of humanitarian personnel.
+- **Ambushes are a common context**, posing persistent risks to movement, particularly in contested zones.
+- **National staff experience significantly more casualties** than international personnel, highlighting unequal exposure to risk.
+- **Top incidents span over a decade**, from the chemical weapons crisis to recent power shifts, showing the enduring volatility of the Syrian conflict.
 
 ## Recommendations
 
 ### For Security Planning
 
+- Conduct regular assessments of frontlines and active zones to inform movement protocols.
+- Establish contingency evacuation plans, particularly for urban centers and border crossings.
+- Use geographic heat maps to track ambush zones and reroute accordingly.
+
 ### For Humanitarian Organizations
+
+- Strengthen local partner networks to maintain access when international staff must withdraw.
+- Expand mental health services for national staff disproportionately affected by violence.
+- Pre-position supplies in stable areas to reduce reliance on risky transportation corridors.
 
 ### For Policy Development
 
+- Advocate for secure humanitarian access in demilitarized zones.
+- Support initiatives for accountability in attacks against aid workers, including UN documentation efforts.
+- Encourage diplomatic pressure on actors violating international humanitarian law.
+
 ### For Future Research
+
+- Examine the impact of foreign intervention on humanitarian security outcomes.
+- Investigate patterns in actor-targeting behavior (e.g., ISIS vs. regime vs. Kurdish forces).
+- Explore the role of infrastructure damage on humanitarian logistics and aid delivery capacity.
