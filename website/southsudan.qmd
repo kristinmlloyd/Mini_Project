@@ -11,6 +11,7 @@ format:
     fig-height: 6
     fig-dpi: 300
     self-contained: true
+bibliography: references.bib
 execute:
   warning: false
   message: false
@@ -123,7 +124,7 @@ These findings have significant implications for humanitarian operations in Sout
 
 ## Historical Context
 
-Sudan gained independence in 1956, but divisions between the wealthier north and less-developed south led to decades of conflict. Following two civil wars, South Sudan gained independence in 2011 after 99 percent voted for separation. The new state quickly descended into turmoil as weak governance and ethnic tensions erupted. Major developments included:
+Sudan gained independence in 1956, but divisions between the wealthier north and less-developed south led to decades of conflict. Following two civil wars, South Sudan gained independence in 2011 after 99 percent voted for separation. The new state quickly descended into turmoil as weak governance and ethnic tensions erupted [@cfr_southsudan]. Major developments included:
 
 -   **1956**: Sudan gains independence with deep north-south divisions
 -   **1983-2005**: Second Sudanese Civil War claims over 2 million lives

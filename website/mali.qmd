@@ -1,5 +1,5 @@
 ---
-title: "Security Incidents: Trends and Patterns"
+title: "Security Incidents in Mali: Trends and Patterns"
 format:
   html:
     toc: true
@@ -11,6 +11,7 @@ format:
     fig-height: 6
     fig-dpi: 300
     self-contained: true
+bibliography: references.bib
 execute:
   warning: false
   message: false
@@ -75,7 +76,7 @@ country_data = df[df['country'] == 'Mali']
 
 ```
 
-![](images/malipic2.png)
+![](images/malipic.png)
 
 ```{python}
 #| echo: false
@@ -125,7 +126,7 @@ These findings have significant implications for humanitarian operations in Mali
 
 ## Historical Context
 
-Mali's crisis began with the 2012 Tuareg rebellion, triggered by fighters and weapons flowing from Libya after Gaddafi's fall. The Tuareg MNLA briefly allied with Islamist groups to capture northern cities and declare the independent Azawad state. A military coup in March 2012 further destabilized Mali, until French intervention in 2013 pushed back the Islamists. Major developments included:
+Mali's crisis began with the 2012 Tuareg rebellion, triggered by fighters and weapons flowing from Libya after Gaddafi's fall. The Tuareg MNLA briefly allied with Islamist groups to capture northern cities and declare the independent Azawad state. A military coup in March 2012 further destabilized Mali, until French intervention in 2013 pushed back the Islamists [@cfr_mali]. Major developments included:
 
 -   **2012**: Military coup and Tuareg rebellion seize northern Mali
 -   **2013**: French Operation Serval pushes back Islamist groups

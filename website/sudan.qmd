@@ -1,5 +1,5 @@
 ---
-title: "Security Incidents: Trends and Patterns"
+title: "Security Incidents in Sudan: Trends and Patterns"
 format:
   html:
     toc: true
@@ -11,6 +11,7 @@ format:
     fig-height: 6
     fig-dpi: 300
     self-contained: true
+bibliography: references.bib
 execute:
   warning: false
   message: false
@@ -105,11 +106,25 @@ HTML(html)
 
 ![](images/sudanflag.png){width=200px}
 
+Sudan has become one of the world’s most dangerous contexts for humanitarian operations, with violence escalating sharply since the outbreak of civil war between the Sudanese Armed Forces (SAF) and the Rapid Support Forces (RSF) in 2023. Over 150,000 people have died, and more than 14 million have been displaced, creating unprecedented operational challenges for humanitarian actors.
+
+Key findings from this analysis include:
+
+- **Incident surges align with major conflict milestones**, including the Darfur crisis, Bashir’s overthrow, the 2021 coup, and the 2023 civil war.
+- **Shooting, kidnapping, and bodily assault are the most common attack methods**, reflecting both armed combat and targeted threats to aid workers.
+- **Ambushes dominate the attack context**, especially on roads—making transportation routes a critical risk factor.
+- **Sudanese nationals face nearly all casualties**, highlighting inequities in exposure and duty of care.
+- **Deadly incidents span 20+ years and occur across both urban and rural zones**, showing the long-term and geographically dispersed nature of risk.
+
+This report emphasizes the need for conflict-specific planning, real-time risk assessments, protection of national staff, and sustained policy engagement to ensure safer humanitarian access amid Sudan’s evolving crisis.
+
 # Background: The Conflict
+
+## Historical Context
 
 Sudan faces a catastrophic humanitarian crisis as civil war between the Sudanese Armed Forces (SAF) and Rapid Support Forces (RSF) enters its third year. Since April 2023, approximately 150,000 people have died and 14 million been displaced. Three million refugees have fled to neighboring countries, while 30 million need humanitarian assistance. The UN warns Sudan faces the "world's largest hunger crisis."
 
-The conflict stems from a power struggle between SAF leader Burhan and RSF commander Hemedti after they jointly overthrew dictator Bashir in 2019. Foreign involvement has complicated peace efforts. Recently, SAF has gained territory around Khartoum, while RSF continues committing atrocities in Darfur, raising concerns of renewed genocide.
+The conflict stems from a power struggle between SAF leader Burhan and RSF commander Hemedti after they jointly overthrew dictator Bashir in 2019. Foreign involvement has complicated peace efforts. Recently, SAF has gained territory around Khartoum, while RSF continues committing atrocities in Darfur, raising concerns of renewed genocide [@cfr_sudan].
 
 ## Recent Escalation 
 
@@ -222,8 +237,6 @@ for event in events:
 
 fig.show()
 ```
-
-### Analysis of Incident Trends
 
 ### Analysis of Incident Trends
 
@@ -408,16 +421,12 @@ For more detailed information on the Sudan conflict timeline, see the [Council o
 
 ## Key Findings
 
-## Key Findings
-
 - **Incident spikes align with political turmoil**: Major increases in attacks correspond to events like the Darfur conflict (2004–2006), Bashir’s removal (2019), the 2021 military coup, and the 2023 civil war.
 - **2024 marks the deadliest year**: The SAF counteroffensive resulted in the highest number of incidents recorded, reflecting intense territorial battles and large-scale attacks.
 - **Shooting is the most common attack method**: Followed by kidnapping and bodily assault, indicating a mix of military-style violence and targeted intimidation.
 - **Ambushes dominate attack contexts**: The high frequency of ambushes suggests road travel is particularly dangerous and systematically targeted.
 - **Sudanese nationals suffer the most**: Nationals face significantly higher casualties than international staff, with a disproportionate number of deaths.
 - **Long-term risk on transport routes**: From 2003 to 2023, major incidents consistently occur along roads, showing persistent vulnerability to roadside attacks across decades.
-
-## Recommendations
 
 ## Recommendations
 

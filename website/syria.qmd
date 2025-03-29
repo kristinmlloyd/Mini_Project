@@ -11,6 +11,7 @@ format:
     fig-height: 6
     fig-dpi: 300
     self-contained: true
+bibliography: references.bib
 execute:
   warning: false
   message: false
@@ -105,25 +106,24 @@ HTML(html)
 
 ![](images/syria.png){width=200px}
 
-## Executive Summary
 
-This report examines humanitarian security incidents in the Syrian Arab Republic, highlighting how violence against aid workers has evolved alongside key moments in the civil war.
+This report examines patterns in security incidents affecting humanitarian workers in the Syrian Arab Republic over more than a decade of conflict. Violence has shifted alongside major geopolitical events—from the Syrian uprising and rise of ISIS to the collapse of the Assad regime in 2024. 
 
 Key findings include:
 
-- **Incident spikes align with major conflict milestones**, including ISIS expansion, the Russian intervention, U.S. troop withdrawal, and the fall of the Assad regime.
-- **Shooting and kidnapping are the most common attack types**, reflecting both militarized conflict and deliberate targeting of humanitarian personnel.
-- **Ambushes are the predominant context**, especially during road movements, posing high risks to staff mobility.
-- **National staff are disproportionately affected**, experiencing far more fatalities, injuries, and kidnappings than international staff.
-- **Top-impact incidents occur at project sites and compounds**, often amid combat or crossfire, highlighting the risks of operating in or near active conflict zones.
+- **Aerial bombardment and shelling are the most frequent attack methods**, reflecting state-driven warfare and urban conflict.
+- **Combat and crossfire dominate the context**, indicating that most incidents occur near frontlines rather than through targeted violence.
+- **Ambushes and raids continue to pose risks**, especially during movement through contested areas.
+- **National staff face disproportionate risk**, with the vast majority of casualties across all categories.
+- **High-impact incidents are concentrated at project sites and compounds**, reinforcing the need for fixed-site preparedness.
 
-These patterns emphasize the need for localized, real-time security planning, stronger protections for national staff, and policy-level engagement to ensure safer humanitarian access across Syria.
+These trends highlight the urgency of conflict-sensitive planning, improved duty-of-care for national staff, and sustained policy advocacy to protect humanitarian access in Syria.
 
 # Background: The Conflict
 
 ## Historical Context
 
-The Syrian conflict represents one of the most devastating and complex crises of the 21st century. Beginning as peaceful pro-democracy protests in 2011 during the Arab Spring, it rapidly escalated into a full-scale civil war when the Bashar al-Assad regime responded with violent crackdowns. The conflict evolved into a multi-sided proxy war with international powers backing different factions:
+The Syrian conflict represents one of the most devastating and complex crises of the 21st century. Beginning as peaceful pro-democracy protests in 2011 during the Arab Spring, it rapidly escalated into a full-scale civil war when the Bashar al-Assad regime responded with violent crackdowns [@cfr_syria]. The conflict evolved into a multi-sided proxy war with international powers backing different factions:
 
 -   **2011**: Protests against Assad's authoritarian regime met with violent government response
 -   **2012-2013**: Formation of rebel groups and escalation to full civil war
@@ -255,8 +255,6 @@ fig.show()
 
 ### Analysis of Incident Trends
 
-### Analysis of Incident Trends
-
 The incident timeline in Syria reveals a strong link between major geopolitical events and spikes in humanitarian security threats:
 
 - **2011–2013:** The Syrian uprising and subsequent use of chemical weapons mark a dramatic rise in conflict intensity, with incidents peaking during ISIS’s territorial expansion.
@@ -306,6 +304,14 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
+### Analysis of Attack Methods
+
+**Aerial bombardment** is the most frequently reported attack method, followed by **shelling**, making Syria unique among conflict zones where indirect fire and airstrikes dominate the threat landscape. These tactics reflect state-level military engagement and urban warfare dynamics, especially during regime offensives.
+
+**Shooting** and **kidnapping** also appear prominently, pointing to both conventional ground combat and targeted abduction of humanitarian personnel. Lower-frequency methods such as **bodily assault**, **vehicle-borne IEDs**, and **landmines** indicate a wide tactical range used by both state and non-state actors.
+
+This distribution underscores the need for protective infrastructure in high-risk areas, early-warning systems during aerial campaigns, and mobility protocols to avoid exposure during bombardments and shelling.
+
 ## Attack Contexts
 
 ```{python}
@@ -338,6 +344,12 @@ fig_context.show()
 ```
 
 ### Analysis of Attack Contexts
+
+**Combat or crossfire** is by far the most common context of security incidents in Syria, reflecting the country’s prolonged urban warfare and front-line volatility. This indicates that many humanitarian actors are unintentionally caught in large-scale hostilities, rather than being directly targeted.
+
+Other contexts such as **individual attacks**, **ambushes**, and **raids** occur less frequently but still represent deliberate violence, especially against aid staff in transit or localized settings. A significant number of incidents are listed as **unknown**, pointing to information gaps in chaotic environments.
+
+The dominance of combat-related contexts underscores the urgent need for real-time conflict mapping, coordination with protection clusters, and protocols for operations near frontlines or contested zones.
 
 # Human Impact of Security Incidents {#sec-impact}
 
@@ -455,34 +467,34 @@ For more detailed information on the Syrian conflict timeline, see the [Council 
 
 ## Key Findings
 
-- **Incident frequency closely follows major conflict events**, with peaks during ISIS expansion, U.S. withdrawal, and the Assad regime collapse.
-- **Shooting and kidnapping dominate the attack types**, indicating both military engagement and targeted intimidation of humanitarian personnel.
-- **Ambushes are a common context**, posing persistent risks to movement, particularly in contested zones.
-- **National staff experience significantly more casualties** than international personnel, highlighting unequal exposure to risk.
-- **Top incidents span over a decade**, from the chemical weapons crisis to recent power shifts, showing the enduring volatility of the Syrian conflict.
+- **Incident patterns mirror key conflict events**, including spikes during ISIS expansion, regime offensives, and the 2024 collapse of Assad's government.
+- **Aerial attacks and indirect fire dominate the attack profile**, setting Syria apart from ground-focused conflicts.
+- **Most incidents occur during combat or crossfire**, rather than direct targeting of humanitarian actors.
+- **Nationals account for the vast majority of deaths, injuries, and kidnappings**, indicating significant disparities in exposure and risk.
+- **Project sites and offices are common locations for major incidents**, especially in heavily militarized zones.
 
 ## Recommendations
 
-### For Security Planning
+### For Security Planning 
 
-- Conduct regular assessments of frontlines and active zones to inform movement protocols.
-- Establish contingency evacuation plans, particularly for urban centers and border crossings.
-- Use geographic heat maps to track ambush zones and reroute accordingly.
+- Map and monitor high-risk areas near frontlines, with live updates on aerial activity and shelling zones.
+- Establish hardened infrastructure and underground shelters at compounds and project sites.
+- Develop rapid evacuation protocols tailored to conflict escalation patterns.
 
 ### For Humanitarian Organizations
 
-- Strengthen local partner networks to maintain access when international staff must withdraw.
-- Expand mental health services for national staff disproportionately affected by violence.
-- Pre-position supplies in stable areas to reduce reliance on risky transportation corridors.
+- Provide personal protective equipment and conflict awareness training to national staff in volatile areas.
+- Strengthen coordination with local actors and communities to improve incident reporting and early warnings.
+- Scale up remote programming in areas with ongoing aerial bombardment or crossfire.
 
 ### For Policy Development
 
-- Advocate for secure humanitarian access in demilitarized zones.
-- Support initiatives for accountability in attacks against aid workers, including UN documentation efforts.
-- Encourage diplomatic pressure on actors violating international humanitarian law.
+- Advocate for international enforcement of humanitarian access protections, particularly in aerial bombardment zones.
+- Support diplomatic efforts that promote ceasefires and demilitarized corridors for humanitarian operations.
+- Back UN and independent investigations into attacks on aid workers and facilities.
 
 ### For Future Research
 
-- Examine the impact of foreign intervention on humanitarian security outcomes.
-- Investigate patterns in actor-targeting behavior (e.g., ISIS vs. regime vs. Kurdish forces).
-- Explore the role of infrastructure damage on humanitarian logistics and aid delivery capacity.
+- Analyze how territorial control shifts impact humanitarian security in real time.
+- Investigate long-term mental health outcomes for frontline national staff.
+- Study the role of infrastructure damage (e.g., hospitals, water, roads) on aid delivery and mobility.

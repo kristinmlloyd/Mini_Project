@@ -11,6 +11,7 @@ format:
     fig-height: 6
     fig-dpi: 300
     self-contained: true
+bibliography: references.bib
 execute:
   warning: false
   message: false
@@ -112,7 +113,7 @@ HTML(html)
 
 ## Historical Context
 
-Afghanistan has experienced over four decades of continuous conflict since the Soviet invasion in 1979. Following the Soviet withdrawal in 1989, the country descended into civil war, eventually leading to Taliban rule from 1996 to 2001. After the September 11, 2001 attacks, a US-led coalition overthrew the Taliban regime, establishing the Islamic Republic of Afghanistan. The subsequent two decades saw ongoing insurgency, with the Taliban gradually regaining control of territory despite the presence of international forces. Key developments included:
+Afghanistan has experienced over four decades of continuous conflict since the Soviet invasion in 1979. Following the Soviet withdrawal in 1989, the country descended into civil war, eventually leading to Taliban rule from 1996 to 2001. After the September 11, 2001 attacks, a US-led coalition overthrew the Taliban regime, establishing the Islamic Republic of Afghanistan. The subsequent two decades saw ongoing insurgency, with the Taliban gradually regaining control of territory despite the presence of international forces [@cfr_afghanistan]. Key developments included:
 
 -   **2001-2014**: NATO-led International Security Assistance Force (ISAF) mission
 -   **2014-2021**: NATO Resolute Support Mission focused on training Afghan forces
@@ -430,8 +431,6 @@ if not country_data.empty and 'total_affected' in country_data.columns:
     display_df = top5_incidents[display_cols].rename(columns=column_names)
     display(display_df)
 ```
-
-### Analysis of Major Incidents
 
 ### Analysis of Major Incidents
 

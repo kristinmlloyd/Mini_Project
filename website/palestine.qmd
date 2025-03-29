@@ -11,6 +11,7 @@ format:
     fig-height: 6
     fig-dpi: 300
     self-contained: true
+bibliography: references.bib
 execute:
   warning: false
   message: false
@@ -118,7 +119,7 @@ These findings have critical implications for humanitarian operations, civilian 
 
 ## Historical Context
 
-Palestine has experienced a complex and turbulent history of conflict that has significantly intensified in recent times. The current crisis stems from decades of territorial disputes and failed peace efforts:
+Palestine has experienced a complex and turbulent history of conflict that has significantly intensified in recent times [@cfr_palestine]. The current crisis stems from decades of territorial disputes and failed peace efforts:
 
 -   **1948**: Israel displaced hundreds of thousands of Palestinians
 -   **1967**: Six-Day War led to Israeli control of Gaza Strip, West Bank, and East Jerusalem
@@ -483,3 +484,5 @@ These findings have important implications for security planning, humanitarian p
 -   Examine the effectiveness of different security measures in reducing casualties
 
 By providing a data-driven understanding of security patterns in the Occupied Palestinian Territories, this analysis aims to contribute to safer and more effective operations in this challenging environment.
+
+## References

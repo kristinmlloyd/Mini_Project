@@ -11,6 +11,7 @@ format:
     fig-height: 6
     fig-dpi: 300
     self-contained: true
+bibliography: references.bib
 execute:
   warning: false
   message: false
@@ -119,7 +120,7 @@ These findings have critical implications for humanitarian operations, protectio
 
 ## Historical Context
 
-The conflict in the Democratic Republic of Congo represents one of Africa's most complex and enduring crises. Rooted in the aftermath of the 1994 Rwandan Genocide, the violence has evolved through two major regional wars—the First Congo War (1996-1997) and the Second Congo War (1998-2003)—which collectively resulted in millions of deaths. Despite formal peace agreements, eastern DRC has remained unstable, with over 120 different armed groups competing for territory, resources, and influence in the mineral-rich regions of North Kivu, South Kivu, and Ituri provinces.
+The conflict in the Democratic Republic of Congo represents one of Africa's most complex and enduring crises. Rooted in the aftermath of the 1994 Rwandan Genocide, the violence has evolved through two major regional wars—the First Congo War (1996-1997) and the Second Congo War (1998-2003)—which collectively resulted in millions of deaths. Despite formal peace agreements, eastern DRC has remained unstable, with over 120 different armed groups competing for territory, resources, and influence in the mineral-rich regions of North Kivu, South Kivu, and Ituri provinces [@cfr_drc].
 
 ## Recent Escalation
 
@@ -134,6 +135,7 @@ In early 2025, M23 rebels, backed by Rwandan troops, captured Goma in eastern DR
 <h1>Map of Incidents <img src="images/map.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h1>
 
 ```{python}
+#| echo: false
 icon_path = "images/hazard2.png"
 valid_points = country_data[country_data['latitude'].notna() & country_data['longitude'].notna()]
 
