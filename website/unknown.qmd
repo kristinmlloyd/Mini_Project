@@ -1,0 +1,434 @@
+---
+title: "Missing Data Patterns in Humanitarian Security Incidents"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    number-sections: true
+    theme: cosmo
+    fig-width: 9
+    fig-height: 6
+    fig-dpi: 300
+    self-contained: true
+execute:
+  warning: false
+  message: false
+---
+
+```{python}
+
+#| label: setup
+#| include: false
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+
+# Set the default figure size to 10x6 inches
+plt.rcParams['figure.figsize'] = (10, 6)
+
+# Other setup code
+warnings.filterwarnings('ignore', category=FutureWarning)
+sns.set_theme(style="whitegrid")
+
+```
+
+```{python}
+
+#| include: false
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import warnings
+
+# Suppress warnings
+warnings.filterwarnings('ignore', category=FutureWarning)
+
+# Set up consistent theme and colors
+sns.set_theme(style="whitegrid")
+plt.rcParams['figure.figsize'] = (12, 7)
+plt.rcParams['font.size'] = 11
+plt.rcParams['axes.titlesize'] = 14
+plt.rcParams['axes.labelsize'] = 12
+
+# Custom color palette inspired by humanitarian organizations
+palette = {
+    "primary": "#1D70B8",    # UNHCR blue
+    "secondary": "#FFBD59",  # WFP yellow
+    "tertiary": "#F2645A",   # ICRC red
+    "neutral": "#7A868C"     # UN gray
+}
+
+# Alternative colormap for heatmaps
+missing_cmap = sns.color_palette("YlOrRd", as_cmap=True)
+```
+
+```{python}
+# Load dataset
+df = pd.read_csv("data/security_incidents_cleaned.csv")
+
+# Countries of interest
+countries = [
+    "Occupied Palestinian Territories", "Afghanistan", "DR Congo",
+    "Syrian Arab Republic", "Somalia", "Mali", "South Sudan", "Sudan"
+]
+
+# Filter data for those countries
+df_filtered = df[df['country'].isin(countries)]
+
+# Calculate total incidents per country for normalization
+country_totals = df_filtered.groupby('country').size().to_dict()
+```
+
+## 1. Bar Chart of Unknown Values by Column and Country
+
+```{python}
+
+#| fig-width: 6
+#| fig-height: 3.5
+
+# Your visualization code here
+# Columns to analyze
+columns_to_check = [
+    "means_of_attack", "attack_context", "location",
+    "motive", "actor_type", "actor_name"
+]
+
+# Calculate total incidents per country for normalization
+country_totals = df_filtered.groupby('country').size()
+
+# Initialize a DataFrame to store results - with explicit float dtype
+results = pd.DataFrame(index=countries, columns=columns_to_check, dtype=float)
+
+# Count "Unknown" values in each column for each country
+value = "Unknown"  # Change this to analyze a different value
+for country in countries:
+    country_data = df_filtered[df_filtered['country'] == country]
+    country_total = len(country_data)
+    
+    if country_total > 0:
+        for col in columns_to_check:
+            # Count occurrences and calculate percentage
+            count = country_data[country_data[col] == value].shape[0]
+            percentage = (count / country_total) * 100
+            results.loc[country, col] = percentage
+    else:
+        for col in columns_to_check:
+            results.loc[country, col] = 0.0
+
+# Calculate the average percentage across all columns
+results['average'] = results[columns_to_check].mean(axis=1)
+
+# Sort by average (descending)
+results = results.sort_values('average', ascending=False)
+
+# Create the bar chart
+plt.figure(figsize=(14, 8))
+
+# Plot grouped bars for each column
+results[columns_to_check].plot(
+    kind='bar',
+    ax=plt.gca(),
+    width=0.8
+)
+
+# Add a line for the average
+plt.plot(
+    range(len(results)),
+    results['average'],
+    'ko-',
+    linewidth=2,
+    markersize=8,
+    label='Average'
+)
+
+# Calculate total counts of Unknown values
+unknown_counts = {}
+for country in countries:
+    country_data = df_filtered[df_filtered['country'] == country]
+    unknown_total = country_data[columns_to_check].apply(
+        lambda row: (row == value).sum(), axis=1
+    ).sum()
+    unknown_counts[country] = unknown_total
+
+# Add annotations for averages
+for i, (country, avg) in enumerate(results['average'].items()):
+    plt.annotate(
+        f"{avg:.1f}%\n({unknown_counts[country]} occurrences)",
+        xy=(i, avg),
+        xytext=(0, 10),
+        textcoords='offset points',
+        ha='center',
+        va='bottom',
+        fontweight='bold',
+        bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="gray", alpha=0.8)
+    )
+
+plt.title(f"Percentage of '{value}' Values Across All Columns by Country")
+plt.xlabel("Country")
+plt.ylabel(f"Percentage of '{value}' Values")
+plt.legend(title="Column", bbox_to_anchor=(1.01, 1), loc='upper left')
+plt.xticks(rotation=45, ha='right')
+plt.grid(axis='y', alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+## 2. Heatmap of Unknown Values by Column and Country
+
+```{python}
+# Columns to analyze
+columns_to_check = [
+    "means_of_attack", "attack_context", "location",
+    "motive", "actor_type", "actor_name"
+]
+
+# Calculate total incidents per country for normalization
+country_totals = df_filtered.groupby('country').size()
+
+# Initialize a DataFrame to store results - with explicit float dtype
+heatmap_data = pd.DataFrame(index=countries, columns=columns_to_check, dtype=float)
+
+# Count "Unknown" values in each column for each country
+value = "Unknown"  # Change this to analyze a different value
+for country in countries:
+    country_data = df_filtered[df_filtered['country'] == country]
+    country_total = len(country_data)
+    
+    if country_total > 0:
+        for col in columns_to_check:
+            # Count occurrences and calculate percentage
+            count = country_data[country_data[col] == value].shape[0]
+            percentage = (count / country_total) * 100
+            heatmap_data.loc[country, col] = percentage
+    else:
+        for col in columns_to_check:
+            heatmap_data.loc[country, col] = 0.0
+
+# Calculate average for sorting
+heatmap_data['average'] = heatmap_data[columns_to_check].mean(axis=1)
+heatmap_data = heatmap_data.sort_values('average', ascending=False)
+    
+# Create heatmap visualization (without the average column)
+plt.figure(figsize=(14, 8))
+sns.heatmap(
+    heatmap_data[columns_to_check],
+    annot=True,
+    fmt=".1f",
+    cmap="YlOrRd",
+    linewidths=0.5,
+    cbar_kws={'label': '% Unknown'}
+)
+
+plt.title("Percentage of 'Unknown' Values by Country and Column")
+plt.tight_layout()
+plt.show()
+```
+
+## 3. Data Completeness Stacked Bar Chart
+
+```{python}
+# Columns to analyze
+columns_to_check = [
+    "means_of_attack", "attack_context", "location",
+    "motive", "actor_type", "actor_name"
+]
+
+# Count 'Unknown' values per row
+df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(
+    lambda row: (row == "Unknown").sum(), axis=1
+)
+
+# Calculate total unknown values per country
+country_unknown = df_filtered.groupby('country')['unknown_count'].sum()
+
+# Calculate total possible unknown values (# rows * # columns)
+country_total_possible = df_filtered.groupby('country').size() * len(columns_to_check)
+
+# Calculate percentages
+unknown_pct = (country_unknown / country_total_possible * 100).reindex(countries)
+known_pct = 100 - unknown_pct
+
+# Sort by percentage of known values (ascending)
+sorted_countries = known_pct.sort_values().index
+
+# Create DataFrame for plotting
+stacked_data = pd.DataFrame({
+    'country': sorted_countries,
+    'Known': known_pct[sorted_countries].values,
+    'Unknown': unknown_pct[sorted_countries].values
+})
+
+# Reshape for plotting
+plot_data = pd.melt(
+    stacked_data,
+    id_vars=['country'],
+    value_vars=['Known', 'Unknown'],
+    var_name='Data Status',
+    value_name='Percentage'
+)
+
+# Plot
+plt.figure(figsize=(12, 7))
+ax = sns.barplot(
+    data=plot_data,
+    x='Percentage',
+    y='country',
+    hue='Data Status',
+    palette=['#1D70B8', '#F2645A']  # Blue for Known, Red for Unknown
+)
+
+# Add percentage labels
+for i, country in enumerate(sorted_countries):
+    known = known_pct[country]
+    plt.text(
+        50, 
+        i, 
+        f"{known:.1f}% Complete", 
+        ha='center', 
+        va='center', 
+        color='white', 
+        fontweight='bold'
+    )
+
+plt.title("Data Completeness by Country (%)")
+plt.xlabel("Percentage")
+plt.ylabel("Country")
+plt.legend(title='', loc='lower right')
+plt.tight_layout()
+plt.show()
+```
+
+## 4. Distribution of Unknown Fields per Record
+
+```{python}
+# Columns to analyze
+columns_to_check = [
+    "means_of_attack", "attack_context", "location",
+    "motive", "actor_type", "actor_name"
+]
+
+# Count 'Unknown' values per row if not already done
+if "unknown_count" not in df_filtered.columns:
+    df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(
+        lambda row: (row == "Unknown").sum(), axis=1
+    )
+
+# Get the distribution of records with each number of unknown fields (as percentages)
+unknown_dist = pd.crosstab(
+    index=df_filtered['country'],
+    columns=df_filtered['unknown_count'],
+    normalize='index'
+) * 100
+
+# Sort countries by average number of unknown fields
+avg_unknown = df_filtered.groupby('country')['unknown_count'].mean().sort_values(ascending=False)
+unknown_dist = unknown_dist.reindex(avg_unknown.index)
+
+# Plot stacked bars
+plt.figure(figsize=(14, 8))
+unknown_dist.plot(
+    kind='barh',
+    stacked=True,
+    figsize=(14, 8),
+    cmap='YlOrRd',
+    width=0.8
+)
+
+# Add text for average unknown count
+for i, country in enumerate(unknown_dist.index):
+    avg = avg_unknown[country]
+    plt.text(
+        101, 
+        i, 
+        f"Avg: {avg:.1f} fields", 
+        va='center', 
+        fontsize=10, 
+        fontweight='bold'
+    )
+
+plt.title("Distribution of Records by Number of Unknown Fields")
+plt.xlabel("Percentage of Records")
+plt.ylabel("Country")
+plt.legend(
+    title='Number of Unknown Fields',
+    bbox_to_anchor=(1.01, 1),
+    loc='upper left'
+)
+plt.xlim(0, 120)  # Leave room for annotations
+plt.grid(False)
+plt.tight_layout()
+plt.show()
+```
+
+## 5. Total Missing Data by Country
+
+```{python}
+# Columns to analyze
+columns_to_check = [
+    "means_of_attack", "attack_context", "location",
+    "motive", "actor_type", "actor_name"
+]
+
+# Count 'Unknown' values per row if not already done
+if "unknown_count" not in df_filtered.columns:
+    df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(
+        lambda row: (row == "Unknown").sum(), axis=1
+    )
+
+# Calculate total and percentage of unknown values by country
+country_stats = []
+for country in countries:
+    country_data = df_filtered[df_filtered['country'] == country]
+    total_incidents = len(country_data)
+    
+    if total_incidents > 0:
+        total_unknown = country_data['unknown_count'].sum()
+        total_possible = total_incidents * len(columns_to_check)
+        pct_unknown = (total_unknown / total_possible) * 100
+        
+        country_stats.append({
+            'country': country,
+            'total_incidents': total_incidents,
+            'total_unknown': total_unknown,
+            'percent_unknown': pct_unknown,
+            'avg_unknown_per_record': total_unknown / total_incidents
+        })
+
+# Convert to DataFrame and sort
+stats_df = pd.DataFrame(country_stats)
+stats_df = stats_df.sort_values('percent_unknown', ascending=False)
+
+# Create bar chart
+plt.figure(figsize=(12, 7))
+bars = plt.barh(
+    stats_df['country'], 
+    stats_df['percent_unknown'],
+    color='#F2645A',
+    alpha=0.8
+)
+
+# Add text labels
+for i, row in enumerate(stats_df.itertuples()):
+    plt.text(
+        row.percent_unknown + 0.5, 
+        i, 
+        f"{row.percent_unknown:.1f}% ({row.total_unknown}/{row.total_incidents*len(columns_to_check)})", 
+        va='center'
+    )
+
+plt.title("Overall Percentage of Unknown Values by Country")
+plt.xlabel("Percentage of Unknown Values")
+plt.ylabel("Country")
+plt.grid(axis='x', alpha=0.3)
+plt.tight_layout()
+plt.show()
+```

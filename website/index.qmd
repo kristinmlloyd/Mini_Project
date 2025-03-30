@@ -7,6 +7,9 @@ format:
     css: styles.css
     toc: false
     page-layout: full
+bibliography: references.bib
+nocite: "@*"
+csl: apa.csl
 ---
 
 ![](images/intro2.png){width=100% height=auto style="margin-bottom: 1.5rem; border-radius: 12px;"}
@@ -43,8 +46,12 @@ The AWSD is the only comprehensive global database that documents **targeted vio
 
 ## 📥 Source and Access
 
-This dataset was downloaded directly from: 👉 [Aid Worker Security Database (AWSD)](https://aidworkersecurity.org)
+This dataset was downloaded directly from: 👉 [Aid Worker Security Database (AWSD)](https://aidworkersecurity.org) [@awsd2024].
 
 Please cite as:  
 **Humanitarian Outcomes. Aid Worker Security Database (AWSD). https://aidworkersecurity.org**
 
+## Full Bibliography
+
+::: {#refs}
+:::

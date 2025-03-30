@@ -3,7 +3,7 @@ project:
 
 website:
   title: "DSAN 5100"
-  favicon: "images/palestine.png"
+  favicon: "images/gu.png"
   navbar:
     search: true
     left:
@@ -31,10 +31,8 @@ website:
             text: South Sudan
           - href: sudan.qmd
             text: Sudan
-      - href: index.qmd
+      - href: hey.qmd
         text: Exploring the Unknown
-      - href: index.qmd
-        text: Bibliography
       - href: index.qmd
         text: Appendix
       - href: delete.qmd

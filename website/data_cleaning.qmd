@@ -11,6 +11,8 @@ format:
     error: false  
 ---
 
+![](images/broom.png){width=150px}
+
 ## 1. Introduction
 
 This document outlines the data cleaning process for the security incidents dataset. We'll examine the data structure, identify and address missing values, and prepare the dataset for analysis of broad trends in aid worker incidents by country, year, and organization type.
@@ -393,6 +395,7 @@ The dataset is now ready for exploratory data analysis and modeling to identify 
 ```{python}
 #| label: save-dataset
 #| eval: false
+#| echo: false
 
 df.to_csv("data/security_incidents_cleaned.csv", index=False)
 ```
