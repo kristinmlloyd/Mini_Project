@@ -428,7 +428,7 @@ For more detailed information on the Sudan conflict timeline, see the [Council o
 - **Sudanese nationals suffer the most**: Nationals face significantly higher casualties than international staff, with a disproportionate number of deaths.
 - **Long-term risk on transport routes**: From 2003 to 2023, major incidents consistently occur along roads, showing persistent vulnerability to roadside attacks across decades.
 
-## Recommendations
+<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
 
 ### For Security Planning
 

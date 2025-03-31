@@ -123,7 +123,7 @@ These patterns call for data-driven planning, localized security strategies, and
 
 ## Historical Context
 
-The Somali conflict has been shaped by decades of state collapse, civil war, and the rise of extremist groups. Al-Shabaab emerged from this chaotic environment, tracing its origins to Afghan war veterans who returned to Somalia in the late 1980s. The group's evolution occurred against a backdrop of complete state failure:
+The Somali conflict has been shaped by decades of state collapse, civil war, and the rise of extremist groups. Al-Shabaab emerged from this chaotic environment, tracing its origins to Afghan war veterans who returned to Somalia in the late 1980s [@cfr_somalia]. The group's evolution occurred against a backdrop of complete state failure:
 
 -   **1991**: Collapse of the Somali central government, leading to prolonged civil war
 -   **Late 1990s**: Formation of al-Ittihad al-Islami (AIAI), a Salafi militant organization
@@ -457,7 +457,7 @@ For more detailed information on the Somolian conflict timeline, see the [Counci
 - **Top-impact incidents occur in roads and compounds**, showing that both movement and fixed locations carry high security exposure.
 - **Non-state armed groups are responsible for all major attacks**, indicating persistent insecurity even during periods of relative political calm.
 
-## Recommendations
+<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
 
 ### For Security Planning
 

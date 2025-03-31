@@ -11,7 +11,7 @@ website:
         text: Introduction
       - href: data_cleaning.qmd
         text: Data Cleaning
-      - href: eda.qmd
+      - href: international.qmd
         text: International Analysis
       - text: Individual Country Analysis
         menu: 
@@ -31,11 +31,11 @@ website:
             text: South Sudan
           - href: sudan.qmd
             text: Sudan
-      - href: hey.qmd
+      - href: unknown.qmd
         text: Exploring the Unknown
-      - href: index.qmd
+      - href: appendix.qmd
         text: Appendix
-      - href: delete.qmd
+      - href: llm.qmd
         text: LLM Log
 
     right:

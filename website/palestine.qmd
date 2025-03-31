@@ -458,7 +458,7 @@ This analysis of security incidents in the Occupied Palestinian Territories reve
 
 4.  **Combat as primary context**: Most incidents occur during active combat situations, suggesting that conflict avoidance is a critical security strategy.
 
-## Recommendations
+<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
 
 These findings have important implications for security planning, humanitarian programming, and policy development:
 

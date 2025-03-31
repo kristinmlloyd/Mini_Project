@@ -450,7 +450,7 @@ This analysis of security incidents in South Sudan reveals several critical patt
 
 5.  **Access constraints mask security deterioration**: The recent decline in incidents appears to reflect restricted humanitarian access rather than improved security conditions, as overall violence continues to intensify.
 
-## Recommendations
+<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
 
 ### For Security Planning
 

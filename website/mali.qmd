@@ -447,7 +447,7 @@ This analysis reveals several critical trends in Mali's security environment:
 
 5.  **Misleading security metrics**: Military withdrawals correlate with apparent improvements that actually represent reduced humanitarian presence.
 
-## Recommendations
+<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
 
 ### For Security Planning
 

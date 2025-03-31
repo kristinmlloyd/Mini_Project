@@ -430,7 +430,7 @@ This analysis of security incidents in the Democratic Republic of Congo reveals 
 
 5.  **Geographic vulnerabilities**: Road networks and transportation routes emerge as particularly high-risk areas, with the majority of major incidents occurring during movement.
 
-## Recommendations
+<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
 
 These findings suggest specific approaches for operating in the DRC context:
 

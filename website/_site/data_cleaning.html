@@ -4778,7 +4778,7 @@ vertical-align: -.125em;
 <span class="menu-text">Data Cleaning</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./eda.html"> 
+    <a class="nav-link" href="./international.html"> 
 <span class="menu-text">International Analysis</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -4821,19 +4821,15 @@ vertical-align: -.125em;
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="./unknown.html"> 
 <span class="menu-text">Exploring the Unknown</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Bibliography</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="./appendix.html"> 
 <span class="menu-text">Appendix</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./delete.html"> 
+    <a class="nav-link" href="./llm.html"> 
 <span class="menu-text">LLM Log</span></a>
   </li>  
 </ul>
@@ -4936,7 +4932,7 @@ vertical-align: -.125em;
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="load-data" class="cell-output cell-output-display" data-execution_count="16">
+<div id="load-data" class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
 
@@ -5013,7 +5009,7 @@ vertical-align: -.125em;
 <section id="handling-missing-values" class="level2">
 <h2 class="anchored" data-anchor-id="handling-missing-values">3. Handling Missing Values</h2>
 <p>To better understand which variables have missing values, we’ll create a visualization showing the percentage of missing values per column.</p>
-<div id="9ef95508" class="cell" data-execution_count="3">
+<div id="772ad11c" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>missing_values <span class="op">=</span> df.isnull().<span class="bu">sum</span>()</span>
@@ -5106,7 +5102,7 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<div id="c18cf6bb" class="cell" data-execution_count="6">
+<div id="c65de0bf" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>missing_values <span class="op">=</span> df.isnull().<span class="bu">sum</span>()</span>
@@ -5213,7 +5209,7 @@ Dataset now contains 4314 unique records</code></pre>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="data-types" class="cell-output cell-output-display" data-execution_count="24">
+<div id="data-types" class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>year                          int64
 country                      object
 un                            int64
@@ -5300,7 +5296,7 @@ dtype: object</code></pre>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>df[count_columns].dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="convert-data-types" class="cell-output cell-output-display" data-execution_count="25">
+<div id="convert-data-types" class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>icrc             int64
 nrcs_and_ifrc    int64
 nngo             int64
@@ -5559,7 +5555,7 @@ Columns in the cleaned dataset:
 
 Summary statistics:</code></pre>
 </div>
-<div id="final-summary" class="cell-output cell-output-display" data-execution_count="30">
+<div id="final-summary" class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
 

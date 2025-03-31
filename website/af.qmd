@@ -460,7 +460,7 @@ This analysis of security incidents in Afghanistan reveals several critical patt
 
 4.  **Kidnapping dynamics**: Afghanistan shows a distinctive pattern of kidnapping incidents, particularly along roads and transport routes.
 
-## Recommendations
+<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
 
 These findings suggest specific approaches for operating in the Afghan context:
 

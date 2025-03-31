@@ -75,15 +75,16 @@ Security incidents aren't distributed evenly across the world. Some regions expe
 
 The map below displays incidents across the globe, with colors indicating the severity based on the number of people affected:
 
--   Blue: No reported casualties
--   Green: 1-5 affected individuals
--   Orange: 6-20 affected individuals
--   Red: More than 20 affected individuals
+- Blue: No reported casualties
+- Green: 1-5 affected individuals
+- Orange: 6-20 affected individuals
+- Red: More than 20 affected individuals
 
 Clustering is used to manage dense areas where multiple incidents occurred in close proximity.
 
 ```{python}
 #| label: incident-map-function
+#| echo: false
 
 def create_incidents_map(data):
     """
@@ -143,8 +144,8 @@ def create_incidents_map(data):
 
 ```{python}
 #| label: create-global-map
+#| echo: false
 
-# Create and display the global incidents map
 global_incidents_map = create_incidents_map(df)
 map_filename = "images/global_security_incidents_map.html"
 global_incidents_map.save(map_filename)
@@ -153,7 +154,7 @@ global_incidents_map
 
 The interactive map reveals several important patterns:
 
--   Incidents tend to cluster in certain regions, particularly in conflict zones and areas with political instability
+-   Incidents tend to cluster in certain regions
 -   Urban centers often show higher concentrations of incidents
 -   The distribution of high-severity incidents (red markers) isn't uniform, suggesting regional differences in the nature of security threats
 
@@ -168,15 +169,16 @@ Security landscapes evolve over time. By examining how incident patterns change 
 The animated choropleth map below shows how the distribution of security incidents has shifted over the years. Darker colors indicate higher numbers of incidents.
 
 ```{python}
-#| label: incidents-choropleth
 
 incidents_by_year_country = df.groupby(['year', 'country']).size().reset_index(name='incidents')
 year_totals = incidents_by_year_country.groupby('year')['incidents'].sum().reset_index().sort_values('year')
 
+# Updated colorscale using the colors from the image
 custom_colorscale = [
-    [0, "#FF8db2"], 
-    [0.5, palette["primary"]], 
-    [1, "#Fe8d01"]  
+    [0, "#F99301"],     # Dark Orange
+    [0.33, "#F56300"],  # Safety Orange
+    [0.66, "#A1083B"],  # Jazzberry Jam
+    [1, "#541743"]      # Pompadour
 ]
 
 fig = px.choropleth(
@@ -237,6 +239,7 @@ fig.update_layout(annotations=[
 
 fig.write_html("images/interactive_incidents_over_time.html")
 fig.show()
+
 ```
 
 This visualization reveals several insights:
@@ -254,6 +257,7 @@ To better understand the overall temporal pattern of security incidents, we can 
 
 ```{python}
 #| label: yearly-incidents-bar
+#| echo: false
 
 year_incidents = df.groupby('year').size().reset_index(name='incidents')
 year_incidents['year'] = year_incidents['year'].astype(str)
@@ -325,11 +329,11 @@ fig_top_all_time.update_traces(marker_color=palette["primary"])
 fig_top_all_time.update_layout(
     title={
         'text': 'Top Countries by Security Incidents (All Time)',
-        'y': 0.95,
+        'y': 1.0,
         'x': 0.5,
         'xanchor': 'center',
         'yanchor': 'top',
-        'font': {'size': 20}
+        'font': {'size': 17}
     },
     xaxis={'categoryorder': 'total descending', 'tickangle': 45}
 )
@@ -374,11 +378,11 @@ fig_top_recent.update_traces(marker_color=palette["primary"])
 fig_top_recent.update_layout(
     title={
         'text': f'Top Countries by Security Incidents (Last 10 Years: {ten_years_ago}-{current_year})',
-        'y': 0.95,
+        'y': 1.0,
         'x': 0.5,
         'xanchor': 'center',
         'yanchor': 'top',
-        'font': {'size': 20}
+        'font': {'size': 17}
     },
     xaxis={'categoryorder': 'total descending', 'tickangle': 45}
 )
@@ -391,9 +395,11 @@ fig_top_recent.write_html("images/top_countries_recent.html")
 This recent trends analysis shows:
 
 - Countries that have experienced deteriorating security situations in the past decade
--   An Emerging hotspot (Mali) that did not appear in historical data
+- An Emerging hotspot (Mali) that did not appear in historical data
 
 By comparing this visualization with the all-time analysis, we can identify significant shifts in global security patterns.
+
+
 
 # Types of Injuries and Their Contexts
 
@@ -423,10 +429,11 @@ if 'means_of_attack' in df.columns:
         xaxis_title="Number of Incidents",
         yaxis_title=None,
         title={
-            'y': 0.95,
+            'y': 1.0,
             'x': 0.5,
             'xanchor': 'center',
-            'yanchor': 'top'
+            'yanchor': 'top',
+            'font': {'size': 17}
         }
     )
     
@@ -584,10 +591,11 @@ fig_casualties.update_layout(
     yaxis_title="Number of People",
     legend_title_text=None,
     title={
-        'y': 0.95,
+        'y': 1.0,
         'x': 0.5,
         'xanchor': 'center',
-        'yanchor': 'top'
+        'yanchor': 'top',
+        'font': {'size': 17}
     }
 )
 
@@ -766,10 +774,11 @@ if all(col in df.columns for col in org_cols):
         xaxis_title="Number of Incidents",
         yaxis={'categoryorder': 'total ascending'},
         title={
-            'y': 0.95,
+            'y': 1.0,
             'x': 0.5,
             'xanchor': 'center',
-            'yanchor': 'top'
+            'yanchor': 'top',
+            'font': {'size': 17}
         }
     )
     
