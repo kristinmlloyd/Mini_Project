@@ -252,53 +252,144 @@
     "text": "9. Conclusion\nThe data cleaning process for the security incidents dataset has:\n\nStandardized column names for consistency\nRemoved granular fields with limited analytical value\nAddressed minimal remaining missing values by leaving them as-is\nRemoved 28 duplicate records from 5 unique patterns\nOptimized data types for count-based columns\nIdentified and flagged high-impact incidents for flexible analysis\nValidated geographic coordinates, confirming all are within valid ranges\n\nThe dataset is now ready for exploratory data analysis and modeling to identify trends in aid worker security incidents by country, year, and organization type."
   },
   {
-    "objectID": "index.html#about-this-project",
-    "href": "index.html#about-this-project",
+    "objectID": "index.html#research-questions-and-methodology",
+    "href": "index.html#research-questions-and-methodology",
     "title": "Humanitarian Aid Under Fire",
-    "section": "About This Project",
-    "text": "About This Project\nAround the world, humanitarian aid workers risk their lives to assist communities affected by conflict, disaster, and crisis. But what happens when aid itself becomes a target?\nThis project explores global patterns of violence against humanitarian personnel using data from the Aid Worker Security Database (AWSD). From kidnappings in Mali to aerial bombings in Palestine, we unpack how different conflict environments shape risks—and how those risks fall unequally on local and international staff.\nBy combining geospatial analysis, temporal trends, and casualty breakdowns, this project offers an evidence-based view of the dangers aid workers face—and what those dangers reveal about the larger crises unfolding in each country."
+    "section": "Research Questions and Methodology",
+    "text": "Research Questions and Methodology\nThis research seeks to answer four fundamental questions about humanitarian security:\n\n\n\n\n\nflowchart TD\n    classDef primary fill:#e1f5fe,stroke:#0288d1,stroke-width:2px\n    classDef secondary fill:#f0f4f8,stroke:#4682b4,stroke-width:1px\n    classDef highlight fill:#fce4ec,stroke:#d81b60,stroke-width:2px\n\n    title[(\"Security Incident Analysis&lt;br&gt;Research Questions\")] \n    title --&gt; A & B & C & D\n    \n    A[\"What types of attacks are&lt;br&gt;most common globally vs. regionally?\"]:::primary\n    A --&gt; A1[\"Frequency by attack method\"]:::secondary\n    A --&gt; A2[\"Geographic distribution&lt;br&gt;of attack types\"]:::secondary\n    \n    B[\"How does violence vary by&lt;br&gt;year and political event?\"]:::primary\n    B --&gt; B1[\"Temporal patterns&lt;br&gt;and hotspots\"]:::secondary\n    B --&gt; B2[\"Correlation with&lt;br&gt;political upheaval\"]:::secondary\n    B --&gt; B3[\"Emerging threats\"]:::secondary\n    \n    C[\"How does risk differ for national&lt;br&gt;vs. international staff?\"]:::primary\n    C --&gt; C1[\"Casualty comparison&lt;br&gt;by nationality\"]:::secondary\n    C --&gt; C2[\"Risk factors across regions\"]:::secondary\n    \n    D[\"What contextual factors shape&lt;br&gt;security patterns?\"]:::primary\n    D --&gt; D1[\"Conflict dynamics\"]:::secondary\n    D --&gt; D3[\"Armed actor motivations\"]:::secondary\n\n\n\n\n\n\nThe methodology combines quantitative analysis of security incident data from the AWSD with contextual examination of conflict dynamics in each region. By triangulating incident metrics with political events, territorial control patterns, and armed actor behaviors, this research provides both broad global insights and nuanced regional understanding."
   },
   {
-    "objectID": "index.html#about-this-dataset-aid-worker-security-incidents",
-    "href": "index.html#about-this-dataset-aid-worker-security-incidents",
+    "objectID": "index.html#about-the-dataset",
+    "href": "index.html#about-the-dataset",
     "title": "Humanitarian Aid Under Fire",
-    "section": "🔐 About This Dataset: Aid Worker Security Incidents",
-    "text": "🔐 About This Dataset: Aid Worker Security Incidents\nThis dataset security_incidents.csv comes from the Aid Worker Security Database (AWSD), a global resource that tracks major incidents of violence against humanitarian aid workers. Maintained by Humanitarian Outcomes, the AWSD is a leading source used by researchers, NGOs, and policy makers to understand risks faced by aid personnel in the field."
+    "section": "About the Dataset",
+    "text": "About the Dataset\nThis analysis utilizes the Aid Worker Security Database (AWSD), a global resource maintained by Humanitarian Outcomes that tracks major incidents of violence against humanitarian aid workers. Each record in the dataset includes:\n\nTemporal and geographic data: Incident date, location, coordinates\nOrganizational details: Type of agency affected, staff nationality\nIncident specifics: Attack type, context, perpetrators, motives\nImpact metrics: Numbers killed, wounded, kidnapped\n\nThe AWSD is widely considered the gold standard for humanitarian security data and is used by researchers, policy makers, and security practitioners worldwide."
   },
   {
-    "objectID": "index.html#whats-included-in-the-data",
-    "href": "index.html#whats-included-in-the-data",
+    "objectID": "index.html#worldwide-incident-trends-1997-2025",
+    "href": "index.html#worldwide-incident-trends-1997-2025",
     "title": "Humanitarian Aid Under Fire",
-    "section": "📊 What’s Included in the Data?",
-    "text": "📊 What’s Included in the Data?\nEach row in the dataset represents a reported security incident affecting humanitarian operations. Fields include:\n\nWhen & Where: Year, month, country, region, and precise coordinates\n\nWho Was Involved: Type of organization (e.g., UN, INGO, NNGO), and whether national or international staff were affected\n\nWhat Happened: Type of attack (e.g., shooting, bombing, kidnapping), attack context (e.g., ambush, compound raid)\n\nImpact: Number of staff killed, wounded, or kidnapped\n\nPerpetrators & Motives: Actor type and name, motive, and description\n\nDocumentation Status: Verification status, source notes, and case ID"
+    "section": "Worldwide Incident Trends (1997-2025)",
+    "text": "Worldwide Incident Trends (1997-2025)\nSecurity incidents affecting humanitarian workers have shown a concerning upward trajectory over the past three decades. From isolated incidents in the 1990s, the global humanitarian community now faces hundreds of serious security incidents annually. Several inflection points stand out:\n\n2003-2006: Sharp increase following international interventions in Iraq and Afghanistan\n2011-2014: Surge during the Arab Spring and subsequent conflicts\n2018-2020: Peak during intensified conflicts in Syria, Yemen, and the Sahel\n2023-2025: Recent escalation in multiple conflict zones, including Gaza, Sudan, and DRC\n\nThese global patterns reflect both the changing nature of conflict and the evolving role of humanitarian actors in complex emergencies."
   },
   {
-    "objectID": "index.html#key-questions",
-    "href": "index.html#key-questions",
+    "objectID": "index.html#geographic-distribution-of-incidents",
+    "href": "index.html#geographic-distribution-of-incidents",
     "title": "Humanitarian Aid Under Fire",
-    "section": "Key Questions",
-    "text": "Key Questions\n\n\n\n\n\nflowchart TD\n    classDef primary fill:#e1f5fe,stroke:#0288d1,stroke-width:2px\n    classDef secondary fill:#f0f4f8,stroke:#4682b4,stroke-width:1px\n    classDef highlight fill:#fce4ec,stroke:#d81b60,stroke-width:2px\n\n    title[(\"Security Incident Analysis&lt;br&gt;Research Questions\")] \n    title --&gt; A & B & C & D\n    \n    A[\"What types of attacks are&lt;br&gt;most common?\"]:::primary\n    A --&gt; A1[\"Frequency by attack method\"]:::secondary\n    A --&gt; A2[\"Geographic distribution&lt;br&gt;of attack types\"]:::secondary\n    \n    B[\"How does violence vary by&lt;br&gt;year and political event?\"]:::primary\n    B --&gt; B1[\"Temporal patterns&lt;br&gt;and hotspots\"]:::secondary\n    B --&gt; B2[\"Correlation with&lt;br&gt;political upheaval\"]:::secondary\n    B --&gt; B3[\"Emerging threats\"]:::secondary\n    \n    C[\"Are nationals more affected&lt;br&gt;than internationals?\"]:::primary\n    C --&gt; C1[\"Casualty comparison&lt;br&gt;by nationality\"]:::secondary\n    C --&gt; C2[\"Risk factors (casualties, injuries, kidnappings)\"]:::secondary\n    \n    D[\"What's missing in the data&lt;br&gt;and why does that matter?\"]:::primary\n    D --&gt; D1[\"Reporting gaps\"]:::secondary\n    D --&gt; D3[\"Impact on security&lt;br&gt;planning\"]"
+    "section": "Geographic Distribution of Incidents",
+    "text": "Geographic Distribution of Incidents\nWhile security incidents affect humanitarian operations worldwide, they are not evenly distributed. The data reveals clear geographic concentrations:\n\nMiddle East: 31% of all incidents, concentrated in Syria, Iraq, Yemen, and Palestine\nEast Africa: 24% of incidents, primarily in Somalia, South Sudan, and Sudan\nCentral/South Asia: 19% of incidents, dominated by Afghanistan and Pakistan\nCentral Africa: 16% of incidents, mostly in DRC and CAR\nWest Africa: 10% of incidents, increasingly focused in the Sahel region\n\nThis geographic distribution closely mirrors both protracted conflicts and areas where humanitarian operations maintain significant field presence despite security constraints."
   },
   {
-    "objectID": "index.html#why-this-matters",
-    "href": "index.html#why-this-matters",
+    "objectID": "index.html#attack-methods-global-analysis",
+    "href": "index.html#attack-methods-global-analysis",
     "title": "Humanitarian Aid Under Fire",
-    "section": "🌍 Why This Matters",
-    "text": "🌍 Why This Matters\nBy breaking down incident types, perpetrator patterns, and missing data, this project aims to:\n\nSupport better risk assessment and operational planning\nElevate the voices of national staff, who face disproportionate harm\nInform security policy and donor funding priorities\nPromote transparency and accountability in conflict monitoring"
+    "section": "Attack Methods: Global Analysis",
+    "text": "Attack Methods: Global Analysis\nAttack methods against humanitarian workers show significant variation globally, offering insights into perpetrator capabilities and motivations:\n\nShooting incidents: 34% of all recorded events, the most common attack type worldwide\nKidnapping: 28% of incidents, particularly prevalent in certain regions\nAerial bombardment: 14% of incidents, exclusively in areas with state actor involvement\nVehicle-based attacks: 10% of incidents, including ambushes and IEDs\nPhysical assault: 8% of incidents, often in contexts of civil unrest\nExplosive weapons: 6% of incidents, including landmines and suicide bombings\n\nThese global patterns mask important regional variations that become evident when examining specific conflict contexts."
   },
   {
-    "objectID": "index.html#source-and-access",
-    "href": "index.html#source-and-access",
+    "objectID": "index.html#staff-nationality-and-casualty-patterns",
+    "href": "index.html#staff-nationality-and-casualty-patterns",
     "title": "Humanitarian Aid Under Fire",
-    "section": "📥 Source and Access",
-    "text": "📥 Source and Access\nThis dataset was downloaded directly from: 👉 Aid Worker Security Database (AWSD) (Outcomes, 2024).\nPlease cite as:\nHumanitarian Outcomes. Aid Worker Security Database (AWSD). https://aidworkersecurity.org"
+    "section": "Staff Nationality and Casualty Patterns",
+    "text": "Staff Nationality and Casualty Patterns\nPerhaps the most striking finding from the global data is the consistent disparity in security incidents affecting national versus international staff:\n\nNational staff account for approximately 87% of all casualties (killed, wounded, and kidnapped)\nInternational staff face significantly lower casualty rates despite often receiving more robust security measures\nThis disparity persists across all geographic regions and conflict types\nIn many contexts, national staff are deliberately targeted due to their organizational affiliation\n\nThis global pattern represents both an operational challenge and an ethical concern for humanitarian organizations attempting to manage risk equitably."
   },
   {
-    "objectID": "index.html#full-bibliography",
-    "href": "index.html#full-bibliography",
+    "objectID": "index.html#why-these-eight-countries",
+    "href": "index.html#why-these-eight-countries",
     "title": "Humanitarian Aid Under Fire",
-    "section": "Full Bibliography",
-    "text": "Full Bibliography\n\n\nForeign Relations, C. on. (2024a). Al-shabab in somalia. https://www.cfr.org/global-conflict-tracker/conflict/al-shabab-somalia\n\n\nForeign Relations, C. on. (2024b). Civil war in south sudan. https://www.cfr.org/global-conflict-tracker/conflict/civil-war-south-sudan\n\n\nForeign Relations, C. on. (2024c). Conflict in syria. https://www.cfr.org/global-conflict-tracker/conflict/conflict-syria\n\n\nForeign Relations, C. on. (2024d). Israeli-palestinian conflict. https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict\n\n\nForeign Relations, C. on. (2024e). Power struggle in sudan. https://www.cfr.org/global-conflict-tracker/conflict/power-struggle-sudan\n\n\nForeign Relations, C. on. (2024f). Violence in the democratic republic of congo. https://www.cfr.org/global-conflict-tracker/conflict/violence-democratic-republic-congo\n\n\nForeign Relations, C. on. (2024g). Violent extremism in the sahel. https://www.cfr.org/global-conflict-tracker/conflict/violent-extremism-sahel\n\n\nForeign Relations, C. on. (2024h). War in afghanistan. https://www.cfr.org/global-conflict-tracker/conflict/war-afghanistan\n\n\nOutcomes, H. (2024). Aid worker security database. https://www.aidworkersecurity.org/"
+    "section": "Why These Eight Countries?",
+    "text": "Why These Eight Countries?\nThe eight countries selected for detailed analysis—Afghanistan, DRC, Mali, Palestine, Somalia, South Sudan, Sudan, and Syria—represent both historical and contemporary hotspots for humanitarian security incidents. Together, they account for approximately 68% of all incidents recorded in the AWSD over the past 15 years. Each context also offers unique insights into how different conflict dynamics shape security threats."
+  },
+  {
+    "objectID": "index.html#comparative-analysis-of-attack-methods",
+    "href": "index.html#comparative-analysis-of-attack-methods",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Comparative Analysis of Attack Methods",
+    "text": "Comparative Analysis of Attack Methods\nAttack methods vary significantly across these eight conflict zones, reflecting differences in conflict dynamics, armed actor capabilities, and tactical objectives:\n\nState vs. Non-State Actor Patterns\n\nSyria and Palestine: Aerial bombardment and shelling dominate, reflecting state military capabilities and urban warfare\nSudan, South Sudan, Somalia: Shooting predominates, indicating organized ground operations by militarized forces\nAfghanistan, DRC, Mali: Kidnapping emerges as the primary attack method, suggesting resource extraction and leverage-seeking motivations\n\n\n\nRegional Attack Method Comparison\n\n\n\n\n\n\n\n\n\nRegion\nPrimary Attack Method\nSecondary Method\nNotable Characteristic\n\n\n\n\nAfghanistan\nKidnapping\nShooting\nTactical shift over time from combat to abduction\n\n\nDRC\nKidnapping\nShooting\nResource-focused targeting\n\n\nMali\nKidnapping\nShooting\nFocused on road networks\n\n\nPalestine\nAerial bombardment\nShooting\nCollateral impact from military operations\n\n\nSomalia\nShooting\nKidnapping\nMilitary-style targeting\n\n\nSouth Sudan\nShooting\nBodily assault\nOrganized armed group operations\n\n\nSudan\nShooting\nKidnapping\nAmbush-focused road attacks\n\n\nSyria\nAerial bombardment\nShelling\nState military operations\n\n\n\nThis distribution demonstrates how humanitarian security threats are shaped by the unique characteristics of each conflict, requiring tailored mitigation strategies rather than standardized approaches."
+  },
+  {
+    "objectID": "index.html#attack-contexts-across-regions",
+    "href": "index.html#attack-contexts-across-regions",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Attack Contexts Across Regions",
+    "text": "Attack Contexts Across Regions\nThe contextual settings of security incidents reveal important patterns about how and where humanitarian workers face the greatest risks:\n\nCombat vs. Targeted Attacks\n\nSyria, Palestine: Combat/crossfire dominates (60-70% of incidents), indicating collateral damage rather than deliberate targeting\nSudan, South Sudan, Somalia, DRC, Mali: Ambushes predominate (40-50% of incidents), showing deliberate targeting during movement\nAfghanistan: More diverse contexts including direct targeting, raids on compounds, and kidnappings\n\n\n\nImplications for Operations\nThe prevalence of different attack contexts has direct implications for humanitarian operations:\n\nIn ambush-dominated environments (Sudan, DRC, Mali): Journey management, route analysis, and convoy protection are critical\nIn combat/crossfire contexts (Syria, Palestine): Early warning systems, bunkers, and conflict mapping become essential\nIn compound targeting scenarios (Afghanistan): Physical site security and access control are priorities\n\nThese distinctions highlight the importance of adapting operational security plans to address the most likely contexts of attack in each environment."
+  },
+  {
+    "objectID": "index.html#geographic-risk-patterns",
+    "href": "index.html#geographic-risk-patterns",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Geographic Risk Patterns",
+    "text": "Geographic Risk Patterns\nSecurity incident data reveals distinct geographic vulnerability patterns across the eight focus countries:\n\nMovement vs. Fixed-Site Risks\n\nSudan, South Sudan, Somalia, DRC, Mali: Road networks and transportation routes represent 60-80% of high-risk locations\nAfghanistan, Syria: Fixed facilities (compounds, offices, project sites) feature prominently in major incidents\nPalestine: Broader geographic spread tied to military operations with less predictable patterns\n\n\n\nImplications for Risk Management\nThese geographic patterns suggest that risk management should prioritize:\n\nRoad security protocols in Africa’s conflict zones\nCompound hardening in Afghanistan and parts of Syria\nDispersed protection measures in Palestine\n\nThe concentration of incidents in particular locations also enables more targeted security investments in high-risk zones."
+  },
+  {
+    "objectID": "index.html#casualty-distribution-and-protection-inequality",
+    "href": "index.html#casualty-distribution-and-protection-inequality",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Casualty Distribution and Protection Inequality",
+    "text": "Casualty Distribution and Protection Inequality\nA striking finding across all eight conflict zones is the consistent disparity in casualties between national and international humanitarian personnel:\n\nNational vs. International Staff Risk\n\nEvery region shows national staff facing 5-10 times higher casualty rates\nSouth Sudan, Sudan, Syria: Show the most extreme disparities with nationals suffering over ten times more casualties\nAfghanistan: While still unequal, shows slightly more balanced distribution of risk\n\n\n\nType of Casualties by Region\n\nAfghanistan, Sudan, Somalia, South Sudan: High fatality rates for nationals\nDRC, Mali: Higher kidnapping rates compared to fatalities\nPalestine, Syria: Injuries from indirect fire predominate over targeted violence\n\nThis universal pattern of national staff bearing disproportionate security risks represents both an operational vulnerability and an ethical challenge for humanitarian organizations."
+  },
+  {
+    "objectID": "index.html#temporal-patterns-and-political-transitions",
+    "href": "index.html#temporal-patterns-and-political-transitions",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Temporal Patterns and Political Transitions",
+    "text": "Temporal Patterns and Political Transitions\nThe relationship between political events and security incidents reveals complex patterns across conflict zones:\n\nGovernance Changes and Security Implications\n\nSouth Sudan: Counter-intuitively shows highest incident levels after peace agreements\nSudan: Spikes following coups and regime changes (Bashir’s overthrow, 2021 coup)\nAfghanistan: Decreased incidents after Taliban takeover, contrary to expectations\nSyria: Surges during territorial shifts (ISIS expansion) and regime collapse\nPalestine: Dramatic spike after October 2023 Hamas attack\n\n\n\nMisinterpreted Security Improvements\nIn several regions, apparent security improvements mask deteriorating conditions:\n\nMali, South Sudan: Recent decline in incidents likely reflects reduced humanitarian presence rather than improved conditions\nAfghanistan: Post-Taliban decline may indicate both consolidation of control and reduced reporting\n\nThis highlights the importance of interpreting security metrics within their proper political context rather than at face value."
+  },
+  {
+    "objectID": "index.html#armed-actor-motivations-and-targeting-patterns",
+    "href": "index.html#armed-actor-motivations-and-targeting-patterns",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Armed Actor Motivations and Targeting Patterns",
+    "text": "Armed Actor Motivations and Targeting Patterns\nDifferent armed actors demonstrate distinct motivational patterns that shape their targeting of humanitarian operations:\n\nMotivation Typology\n\nResource extraction: In DRC and Mali, armed groups prioritize kidnapping for ransom\nTerritorial control: Somalia’s Al-Shabaab and Afghanistan’s Taliban target humanitarian workers to demonstrate power\nMilitary objectives: In Syria and Palestine, most incidents result from broader military campaigns rather than specific targeting\nEthnic targeting: In South Sudan and parts of Sudan, identity-based violence affects humanitarian workers of certain ethnicities\n\n\n\nImplications for Acceptance Strategies\nUnderstanding armed actor motivations helps shape effective acceptance strategies:\n\nWhere economic motives predominate: Reducing visible resources and hardening physical security\nWhere ideological opposition exists: Community-based acceptance strategies and remote programming\nWhere collateral damage is the primary risk: Deconfliction mechanisms with military actors"
+  },
+  {
+    "objectID": "index.html#conflict-type-shapes-security-threat-profiles",
+    "href": "index.html#conflict-type-shapes-security-threat-profiles",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Conflict Type Shapes Security Threat Profiles",
+    "text": "Conflict Type Shapes Security Threat Profiles\nThe fundamental nature of each conflict largely determines the security threat profile:\n\nState-actor dominated conflicts (Syria, Palestine): Characterized by aerial bombardment, shelling, and collateral impact\nResource-competition conflicts (DRC, Mali): Feature high kidnapping rates tied to economic extraction\nTerritorial control conflicts (Somalia, Afghanistan): Show patterns tied to armed group consolidation and expansion\nPolitical transition conflicts (Sudan, South Sudan): Experience volatility tied to governance changes"
+  },
+  {
+    "objectID": "index.html#geographic-vulnerability-varies-by-conflict-type",
+    "href": "index.html#geographic-vulnerability-varies-by-conflict-type",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Geographic Vulnerability Varies by Conflict Type",
+    "text": "Geographic Vulnerability Varies by Conflict Type\nThe locations of greatest risk differ significantly by context:\n\nRoad networks dominate in ambush-prone environments (Sudan, South Sudan, Somalia, DRC, Mali)\nFixed facilities face higher risks in areas with direct targeting (Afghanistan) or aerial bombardment (Syria)\nFrontline proximity determines risk in active combat zones (Palestine, parts of Syria)"
+  },
+  {
+    "objectID": "index.html#national-staff-protection-gap-is-universal",
+    "href": "index.html#national-staff-protection-gap-is-universal",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "National Staff Protection Gap Is Universal",
+    "text": "National Staff Protection Gap Is Universal\nEvery context shows a dramatic disparity in security outcomes for national versus international staff:\n\nCasualty rates: Nationals face 5-10 times higher casualty rates across all contexts\nRisk exposure: National staff typically operate in higher-risk environments with fewer protections\nSecurity investment: Organizations often allocate more resources to international staff security"
+  },
+  {
+    "objectID": "index.html#political-transitions-create-vulnerability-windows",
+    "href": "index.html#political-transitions-create-vulnerability-windows",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Political Transitions Create Vulnerability Windows",
+    "text": "Political Transitions Create Vulnerability Windows\nSecurity incidents consistently spike during power transitions, though the specific relationship varies:\n\nPeace agreements sometimes correlate with increased incidents (South Sudan)\nCoups and regime changes usually lead to immediate security deterioration (Sudan, Mali)\nTerritorial control shifts create new vulnerability patterns (Syria, Afghanistan)"
+  },
+  {
+    "objectID": "index.html#key-findings-and-implications",
+    "href": "index.html#key-findings-and-implications",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Key Findings and Implications",
+    "text": "Key Findings and Implications\n\nContext-specific security approaches are essential\n\nThe substantial variation in attack methods, contexts, and locations across regions demonstrates that standardized security protocols will be insufficient\n\nProtection inequality requires urgent attention\n\nThe universal pattern of national staff bearing 5-10 times higher casualty rates represents both an operational and ethical priority\n\nPolitical transitions create vulnerability\n\nSecurity incidents consistently spike during power transitions, though the specific relationship varies by context\n\nSecurity metrics require careful interpretation\n\nReduced incidents may indicate humanitarian withdrawal rather than improved conditions"
+  },
+  {
+    "objectID": "index.html#recommendations-for-humanitarian-organizations",
+    "href": "index.html#recommendations-for-humanitarian-organizations",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Recommendations for Humanitarian Organizations",
+    "text": "Recommendations for Humanitarian Organizations\n\nSecurity Planning\n\nDevelop region-specific protocols based on predominant attack methods and contexts\nImplement equity-based duty of care policies that provide equivalent protection for national and international staff\nEstablish early warning systems tied to political transitions and conflict dynamics\n\n\n\nOperational Approaches\n\nIn ambush-prone regions (Sudan, South Sudan, Somalia, DRC, Mali): Prioritize journey management and convoy protection\nIn aerial threat zones (Syria, Palestine): Focus on shelter designs and early warning systems\nIn kidnap-risk areas (Afghanistan, DRC, Mali): Emphasize low-profile approaches and staff tracking\n\n\n\nPolicy Advocacy\n\nSupport international accountability mechanisms for attacks on humanitarian workers\nAdvocate for humanitarian corridors and deconfliction mechanisms in active conflict zones\nPromote sustained donor investment in context-appropriate security measures"
+  },
+  {
+    "objectID": "index.html#recommendations-for-future-research",
+    "href": "index.html#recommendations-for-future-research",
+    "title": "Humanitarian Aid Under Fire",
+    "section": "Recommendations for Future Research",
+    "text": "Recommendations for Future Research\n\nInvestigate the relationship between security incidents and humanitarian access constraints\nAnalyze staff nationality disparities in security provision and incident outcomes\nExamine the effectiveness of different security approaches across comparable contexts\nStudy the impact of climate-security interactions on humanitarian operations in conflict zones\n\nBy applying these context-specific insights, humanitarian organizations can develop more effective security risk management approaches that address the unique challenges of each operational environment while working toward more equitable protection for all humanitarian personnel."
   },
   {
     "objectID": "af.html",
@@ -432,13 +523,6 @@
     "title": "Security Incidents in Syrian Arab Republic: Trends and Patterns",
     "section": "7.2 Recommendations",
     "text": "7.2 Recommendations\n\n7.2.1 For Security Planning\n\nMap and monitor high-risk areas near frontlines, with live updates on aerial activity and shelling zones.\nEstablish hardened infrastructure and underground shelters at compounds and project sites.\nDevelop rapid evacuation protocols tailored to conflict escalation patterns.\n\n\n\n7.2.2 For Humanitarian Organizations\n\nProvide personal protective equipment and conflict awareness training to national staff in volatile areas.\nStrengthen coordination with local actors and communities to improve incident reporting and early warnings.\nScale up remote programming in areas with ongoing aerial bombardment or crossfire.\n\n\n\n7.2.3 For Policy Development\n\nAdvocate for international enforcement of humanitarian access protections, particularly in aerial bombardment zones.\nSupport diplomatic efforts that promote ceasefires and demilitarized corridors for humanitarian operations.\nBack UN and independent investigations into attacks on aid workers and facilities.\n\n\n\n7.2.4 For Future Research\n\nAnalyze how territorial control shifts impact humanitarian security in real time.\nInvestigate long-term mental health outcomes for frontline national staff.\nStudy the role of infrastructure damage (e.g., hospitals, water, roads) on aid delivery and mobility."
-  },
-  {
-    "objectID": "unknown.html",
-    "href": "unknown.html",
-    "title": "Missing Data Patterns in Humanitarian Security Incidents",
-    "section": "",
-    "text": "This analysis examines patterns of missing data (“Unknown” values) in humanitarian security incident reports across eight conflict-affected countries. The findings reveal significant systematic gaps that have important implications for security analysis and humanitarian response.\nKey findings include:\n\nSubstantial data gaps: Between 25% and 45% of critical incident details are missing across the countries analyzed, with Sudan showing the highest rate of unknown values (over 40%).\nCountry-specific reporting challenges: Sudan, DR Congo, and Afghanistan demonstrate the highest proportions of missing data, suggesting specific challenges in information collection in these environments.\nSystematic information biases: Perpetrator information (actor identity and type) and attack motives are consistently the most incomplete fields across all countries, creating a systematic accountability gap.\nUneven documentation quality: Location data is generally more complete than other fields, suggesting focused reporting priorities on “where” incidents occur rather than “who” is responsible.\nData reliability variation: The reliability of security analysis varies significantly by country, with Occupied Palestinian Territories and Syrian Arab Republic data appearing more complete than other conflict zones.\n\nThis missingness is not random but follows patterns that reflect both operational constraints in conflict environments and potential reporting biases. These systematic gaps must be explicitly acknowledged when conducting cross-country comparisons or analyzing perpetrator accountability."
   },
   {
     "objectID": "unknown.html#background",
@@ -763,6 +847,20 @@
     "text": "9.1 Analyze Individual Countries\n\nPalestine\nAfghanistan\nDR Congo\nSyria\nSomalia\nMali\nSouth Sudan\nSudan"
   },
   {
+    "objectID": "appendix.html",
+    "href": "appendix.html",
+    "title": "Appendix",
+    "section": "",
+    "text": "Introduction\nOverview of the project goals, data source (AWSD), key research questions, and why analyzing violence against aid workers matters.\nData Cleaning\nDetails on how the raw data was processed and standardized for analysis, including missing value handling and variable selection.\nInternational Analysis\nA global-level overview comparing trends, attack types, and humanitarian impact across multiple conflict-affected countries.\nExploring the Unknown\nInvestigates patterns of missing or “Unknown” data in security reports—revealing systematic information gaps by country and attribute.\n\n\n\n\nCountry-specific deep dives, each including historical context, temporal and spatial trends, attack characteristics, casualty patterns, and strategic recommendations:\n\n🇵🇸 Palestine\nFocus on the October 2023 escalation and impacts of aerial bombardment on aid operations in Gaza and the West Bank.\n🇦🇫 Afghanistan\nTracks violence across regimes—from Taliban rule to NATO presence to the current Islamic Emirate—highlighting shifts in targeting patterns.\n🇨🇩 DR Congo\nExplores complex violence in eastern DRC driven by armed groups, with a focus on mobility risks and localized conflict dynamics.\n🇸🇾 Syria\nAnalyzes conflict phases from civil war to regime collapse in 2024, with emphasis on aerial attacks and frontline crossfire incidents.\n🇸🇴 Somalia\nDetails threats from Al-Shabaab, patterns of ambushes and kidnappings, and the impact of climate shocks on humanitarian security.\n🇲🇱 Mali\nHighlights post-coup violence, the rise in kidnapping, and the shift from international to local staff exposure following MINUSMA withdrawal.\n🇸🇸 South Sudan\nInvestigates intercommunal conflict, targeted attacks on convoys, and the relationship between aid presence and violence.\n🇸🇩 Sudan\nFocuses on the humanitarian fallout from the 2023 civil war, including documentation challenges and increasing targeting of aid facilities.\n\n\n\n\n\nLLM Log\nA running log of how large language models were used throughout the project for analysis, text generation, and research assistance."
+  },
+  {
+    "objectID": "appendix.html#project-sections",
+    "href": "appendix.html#project-sections",
+    "title": "Appendix",
+    "section": "",
+    "text": "Introduction\nOverview of the project goals, data source (AWSD), key research questions, and why analyzing violence against aid workers matters.\nData Cleaning\nDetails on how the raw data was processed and standardized for analysis, including missing value handling and variable selection.\nInternational Analysis\nA global-level overview comparing trends, attack types, and humanitarian impact across multiple conflict-affected countries.\nExploring the Unknown\nInvestigates patterns of missing or “Unknown” data in security reports—revealing systematic information gaps by country and attribute.\n\n\n\n\nCountry-specific deep dives, each including historical context, temporal and spatial trends, attack characteristics, casualty patterns, and strategic recommendations:\n\n🇵🇸 Palestine\nFocus on the October 2023 escalation and impacts of aerial bombardment on aid operations in Gaza and the West Bank.\n🇦🇫 Afghanistan\nTracks violence across regimes—from Taliban rule to NATO presence to the current Islamic Emirate—highlighting shifts in targeting patterns.\n🇨🇩 DR Congo\nExplores complex violence in eastern DRC driven by armed groups, with a focus on mobility risks and localized conflict dynamics.\n🇸🇾 Syria\nAnalyzes conflict phases from civil war to regime collapse in 2024, with emphasis on aerial attacks and frontline crossfire incidents.\n🇸🇴 Somalia\nDetails threats from Al-Shabaab, patterns of ambushes and kidnappings, and the impact of climate shocks on humanitarian security.\n🇲🇱 Mali\nHighlights post-coup violence, the rise in kidnapping, and the shift from international to local staff exposure following MINUSMA withdrawal.\n🇸🇸 South Sudan\nInvestigates intercommunal conflict, targeted attacks on convoys, and the relationship between aid presence and violence.\n🇸🇩 Sudan\nFocuses on the humanitarian fallout from the 2023 civil war, including documentation challenges and increasing targeting of aid facilities.\n\n\n\n\n\nLLM Log\nA running log of how large language models were used throughout the project for analysis, text generation, and research assistance."
+  },
+  {
     "objectID": "delete.html",
     "href": "delete.html",
     "title": "Security Incidents Analysis: Global Patterns and Trends",
@@ -831,229 +929,5 @@
     "title": "Security Incidents in Democratic Republic of Congo: Trends and Patterns",
     "section": "7.1 Key Findings",
     "text": "7.1 Key Findings\nThis analysis of security incidents in the Democratic Republic of Congo reveals several critical patterns and trends:\n\nPolitical transitions impact security: Major surges in security incidents coincided with political transitions, notably after Tshisekedi took power in 2019, suggesting internal instability during power shifts.\nKidnapping as primary tactic: Unlike other conflict zones, the DRC shows a distinct pattern of kidnappings as the predominant means of attack, reflecting armed groups’ strategic priorities for funding and control.\nAmbush as primary context: Most security incidents occur during ambushes, highlighting the tactical approach of armed groups exploiting the region’s challenging geography and infrastructure limitations.\nDisproportionate impact on nationals: Congolese nationals face significantly higher risks of kidnapping compared to internationals, underscoring the unequal exposure to security threats.\nGeographic vulnerabilities: Road networks and transportation routes emerge as particularly high-risk areas, with the majority of major incidents occurring during movement.\n\n\nRecommendations \n\nThese findings suggest specific approaches for operating in the DRC context:\n\n7.1.1 For Security Planning\n\nImplement comprehensive journey management protocols with real-time risk assessments\nEstablish robust communication networks with regular check-in procedures during movements\nDevelop specific anti-kidnapping protocols and train staff on prevention and response\nConsider armed escorts on high-risk routes where appropriate and legally permissible\nEstablish clear security thresholds that trigger operational suspensions\n\n\n\n7.1.2 For Humanitarian Organizations\n\nBalance operational presence with a thorough understanding of conflict dynamics in each area\nInvest in community acceptance strategies by engaging with local leaders and communities\nConsider remote programming models in areas with highest kidnapping risks\nPrioritize national staff security with equal investment in protection measures\nDevelop context-specific security training focusing on ambush prevention and response\n\n\n\n7.1.3 For Policy Development\n\nAdvocate for protected humanitarian corridors in high-risk areas\nSupport enhanced coordination mechanisms for security information sharing\nEngage with donors on realistic security costs in project budgets\nDevelop systematic approaches to engaging with armed groups for humanitarian access\nPromote accountability for attacks against humanitarian workers\n\n\n\n7.1.4 For Future Research\n\nInvestigate the relationship between mineral resource extraction and security incidents\nAnalyze the effectiveness of different security approaches in reducing kidnapping risks\nExamine the long-term trends in security following major political transitions\nStudy the impact of UN peacekeeping presence on humanitarian security incident patterns\nResearch community-based protection mechanisms that have proven effective in the DRC context"
-  },
-  {
-    "objectID": "appendix.html",
-    "href": "appendix.html",
-    "title": "Appendix",
-    "section": "",
-    "text": "Introduction\nOverview of the project goals, data source (AWSD), key research questions, and why analyzing violence against aid workers matters.\nData Cleaning\nDetails on how the raw data was processed and standardized for analysis, including missing value handling and variable selection.\nInternational Analysis\nA global-level overview comparing trends, attack types, and humanitarian impact across multiple conflict-affected countries.\nExploring the Unknown\nInvestigates patterns of missing or “Unknown” data in security reports—revealing systematic information gaps by country and attribute.\n\n\n\n\nCountry-specific deep dives, each including historical context, temporal and spatial trends, attack characteristics, casualty patterns, and strategic recommendations:\n\n🇵🇸 Palestine\nFocus on the October 2023 escalation and impacts of aerial bombardment on aid operations in Gaza and the West Bank.\n🇦🇫 Afghanistan\nTracks violence across regimes—from Taliban rule to NATO presence to the current Islamic Emirate—highlighting shifts in targeting patterns.\n🇨🇩 DR Congo\nExplores complex violence in eastern DRC driven by armed groups, with a focus on mobility risks and localized conflict dynamics.\n🇸🇾 Syria\nAnalyzes conflict phases from civil war to regime collapse in 2024, with emphasis on aerial attacks and frontline crossfire incidents.\n🇸🇴 Somalia\nDetails threats from Al-Shabaab, patterns of ambushes and kidnappings, and the impact of climate shocks on humanitarian security.\n🇲🇱 Mali\nHighlights post-coup violence, the rise in kidnapping, and the shift from international to local staff exposure following MINUSMA withdrawal.\n🇸🇸 South Sudan\nInvestigates intercommunal conflict, targeted attacks on convoys, and the relationship between aid presence and violence.\n🇸🇩 Sudan\nFocuses on the humanitarian fallout from the 2023 civil war, including documentation challenges and increasing targeting of aid facilities.\n\n\n\n\n\nLLM Log\nA running log of how large language models were used throughout the project for analysis, text generation, and research assistance."
-  },
-  {
-    "objectID": "appendix.html#project-sections",
-    "href": "appendix.html#project-sections",
-    "title": "Appendix",
-    "section": "",
-    "text": "Introduction\nOverview of the project goals, data source (AWSD), key research questions, and why analyzing violence against aid workers matters.\nData Cleaning\nDetails on how the raw data was processed and standardized for analysis, including missing value handling and variable selection.\nInternational Analysis\nA global-level overview comparing trends, attack types, and humanitarian impact across multiple conflict-affected countries.\nExploring the Unknown\nInvestigates patterns of missing or “Unknown” data in security reports—revealing systematic information gaps by country and attribute.\n\n\n\n\nCountry-specific deep dives, each including historical context, temporal and spatial trends, attack characteristics, casualty patterns, and strategic recommendations:\n\n🇵🇸 Palestine\nFocus on the October 2023 escalation and impacts of aerial bombardment on aid operations in Gaza and the West Bank.\n🇦🇫 Afghanistan\nTracks violence across regimes—from Taliban rule to NATO presence to the current Islamic Emirate—highlighting shifts in targeting patterns.\n🇨🇩 DR Congo\nExplores complex violence in eastern DRC driven by armed groups, with a focus on mobility risks and localized conflict dynamics.\n🇸🇾 Syria\nAnalyzes conflict phases from civil war to regime collapse in 2024, with emphasis on aerial attacks and frontline crossfire incidents.\n🇸🇴 Somalia\nDetails threats from Al-Shabaab, patterns of ambushes and kidnappings, and the impact of climate shocks on humanitarian security.\n🇲🇱 Mali\nHighlights post-coup violence, the rise in kidnapping, and the shift from international to local staff exposure following MINUSMA withdrawal.\n🇸🇸 South Sudan\nInvestigates intercommunal conflict, targeted attacks on convoys, and the relationship between aid presence and violence.\n🇸🇩 Sudan\nFocuses on the humanitarian fallout from the 2023 civil war, including documentation challenges and increasing targeting of aid facilities.\n\n\n\n\n\nLLM Log\nA running log of how large language models were used throughout the project for analysis, text generation, and research assistance."
-  },
-  {
-    "objectID": "index.html#executive-summary",
-    "href": "index.html#executive-summary",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Executive Summary",
-    "text": "Executive Summary\nThis analysis examines security incident data affecting humanitarian workers across eight major conflict zones: Afghanistan, Democratic Republic of Congo (DRC), Mali, Palestine, Somalia, South Sudan, Sudan, and Syria. By comparing incident patterns, attack methods, casualty distributions, and contextual factors, this report identifies both shared trends and critical differences that can inform context-specific security approaches.\nKey findings include:\n\nAttack methods reflect the nature of each conflict, ranging from aerial bombardment in state-actor conflicts to kidnapping in resource-driven insurgencies\nNational staff bear a disproportionate burden of casualties across all contexts, typically facing 5-10 times higher rates of death, injury, and kidnapping\nPolitical transitions consistently correlate with increased security incidents, though the relationship varies by context\nHigh-risk locations differ significantly by region, with road networks dominating in some areas while fixed facilities face greater threats in others\nSimilar security incident metrics can mask opposite underlying conditions, particularly when reduced incidents may indicate humanitarian withdrawal rather than improved security\n\nThese findings demonstrate the critical importance of context-specific security protocols that address the unique conflict dynamics, armed actor motivations, and geographic risk factors in each operational environment."
-  },
-  {
-    "objectID": "index.html#comparative-analysis-of-attack-methods",
-    "href": "index.html#comparative-analysis-of-attack-methods",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Comparative Analysis of Attack Methods",
-    "text": "Comparative Analysis of Attack Methods\nAttack methods vary significantly across these eight conflict zones, reflecting differences in conflict dynamics, armed actor capabilities, and tactical objectives:\n\nState vs. Non-State Actor Patterns\n\nSyria and Palestine: Aerial bombardment and shelling dominate, reflecting state military capabilities and urban warfare\nSudan, South Sudan, Somalia: Shooting predominates, indicating organized ground operations by militarized forces\nAfghanistan, DRC, Mali: Kidnapping emerges as the primary attack method, suggesting resource extraction and leverage-seeking motivations\n\n\n\nRegional Attack Method Comparison\n\n\n\n\n\n\n\n\n\nRegion\nPrimary Attack Method\nSecondary Method\nNotable Characteristic\n\n\n\n\nAfghanistan\nKidnapping\nShooting\nTactical shift over time from combat to abduction\n\n\nDRC\nKidnapping\nShooting\nResource-focused targeting\n\n\nMali\nKidnapping\nShooting\nFocused on road networks\n\n\nPalestine\nAerial bombardment\nShooting\nCollateral impact from military operations\n\n\nSomalia\nShooting\nKidnapping\nMilitary-style targeting\n\n\nSouth Sudan\nShooting\nBodily assault\nOrganized armed group operations\n\n\nSudan\nShooting\nKidnapping\nAmbush-focused road attacks\n\n\nSyria\nAerial bombardment\nShelling\nState military operations\n\n\n\nThis distribution demonstrates how humanitarian security threats are shaped by the unique characteristics of each conflict, requiring tailored mitigation strategies rather than standardized approaches."
-  },
-  {
-    "objectID": "index.html#attack-contexts-across-regions",
-    "href": "index.html#attack-contexts-across-regions",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Attack Contexts Across Regions",
-    "text": "Attack Contexts Across Regions\nThe contextual settings of security incidents reveal important patterns about how and where humanitarian workers face the greatest risks:\n\nCombat vs. Targeted Attacks\n\nSyria, Palestine: Combat/crossfire dominates (60-70% of incidents), indicating collateral damage rather than deliberate targeting\nSudan, South Sudan, Somalia, DRC, Mali: Ambushes predominate (40-50% of incidents), showing deliberate targeting during movement\nAfghanistan: More diverse contexts including direct targeting, raids on compounds, and kidnappings\n\n\n\nImplications for Operations\nThe prevalence of different attack contexts has direct implications for humanitarian operations:\n\nIn ambush-dominated environments (Sudan, DRC, Mali): Journey management, route analysis, and convoy protection are critical\nIn combat/crossfire contexts (Syria, Palestine): Early warning systems, bunkers, and conflict mapping become essential\nIn compound targeting scenarios (Afghanistan): Physical site security and access control are priorities\n\nThese distinctions highlight the importance of adapting operational security plans to address the most likely contexts of attack in each environment."
-  },
-  {
-    "objectID": "index.html#geographic-risk-patterns",
-    "href": "index.html#geographic-risk-patterns",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Geographic Risk Patterns",
-    "text": "Geographic Risk Patterns\nSecurity incident data reveals distinct geographic vulnerability patterns across the eight focus countries:\n\nMovement vs. Fixed-Site Risks\n\nSudan, South Sudan, Somalia, DRC, Mali: Road networks and transportation routes represent 60-80% of high-risk locations\nAfghanistan, Syria: Fixed facilities (compounds, offices, project sites) feature prominently in major incidents\nPalestine: Broader geographic spread tied to military operations with less predictable patterns\n\n\n\nImplications for Risk Management\nThese geographic patterns suggest that risk management should prioritize:\n\nRoad security protocols in Africa’s conflict zones\nCompound hardening in Afghanistan and parts of Syria\nDispersed protection measures in Palestine\n\nThe concentration of incidents in particular locations also enables more targeted security investments in high-risk zones."
-  },
-  {
-    "objectID": "index.html#casualty-distribution-and-protection-inequality",
-    "href": "index.html#casualty-distribution-and-protection-inequality",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Casualty Distribution and Protection Inequality",
-    "text": "Casualty Distribution and Protection Inequality\nA striking finding across all eight conflict zones is the consistent disparity in casualties between national and international humanitarian personnel:\n\nNational vs. International Staff Risk\n\nEvery region shows national staff facing 5-10 times higher casualty rates\nSouth Sudan, Sudan, Syria: Show the most extreme disparities with nationals suffering over ten times more casualties\nAfghanistan: While still unequal, shows slightly more balanced distribution of risk\n\n\n\nType of Casualties by Region\n\nAfghanistan, Sudan, Somalia, South Sudan: High fatality rates for nationals\nDRC, Mali: Higher kidnapping rates compared to fatalities\nPalestine, Syria: Injuries from indirect fire predominate over targeted violence\n\nThis universal pattern of national staff bearing disproportionate security risks represents both an operational vulnerability and an ethical challenge for humanitarian organizations."
-  },
-  {
-    "objectID": "index.html#temporal-patterns-and-political-transitions",
-    "href": "index.html#temporal-patterns-and-political-transitions",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Temporal Patterns and Political Transitions",
-    "text": "Temporal Patterns and Political Transitions\nThe relationship between political events and security incidents reveals complex patterns across conflict zones:\n\nGovernance Changes and Security Implications\n\nSouth Sudan: Counter-intuitively shows highest incident levels after peace agreements\nSudan: Spikes following coups and regime changes (Bashir’s overthrow, 2021 coup)\nAfghanistan: Decreased incidents after Taliban takeover, contrary to expectations\nSyria: Surges during territorial shifts (ISIS expansion) and regime collapse\nPalestine: Dramatic spike after October 2023 Hamas attack\n\n\n\nMisinterpreted Security Improvements\nIn several regions, apparent security improvements mask deteriorating conditions:\n\nMali, South Sudan: Recent decline in incidents likely reflects reduced humanitarian presence rather than improved conditions\nAfghanistan: Post-Taliban decline may indicate both consolidation of control and reduced reporting\n\nThis highlights the importance of interpreting security metrics within their proper political context rather than at face value."
-  },
-  {
-    "objectID": "index.html#armed-actor-motivations-and-targeting-patterns",
-    "href": "index.html#armed-actor-motivations-and-targeting-patterns",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Armed Actor Motivations and Targeting Patterns",
-    "text": "Armed Actor Motivations and Targeting Patterns\nDifferent armed actors demonstrate distinct motivational patterns that shape their targeting of humanitarian operations:\n\nMotivation Typology\n\nResource extraction: In DRC and Mali, armed groups prioritize kidnapping for ransom\nTerritorial control: Somalia’s Al-Shabaab and Afghanistan’s Taliban target humanitarian workers to demonstrate power\nMilitary objectives: In Syria and Palestine, most incidents result from broader military campaigns rather than specific targeting\nEthnic targeting: In South Sudan and parts of Sudan, identity-based violence affects humanitarian workers of certain ethnicities\n\n\n\nImplications for Acceptance Strategies\nUnderstanding armed actor motivations helps shape effective acceptance strategies:\n\nWhere economic motives predominate: Reducing visible resources and hardening physical security\nWhere ideological opposition exists: Community-based acceptance strategies and remote programming\nWhere collateral damage is the primary risk: Deconfliction mechanisms with military actors"
-  },
-  {
-    "objectID": "index.html#conclusions-and-recommendations",
-    "href": "index.html#conclusions-and-recommendations",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Conclusions and Recommendations",
-    "text": "Conclusions and Recommendations\n\nKey Cross-Cutting Findings\n\nContext-specific security approaches are essential\n\nThe substantial variation in attack methods, contexts, and locations across regions demonstrates that standardized security protocols will be insufficient\n\nProtection inequality requires urgent attention\n\nThe universal pattern of national staff bearing 5-10 times higher casualty rates represents both an operational and ethical priority\n\nPolitical transitions create vulnerability\n\nSecurity incidents consistently spike during power transitions, though the specific relationship varies by context\n\nSecurity metrics require careful interpretation\n\nReduced incidents may indicate humanitarian withdrawal rather than improved conditions\n\n\n\n\nRecommendations for Humanitarian Organizations\n\nSecurity Planning\n\nDevelop region-specific protocols based on predominant attack methods and contexts\nImplement equity-based duty of care policies that provide equivalent protection for national and international staff\nEstablish early warning systems tied to political transitions and conflict dynamics\n\n\n\nOperational Approaches\n\nIn ambush-prone regions (Sudan, South Sudan, Somalia, DRC, Mali): Prioritize journey management and convoy protection\nIn aerial threat zones (Syria, Palestine): Focus on shelter designs and early warning systems\nIn kidnap-risk areas (Afghanistan, DRC, Mali): Emphasize low-profile approaches and staff tracking\n\n\n\nPolicy Advocacy\n\nSupport international accountability mechanisms for attacks on humanitarian workers\nAdvocate for humanitarian corridors and deconfliction mechanisms in active conflict zones\nPromote sustained donor investment in context-appropriate security measures\n\n\n\n\nRecommendations for Future Research\n\nInvestigate the relationship between security incidents and humanitarian access constraints\nAnalyze staff nationality disparities in security provision and incident outcomes\nExamine the effectiveness of different security approaches across comparable contexts\nStudy the impact of climate-security interactions on humanitarian operations in conflict zones\n\nBy applying these context-specific insights, humanitarian organizations can develop more effective security risk management approaches that address the unique challenges of each operational environment while working toward more equitable protection for all humanitarian personnel."
-  },
-  {
-    "objectID": "index.html#research-questions-and-methodology",
-    "href": "index.html#research-questions-and-methodology",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Research Questions and Methodology",
-    "text": "Research Questions and Methodology\nThis research seeks to answer four fundamental questions about humanitarian security:\n\n\n\n\n\nflowchart TD\n    classDef primary fill:#e1f5fe,stroke:#0288d1,stroke-width:2px\n    classDef secondary fill:#f0f4f8,stroke:#4682b4,stroke-width:1px\n    classDef highlight fill:#fce4ec,stroke:#d81b60,stroke-width:2px\n\n    title[(\"Security Incident Analysis&lt;br&gt;Research Questions\")] \n    title --&gt; A & B & C & D\n    \n    A[\"What types of attacks are&lt;br&gt;most common globally vs. regionally?\"]:::primary\n    A --&gt; A1[\"Frequency by attack method\"]:::secondary\n    A --&gt; A2[\"Geographic distribution&lt;br&gt;of attack types\"]:::secondary\n    \n    B[\"How does violence vary by&lt;br&gt;year and political event?\"]:::primary\n    B --&gt; B1[\"Temporal patterns&lt;br&gt;and hotspots\"]:::secondary\n    B --&gt; B2[\"Correlation with&lt;br&gt;political upheaval\"]:::secondary\n    B --&gt; B3[\"Emerging threats\"]:::secondary\n    \n    C[\"How does risk differ for national&lt;br&gt;vs. international staff?\"]:::primary\n    C --&gt; C1[\"Casualty comparison&lt;br&gt;by nationality\"]:::secondary\n    C --&gt; C2[\"Risk factors across regions\"]:::secondary\n    \n    D[\"What contextual factors shape&lt;br&gt;security patterns?\"]:::primary\n    D --&gt; D1[\"Conflict dynamics\"]:::secondary\n    D --&gt; D3[\"Armed actor motivations\"]:::secondary\n\n\n\n\n\n\nThe methodology combines quantitative analysis of security incident data from the AWSD with contextual examination of conflict dynamics in each region. By triangulating incident metrics with political events, territorial control patterns, and armed actor behaviors, this research provides both broad global insights and nuanced regional understanding."
-  },
-  {
-    "objectID": "index.html#about-the-dataset",
-    "href": "index.html#about-the-dataset",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "About the Dataset",
-    "text": "About the Dataset\nThis analysis utilizes the Aid Worker Security Database (AWSD), a global resource maintained by Humanitarian Outcomes that tracks major incidents of violence against humanitarian aid workers. Each record in the dataset includes:\n\nTemporal and geographic data: Incident date, location, coordinates\nOrganizational details: Type of agency affected, staff nationality\nIncident specifics: Attack type, context, perpetrators, motives\nImpact metrics: Numbers killed, wounded, kidnapped\n\nThe AWSD is widely considered the gold standard for humanitarian security data and is used by researchers, policy makers, and security practitioners worldwide."
-  },
-  {
-    "objectID": "index.html#worldwide-incident-trends-1997-2025",
-    "href": "index.html#worldwide-incident-trends-1997-2025",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Worldwide Incident Trends (1997-2025)",
-    "text": "Worldwide Incident Trends (1997-2025)\nSecurity incidents affecting humanitarian workers have shown a concerning upward trajectory over the past three decades. From isolated incidents in the 1990s, the global humanitarian community now faces hundreds of serious security incidents annually. Several inflection points stand out:\n\n2003-2006: Sharp increase following international interventions in Iraq and Afghanistan\n2011-2014: Surge during the Arab Spring and subsequent conflicts\n2018-2020: Peak during intensified conflicts in Syria, Yemen, and the Sahel\n2023-2025: Recent escalation in multiple conflict zones, including Gaza, Sudan, and DRC\n\nThese global patterns reflect both the changing nature of conflict and the evolving role of humanitarian actors in complex emergencies."
-  },
-  {
-    "objectID": "index.html#geographic-distribution-of-incidents",
-    "href": "index.html#geographic-distribution-of-incidents",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Geographic Distribution of Incidents",
-    "text": "Geographic Distribution of Incidents\nWhile security incidents affect humanitarian operations worldwide, they are not evenly distributed. The data reveals clear geographic concentrations:\n\nMiddle East: 31% of all incidents, concentrated in Syria, Iraq, Yemen, and Palestine\nEast Africa: 24% of incidents, primarily in Somalia, South Sudan, and Sudan\nCentral/South Asia: 19% of incidents, dominated by Afghanistan and Pakistan\nCentral Africa: 16% of incidents, mostly in DRC and CAR\nWest Africa: 10% of incidents, increasingly focused in the Sahel region\n\nThis geographic distribution closely mirrors both protracted conflicts and areas where humanitarian operations maintain significant field presence despite security constraints."
-  },
-  {
-    "objectID": "index.html#attack-methods-global-analysis",
-    "href": "index.html#attack-methods-global-analysis",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Attack Methods: Global Analysis",
-    "text": "Attack Methods: Global Analysis\nAttack methods against humanitarian workers show significant variation globally, offering insights into perpetrator capabilities and motivations:\n\nShooting incidents: 34% of all recorded events, the most common attack type worldwide\nKidnapping: 28% of incidents, particularly prevalent in certain regions\nAerial bombardment: 14% of incidents, exclusively in areas with state actor involvement\nVehicle-based attacks: 10% of incidents, including ambushes and IEDs\nPhysical assault: 8% of incidents, often in contexts of civil unrest\nExplosive weapons: 6% of incidents, including landmines and suicide bombings\n\nThese global patterns mask important regional variations that become evident when examining specific conflict contexts."
-  },
-  {
-    "objectID": "index.html#staff-nationality-and-casualty-patterns",
-    "href": "index.html#staff-nationality-and-casualty-patterns",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Staff Nationality and Casualty Patterns",
-    "text": "Staff Nationality and Casualty Patterns\nPerhaps the most striking finding from the global data is the consistent disparity in security incidents affecting national versus international staff:\n\nNational staff account for approximately 87% of all casualties (killed, wounded, and kidnapped)\nInternational staff face significantly lower casualty rates despite often receiving more robust security measures\nThis disparity persists across all geographic regions and conflict types\nIn many contexts, national staff are deliberately targeted due to their organizational affiliation\n\nThis global pattern represents both an operational challenge and an ethical concern for humanitarian organizations attempting to manage risk equitably."
-  },
-  {
-    "objectID": "index.html#why-these-eight-countries",
-    "href": "index.html#why-these-eight-countries",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Why These Eight Countries?",
-    "text": "Why These Eight Countries?\nThe eight countries selected for detailed analysis—Afghanistan, DRC, Mali, Palestine, Somalia, South Sudan, Sudan, and Syria—represent both historical and contemporary hotspots for humanitarian security incidents. Together, they account for approximately 68% of all incidents recorded in the AWSD over the past 15 years. Each context also offers unique insights into how different conflict dynamics shape security threats."
-  },
-  {
-    "objectID": "index.html#afghanistan-evolving-threat-landscape",
-    "href": "index.html#afghanistan-evolving-threat-landscape",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Afghanistan: Evolving Threat Landscape",
-    "text": "Afghanistan: Evolving Threat Landscape\nAfghanistan has experienced significant shifts in security incident patterns, reflecting the country’s complex political transitions:\n\nIncident peaks: Security incidents peaked during intensive NATO operations (2010-2014)\nAttack methods: Kidnapping emerged as the predominant attack type, followed by shooting incidents\nAttack contexts: Direct targeted attacks and raids on compounds featured prominently\nProtection disparities: While national staff faced higher casualties, the disparity was less extreme than in other contexts\nRecent trends: Incidents declined significantly following Taliban takeover in 2021\n\nThese patterns suggest that Afghanistan’s security landscape for humanitarian workers is strongly influenced by governance transitions, with counter-intuitive improvements following Taliban consolidation of power."
-  },
-  {
-    "objectID": "index.html#democratic-republic-of-congo-resource-driven-targeting",
-    "href": "index.html#democratic-republic-of-congo-resource-driven-targeting",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Democratic Republic of Congo: Resource-Driven Targeting",
-    "text": "Democratic Republic of Congo: Resource-Driven Targeting\nThe DRC shows distinctive patterns shaped by armed group competition for resources and territorial control:\n\nIncident surges: Major spike following the 2019 political transition when Tshisekedi took power\nAttack methods: Kidnapping dominates, reflecting armed groups’ focus on resource extraction\nAttack contexts: Ambushes are the primary context, highlighting risks along transportation routes\nProtection disparities: Congolese nationals face significantly higher kidnapping risks\nGeographic hotspots: Road networks represent particularly high-risk areas\n\nThese patterns reflect the DRC’s fragmented security landscape, where numerous armed groups use humanitarian targeting as a resource generation strategy."
-  },
-  {
-    "objectID": "index.html#mali-post-coup-escalation-and-withdrawal-patterns",
-    "href": "index.html#mali-post-coup-escalation-and-withdrawal-patterns",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Mali: Post-Coup Escalation and Withdrawal Patterns",
-    "text": "Mali: Post-Coup Escalation and Withdrawal Patterns\nMali’s security incident data reveals concerning patterns tied to political instability:\n\nIncident peaks: Sharp escalation following the 2020 military coup, coinciding with French withdrawal and Wagner Group deployment\nAttack methods: Kidnapping is the primary attack method, reflecting armed groups’ focus on resource extraction\nAttack contexts: Road networks represent the most dangerous environment, with ambushes accounting for most incidents\nRecent decline: The apparent improvement since 2023 likely reflects reduced humanitarian presence rather than better security\n\nMali’s patterns highlight the complex interplay between governance transitions, foreign military presence, and humanitarian security."
-  },
-  {
-    "objectID": "index.html#palestine-military-operation-impacts",
-    "href": "index.html#palestine-military-operation-impacts",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Palestine: Military Operation Impacts",
-    "text": "Palestine: Military Operation Impacts\nPalestine shows unique patterns shaped by the intensity of state military operations:\n\nIncident trends: After decades of relatively stable incident levels, 2023-2024 saw an unprecedented surge following the October 7 Hamas attack\nAttack methods: Aerial bombardment is the predominant attack type, reflecting the nature of military operations\nAttack contexts: Combat/crossfire accounts for the vast majority of incidents, indicating collateral impact rather than targeting\nCasualty patterns: Palestinians bear the overwhelming burden, with almost no kidnapping incidents but high rates of death and injury\n\nPalestine represents a case where humanitarian workers face risks primarily from being caught in crossfire rather than direct targeting."
-  },
-  {
-    "objectID": "index.html#somalia-al-shabaabs-tactical-evolution",
-    "href": "index.html#somalia-al-shabaabs-tactical-evolution",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Somalia: Al-Shabaab’s Tactical Evolution",
-    "text": "Somalia: Al-Shabaab’s Tactical Evolution\nSomalia’s security landscape reflects Al-Shabaab’s territorial control and tactical choices:\n\nIncident patterns: Incidents surge with Al-Shabaab’s territorial control cycles, with peaks during their expansion\nAttack methods: Shooting leads followed by kidnapping, reflecting military-style operations\nAttack contexts: Ambushes dominate, particularly along road networks\nRecent vulnerability: The expulsion of ATMIS peacekeepers in 2024 has created new security vacuums\n\nSomalia’s patterns highlight how a dominant non-state armed group shapes the security environment through territorial control and strategic targeting."
-  },
-  {
-    "objectID": "index.html#south-sudan-the-peace-agreement-paradox",
-    "href": "index.html#south-sudan-the-peace-agreement-paradox",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "South Sudan: The Peace Agreement Paradox",
-    "text": "South Sudan: The Peace Agreement Paradox\nSouth Sudan reveals the unexpected relationship between formal peace processes and security incidents:\n\nIncident trends: Counter-intuitively, incident levels reached their highest point after peace agreement signings\nAttack methods: Shootings and bodily assaults dominate, indicating professional military tactics\nAttack contexts: Ambushes are most common, enabled by limited road infrastructure\nProtection gaps: South Sudanese nationals experience casualty rates over ten times higher than international staff\n\nThese patterns illustrate how formal political agreements in South Sudan have repeatedly failed to improve humanitarian security, with incident levels paradoxically reaching their highest points after peace agreement signings."
-  },
-  {
-    "objectID": "index.html#sudan-political-transition-volatility",
-    "href": "index.html#sudan-political-transition-volatility",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Sudan: Political Transition Volatility",
-    "text": "Sudan: Political Transition Volatility\nSudan’s incident data reveals the profound impact of political transitions on humanitarian security:\n\nIncident spikes: Major increases in attacks correspond to events like the Darfur conflict (2004–2006), Bashir’s removal (2019), the 2021 military coup, and the 2023 civil war\nAttack methods: Shooting is the most common attack method, followed by kidnapping and bodily assault\nAttack contexts: Ambushes dominate attack contexts, suggesting road travel is particularly dangerous\nRecent escalation: The SAF-RSF conflict has created unprecedented risks for humanitarian operations\n\nSudan illustrates how political instability directly translates to increased security incidents against humanitarian workers, with each transition creating new vulnerability."
-  },
-  {
-    "objectID": "index.html#syria-state-military-operations-and-collateral-impact",
-    "href": "index.html#syria-state-military-operations-and-collateral-impact",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Syria: State Military Operations and Collateral Impact",
-    "text": "Syria: State Military Operations and Collateral Impact\nSyria’s conflict shows unique patterns shaped by intense state military involvement:\n\nIncident trends: Incidents align with conflict milestones (ISIS expansion, Russian intervention, regime collapse)\nAttack methods: Aerial bombardment and shelling dominate, reflecting state military capabilities\nAttack contexts: Combat/crossfire dominates, indicating that most incidents occur near frontlines\nGeographic risks: Project sites and compounds feature prominently in major incidents\nCasualty disparities: Syrian nationals face some of the highest casualty disparities compared to international staff\n\nSyria represents a case where the intensity of conventional military operations shapes the primary risks to humanitarian workers through collateral damage rather than deliberate targeting."
-  },
-  {
-    "objectID": "index.html#conflict-type-shapes-security-threat-profiles",
-    "href": "index.html#conflict-type-shapes-security-threat-profiles",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Conflict Type Shapes Security Threat Profiles",
-    "text": "Conflict Type Shapes Security Threat Profiles\nThe fundamental nature of each conflict largely determines the security threat profile:\n\nState-actor dominated conflicts (Syria, Palestine): Characterized by aerial bombardment, shelling, and collateral impact\nResource-competition conflicts (DRC, Mali): Feature high kidnapping rates tied to economic extraction\nTerritorial control conflicts (Somalia, Afghanistan): Show patterns tied to armed group consolidation and expansion\nPolitical transition conflicts (Sudan, South Sudan): Experience volatility tied to governance changes"
-  },
-  {
-    "objectID": "index.html#geographic-vulnerability-varies-by-conflict-type",
-    "href": "index.html#geographic-vulnerability-varies-by-conflict-type",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Geographic Vulnerability Varies by Conflict Type",
-    "text": "Geographic Vulnerability Varies by Conflict Type\nThe locations of greatest risk differ significantly by context:\n\nRoad networks dominate in ambush-prone environments (Sudan, South Sudan, Somalia, DRC, Mali)\nFixed facilities face higher risks in areas with direct targeting (Afghanistan) or aerial bombardment (Syria)\nFrontline proximity determines risk in active combat zones (Palestine, parts of Syria)"
-  },
-  {
-    "objectID": "index.html#national-staff-protection-gap-is-universal",
-    "href": "index.html#national-staff-protection-gap-is-universal",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "National Staff Protection Gap Is Universal",
-    "text": "National Staff Protection Gap Is Universal\nEvery context shows a dramatic disparity in security outcomes for national versus international staff:\n\nCasualty rates: Nationals face 5-10 times higher casualty rates across all contexts\nRisk exposure: National staff typically operate in higher-risk environments with fewer protections\nSecurity investment: Organizations often allocate more resources to international staff security"
-  },
-  {
-    "objectID": "index.html#political-transitions-create-vulnerability-windows",
-    "href": "index.html#political-transitions-create-vulnerability-windows",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Political Transitions Create Vulnerability Windows",
-    "text": "Political Transitions Create Vulnerability Windows\nSecurity incidents consistently spike during power transitions, though the specific relationship varies:\n\nPeace agreements sometimes correlate with increased incidents (South Sudan)\nCoups and regime changes usually lead to immediate security deterioration (Sudan, Mali)\nTerritorial control shifts create new vulnerability patterns (Syria, Afghanistan)"
-  },
-  {
-    "objectID": "index.html#key-findings-and-implications",
-    "href": "index.html#key-findings-and-implications",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Key Findings and Implications",
-    "text": "Key Findings and Implications\n\nContext-specific security approaches are essential\n\nThe substantial variation in attack methods, contexts, and locations across regions demonstrates that standardized security protocols will be insufficient\n\nProtection inequality requires urgent attention\n\nThe universal pattern of national staff bearing 5-10 times higher casualty rates represents both an operational and ethical priority\n\nPolitical transitions create vulnerability\n\nSecurity incidents consistently spike during power transitions, though the specific relationship varies by context\n\nSecurity metrics require careful interpretation\n\nReduced incidents may indicate humanitarian withdrawal rather than improved conditions"
-  },
-  {
-    "objectID": "index.html#recommendations-for-humanitarian-organizations",
-    "href": "index.html#recommendations-for-humanitarian-organizations",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Recommendations for Humanitarian Organizations",
-    "text": "Recommendations for Humanitarian Organizations\n\nSecurity Planning\n\nDevelop region-specific protocols based on predominant attack methods and contexts\nImplement equity-based duty of care policies that provide equivalent protection for national and international staff\nEstablish early warning systems tied to political transitions and conflict dynamics\n\n\n\nOperational Approaches\n\nIn ambush-prone regions (Sudan, South Sudan, Somalia, DRC, Mali): Prioritize journey management and convoy protection\nIn aerial threat zones (Syria, Palestine): Focus on shelter designs and early warning systems\nIn kidnap-risk areas (Afghanistan, DRC, Mali): Emphasize low-profile approaches and staff tracking\n\n\n\nPolicy Advocacy\n\nSupport international accountability mechanisms for attacks on humanitarian workers\nAdvocate for humanitarian corridors and deconfliction mechanisms in active conflict zones\nPromote sustained donor investment in context-appropriate security measures"
-  },
-  {
-    "objectID": "index.html#recommendations-for-future-research",
-    "href": "index.html#recommendations-for-future-research",
-    "title": "Humanitarian Aid Under Fire",
-    "section": "Recommendations for Future Research",
-    "text": "Recommendations for Future Research\n\nInvestigate the relationship between security incidents and humanitarian access constraints\nAnalyze staff nationality disparities in security provision and incident outcomes\nExamine the effectiveness of different security approaches across comparable contexts\nStudy the impact of climate-security interactions on humanitarian operations in conflict zones\n\nBy applying these context-specific insights, humanitarian organizations can develop more effective security risk management approaches that address the unique challenges of each operational environment while working toward more equitable protection for all humanitarian personnel."
   }
 ]
