@@ -1,6 +1,6 @@
 ---
 title: "Humanitarian Aid Under Fire"
-subtitle: "Analyzing Global Patterns of Violence Against Aid Workers"
+subtitle: "A Global Analysis of Violence Against Humanitarian Workers"
 format:
   html:
     theme: cosmo
@@ -12,9 +12,7 @@ nocite: "@*"
 csl: apa.csl
 ---
 
-![](images/intro2.png){width=100% height=auto style="margin-bottom: 1.5rem; border-radius: 12px;"}
-
-![](images/aid2.png)
+![](images/hi3.png)
 
 # Introduction: The Rising Threats to Humanitarian Workers
 
@@ -22,9 +20,14 @@ Around the world, humanitarian aid workers risk their lives to assist communitie
 
 This research explores global patterns of violence against humanitarian personnel using data from the **Aid Worker Security Database (AWSD)**. By examining incident patterns across time, geography, and conflict contexts, we uncover both universal trends and context-specific threats that shape the security landscape for aid operations worldwide.
 
-In particular, this analysis focuses on eight contemporary conflict hotspots—Afghanistan, Democratic Republic of Congo (DRC), Mali, Palestine, Somalia, South Sudan, Sudan, and Syria—that represent both the highest incident rates over the past 15 years and some of the most dangerous environments for humanitarian operations today.
+In particular, this analysis focuses on eight contemporary conflict hotspots—Afghanistan, Democratic Republic of Congo (DRC), Mali, Palestine, Somalia, South Sudan, Sudan, and Syria, that represent both the highest incident rates over all time and in the past 15 years.
 
 ## Research Questions and Methodology
+
+<div style="text-align: left;">
+  ![](images/question.png){width=100px}
+</div>
+
 
 This research seeks to answer four fundamental questions about humanitarian security:
 
@@ -37,7 +40,7 @@ flowchart TD
     title[("Security Incident Analysis<br>Research Questions")] 
     title --> A & B & C & D
     
-    A["What types of attacks are<br>most common globally vs. regionally?"]:::primary
+    A["What types of attacks are<br>most common?"]:::primary
     A --> A1["Frequency by attack method"]:::secondary
     A --> A2["Geographic distribution<br>of attack types"]:::secondary
     
@@ -55,7 +58,7 @@ flowchart TD
     D --> D3["Armed actor motivations"]:::secondary
 ```
 
-The methodology combines quantitative analysis of security incident data from the AWSD with contextual examination of conflict dynamics in each region. By triangulating incident metrics with political events, territorial control patterns, and armed actor behaviors, this research provides both broad global insights and nuanced regional understanding.
+This research combines data analysis from the AWSD with context about conflict in each region. By connecting incident trends with political events, territorial control, and the actions of armed groups, it offers both a global overview and detailed regional insights.
 
 ## About the Dataset
 
@@ -70,9 +73,11 @@ The AWSD is widely considered the gold standard for humanitarian security data a
 
 # Global Patterns of Humanitarian Security Incidents
 
+![](images/glob.png){width=200px}
+
 ## Worldwide Incident Trends (1997-2025)
 
-Security incidents affecting humanitarian workers have shown a concerning upward trajectory over the past three decades. From isolated incidents in the 1990s, the global humanitarian community now faces hundreds of serious security incidents annually. Several inflection points stand out:
+Security incidents affecting humanitarian workers have shown a concerning upward trajectory over the past three decades. Several inflection points stand out:
 
 - **2003-2006**: Sharp increase following international interventions in Iraq and Afghanistan
 - **2011-2014**: Surge during the Arab Spring and subsequent conflicts
@@ -83,36 +88,21 @@ These global patterns reflect both the changing nature of conflict and the evolv
 
 ## Geographic Distribution of Incidents
 
-While security incidents affect humanitarian operations worldwide, they are not evenly distributed. The data reveals clear geographic concentrations:
+![](images/globby.png){width=200px}
 
-- **Middle East**: 31% of all incidents, concentrated in Syria, Iraq, Yemen, and Palestine
-- **East Africa**: 24% of incidents, primarily in Somalia, South Sudan, and Sudan
-- **Central/South Asia**: 19% of incidents, dominated by Afghanistan and Pakistan
-- **Central Africa**: 16% of incidents, mostly in DRC and CAR
-- **West Africa**: 10% of incidents, increasingly focused in the Sahel region
+While security incidents affect humanitarian operations worldwide, they are not evenly distributed. We focus on,
 
-This geographic distribution closely mirrors both protracted conflicts and areas where humanitarian operations maintain significant field presence despite security constraints.
-
-## Attack Methods: Global Analysis
-
-Attack methods against humanitarian workers show significant variation globally, offering insights into perpetrator capabilities and motivations:
-
-- **Shooting incidents**: 34% of all recorded events, the most common attack type worldwide
-- **Kidnapping**: 28% of incidents, particularly prevalent in certain regions
-- **Aerial bombardment**: 14% of incidents, exclusively in areas with state actor involvement
-- **Vehicle-based attacks**: 10% of incidents, including ambushes and IEDs
-- **Physical assault**: 8% of incidents, often in contexts of civil unrest
-- **Explosive weapons**: 6% of incidents, including landmines and suicide bombings
-
-These global patterns mask important regional variations that become evident when examining specific conflict contexts.
+- **Middle East**: Syria and Palestine
+- **East Africa**: Somalia, South Sudan, and Sudan
+- **Central/South Asia**: Afghanistan 
+- **Central Africa**: DRC 
 
 ## Staff Nationality and Casualty Patterns
 
-Perhaps the most striking finding from the global data is the consistent disparity in security incidents affecting national versus international staff:
+There is a consistent disparity in security incidents affecting national versus international staff:
 
-- National staff account for approximately **87% of all casualties** (killed, wounded, and kidnapped)
-- International staff face significantly lower casualty rates despite often receiving more robust security measures
-- This disparity persists across all geographic regions and conflict types
+- National staff account for a significant amount of all casualities (killed, wounded, and kidnapped)
+- This disparity persists across all geographic regions analyzed 
 - In many contexts, national staff are deliberately targeted due to their organizational affiliation
 
 This global pattern represents both an operational challenge and an ethical concern for humanitarian organizations attempting to manage risk equitably.
@@ -121,7 +111,7 @@ This global pattern represents both an operational challenge and an ethical conc
 
 ## Why These Eight Countries?
 
-The eight countries selected for detailed analysis—Afghanistan, DRC, Mali, Palestine, Somalia, South Sudan, Sudan, and Syria—represent both historical and contemporary hotspots for humanitarian security incidents. Together, they account for approximately 68% of all incidents recorded in the AWSD over the past 15 years. Each context also offers unique insights into how different conflict dynamics shape security threats.
+The eight countries selected for detailed analysis Afghanistan, DRC, Mali, Palestine, Somalia, South Sudan, Sudan, and Syria, represent both historical and contemporary hotspots for humanitarian security incidents. Together, they account for approximately 68% ___ FILL IN of all incidents recorded in the AWSD over the past 15 years. Each context also offers unique insights into how different conflict dynamics shape security threats.
 
 ## Comparative Analysis of Attack Methods
 
@@ -154,7 +144,7 @@ The contextual settings of security incidents reveal important patterns about ho
 
 ### Combat vs. Targeted Attacks
 
-- **Syria, Palestine**: Combat/crossfire dominates (60-70% of incidents), indicating collateral damage rather than deliberate targeting
+- **Syria, Palestine**: Combat/crossfire dominates, indicating collateral damage rather than deliberate targeting
 - **Sudan, South Sudan, Somalia, DRC, Mali**: Ambushes predominate (40-50% of incidents), showing deliberate targeting during movement
 - **Afghanistan**: More diverse contexts including direct targeting, raids on compounds, and kidnappings
 
@@ -167,113 +157,6 @@ The prevalence of different attack contexts has direct implications for humanita
 - In **compound targeting** scenarios (Afghanistan): Physical site security and access control are priorities
 
 These distinctions highlight the importance of adapting operational security plans to address the most likely contexts of attack in each environment.
-
-## Geographic Risk Patterns
-
-Security incident data reveals distinct geographic vulnerability patterns across the eight focus countries:
-
-### Movement vs. Fixed-Site Risks
-
-- **Sudan, South Sudan, Somalia, DRC, Mali**: Road networks and transportation routes represent 60-80% of high-risk locations
-- **Afghanistan, Syria**: Fixed facilities (compounds, offices, project sites) feature prominently in major incidents
-- **Palestine**: Broader geographic spread tied to military operations with less predictable patterns
-
-### Implications for Risk Management
-
-These geographic patterns suggest that risk management should prioritize:
-
-- **Road security protocols** in Africa's conflict zones
-- **Compound hardening** in Afghanistan and parts of Syria
-- **Dispersed protection measures** in Palestine
-
-The concentration of incidents in particular locations also enables more targeted security investments in high-risk zones.
-
-## Casualty Distribution and Protection Inequality
-
-A striking finding across all eight conflict zones is the consistent disparity in casualties between national and international humanitarian personnel:
-
-### National vs. International Staff Risk
-
-- Every region shows national staff facing 5-10 times higher casualty rates
-- **South Sudan, Sudan, Syria**: Show the most extreme disparities with nationals suffering over ten times more casualties
-- **Afghanistan**: While still unequal, shows slightly more balanced distribution of risk
-
-### Type of Casualties by Region
-
-- **Afghanistan, Sudan, Somalia, South Sudan**: High fatality rates for nationals
-- **DRC, Mali**: Higher kidnapping rates compared to fatalities
-- **Palestine, Syria**: Injuries from indirect fire predominate over targeted violence
-
-This universal pattern of national staff bearing disproportionate security risks represents both an operational vulnerability and an ethical challenge for humanitarian organizations.
-
-## Temporal Patterns and Political Transitions
-
-The relationship between political events and security incidents reveals complex patterns across conflict zones:
-
-### Governance Changes and Security Implications
-
-- **South Sudan**: Counter-intuitively shows highest incident levels after peace agreements
-- **Sudan**: Spikes following coups and regime changes (Bashir's overthrow, 2021 coup)
-- **Afghanistan**: Decreased incidents after Taliban takeover, contrary to expectations
-- **Syria**: Surges during territorial shifts (ISIS expansion) and regime collapse
-- **Palestine**: Dramatic spike after October 2023 Hamas attack
-
-### Misinterpreted Security Improvements
-
-In several regions, apparent security improvements mask deteriorating conditions:
-
-- **Mali, South Sudan**: Recent decline in incidents likely reflects reduced humanitarian presence rather than improved conditions
-- **Afghanistan**: Post-Taliban decline may indicate both consolidation of control and reduced reporting
-
-This highlights the importance of interpreting security metrics within their proper political context rather than at face value.
-
-## Armed Actor Motivations and Targeting Patterns
-
-Different armed actors demonstrate distinct motivational patterns that shape their targeting of humanitarian operations:
-
-### Motivation Typology
-
-- **Resource extraction**: In DRC and Mali, armed groups prioritize kidnapping for ransom
-- **Territorial control**: Somalia's Al-Shabaab and Afghanistan's Taliban target humanitarian workers to demonstrate power
-- **Military objectives**: In Syria and Palestine, most incidents result from broader military campaigns rather than specific targeting
-- **Ethnic targeting**: In South Sudan and parts of Sudan, identity-based violence affects humanitarian workers of certain ethnicities
-
-### Implications for Acceptance Strategies
-
-Understanding armed actor motivations helps shape effective acceptance strategies:
-
-- Where **economic motives** predominate: Reducing visible resources and hardening physical security
-- Where **ideological opposition** exists: Community-based acceptance strategies and remote programming
-- Where **collateral damage** is the primary risk: Deconfliction mechanisms with military actors
-
-# Comparative Analysis and Cross-Cutting Themes
-
-The detailed examination of these eight countries reveals several critical cross-cutting themes:
-
-## Conflict Type Shapes Security Threat Profiles
-
-The fundamental nature of each conflict largely determines the security threat profile:
-
-- **State-actor dominated conflicts** (Syria, Palestine): Characterized by aerial bombardment, shelling, and collateral impact
-- **Resource-competition conflicts** (DRC, Mali): Feature high kidnapping rates tied to economic extraction
-- **Territorial control conflicts** (Somalia, Afghanistan): Show patterns tied to armed group consolidation and expansion
-- **Political transition conflicts** (Sudan, South Sudan): Experience volatility tied to governance changes
-
-## Geographic Vulnerability Varies by Conflict Type
-
-The locations of greatest risk differ significantly by context:
-
-- **Road networks** dominate in ambush-prone environments (Sudan, South Sudan, Somalia, DRC, Mali)
-- **Fixed facilities** face higher risks in areas with direct targeting (Afghanistan) or aerial bombardment (Syria)
-- **Frontline proximity** determines risk in active combat zones (Palestine, parts of Syria)
-
-## National Staff Protection Gap Is Universal
-
-Every context shows a dramatic disparity in security outcomes for national versus international staff:
-
-- **Casualty rates**: Nationals face 5-10 times higher casualty rates across all contexts
-- **Risk exposure**: National staff typically operate in higher-risk environments with fewer protections
-- **Security investment**: Organizations often allocate more resources to international staff security
 
 ## Political Transitions Create Vulnerability Windows
 
@@ -315,18 +198,18 @@ Security incidents consistently spike during power transitions, though the speci
 
 ### Policy Advocacy
 
-- Support international accountability mechanisms for attacks on humanitarian workers
-- Advocate for humanitarian corridors and deconfliction mechanisms in active conflict zones
-- Promote sustained donor investment in context-appropriate security measures
+- Support efforts to hold people accountable for attacks on aid workers
+- Advocate for safe zones and agreements to protect humanitarians in conflict areas
+- Encourage continued funding for safety measures that fit each local context
 
 ## Recommendations for Future Research
 
-- Investigate the relationship between security incidents and humanitarian access constraints
-- Analyze staff nationality disparities in security provision and incident outcomes
-- Examine the effectiveness of different security approaches across comparable contexts
-- Study the impact of climate-security interactions on humanitarian operations in conflict zones
+- Explore how security incidents affect access to humanitarian aid
+- Look at differences in safety and outcomes for local vs. international staff
+- Compare which security strategies work best in similar conflict areas
+- Study how climate issues and conflict together affect humanitarian work
 
-By applying these context-specific insights, humanitarian organizations can develop more effective security risk management approaches that address the unique challenges of each operational environment while working toward more equitable protection for all humanitarian personnel.
+By using insights from each specific context, humanitarian organizations can create stronger, more tailored safety plans that respond to the unique challenges of each location, while also working to ensure fair and equal protection for both local and international staff.
 
 # 📥 Source and Access
 
