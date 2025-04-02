@@ -78,6 +78,7 @@ if missing_values.sum() > 0:
     plt.show()
 
 ```
+
 ```{python}
 #| label: missing-values-viz
 
@@ -85,7 +86,7 @@ missing_percent = (df.isna().sum() / len(df)) * 100
 missing_percent = missing_percent[missing_percent > 0].sort_values(ascending=True)
 
 plt.figure(figsize=(7, 4))
-missing_percent.plot(kind='barh', color='#FFBD59')
+missing_percent.plot(kind='barh', color='#64C1FF')
 plt.title("Percentage of Missing Values per Column")
 plt.xlabel("Percent Missing (%)")
 plt.tight_layout()
@@ -109,6 +110,8 @@ Since our analysis focus is on broad trends by country, year, and organization t
 ```{python}
 #| label: remove-columns
 
+import matplotlib.pyplot as plt
+
 columns_to_drop = ['day', 'month', 'district', 'city', 'region', 'country_code', 'incident_id']
 df.drop(columns=columns_to_drop, inplace=True)
 
@@ -118,12 +121,13 @@ missing_percent = missing_percent[missing_percent > 0].sort_values(ascending=Tru
 
 # Visualize the remaining missing values
 plt.figure(figsize=(7, 4))
-missing_percent.plot(kind='barh')
+missing_percent.plot(kind='barh', color='#64C1FF')
 plt.title("Percentage of Missing Values After Column Removal")
 plt.xlabel("Percent Missing (%)")
 plt.tight_layout()
 plt.grid(axis='x', linestyle='--', alpha=0.5)
 plt.show()
+
 ```
 
 ```{python}
@@ -273,7 +277,7 @@ for col in numeric_cols:
 outlier_summary = outlier_summary.sort_values('Percentage', ascending=True)
 
 plt.figure(figsize=(7,4))
-plt.barh(outlier_summary['Column'], outlier_summary['Percentage'], color='#FFBD59')
+plt.barh(outlier_summary['Column'], outlier_summary['Percentage'], color='#64C1FF')
 plt.title('Percentage of Outliers by Column')
 plt.xlabel('Percentage of Values Identified as Outliers')
 plt.grid(axis='x', linestyle='--', alpha=0.7)
@@ -294,11 +298,12 @@ top_cols = outlier_summary.head(6)['Column'].tolist()
 plt.figure(figsize=(10, 6))
 for i, col in enumerate(top_cols, 1):
     plt.subplot(2, 3, i)
-    sns.boxplot(y=df[col])
+    sns.boxplot(y=df[col], color='#64C1FF')
     plt.title(f'Box Plot: {col}')
     plt.grid(linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
+
 ```
 
 ### 6.2 Outlier Handling Strategy

@@ -20,14 +20,13 @@ Around the world, humanitarian aid workers risk their lives to assist communitie
 
 This research explores global patterns of violence against humanitarian personnel using data from the **Aid Worker Security Database (AWSD)**. By examining incident patterns across time, geography, and conflict contexts, we uncover both universal trends and context-specific threats that shape the security landscape for aid operations worldwide.
 
-In particular, this analysis focuses on eight contemporary conflict hotspots—Afghanistan, Democratic Republic of Congo (DRC), Mali, Palestine, Somalia, South Sudan, Sudan, and Syria, that represent both the highest incident rates over all time and in the past 15 years.
+In particular, this analysis focuses on eight contemporary conflict hotspots, Afghanistan, Democratic Republic of Congo (DRC), Mali, Palestine, Somalia, South Sudan, Sudan, and Syria, that represent both the highest incident rates over all time and in the past 15 years.
 
 ## Research Questions and Methodology
 
 <div style="text-align: left;">
   ![](images/question.png){width=100px}
 </div>
-
 
 This research seeks to answer four fundamental questions about humanitarian security:
 
@@ -69,7 +68,7 @@ This analysis utilizes the **Aid Worker Security Database (AWSD)**, a global res
 - **Incident specifics**: Attack type, context, perpetrators, motives
 - **Impact metrics**: Numbers killed, wounded, kidnapped
 
-The AWSD is widely considered the gold standard for humanitarian security data and is used by researchers, policy makers, and security practitioners worldwide.
+The AWSD is considered the gold standard for humanitarian security data and is used by researchers, policy makers, and security practitioners worldwide.
 
 # Global Patterns of Humanitarian Security Incidents
 
@@ -103,7 +102,6 @@ There is a consistent disparity in security incidents affecting national versus 
 
 - National staff account for a significant amount of all casualities (killed, wounded, and kidnapped)
 - This disparity persists across all geographic regions analyzed 
-- In many contexts, national staff are deliberately targeted due to their organizational affiliation
 
 This global pattern represents both an operational challenge and an ethical concern for humanitarian organizations attempting to manage risk equitably.
 

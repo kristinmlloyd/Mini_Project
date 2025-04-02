@@ -154,6 +154,7 @@ South Sudan has experienced a dramatic deterioration in security and humanitaria
 <h1>Map of Incidents <img src="images/map.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h1>
 
 ```{python}
+#| echo: false
 icon_path = "images/hazard2.png"
 valid_points = country_data[country_data['latitude'].notna() & country_data['longitude'].notna()]
 
