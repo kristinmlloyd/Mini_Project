@@ -26,11 +26,18 @@ csl: apa.csl
 
 Around the world, humanitarian aid workers risk their lives to assist communities affected by conflict, disaster, and crisis. But what happens when **aid itself becomes a target**?
 
-This research explores global patterns of violence against humanitarian personnel using data from the **Aid Worker Security Database (AWSD)**. By examining incident patterns across time, geography, and conflict contexts, we uncover both universal trends and context-specific threats that shape the security landscape for aid operations worldwide.
+This research explores global patterns of violence against humanitarian personnel using data from the **Aid Worker Security Database (AWSD)**. By examining incident patterns across time, geography, and conflict contexts, we uncover both universal trends and context-specific threats that shape the security landscape for aid operations worldwide. Each record in the dataset includes:
 
-In particular, this analysis focuses on eight contemporary conflict hotspots, Afghanistan, Democratic Republic of Congo (DRC), Mali, Palestine, Somalia, South Sudan, Sudan, and Syria, that represent both the highest incident rates over all time and in the past 15 years.
+- **Temporal and geographic data**: Incident date, location, coordinates
+- **Organizational details**: Type of agency affected, staff nationality
+- **Incident specifics**: Attack type, context, perpetrators, motives
+- **Impact metrics**: Numbers killed, wounded, kidnapped
 
-## Research Questions and Methodology
+The AWSD is considered the gold standard for humanitarian security data and is used by researchers, policy makers, and security practitioners worldwide.
+
+# Research Questions and Methodology
+
+## Research Questions
 
 <div style="text-align: left;">
   ![](images/question.png){width=100px}
@@ -65,55 +72,117 @@ flowchart TD
     D --> D3["Armed actor motivations"]:::secondary
 ```
 
-This research combines data analysis from the AWSD with context about conflict in each region. By connecting incident trends with political events, territorial control, and the actions of armed groups, it offers both a global overview and detailed regional insights.
+## Methodology
 
-## About the Dataset
-
-This analysis utilizes the **Aid Worker Security Database (AWSD)**, a global resource maintained by **Humanitarian Outcomes** that tracks major incidents of violence against humanitarian aid workers. Each record in the dataset includes:
-
-- **Temporal and geographic data**: Incident date, location, coordinates
-- **Organizational details**: Type of agency affected, staff nationality
-- **Incident specifics**: Attack type, context, perpetrators, motives
-- **Impact metrics**: Numbers killed, wounded, kidnapped
-
-The AWSD is considered the gold standard for humanitarian security data and is used by researchers, policy makers, and security practitioners worldwide.
-
-# Global Patterns of Humanitarian Security Incidents
-
-![](images/glob.png){width=200px}
-
-## Worldwide Incident Trends (1997-2025)
-
-Security incidents affecting humanitarian workers have shown a concerning upward trajectory over the past three decades. Several inflection points stand out:
-
-- **2003-2006**: Sharp increase following international interventions in Iraq and Afghanistan
-- **2011-2014**: Surge during the Arab Spring and subsequent conflicts
-- **2018-2020**: Peak during intensified conflicts in Syria, Yemen, and the Sahel
-- **2023-2025**: Recent escalation in multiple conflict zones, including Gaza, Sudan, and DRC
-
-These global patterns reflect both the changing nature of conflict and the evolving role of humanitarian actors in complex emergencies.
+This project is broken into three main parts. First, we conduct an international analysis of all countries to uncover global trends in humanitarian security incidents. Next, we take a closer look at eight contemporary conflict hotspots—Afghanistan, Democratic Republic of Congo (DRC), Mali, Palestine, Somalia, South Sudan, Sudan, and Syria—to explore country-specific patterns and challenges. Lastly, throughout our analysis, we encountered a significant number of unknown values; we examine the implications of this missing data and reflect on how uncertainty shapes our understanding of humanitarian risk.
 
 # Regional Focus: Eight Contemporary Hotspots
 
 ## Why These Eight Countries?
 
-![](images/globby.png){width=200px}
+![](images/glob.png){width=200px}
 
-While security incidents affect humanitarian operations worldwide, they are not evenly distributed. This project focuses on,
+These countries consistently rank among those with the highest security incident rates, both historically and over the past 15 years. Mali emerges as a major hotspot primarily in the past 15 years.
 
-- **Middle East**: Syria and Palestine
-- **East Africa**: Somalia, South Sudan, and Sudan
-- **Central/South Asia**: Afghanistan 
-- **Central Africa**: DRC 
+```{python}
+#| echo: false
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
 
-The eight countries selected for detailed analysis Afghanistan, DRC, Mali, Palestine, Somalia, South Sudan, Sudan, and Syria, represent both historical and contemporary hotspots for humanitarian security incidents. Together, they account for approximately 68% **FILL IN** of all incidents recorded in the AWSD over the past 15 years. Each context also offers unique insights into how different conflict dynamics shape security threats.
+# Define values
+percent_target_countries = 8.42
+percent_target_incidents = 63.82
 
-## Staff Nationality and Casualty Patterns
+# Create positions for the bars (closer together)
+positions = [0, 0.4]  # Place bars much closer together
+labels = ['Countries', 'Incidents']
+colors = ['#FF5733', '#E8E8E8']
+bar_width = 0.35  # Slightly narrower bars
+
+# Create smaller plot with tighter width
+fig, ax = plt.subplots(figsize=(2, 1.5))
+
+# Plot stacked bars (bottom = Target, top = Other)
+for i in range(2):
+    ax.bar(positions[i], percent_target_countries if i == 0 else percent_target_incidents, 
+           color=colors[0], width=bar_width)
+    ax.bar(positions[i], 100 - (percent_target_countries if i == 0 else percent_target_incidents), 
+           color=colors[1], width=bar_width, 
+           bottom=percent_target_countries if i == 0 else percent_target_incidents)
+    
+    # Add exact decimal value labels
+    if i == 0:
+        ax.text(positions[i], percent_target_countries / 2, f"{percent_target_countries}%", 
+                ha='center', va='center', color='white', fontsize=6, fontweight='bold')
+    else:
+        ax.text(positions[i], percent_target_incidents / 2, f"{percent_target_incidents}%", 
+                ha='center', va='center', color='white', fontsize=6, fontweight='bold')
+
+# Bold title with smaller font
+ax.set_title('8 Countries = 64% of Incidents', fontsize=7, fontweight='bold')
+
+# Further clean up
+ax.set_ylim(0, 100)
+ax.set_yticks([])
+ax.set_xticks(positions)
+ax.set_xticklabels(labels, fontsize=6)
+ax.tick_params(left=False, bottom=False)
+for spine in ax.spines.values():
+    spine.set_visible(False)
+
+# This makes the plot even tighter
+plt.tight_layout(pad=0.05)
+plt.subplots_adjust(left=0, right=1)  # Use full width of figure
+plt.savefig("mini_security_chart_close_bars.png", dpi=300, bbox_inches='tight')
+plt.show()
+
+```
+
+```{python}
+#| echo: false
+import pandas as pd
+
+# Load the data
+df = pd.read_csv("data/security_incidents_cleaned.csv")
+
+# Standardize country names for matching
+df['country'] = df['country'].str.strip().str.lower()
+
+# Define the list of target countries
+target_countries = [
+    'somalia',
+    'occupied palestinian territories',
+    'dr congo',
+    'mali',
+    'south sudan',
+    'sudan',
+    'afghanistan',
+    'syrian arab republic'
+]
+
+target_countries = [c.lower() for c in target_countries]
+
+total_incidents = len(df)
+
+target_incidents = df[df['country'].isin(target_countries)]
+num_target_incidents = len(target_incidents)
+
+percent_target = (num_target_incidents / total_incidents) * 100
+
+num_countries = df['country'].nunique()
+
+```
+
+Although they represent just 8.4% of the countries in the dataset, these eight nations account for 63.8% of all recorded incidents.
+
+## Key Findings
+
+### Staff Nationality and Casualty Patterns
 
 There is a consistent disparity in security incidents affecting national versus international staff:
 
 - National staff account for a significant amount of all casualities (killed, wounded, and kidnapped)
-- This disparity persists across all geographic regions analyzed 
 
 This pattern represents both an operational challenge and an ethical concern for humanitarian organizations attempting to manage risk equitably.
 
@@ -220,7 +289,7 @@ display(tabs)
 
 ```
 
-## Attack Methods and Attack Contexts
+### Attack Methods and Attack Contexts
 
 ```{python}
 #| echo: false
@@ -342,80 +411,327 @@ Attack methods and contexts vary significantly across these eight conflict zones
 
 Attack methods: 
 
-- **Syria and Palestine**: Aerial bombardment and shelling dominate, reflecting state military capabilities and urban warfare. Combat/crossfire dominates, indicating collateral damage rather than deliberate targeting. 
-- **Sudan, South Sudan, Somalia**: Shooting predominates, indicating organized ground operations by militarized forces
-- **Afghanistan, DRC, Mali**: Kidnapping emerges as the primary attack method, suggesting resource extraction and leverage-seeking motivations
+- **Syria and Occupied Palestinian Territories**: Shelling and aerial bombardment highlight state-led military operations and urban conflict.
+- **Afghanistan, Somalia, DRC**: Kidnapping is the most common method, pointing to tactics focused on leverage, ransom, and disruption.
+- **Sudan and South Sudan**: High rates of shooting and bodily assault reflect widespread ground violence by armed groups.
+- **Mali**: Kidnapping dominates, but overall attack volume is lower, reflecting a more targeted threat environment.
 
 This distribution demonstrates how humanitarian security threats are shaped by the unique characteristics of each conflict, requiring tailored mitigation strategies rather than standardized approaches.
 
 Attack contexts:
 
-- **Syria, Palestine**: Combat/crossfire dominates, indicating collateral damage rather than deliberate targeting
-- **Sudan, South Sudan, Somalia, DRC, Mali**: Ambushes predominate (40-50% of incidents), showing deliberate targeting during movement
-- **Afghanistan**: More diverse contexts including direct targeting, raids on compounds, and kidnappings
+- **Syria, Palestine**: Combat/crossfire is the leading context, indicating indirect exposure to conflict rather than targeted attacks.
+- **Sudan, South Sudan, Somalia, DRC, Mali**: Ambushes are the most common, suggesting frequent targeting of aid workers while in transit.
+- **Afghanistan**: Attack contexts are more varied, including ambushes, individual targeting, and compound raids.
 
-### Implications for Operations
+Implications for Operations:
 
 The prevalence of different attack contexts has direct implications for humanitarian operations:
 
-- In **ambush-dominated environments** (Sudan, DRC, Mali): Journey management, route analysis, and convoy protection are critical
-- In **combat/crossfire contexts** (Syria, Palestine): Early warning systems, bunkers, and conflict mapping become essential
+- In **ambush-dominated environments** (Sudan, South Sudan, DRC, Mali): Focus on secure movement, use route risk assessments, journey management protocols, and vehicle convoy strategies.
+- In **combat/crossfire contexts** (Syria, Palestine): Emphasize early warning systems, shelter infrastructure, and close coordination with local security mapping efforts.
 - In **compound targeting** scenarios (Afghanistan): Physical site security and access control are priorities
+- In **kidnapping-prone areas** (Afghanistan, Somalia, DRC, Mali): Invest in staff training on abduction response and low-profile movement tactics.
 
 These distinctions highlight the importance of adapting operational security plans to address the most likely contexts of attack in each environment.
 
-## Political Transitions Create Vulnerability Windows
+### Political Transitions Create Vulnerability Windows
 
 Security incidents consistently spike during power transitions, though the specific relationship varies:
 
-- **Peace agreements** sometimes correlate with increased incidents (South Sudan)
-- **Coups and regime changes** usually lead to immediate security deterioration (Sudan, Mali)
-- **Territorial control shifts** create new vulnerability patterns (Syria, Afghanistan)
+- **Peace agreements** sometimes correlate with increased incidents 
+- **Coups and regime changes** usually lead to immediate security deterioration 
+- **Territorial control shifts** create new vulnerability patterns 
+
+```{=html}
+<style>
+  .countries-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .country-box {
+    width: 120px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    background-color: #FF5733;
+  }
+  
+  .country-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  
+  .stat-box {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 20px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    border-left: 5px solid #FF5733;
+  }
+</style>
+
+<div class="stat-box">
+  Select a country below to learn more about the conflict it has faced.
+</div>
+
+<div class="countries-container">
+  <a href="https://www.cfr.org/global-conflict-tracker/conflict/conflict-syria" target="_blank" style="text-decoration: none;">
+    <div class="country-box" style="background: linear-gradient(45deg, #FF5733, #E6270B);">
+      Syria
+    </div>
+  </a>
+  
+  <a href="https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict" target="_blank" style="text-decoration: none;">
+    <div class="country-box" style="background: linear-gradient(45deg, #FF5733, #E6270B);">
+      Occupied Palestinian Territories
+    </div>
+  </a>
+  
+  <a href="https://www.cfr.org/global-conflict-tracker/conflict/war-afghanistan" target="_blank" style="text-decoration: none;">
+    <div class="country-box" style="background: linear-gradient(45deg, #FF7833, #E94B0C);">
+      Afghanistan
+    </div>
+  </a>
+  
+  <a href="https://www.cfr.org/global-conflict-tracker/conflict/al-shabab-somalia" target="_blank" style="text-decoration: none;">
+    <div class="country-box" style="background: linear-gradient(45deg, #FF7833, #E94B0C);">
+      Somalia
+    </div>
+  </a>
+  
+  <a href="https://www.cfr.org/global-conflict-tracker/conflict/civil-war-south-sudan" target="_blank" style="text-decoration: none;">
+    <div class="country-box" style="background: linear-gradient(45deg, #FF9933, #EC6D0E);">
+      South Sudan
+    </div>
+  </a>
+  
+  <a href="https://www.cfr.org/global-conflict-tracker/conflict/power-struggle-sudan" target="_blank" style="text-decoration: none;">
+    <div class="country-box" style="background: linear-gradient(45deg, #FF9933, #EC6D0E);">
+      Sudan
+    </div>
+  </a>
+  
+  <a href="https://www.cfr.org/global-conflict-tracker/conflict/violence-democratic-republic-congo" target="_blank" style="text-decoration: none;">
+    <div class="country-box" style="background: linear-gradient(45deg, #FFAA33, #ED810F);">
+      DR Congo
+    </div>
+  </a>
+  
+  <a href="https://www.cfr.org/global-conflict-tracker/conflict/destabilization-mali" target="_blank" style="text-decoration: none;">
+    <div class="country-box" style="background: linear-gradient(45deg, #FFAA33, #ED810F);">
+      Mali
+    </div>
+  </a>
+</div>
+
+<script>
+  // Add optional animation or additional interactivity if needed
+  document.addEventListener('DOMContentLoaded', function() {
+    const countryBoxes = document.querySelectorAll('.country-box');
+    countryBoxes.forEach(box => {
+      box.addEventListener('mouseover', function() {
+        this.style.transform = 'translateY(-5px)';
+      });
+      box.addEventListener('mouseout', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+  });
+</script>
+```
+
+### Missing Context, Hidden Risks
+
+Missing data remains a major challenge. In several countries, over one-third of incidents lack key contextual information—limiting our ability to fully understand patterns of violence and potentially underrepresenting specific threats.
+
+```{python}
+#| include: false
+#| echo: false
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+plt.rcParams['font.size'] = 11
+plt.rcParams['axes.titlesize'] = 10
+plt.rcParams['axes.labelsize'] = 8
+
+palette = {
+    "primary": "#1D70B8",
+    "secondary": "#FFBD59",
+    "tertiary": "#F2645A",
+    "neutral": "#7A868C"
+}
+
+df = pd.read_csv("data/security_incidents_cleaned.csv")
+countries = [
+    "Occupied Palestinian Territories", "Afghanistan", "DR Congo",
+    "Syrian Arab Republic", "Somalia", "Mali", "South Sudan", "Sudan"
+]
+df_filtered = df[df['country'].isin(countries)]
+country_totals = df_filtered.groupby('country').size().to_dict()
+```
+
+```{python}
+
+#| echo: false
+
+columns_to_check = [
+    "means_of_attack", "attack_context", "location",
+    "motive", "actor_type", "actor_name"
+]
+
+df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(
+    lambda row: (row == "Unknown").sum(), axis=1
+)
+
+country_stats = []
+for country in countries:
+    country_data = df_filtered[df_filtered['country'] == country]
+    total_incidents = len(country_data)
+    total_unknown = country_data['unknown_count'].sum()
+    total_possible = total_incidents * len(columns_to_check)
+    pct_unknown = (total_unknown / total_possible) * 100 if total_possible > 0 else 0
+    country_stats.append({
+        'country': country,
+        'percent_unknown': pct_unknown
+    })
+
+stats_df = pd.DataFrame(country_stats).sort_values('percent_unknown', ascending=False)
+
+```
+
+```{python}
+
+#| echo: false
+
+df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(lambda row: (row == "Unknown").sum(), axis=1)
+country_unknown = df_filtered.groupby('country')['unknown_count'].sum()
+total_possible = df_filtered.groupby('country').size() * len(columns_to_check)
+unknown_pct = (country_unknown / total_possible * 100).reindex(countries)
+known_pct = 100 - unknown_pct
+
+sorted_countries = known_pct.sort_values().index
+stacked_data = pd.DataFrame({
+    'country': sorted_countries,
+    'Known': known_pct[sorted_countries].values,
+    'Unknown': unknown_pct[sorted_countries].values
+})
+
+plt.figure(figsize=(2.8, 1.8))  # smaller figure
+
+# Plot stacked bars
+bar1 = plt.barh(
+    y=stacked_data['country'],  
+    width=stacked_data['Known'],
+    color='#FF5252',
+    height=0.6,
+    label='Known'
+)
+
+bar2 = plt.barh(
+    y=stacked_data['country'],
+    width=stacked_data['Unknown'],
+    left=stacked_data['Known'],
+    color='#64C1FF',
+    height=0.6,
+    label='Unknown'
+)
+
+# Add smaller percentage labels
+for i, country in enumerate(stacked_data['country']):
+    if stacked_data['Known'][i] > 15:
+        plt.text(stacked_data['Known'][i] / 2, i, f"{stacked_data['Known'][i]:.0f}%", 
+                 va='center', ha='center', color='white', fontsize=4.5)
+    if stacked_data['Unknown'][i] > 15:
+        plt.text(stacked_data['Known'][i] + stacked_data['Unknown'][i] / 2, i, f"{stacked_data['Unknown'][i]:.0f}%", 
+                 va='center', ha='center', color='white', fontsize=4.5)
+
+# Set limits and ticks
+plt.xlim(0, 100)
+plt.yticks(fontsize=5)
+plt.xticks([0, 50, 100], fontsize=5)
+
+# Title with smaller font
+plt.title("Data Completeness by Country (%)", fontsize=6.5)
+
+# Smaller legend off to right
+plt.legend(loc='center left', bbox_to_anchor=(1.02, 0.5), frameon=False, fontsize=5)
+
+# Clean up spines
+plt.gca().spines['right'].set_visible(False)
+plt.gca().spines['top'].set_visible(False)
+
+# Optimize layout
+plt.tight_layout(pad=0.2)
+plt.subplots_adjust(left=0.28, right=0.82)
+
+plt.show()
+```
 
 # Conclusions and Recommendations
 
 ## Key Findings and Implications
 
-1. **Context-specific security approaches are essential**
-   - The substantial variation in attack methods, contexts, and locations across regions demonstrates that standardized security protocols will be insufficient
-
-2. **Protection inequality requires urgent attention**
-   - The universal pattern of national staff bearing 5-10 times higher casualty rates represents both an operational and ethical priority
-
-3. **Political transitions create vulnerability**
-   - Security incidents consistently spike during power transitions, though the specific relationship varies by context
-
-4. **Security metrics require careful interpretation**
-   - Reduced incidents may indicate humanitarian withdrawal rather than improved conditions
+- **Security strategies must be context-specific**  
+  Patterns of violence vary widely by country—kidnappings, ambushes, aerial bombardments—making one-size-fits-all protocols ineffective.
+- **National staff face disproportionate risk**  
+  Across all regions, national personnel experience 5–10 times more casualties than international staff, raising urgent ethical and operational concerns.
+- **Political transitions increase risk**  
+  Security incidents often spike during leadership changes, peace deals, or shifts in territorial control, creating windows of heightened vulnerability.
+- **Lower incident counts don't always signal improvement**  
+  A decline in reported attacks may reflect aid withdrawal or underreporting, especially in high-unknown-data contexts—not necessarily increased safety.
+- **Data gaps obscure key risks**  
+  In many countries, over one-third of records lack crucial context, limiting the ability to design fully informed security strategies.
 
 ## Recommendations for Humanitarian Organizations
 
 ### Security Planning
 
-- Develop region-specific protocols based on predominant attack methods and contexts
-- Implement equity-based duty of care policies that provide equivalent protection for national and international staff
-- Establish early warning systems tied to political transitions and conflict dynamics
+- Develop country-specific protocols based on the dominant attack methods and risk contexts.
+- Ensure equity in protection policies, providing national staff with safety measures equivalent to those of international personnel.
+- Integrate early warning systems tied to political events and local shifts in control.
+- Improve data collection and completeness to better understand risk environments and adapt security policies in real time.
 
-### Operational Approaches
+### Context-Specific Security Measures
 
-- In **ambush-prone regions** (Sudan, South Sudan, Somalia, DRC, Mali): Prioritize journey management and convoy protection
-- In **aerial threat zones** (Syria, Palestine): Focus on shelter designs and early warning systems
-- In **kidnap-risk areas** (Afghanistan, DRC, Mali): Emphasize low-profile approaches and staff tracking
+- **In ambush-heavy settings** (e.g., Sudan, South Sudan, DRC, Mali): Prioritize secure transportation, journey management, and convoy procedures.
+- **In urban conflict or aerial threat zones** (e.g., Syria, Palestine): Invest in shelter infrastructure and real-time conflict tracking.
+- **In high kidnap-risk regions** (e.g., Afghanistan, Somalia, Mali): Emphasize low-profile operations, staff movement protocols, and abduction response training.
 
 ### Policy Advocacy
 
-- Support efforts to hold people accountable for attacks on aid workers
-- Advocate for safe zones and agreements to protect humanitarians in conflict areas
-- Encourage continued funding for safety measures that fit each local context
+- Support accountability for attacks on aid workers through legal action and diplomatic pressure.
+- Promote safe corridors and humanitarian access agreements, especially in contested or shifting zones.
+- Advocate for continued investment in context-appropriate security infrastructure, staff training, and incident reporting systems.
 
 ## Recommendations for Future Research
 
-- Explore how security incidents affect access to humanitarian aid
-- Look at differences in safety and outcomes for local vs. international staff
-- Compare which security strategies work best in similar conflict areas
-- Study how climate issues and conflict together affect humanitarian work
-
-By using insights from each specific context, humanitarian organizations can create stronger, more tailored safety plans that respond to the unique challenges of each location, while also working to ensure fair and equal protection for both local and international staff.
+- Assess how insecurity affects humanitarian access and the ability to deliver aid.
+- Investigate differences in outcomes and risk between local and international personnel.
+- Evaluate which security practices are most effective across different conflict types.
+- Explore how climate stressors intersect with violence and impact aid operations.
 
 # 📥 Source and Access
 

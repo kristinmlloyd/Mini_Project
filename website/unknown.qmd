@@ -108,29 +108,6 @@ columns_to_check = [
     "motive", "actor_type", "actor_name"
 ]
 
-df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(
-    lambda row: (row == "Unknown").sum(), axis=1
-)
-
-country_stats = []
-for country in countries:
-    country_data = df_filtered[df_filtered['country'] == country]
-    total_incidents = len(country_data)
-    total_unknown = country_data['unknown_count'].sum()
-    total_possible = total_incidents * len(columns_to_check)
-    pct_unknown = (total_unknown / total_possible) * 100 if total_possible > 0 else 0
-    country_stats.append({
-        'country': country,
-        'percent_unknown': pct_unknown
-    })
-
-stats_df = pd.DataFrame(country_stats).sort_values('percent_unknown', ascending=False)
-
-```
-
-```{python}
-#| echo: false
-
 df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(lambda row: (row == "Unknown").sum(), axis=1)
 country_unknown = df_filtered.groupby('country')['unknown_count'].sum()
 total_possible = df_filtered.groupby('country').size() * len(columns_to_check)
@@ -144,24 +121,55 @@ stacked_data = pd.DataFrame({
     'Unknown': unknown_pct[sorted_countries].values
 })
 
-plot_data = pd.melt(stacked_data, id_vars=['country'], value_vars=['Known', 'Unknown'], var_name='Status', value_name='Percent')
+plt.figure(figsize=(2.8, 1.8))  # smaller figure
 
-plt.figure(figsize=(5, 4))
-
-sns.barplot(
-    data=plot_data, 
-    x='Percent', 
-    y='country', 
-    hue='Status', 
-    palette={'Known': '#FF5252', 'Unknown': '#64C1FF'}  
+# Plot stacked bars
+bar1 = plt.barh(
+    y=stacked_data['country'],  
+    width=stacked_data['Known'],
+    color='#FF5252',
+    height=0.6,
+    label='Known'
 )
 
-plt.legend(title='', loc='lower right', fontsize=8, frameon=False)
+bar2 = plt.barh(
+    y=stacked_data['country'],
+    width=stacked_data['Unknown'],
+    left=stacked_data['Known'],
+    color='#64C1FF',
+    height=0.6,
+    label='Unknown'
+)
 
-plt.title("Data Completeness by Country (%)")
-plt.tight_layout()
+# Add smaller percentage labels
+for i, country in enumerate(stacked_data['country']):
+    if stacked_data['Known'][i] > 15:
+        plt.text(stacked_data['Known'][i] / 2, i, f"{stacked_data['Known'][i]:.0f}%", 
+                 va='center', ha='center', color='white', fontsize=4.5)
+    if stacked_data['Unknown'][i] > 15:
+        plt.text(stacked_data['Known'][i] + stacked_data['Unknown'][i] / 2, i, f"{stacked_data['Unknown'][i]:.0f}%", 
+                 va='center', ha='center', color='white', fontsize=4.5)
+
+# Set limits and ticks
+plt.xlim(0, 100)
+plt.yticks(fontsize=5)
+plt.xticks([0, 50, 100], fontsize=5)
+
+# Title with smaller font
+plt.title("Data Completeness by Country (%)", fontsize=6.5)
+
+# Smaller legend off to right
+plt.legend(loc='center left', bbox_to_anchor=(1.02, 0.5), frameon=False, fontsize=5)
+
+# Clean up spines
+plt.gca().spines['right'].set_visible(False)
+plt.gca().spines['top'].set_visible(False)
+
+# Optimize layout
+plt.tight_layout(pad=0.2)
+plt.subplots_adjust(left=0.28, right=0.82)
+
 plt.show()
-
 ```
 
 The chart reveals significant variation in data completeness across countries. Sudan leads with over 40% of relevant fields missing, followed by DR Congo and Afghanistan, each exceeding 35%. These high rates suggest either limited access to reliable data in volatile regions or weak reporting infrastructure. Countries like the Syrian Arab Republic and Occupied Palestinian Territories show comparatively lower missingness, potentially due to better-established monitoring systems or more centralized data collection efforts.
@@ -226,7 +234,7 @@ import matplotlib.pyplot as plt
 df = pd.read_csv("data/security_incidents_cleaned.csv")
 
 target_countries = [
-    "Occupied Palestine Territories",
+    "Occupied Palestinian Territories",
     "Afghanistan",
     "DR Congo",
     "Syrian Arab Republic",
