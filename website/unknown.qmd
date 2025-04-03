@@ -102,74 +102,66 @@ For each country and field, we calculate the percentage of incidents with "Unkno
 ```{python}
 
 #| echo: false
+import pandas as pd
+import matplotlib.pyplot as plt
 
+# Load the data
+df = pd.read_csv("data/security_incidents_cleaned.csv")
+
+# Define target countries
+target_countries = [
+    "Occupied Palestinian Territories",
+    "Afghanistan",
+    "DR Congo",
+    "Syrian Arab Republic",
+    "Somalia",
+    "Mali",
+    "South Sudan",
+    "Sudan"
+]
+
+# Filter for target countries
+filtered_df = df[df["country"].isin(target_countries)]
+
+# Columns to check for unknown values
 columns_to_check = [
     "means_of_attack", "attack_context", "location",
     "motive", "actor_type", "actor_name"
 ]
 
-df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(lambda row: (row == "Unknown").sum(), axis=1)
-country_unknown = df_filtered.groupby('country')['unknown_count'].sum()
-total_possible = df_filtered.groupby('country').size() * len(columns_to_check)
-unknown_pct = (country_unknown / total_possible * 100).reindex(countries)
-known_pct = 100 - unknown_pct
+# Compute unknowns per country
+def calculate_known_unknown(df, columns):
+    summary = []
+    for country in target_countries:
+        country_data = df[df["country"] == country]
+        total_cells = len(country_data) * len(columns)
+        unknowns = (country_data[columns] == "Unknown").sum().sum()
+        knowns = total_cells - unknowns
+        summary.append({
+            "country": country,
+            "known": knowns,
+            "unknown": unknowns,
+            "pct_known": knowns / total_cells,
+            "pct_unknown": unknowns / total_cells
+        })
+    return pd.DataFrame(summary).sort_values("pct_unknown", ascending=False)
 
-sorted_countries = known_pct.sort_values().index
-stacked_data = pd.DataFrame({
-    'country': sorted_countries,
-    'Known': known_pct[sorted_countries].values,
-    'Unknown': unknown_pct[sorted_countries].values
-})
+# Apply function
+summary_df = calculate_known_unknown(filtered_df, columns_to_check)
 
-plt.figure(figsize=(2.8, 1.8))  # smaller figure
-
-# Plot stacked bars
-bar1 = plt.barh(
-    y=stacked_data['country'],  
-    width=stacked_data['Known'],
-    color='#FF5252',
-    height=0.6,
-    label='Known'
-)
-
-bar2 = plt.barh(
-    y=stacked_data['country'],
-    width=stacked_data['Unknown'],
-    left=stacked_data['Known'],
-    color='#64C1FF',
-    height=0.6,
-    label='Unknown'
-)
-
-# Add smaller percentage labels
-for i, country in enumerate(stacked_data['country']):
-    if stacked_data['Known'][i] > 15:
-        plt.text(stacked_data['Known'][i] / 2, i, f"{stacked_data['Known'][i]:.0f}%", 
-                 va='center', ha='center', color='white', fontsize=4.5)
-    if stacked_data['Unknown'][i] > 15:
-        plt.text(stacked_data['Known'][i] + stacked_data['Unknown'][i] / 2, i, f"{stacked_data['Unknown'][i]:.0f}%", 
-                 va='center', ha='center', color='white', fontsize=4.5)
-
-# Set limits and ticks
-plt.xlim(0, 100)
-plt.yticks(fontsize=5)
-plt.xticks([0, 50, 100], fontsize=5)
-
-# Title with smaller font
-plt.title("Data Completeness by Country (%)", fontsize=6.5)
-
-# Smaller legend off to right
-plt.legend(loc='center left', bbox_to_anchor=(1.02, 0.5), frameon=False, fontsize=5)
-
-# Clean up spines
-plt.gca().spines['right'].set_visible(False)
-plt.gca().spines['top'].set_visible(False)
-
-# Optimize layout
-plt.tight_layout(pad=0.2)
-plt.subplots_adjust(left=0.28, right=0.82)
-
+# Plot
+plt.figure(figsize=(6, 4))
+plt.barh(summary_df["country"], summary_df["pct_known"], color="#64C1FF", label="Known")
+plt.barh(summary_df["country"], summary_df["pct_unknown"], left=summary_df["pct_known"], color="#FF5252", label="Unknown")
+plt.xlabel("Proportion of Attribute Values")
+plt.title("Overall Data Completeness by Country")
+plt.legend(loc="lower right", fontsize=7)
+plt.xticks(fontsize=7)
+plt.yticks(fontsize=7)
+plt.gca().invert_yaxis()
+plt.tight_layout()
 plt.show()
+
 ```
 
 The chart reveals significant variation in data completeness across countries. Sudan leads with over 40% of relevant fields missing, followed by DR Congo and Afghanistan, each exceeding 35%. These high rates suggest either limited access to reliable data in volatile regions or weak reporting infrastructure. Countries like the Syrian Arab Republic and Occupied Palestinian Territories show comparatively lower missingness, potentially due to better-established monitoring systems or more centralized data collection efforts.
@@ -179,8 +171,6 @@ This missingness pattern has important implications:
 - **Cross-country comparisons**: Analysis comparing conflict patterns across countries should acknowledge that information gaps may be driving apparent differences
 - **Trend identification**: Areas with higher missing data may show artificially low counts of specific attack types or perpetrators
 - **Underreporting bias**: The true security situation may be worse than reported, particularly in countries with higher information gaps
-
-## Heatmap of Unknown Values by Column and Country
 
 ```{python}
 #| echo: false
@@ -299,6 +289,22 @@ By implementing these recommendations, organizations can both improve the qualit
 
 ```{python}
 #| echo: false
+
+# Define columns to check for "Unknown" values
+columns_to_check = ["means_of_attack", "attack_context", "location",
+    "motive", "actor_type", "actor_name"]
+
+# Calculate the count of unknown values for each record
+df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(lambda row: (row == "Unknown").sum(), axis=1)
+
+# Calculate the total unknown values per country
+country_unknown = df_filtered.groupby('country')['unknown_count'].sum()
+
+# Calculate the total possible values (total incidents × number of fields checked)
+total_possible = df_filtered.groupby('country').size() * len(columns_to_check)
+
+# Calculate the percentage of unknown values for each country
+unknown_pct = (country_unknown / total_possible * 100).reindex(countries)
 
 # Create summary table
 summary_table = pd.DataFrame({
