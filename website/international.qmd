@@ -508,10 +508,6 @@ fig_context.show()
 
 - **Road**: The high number of incidents on roads could be due to several factors, such as more exposure and visibility of potential targets, less controlled environment compared to other locations, vulnerable transportation of valuable goods or information, etc.
 
-- **Public Locations**: These areas are prone to security incidents because high foot traffic increases opportunities for theft or disruption, multiple entry and exit points, or diverse and unpredictable crowd dynamics.
-
-- **Protect Sites**: Despite being designated as protected, these locations still experience incidents.
-
 ## Gender Distribution of Affected Individuals
 
 Understanding how security incidents affect different gender groups provides important insights into vulnerability patterns and protection needs.

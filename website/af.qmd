@@ -333,6 +333,43 @@ Key Findings:
 - Ambushes feature prominently, highlighting risks along travel routes and during movements
 - Raids on facilities demonstrate vulnerabilities of fixed installations and compounds
 
+## Location of Attack
+
+```{python}
+#| label: fig-attack-locations
+#| fig-cap: "Most common attack locations"
+#| echo: false
+
+# Get top 10 most frequent locations
+location_counts = country_data['location'].value_counts().reset_index()
+location_counts.columns = ['Location', 'Count']
+location_counts = location_counts.sort_values('Count', ascending=False).head(10)
+
+# Create bar chart
+fig_locations = px.bar(
+    location_counts,
+    y='Location',
+    x='Count',
+    title=None,
+    height=500,
+    orientation='h'
+)
+
+fig_locations.update_traces(marker_color="#FFBD59")  # <- updated color
+
+fig_locations.update_layout(
+    yaxis={'categoryorder': 'total ascending'},
+    xaxis_title="Number of Incidents",
+    yaxis_title=None
+)
+
+fig_locations.show()
+```
+
+### Analysis of Attack Locations
+
+The majority of incidents occurred on roads and in unknown locations, highlighting persistent risks during travel and gaps in situational reporting.
+
 # Human Impact of Security Incidents {#sec-impact}
 
 ## Casualties by Category

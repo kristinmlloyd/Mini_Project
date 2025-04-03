@@ -174,7 +174,36 @@ num_countries = df['country'].nunique()
 
 ```
 
-Although they represent just 8.4% of the countries in the dataset, these eight nations account for 63.8% of all recorded incidents.
+```{python}
+
+#| echo: false
+total_affected_sum = target_incidents["total_affected"].sum()
+
+```
+
+Although they represent just 8.4% of the countries in the dataset, these eight nations account for 63.8% of all recorded incidents. 
+
+```{=html}
+
+<style>
+  .pop-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FF5733;
+    display: inline-block;
+    animation: pop 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+  }
+</style>
+
+<p><span class="pop-number">5,375</span> people have been affected by the violence in these countries.</p>
+
+```
 
 ## Key Findings
 
@@ -289,7 +318,7 @@ display(tabs)
 
 ```
 
-### Attack Methods and Attack Contexts
+### Attack Methods, Contexts, and Locations
 
 ```{python}
 #| echo: false
@@ -300,35 +329,43 @@ import ipywidgets as widgets
 attack_data = {
     "Syria": {
         "methods": {"Shelling": 62, "Shooting": 46, "Kidnapping": 39},
-        "contexts": {"Combat/Crossfire": 195, "Unknown": 50, "Individual attack": 43}
+        "contexts": {"Combat/Crossfire": 195, "Unknown": 50, "Individual attack": 43},
+        "locations": {"Project Site": 87, "Road": 76, "Public Location": 70}
     },
     "Afghanistan": {
-        "methods": {"Shooting": 154, "Kidnapping": 197, "Unknown": 74},
-        "contexts": {"Unknown": 123, "Individual attack": 114, "Ambush": 244}
+        "methods": {"Kidnapping": 197, "Shooting": 154, "Unknown": 74},
+        "contexts": {"Ambush": 244, "Unknown": 123, "Individual attack": 114},
+        "locations": {"Road": 245, "Unknown": 169, "Project Site": 62}
     },
     "Mali": {
         "methods": {"Kidnapping": 76, "Shooting": 23, "Bodily assault": 14},
-        "contexts": {"Ambush": 79, "Unknown": 18, "Individual attack": 14}
+        "contexts": {"Ambush": 79, "Unknown": 18, "Individual attack": 14},
+        "locations": {"Road": 80, "Unknown": 19, "Public Location": 13}
     },
     "Occupied Palestine Territories": {
         "methods": {"Aerial bombardment": 67, "Shooting": 41, "Unknown": 27},
-        "contexts": {"Combat/Crossfire": 113, "Individual attack": 18, "Unknown": 16}
+        "contexts": {"Combat/Crossfire": 113, "Individual attack": 18, "Unknown": 16},
+        "locations": {"Unknown": 45, "Project Site": 33, "Road": 28}
     },
     "Somalia": {
         "methods": {"Kidnapping": 132, "Shooting": 66, "Unknown": 35},
-        "contexts": {"Ambush": 88, "Unknown": 61, "Individual attack": 82}
+        "contexts": {"Ambush": 88, "Unknown": 61, "Individual attack": 82},
+        "locations": {"Road": 101, "Unknown": 84, "Public Location": 60}
     },
     "South Sudan": {
         "methods": {"Kidnapping": 76, "Shooting": 23, "Bodily assault": 14},
-        "contexts": {"Ambush": 224, "Individual attack": 155, "Raid": 82}
+        "contexts": {"Ambush": 224, "Individual attack": 155, "Raid": 82},
+        "locations": {"Road": 230, "Public Location": 101, "Unknown": 73}
     },
     "Sudan": {
-        "methods": {"Kidnapping": 75, "Shooting": 113, "Bodily assault": 73},
-        "contexts": {"Ambush": 139, "Unknown": 61, "Combat/Crossfire": 60}
+        "methods": {"Shooting": 113, "Kidnapping": 75, "Bodily assault": 73},
+        "contexts": {"Ambush": 139, "Unknown": 61, "Combat/Crossfire": 60},
+        "locations": {"Road": 195, "Project Site": 50, "Public Location": 43}  # Fixed empty values
     },
     "DRC": {
         "methods": {"Kidnapping": 80, "Shooting": 71, "Bodily assault": 45},
-        "contexts": {"Ambush": 98, "Unknown": 52, "Individual attack": 33}
+        "contexts": {"Ambush": 98, "Unknown": 52, "Individual attack": 33},
+        "locations": {"Road": 103, "Unknown": 60, "Home": 23}
     }
 }
 
@@ -348,6 +385,7 @@ def generate_attack_html(country):
     data = attack_data[country]
     methods = data["methods"]
     contexts = data["contexts"]
+    locations = data["locations"]
 
     method_cards = "".join([
         f"""
@@ -366,6 +404,16 @@ def generate_attack_html(country):
         """
         for k, v in contexts.items()
     ])
+    
+    # Add location cards
+    location_cards = "".join([
+        f"""
+        <div style='background-color:{get_color(v)}; padding:15px; border-radius:5px; text-align:center; width:180px;'>
+            <strong>{k}</strong><br>{v} incidents
+        </div>
+        """
+        for k, v in locations.items()
+    ])
 
     html = f"""
     <div style='font-family: sans-serif;'>
@@ -374,8 +422,12 @@ def generate_attack_html(country):
             {method_cards}
         </div>
         <h2 style='text-align: center;'>Attack Contexts</h2>
-        <div style='display: flex; justify-content: center; gap: 10px;'>
+        <div style='display: flex; justify-content: center; gap: 10px; margin-bottom: 25px;'>
             {context_cards}
+        </div>
+        <h2 style='text-align: center;'>Attack Locations</h2>
+        <div style='display: flex; justify-content: center; gap: 10px;'>
+            {location_cards}
         </div>
     </div>
     """
@@ -393,7 +445,7 @@ for i, country in enumerate(countries):
 # Display title and legend
 title_html = """
 <h1 style='text-align: center; font-size: 2rem; font-weight: bold; font-family: sans-serif;'>
-    Top Three Attack Methods & Contexts by Country
+    Top Three Attack Methods, Contexts & Locations by Country
 </h1>
 <div style='display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;'>
     <div style='background-color:#91cf60; padding: 10px; border-radius: 4px;'>0–49</div>
@@ -404,12 +456,11 @@ title_html = """
 """
 display(HTML(title_html))
 display(tabs)
-
 ```
 
-Attack methods and contexts vary significantly across these eight conflict zones, reflecting differences in conflict dynamics, armed actor capabilities, and tactical objectives:
+Attack methods, contexts, and locations vary significantly across these eight conflict zones, reflecting differences in conflict dynamics, armed actor capabilities, and tactical objectives:
 
-Attack methods: 
+**Attack methods**: 
 
 - **Syria and Occupied Palestinian Territories**: Shelling and aerial bombardment highlight state-led military operations and urban conflict.
 - **Afghanistan, Somalia, DRC**: Kidnapping is the most common method, pointing to tactics focused on leverage, ransom, and disruption.
@@ -418,7 +469,7 @@ Attack methods:
 
 This distribution demonstrates how humanitarian security threats are shaped by the unique characteristics of each conflict, requiring tailored mitigation strategies rather than standardized approaches.
 
-Attack contexts:
+**Attack contexts**:
 
 - **Syria, Palestine**: Combat/crossfire is the leading context, indicating indirect exposure to conflict rather than targeted attacks.
 - **Sudan, South Sudan, Somalia, DRC, Mali**: Ambushes are the most common, suggesting frequent targeting of aid workers while in transit.
@@ -432,6 +483,9 @@ The prevalence of different attack contexts has direct implications for humanita
 - In **combat/crossfire contexts** (Syria, Palestine): Emphasize early warning systems, shelter infrastructure, and close coordination with local security mapping efforts.
 - In **compound targeting** scenarios (Afghanistan): Physical site security and access control are priorities
 - In **kidnapping-prone areas** (Afghanistan, Somalia, DRC, Mali): Invest in staff training on abduction response and low-profile movement tactics.
+
+**Attack locations**: 
+
 
 These distinctions highlight the importance of adapting operational security plans to address the most likely contexts of attack in each environment.
 

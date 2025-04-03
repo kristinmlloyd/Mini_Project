@@ -336,6 +336,43 @@ fig_context.show()
 
 There is a significant gap between ambushes and the second most common category. This disparity highlights how armed groups in Mali have strategically prioritized ambush tactics, likely due to their effectiveness along the country's limited road networks. *source*
 
+## Location of Attack
+
+```{python}
+#| label: fig-attack-locations
+#| fig-cap: "Most common attack locations"
+#| echo: false
+
+# Get top 10 most frequent locations
+location_counts = country_data['location'].value_counts().reset_index()
+location_counts.columns = ['Location', 'Count']
+location_counts = location_counts.sort_values('Count', ascending=False).head(10)
+
+# Create bar chart
+fig_locations = px.bar(
+    location_counts,
+    y='Location',
+    x='Count',
+    title=None,
+    height=500,
+    orientation='h'
+)
+
+fig_locations.update_traces(marker_color="#FFBD59")  # <- updated color
+
+fig_locations.update_layout(
+    yaxis={'categoryorder': 'total ascending'},
+    xaxis_title="Number of Incidents",
+    yaxis_title=None
+)
+
+fig_locations.show()
+```
+
+### Analysis of Attack Locations
+
+The vast majority of incidents occurred on roads, underscoring the heightened dangers faced by aid workers during travel and transportation.
+
 # Human Impact of Security Incidents {#sec-impact}
 
 ## Casualties by Category

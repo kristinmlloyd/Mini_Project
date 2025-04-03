@@ -322,6 +322,43 @@ fig_context.show()
 
 Ambushes are by far the most frequent attack context, significantly surpassing other categories. This suggests both SAF and RSF frequently utilize element-of-surprise tactics, particularly along transport routes. The prevalence of ambushes indicates high risks associated with road travel, reinforcing the need for dynamic security planning, route risk assessments, and protection protocols, especially for humanitarian convoys.
 
+## Location of Attack
+
+```{python}
+#| label: fig-attack-locations
+#| fig-cap: "Most common attack locations"
+#| echo: false
+
+# Get top 10 most frequent locations
+location_counts = country_data['location'].value_counts().reset_index()
+location_counts.columns = ['Location', 'Count']
+location_counts = location_counts.sort_values('Count', ascending=False).head(10)
+
+# Create bar chart
+fig_locations = px.bar(
+    location_counts,
+    y='Location',
+    x='Count',
+    title=None,
+    height=500,
+    orientation='h'
+)
+
+fig_locations.update_traces(marker_color="#FFBD59")  # <- updated color
+
+fig_locations.update_layout(
+    yaxis={'categoryorder': 'total ascending'},
+    xaxis_title="Number of Incidents",
+    yaxis_title=None
+)
+
+fig_locations.show()
+```
+
+### Analysis of Attack Locations
+
+Most humanitarian incidents occurred on roads and project sites, with a high share of unknown locations.
+
 # Human Impact of Security Incidents {#sec-impact}
 
 ## Casualties by Category

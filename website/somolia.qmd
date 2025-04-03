@@ -338,6 +338,43 @@ The relatively high number of **unknown** contexts suggests a need for improved 
 
 This pattern reinforces the operational necessity of route planning, protective protocols for national staff, and scenario-specific security training that prepares personnel for both ambush-style and individualized threats.
 
+## Location of Attack
+
+```{python}
+#| label: fig-attack-locations
+#| fig-cap: "Most common attack locations"
+#| echo: false
+
+# Get top 10 most frequent locations
+location_counts = country_data['location'].value_counts().reset_index()
+location_counts.columns = ['Location', 'Count']
+location_counts = location_counts.sort_values('Count', ascending=False).head(10)
+
+# Create bar chart
+fig_locations = px.bar(
+    location_counts,
+    y='Location',
+    x='Count',
+    title=None,
+    height=500,
+    orientation='h'
+)
+
+fig_locations.update_traces(marker_color="#FFBD59")  # <- updated color
+
+fig_locations.update_layout(
+    yaxis={'categoryorder': 'total ascending'},
+    xaxis_title="Number of Incidents",
+    yaxis_title=None
+)
+
+fig_locations.show()
+```
+
+### Analysis of Attack Locations
+
+Most humanitarian incidents occurred on roads and in public locations, with a notable portion lacking location details.
+
 # Human Impact of Security Incidents {#sec-impact}
 
 ## Casualties by Category
