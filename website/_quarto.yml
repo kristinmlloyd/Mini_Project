@@ -7,7 +7,7 @@ website:
   navbar:
     search: true
     left:
-      - href: index.qmd
+      - href: intro.qmd
         text: Introduction
       - href: data_cleaning.qmd
         text: Data Cleaning

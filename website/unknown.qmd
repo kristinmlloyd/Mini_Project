@@ -129,6 +129,7 @@ stats_df = pd.DataFrame(country_stats).sort_values('percent_unknown', ascending=
 ```
 
 ```{python}
+#| echo: false
 
 df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(lambda row: (row == "Unknown").sum(), axis=1)
 country_unknown = df_filtered.groupby('country')['unknown_count'].sum()
@@ -174,6 +175,7 @@ This missingness pattern has important implications:
 ## Heatmap of Unknown Values by Column and Country
 
 ```{python}
+#| echo: false
 
 columns_to_check = [
     "means_of_attack", "attack_context", "location",
@@ -213,6 +215,56 @@ This heatmap reveals that missing data is not evenly distributed across columns 
 - **Relatively complete location data**: Across most countries, location information is more consistently available than other fields.
 
 These patterns reflect the practical challenges of documenting security incidents in conflict zones, where identifying perpetrators often carries security risks for monitors and witnesses.
+
+## Gender Analysis
+
+```{python}
+#| echo: false
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("data/security_incidents_cleaned.csv")
+
+target_countries = [
+    "Occupied Palestine Territories",
+    "Afghanistan",
+    "DR Congo",
+    "Syrian Arab Republic",
+    "Somalia",
+    "Mali",
+    "South Sudan",
+    "Sudan"
+]
+
+filtered_df = df[df["country"].isin(target_countries)]
+
+summary = filtered_df.groupby("country")[["gender_female", "gender_male", "gender_unknown"]].sum().reset_index()
+
+summary["total"] = summary["gender_female"] + summary["gender_male"] + summary["gender_unknown"]
+summary["known"] = summary["gender_female"] + summary["gender_male"]
+summary["pct_known"] = summary["known"] / summary["total"]
+summary["pct_unknown"] = summary["gender_unknown"] / summary["total"]
+
+summary = summary.sort_values("pct_unknown", ascending=False)
+
+plt.figure(figsize=(6, 4))
+plt.barh(summary["country"], summary["pct_known"], color="#64C1FF", label="Known")
+plt.barh(summary["country"], summary["pct_unknown"], left=summary["pct_known"], color="#FF5252", label="Unknown")
+plt.xlabel("Proportion of Gender Data")
+plt.title("Gender Data Completeness by Country")
+plt.legend(loc="lower right")
+plt.gca().invert_yaxis()
+plt.tight_layout()
+plt.show()
+```
+
+The chart reveals critical gaps in gender data collection across conflict-affected countries, with Sudan exhibiting the highest level of missing information. Syria leads in data completeness, yet nearly one-fifth of gender records remain undocumented. 
+
+**Emergency Response Priorities**: During humanitarian crises, responders often prioritize basic needs (e.g., food, water, shelter) over detailed demographic tracking.
+
+**Reporting Biases**: Incidents affecting females may be underreported in some settings. This data may underrepresent violence against women, particularly sexual violence, is often underreported in conflict zones due to stigma and limited access to reporting mechanisms.
+
+**Legal and Social Norms**: In some countries, recognition of non-binary or transgender individuals is limited or criminalized, leading to exclusion or misclassification. This can result in either lumping into "unknown" or not recording the data at all.
 
 <h1>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h1>
 
