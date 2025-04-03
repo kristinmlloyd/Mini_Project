@@ -223,6 +223,7 @@ display(tabs)
 ## Attack Methods and Attack Contexts
 
 ```{python}
+#| echo: false
 from IPython.display import HTML, display
 import ipywidgets as widgets
 
