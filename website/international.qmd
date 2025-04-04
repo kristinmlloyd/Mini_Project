@@ -77,9 +77,9 @@ df = pd.read_csv("data/security_incidents_cleaned.csv")
 
 # Introduction
 
-This page provides a global overview of security incidents using data from the Aid Worker Security Database. We explore geographic and temporal trends and break down key variables used in the dataset to better understand patterns of violence against humanitarian personnel.
+This part of the analysis provides a global overview of security incidents using data from the Aid Worker Security Database. We explore geographic and temporal trends and break down key variables used in the dataset to better understand patterns of violence against humanitarian personnel.
 
-The international analysis sets the stage before diving into individual country reports.
+As will be demonstrated, the key findings from the global overview identified clear trending hotspots, and these are analyzed in deeper detail within individual country reports.
 
 # Dataset Overview
 
@@ -294,6 +294,154 @@ The interactive bar chart shows:
 - Possible influence from improved data collection and reporting
 
 Together, these visuals underscore how fluid the security landscape is—and why real-time analysis and localized response strategies matter.
+
+# Countries with Most Incidents: All-Time Analysis
+
+First, let's look at which countries have experienced the most security incidents over the entire period covered by our dataset:
+
+```{python}
+#| label: top-countries-all-time
+#| echo: false
+
+total_by_country = df.groupby('country').size().reset_index(name='total_incidents')
+total_by_country = total_by_country.sort_values('total_incidents', ascending=False)
+top15_countries = total_by_country.head(8)
+
+fig_top_all_time = px.bar(
+    top15_countries,
+    x='country',
+    y='total_incidents',
+    labels={'total_incidents': 'Number of Incidents', 'country': 'Country'},
+    height=450
+)
+
+fig_top_all_time.update_traces(marker_color=palette["primary"])
+
+fig_top_all_time.update_layout(
+    title={
+        'text': 'Top Countries by Security Incidents (All Time)',
+        'y': 0.95,  # slightly lower
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top',
+        'font': {'size': 15}
+    },
+    xaxis={'categoryorder': 'total descending', 'tickangle': 45},
+    margin=dict(t=80)  # add top margin
+)
+
+fig_top_all_time.show()
+
+fig_top_all_time.write_html("images/top_countries_all_time.html")
+```
+
+This visualization highlights the countries that have historically been most affected by security incidents. Several factors might contribute to a country appearing on this list:
+
+-   Long-standing regional conflicts
+-   Political instability
+-   Higher population (which can increase the absolute number of incidents)
+-   More comprehensive reporting of incidents
+
+# Countries with Most Incidents: Recent Trends
+
+Historical patterns don't always reflect current realities. To identify emerging security hotspots, we need to focus on more recent data. The following analysis examines incident patterns over the past 10 years:
+
+```{python}
+#| label: top-countries-recent
+#| echo: false
+
+current_year = df['year'].max()
+ten_years_ago = current_year - 10
+recent_df = df[df['year'] >= ten_years_ago]
+
+recent_by_country = recent_df.groupby('country').size().reset_index(name='recent_incidents')
+recent_by_country = recent_by_country.sort_values('recent_incidents', ascending=False)
+top15_recent = recent_by_country.head(8)
+
+fig_top_recent = px.bar(
+    top15_recent,
+    x='country',
+    y='recent_incidents',
+    labels={'recent_incidents': 'Number of Incidents', 'country': 'Country'},
+    height=500
+)
+
+fig_top_recent.update_traces(marker_color=palette["primary"])
+
+fig_top_recent.update_layout(
+    title={
+        'text': f'Top Countries by Security Incidents<br>(Last 10 Years: {ten_years_ago}–{current_year})',
+        'y': 0.95,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top',
+        'font': {'size': 15}  # smaller font
+    },
+    xaxis={'categoryorder': 'total descending', 'tickangle': 45},
+    margin=dict(t=100)
+)
+
+fig_top_recent.show()
+
+fig_top_recent.write_html("images/top_countries_recent.html")
+```
+
+This recent trends analysis shows:
+
+- Countries that have experienced deteriorating security situations in the past decade
+- An Emerging hotspot (Mali) that did not appear in historical data
+
+By comparing this visualization with the all-time analysis, we can identify significant shifts in global security patterns.
+
+# Conclusion
+
+This global analysis provides a comprehensive overview of the security challenges faced by humanitarian personnel across time and geography. By breaking down patterns in attack types, contexts, affected demographics, and organizational exposure, we gain insight into the evolving nature of these risks. While some regions remain persistent hotspots, new threats continue to emerge, underscoring the need for real-time monitoring and adaptive security strategies.
+
+# Next Steps
+
+## Analyze Individual Countries
+
+- [Palestine](palestine.qmd)
+- [Afghanistan](af.qmd)
+- [DR Congo](dr.qmd)
+- [Syria](syria.qmd)
+- [Somalia](somolia.qmd)
+- [Mali](mali.qmd)
+- [South Sudan](southsudan.qmd)
+- [Sudan](sudan.qmd)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### delete 
 
 # Global Breakdown Across Key Variables
 
@@ -561,117 +709,3 @@ The gender distribution of individuals affected by security incidents reveals se
 3.  **Targeting Patterns**: In some contexts, males may be specifically targeted.
 4.  **Reporting Biases**: Incidents affecting females may be underreported in some settings. This data may underrepresent violence against women, particularly sexual violence, is often underreported in conflict zones due to stigma and limited access to reporting mechanisms.
 
-# Countries with Most Incidents: All-Time Analysis
-
-First, let's look at which countries have experienced the most security incidents over the entire period covered by our dataset:
-
-```{python}
-#| label: top-countries-all-time
-#| echo: false
-
-total_by_country = df.groupby('country').size().reset_index(name='total_incidents')
-total_by_country = total_by_country.sort_values('total_incidents', ascending=False)
-top15_countries = total_by_country.head(8)
-
-fig_top_all_time = px.bar(
-    top15_countries,
-    x='country',
-    y='total_incidents',
-    labels={'total_incidents': 'Number of Incidents', 'country': 'Country'},
-    height=450
-)
-
-fig_top_all_time.update_traces(marker_color=palette["primary"])
-
-fig_top_all_time.update_layout(
-    title={
-        'text': 'Top Countries by Security Incidents (All Time)',
-        'y': 0.95,  # slightly lower
-        'x': 0.5,
-        'xanchor': 'center',
-        'yanchor': 'top',
-        'font': {'size': 15}
-    },
-    xaxis={'categoryorder': 'total descending', 'tickangle': 45},
-    margin=dict(t=80)  # add top margin
-)
-
-fig_top_all_time.show()
-
-fig_top_all_time.write_html("images/top_countries_all_time.html")
-```
-
-This visualization highlights the countries that have historically been most affected by security incidents. Several factors might contribute to a country appearing on this list:
-
--   Long-standing regional conflicts
--   Political instability
--   Higher population (which can increase the absolute number of incidents)
--   More comprehensive reporting of incidents
-
-# Countries with Most Incidents: Recent Trends
-
-Historical patterns don't always reflect current realities. To identify emerging security hotspots, we need to focus on more recent data. The following analysis examines incident patterns over the past 10 years:
-
-```{python}
-#| label: top-countries-recent
-#| echo: false
-
-current_year = df['year'].max()
-ten_years_ago = current_year - 10
-recent_df = df[df['year'] >= ten_years_ago]
-
-recent_by_country = recent_df.groupby('country').size().reset_index(name='recent_incidents')
-recent_by_country = recent_by_country.sort_values('recent_incidents', ascending=False)
-top15_recent = recent_by_country.head(8)
-
-fig_top_recent = px.bar(
-    top15_recent,
-    x='country',
-    y='recent_incidents',
-    labels={'recent_incidents': 'Number of Incidents', 'country': 'Country'},
-    height=500
-)
-
-fig_top_recent.update_traces(marker_color=palette["primary"])
-
-fig_top_recent.update_layout(
-    title={
-        'text': f'Top Countries by Security Incidents<br>(Last 10 Years: {ten_years_ago}–{current_year})',
-        'y': 0.95,
-        'x': 0.5,
-        'xanchor': 'center',
-        'yanchor': 'top',
-        'font': {'size': 15}  # smaller font
-    },
-    xaxis={'categoryorder': 'total descending', 'tickangle': 45},
-    margin=dict(t=100)
-)
-
-fig_top_recent.show()
-
-fig_top_recent.write_html("images/top_countries_recent.html")
-```
-
-This recent trends analysis shows:
-
-- Countries that have experienced deteriorating security situations in the past decade
-- An Emerging hotspot (Mali) that did not appear in historical data
-
-By comparing this visualization with the all-time analysis, we can identify significant shifts in global security patterns.
-
-# Conclusion
-
-This global analysis provides a comprehensive overview of the security challenges faced by humanitarian personnel across time and geography. By breaking down patterns in attack types, contexts, affected demographics, and organizational exposure, we gain insight into the evolving nature of these risks. While some regions remain persistent hotspots, new threats continue to emerge, underscoring the need for real-time monitoring and adaptive security strategies.
-
-# Next Steps
-
-## Analyze Individual Countries
-
-- [Palestine](palestine.qmd)
-- [Afghanistan](af.qmd)
-- [DR Congo](dr.qmd)
-- [Syria](syria.qmd)
-- [Somalia](somolia.qmd)
-- [Mali](mali.qmd)
-- [South Sudan](southsudan.qmd)
-- [Sudan](sudan.qmd)

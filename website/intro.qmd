@@ -55,21 +55,12 @@ flowchart TD
     title --> A & B & C & D
     
     A["What types of attacks are<br>most common?"]:::primary
-    A --> A1["Frequency by attack method"]:::secondary
-    A --> A2["Geographic distribution<br>of attack types"]:::secondary
     
     B["How does violence vary by<br>year and political event?"]:::primary
-    B --> B1["Temporal patterns<br>and hotspots"]:::secondary
-    B --> B2["Correlation with<br>political upheaval"]:::secondary
-    B --> B3["Emerging threats"]:::secondary
     
     C["How does risk differ for national<br>vs. international staff?"]:::primary
-    C --> C1["Casualty comparison<br>by nationality"]:::secondary
-    C --> C2["Risk factors across regions"]:::secondary
     
     D["What contextual factors shape<br>security patterns?"]:::primary
-    D --> D1["Conflict dynamics"]:::secondary
-    D --> D3["Armed actor motivations"]:::secondary
 ```
 
 ## Methodology
@@ -181,7 +172,7 @@ total_affected_sum = target_incidents["total_affected"].sum()
 
 ```
 
-Although they represent just 8.4% of the countries in the dataset, these eight nations account for 63.8% of all recorded incidents. 
+Although they represent just 8.4% of the countries in the dataset, these eight countries account for 63.8% of all recorded incidents. 
 
 ```{=html}
 
@@ -201,7 +192,7 @@ Although they represent just 8.4% of the countries in the dataset, these eight n
   }
 </style>
 
-<p><span class="pop-number">5,375</span> people have been affected by the violence in these countries.</p>
+<p><span class="pop-number">5,375</span> humanitarian aid workers have been affected by the violence in these countries.</p>
 
 ```
 
@@ -225,7 +216,7 @@ import ipywidgets as widgets
 
 # Updated data with accurate values
 country_summary = {
-    "Occupied Palestine Territories": {
+    "Palestine": {
         "nationals": {"killed": 423, "wounded": 143, "kidnapped": 0},
         "internationals": {"killed": 8, "wounded": 3, "kidnapped": 1}
     },
@@ -271,26 +262,26 @@ def generate_country_html(country):
         
         <h3 style='text-align: center;'>National Staff</h3>
         <div style='display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;'>
-            <div style='background-color:#FF6B6B; color:white; padding:20px; border-radius:8px;'>
+            <div style='background-color:#FF6B6B; color:white; padding:20px; border-radius:8px; text-align: center;'>
                 <strong>Killed</strong><br>{nat['killed']}
             </div>
-            <div style='background-color:#FFD166; padding:20px; border-radius:8px;'>
+            <div style='background-color:#FFD166; padding:20px; border-radius:8px; text-align: center;'>
                 <strong>Wounded</strong><br>{nat['wounded']}
             </div>
-            <div style='background-color:#64C1FF; color:white; padding:20px; border-radius:8px;'>
+            <div style='background-color:#64C1FF; color:white; padding:20px; border-radius:8px; text-align: center;'>
                 <strong>Kidnapped</strong><br>{nat['kidnapped']}
             </div>
         </div>
         
         <h3 style='text-align: center;'>International Staff</h3>
         <div style='display: flex; justify-content: center; gap: 20px;'>
-            <div style='background-color:#FF6B6B; color:white; padding:20px; border-radius:8px;'>
+            <div style='background-color:#FF6B6B; color:white; padding:20px; border-radius:8px; text-align: center;'>
                 <strong>Killed</strong><br>{intl['killed']}
             </div>
-            <div style='background-color:#FFD166; padding:20px; border-radius:8px;'>
+            <div style='background-color:#FFD166; padding:20px; border-radius:8px; text-align: center;'>
                 <strong>Wounded</strong><br>{intl['wounded']}
             </div>
-            <div style='background-color:#64C1FF; color:white; padding:20px; border-radius:8px;'>
+            <div style='background-color:#64C1FF; color:white; padding:20px; border-radius:8px; text-align: center;'>
                 <strong>Kidnapped</strong><br>{intl['kidnapped']}
             </div>
         </div>
@@ -320,6 +311,8 @@ display(tabs)
 
 ### Attack Methods, Contexts, and Locations
 
+Attack methods, contexts, and locations vary significantly across these eight conflict zones, reflecting differences in conflict dynamics, armed actor capabilities, and tactical objectives:
+
 ```{python}
 #| echo: false
 from IPython.display import HTML, display
@@ -327,30 +320,35 @@ import ipywidgets as widgets
 
 # Attack methods and contexts per country
 attack_data = {
-    "Syria": {
-        "methods": {"Shelling": 62, "Shooting": 46, "Kidnapping": 39},
-        "contexts": {"Combat/Crossfire": 195, "Unknown": 50, "Individual attack": 43},
-        "locations": {"Project Site": 87, "Road": 76, "Public Location": 70}
+    "Palestine": {
+        "methods": {"Aerial bombardment": 67, "Shooting": 41, "Unknown": 27},
+        "contexts": {"Combat/Crossfire": 113, "Individual attack": 18, "Unknown": 16},
+        "locations": {"Unknown": 45, "Project Site": 33, "Road": 28}
     },
     "Afghanistan": {
         "methods": {"Kidnapping": 197, "Shooting": 154, "Unknown": 74},
         "contexts": {"Ambush": 244, "Unknown": 123, "Individual attack": 114},
         "locations": {"Road": 245, "Unknown": 169, "Project Site": 62}
     },
-    "Mali": {
-        "methods": {"Kidnapping": 76, "Shooting": 23, "Bodily assault": 14},
-        "contexts": {"Ambush": 79, "Unknown": 18, "Individual attack": 14},
-        "locations": {"Road": 80, "Unknown": 19, "Public Location": 13}
+    "DRC": {
+        "methods": {"Kidnapping": 80, "Shooting": 71, "Bodily assault": 45},
+        "contexts": {"Ambush": 98, "Unknown": 52, "Individual attack": 33},
+        "locations": {"Road": 103, "Unknown": 60, "Home": 23}
     },
-    "Occupied Palestine Territories": {
-        "methods": {"Aerial bombardment": 67, "Shooting": 41, "Unknown": 27},
-        "contexts": {"Combat/Crossfire": 113, "Individual attack": 18, "Unknown": 16},
-        "locations": {"Unknown": 45, "Project Site": 33, "Road": 28}
+    "Syria": {
+        "methods": {"Shelling": 62, "Shooting": 46, "Kidnapping": 39},
+        "contexts": {"Combat/Crossfire": 195, "Unknown": 50, "Individual attack": 43},
+        "locations": {"Project Site": 87, "Road": 76, "Public Location": 70}
     },
     "Somalia": {
         "methods": {"Kidnapping": 132, "Shooting": 66, "Unknown": 35},
         "contexts": {"Ambush": 88, "Unknown": 61, "Individual attack": 82},
         "locations": {"Road": 101, "Unknown": 84, "Public Location": 60}
+    },
+    "Mali": {
+        "methods": {"Kidnapping": 76, "Shooting": 23, "Bodily assault": 14},
+        "contexts": {"Ambush": 79, "Unknown": 18, "Individual attack": 14},
+        "locations": {"Road": 80, "Unknown": 19, "Public Location": 13}
     },
     "South Sudan": {
         "methods": {"Kidnapping": 76, "Shooting": 23, "Bodily assault": 14},
@@ -361,11 +359,6 @@ attack_data = {
         "methods": {"Shooting": 113, "Kidnapping": 75, "Bodily assault": 73},
         "contexts": {"Ambush": 139, "Unknown": 61, "Combat/Crossfire": 60},
         "locations": {"Road": 195, "Project Site": 50, "Public Location": 43}  # Fixed empty values
-    },
-    "DRC": {
-        "methods": {"Kidnapping": 80, "Shooting": 71, "Bodily assault": 45},
-        "contexts": {"Ambush": 98, "Unknown": 52, "Individual attack": 33},
-        "locations": {"Road": 103, "Unknown": 60, "Home": 23}
     }
 }
 
@@ -458,8 +451,6 @@ display(HTML(title_html))
 display(tabs)
 ```
 
-Attack methods, contexts, and locations vary significantly across these eight conflict zones, reflecting differences in conflict dynamics, armed actor capabilities, and tactical objectives:
-
 **Attack methods**: 
 
 - **Syria and Occupied Palestinian Territories**: Shelling and aerial bombardment highlight state-led military operations and urban conflict.
@@ -486,6 +477,9 @@ The prevalence of different attack contexts has direct implications for humanita
 
 **Attack locations**: 
 
+
+
+come back
 
 These distinctions highlight the importance of adapting operational security plans to address the most likely contexts of attack in each environment.
 
@@ -746,7 +740,7 @@ plt.show()
 
 # Conclusions and Recommendations
 
-## Key Findings and Implications
+## Implications from Key Findings
 
 - **Security strategies must be context-specific**  
   Patterns of violence vary widely by country—kidnappings, ambushes, aerial bombardments—making one-size-fits-all protocols ineffective.
@@ -782,7 +776,6 @@ plt.show()
 
 ## Recommendations for Future Research
 
-- Assess how insecurity affects humanitarian access and the ability to deliver aid.
 - Investigate differences in outcomes and risk between local and international personnel.
 - Evaluate which security practices are most effective across different conflict types.
 - Explore how climate stressors intersect with violence and impact aid operations.
