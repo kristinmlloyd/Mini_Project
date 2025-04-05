@@ -451,37 +451,7 @@ display(HTML(title_html))
 display(tabs)
 ```
 
-**Attack methods**: 
-
-- **Syria and Occupied Palestinian Territories**: Shelling and aerial bombardment highlight state-led military operations and urban conflict.
-- **Afghanistan, Somalia, DRC**: Kidnapping is the most common method, pointing to tactics focused on leverage, ransom, and disruption.
-- **Sudan and South Sudan**: High rates of shooting and bodily assault reflect widespread ground violence by armed groups.
-- **Mali**: Kidnapping dominates, but overall attack volume is lower, reflecting a more targeted threat environment.
-
-This distribution demonstrates how humanitarian security threats are shaped by the unique characteristics of each conflict, requiring tailored mitigation strategies rather than standardized approaches.
-
-**Attack contexts**:
-
-- **Syria, Palestine**: Combat/crossfire is the leading context, indicating indirect exposure to conflict rather than targeted attacks.
-- **Sudan, South Sudan, Somalia, DRC, Mali**: Ambushes are the most common, suggesting frequent targeting of aid workers while in transit.
-- **Afghanistan**: Attack contexts are more varied, including ambushes, individual targeting, and compound raids.
-
-Implications for Operations:
-
-The prevalence of different attack contexts has direct implications for humanitarian operations:
-
-- In **ambush-dominated environments** (Sudan, South Sudan, DRC, Mali): Focus on secure movement, use route risk assessments, journey management protocols, and vehicle convoy strategies.
-- In **combat/crossfire contexts** (Syria, Palestine): Emphasize early warning systems, shelter infrastructure, and close coordination with local security mapping efforts.
-- In **compound targeting** scenarios (Afghanistan): Physical site security and access control are priorities
-- In **kidnapping-prone areas** (Afghanistan, Somalia, DRC, Mali): Invest in staff training on abduction response and low-profile movement tactics.
-
-**Attack locations**: 
-
-
-
-come back
-
-These distinctions highlight the importance of adapting operational security plans to address the most likely contexts of attack in each environment.
+Humanitarian security threats vary widely, with common attack methods including kidnappings, ambushes, shootings, and exposure to crossfire. These threats often occur during travel or in insecure compounds, highlighting the need for context-specific strategies. Ambushes require secure movement planning, crossfire zones need early warning systems and shelter, and areas prone to kidnappings or compound attacks demand staff training and physical site protection. Road travel remains especially risky, emphasizing the importance of route assessments and convoy protocols to safeguard aid workers.
 
 ### Political Transitions Create Vulnerability Windows
 
@@ -687,14 +657,16 @@ stacked_data = pd.DataFrame({
     'Unknown': unknown_pct[sorted_countries].values
 })
 
-plt.figure(figsize=(2.8, 1.8))  # smaller figure
+#| echo: false
+
+plt.figure(figsize=(2.4, 1.4))  # even smaller figure
 
 # Plot stacked bars
 bar1 = plt.barh(
     y=stacked_data['country'],  
     width=stacked_data['Known'],
     color='#FF5252',
-    height=0.6,
+    height=0.45,  # smaller bar height
     label='Known'
 )
 
@@ -703,7 +675,7 @@ bar2 = plt.barh(
     width=stacked_data['Unknown'],
     left=stacked_data['Known'],
     color='#64C1FF',
-    height=0.6,
+    height=0.45,
     label='Unknown'
 )
 
@@ -711,29 +683,29 @@ bar2 = plt.barh(
 for i, country in enumerate(stacked_data['country']):
     if stacked_data['Known'][i] > 15:
         plt.text(stacked_data['Known'][i] / 2, i, f"{stacked_data['Known'][i]:.0f}%", 
-                 va='center', ha='center', color='white', fontsize=4.5)
+                 va='center', ha='center', color='white', fontsize=4)
     if stacked_data['Unknown'][i] > 15:
         plt.text(stacked_data['Known'][i] + stacked_data['Unknown'][i] / 2, i, f"{stacked_data['Unknown'][i]:.0f}%", 
-                 va='center', ha='center', color='white', fontsize=4.5)
+                 va='center', ha='center', color='white', fontsize=4)
 
 # Set limits and ticks
 plt.xlim(0, 100)
-plt.yticks(fontsize=5)
-plt.xticks([0, 50, 100], fontsize=5)
+plt.yticks(fontsize=4)
+plt.xticks([0, 50, 100], fontsize=4)
 
 # Title with smaller font
-plt.title("Data Completeness by Country (%)", fontsize=6.5)
+plt.title("Data Completeness by Country (%)", fontsize=6)
 
-# Smaller legend off to right
-plt.legend(loc='center left', bbox_to_anchor=(1.02, 0.5), frameon=False, fontsize=5)
+# Smaller legend, tighter to side
+plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5), frameon=False, fontsize=4)
 
 # Clean up spines
 plt.gca().spines['right'].set_visible(False)
 plt.gca().spines['top'].set_visible(False)
 
 # Optimize layout
-plt.tight_layout(pad=0.2)
-plt.subplots_adjust(left=0.28, right=0.82)
+plt.tight_layout(pad=0.1)
+plt.subplots_adjust(left=0.32, right=0.82)
 
 plt.show()
 ```

@@ -77,9 +77,9 @@ df = pd.read_csv("data/security_incidents_cleaned.csv")
 
 # Introduction
 
-This part of the analysis provides a global overview of security incidents using data from the Aid Worker Security Database. We explore geographic and temporal trends and break down key variables used in the dataset to better understand patterns of violence against humanitarian personnel.
+This section offers a global overview of security incidents using data from the Aid Worker Security Database, highlighting key geographic and temporal trends to better understand where violence against personnel is most concentrated.  
 
-As will be demonstrated, the key findings from the global overview identified clear trending hotspots, and these are analyzed in deeper detail within individual country reports.
+The analysis reveals distinct hotspots of insecurity, which are explored further in the individual country reports that follow.
 
 # Dataset Overview
 
@@ -107,25 +107,34 @@ The map below displays incidents across the globe, with colors indicating the se
 Clustering is used to manage dense areas where multiple incidents occurred in close proximity.
 
 ```{python}
-#| label: incident-map-function
+
+#| label: global-incidents
+
 #| echo: false
 
-def create_incidents_map(data):
+import folium
+from folium.plugins import MarkerCluster
+import numpy as np
+
+def create_better_incidents_map(data):
     center_lat = data['latitude'].mean()
     center_lon = data['longitude'].mean()
-    incidents_map = folium.Map(location=[center_lat, center_lon], zoom_start=2)
+
+    # Use CartoDB dark theme for a sharper look
+    incidents_map = folium.Map(location=[center_lat, center_lon], zoom_start=2, tiles="CartoDB dark_matter")
+
     marker_cluster = MarkerCluster().add_to(incidents_map)
     valid_coords = data[data['latitude'].notna() & data['longitude'].notna()]
 
     def get_color(affected):
         if pd.isna(affected) or affected == 0:
-            return palette["secondary"]
+            return "#888888"  # muted gray
         elif affected <= 5:
-            return palette["primary"]
+            return "#64C1FF"  # light blue
         elif affected <= 20:
-            return "#FF9A3C"
+            return "#FF9A3C"  # orange
         else:
-            return palette["danger"]
+            return "#FF5252"  # red
 
     for _, row in valid_coords.iterrows():
         popup_text = f"""
@@ -136,24 +145,23 @@ def create_incidents_map(data):
         """
         folium.CircleMarker(
             location=[row['latitude'], row['longitude']],
-            radius=5,
+            radius=np.clip(row['total_affected'] / 2, 3, 10),  # dynamic sizing
             popup=folium.Popup(popup_text, max_width=300),
             fill=True,
-            fill_opacity=0.7,
+            fill_opacity=0.75,
             color=get_color(row['total_affected']),
-            fill_color=get_color(row['total_affected'])
+            fill_color=get_color(row['total_affected']),
+            weight=0.8
         ).add_to(marker_cluster)
 
     return incidents_map
-```
 
-```{python}
-#| label: create-global-map
 #| echo: false
 
-global_incidents_map = create_incidents_map(df)
+global_incidents_map = create_better_incidents_map(df)
 global_incidents_map.save("images/global_security_incidents_map.html")
 global_incidents_map
+
 ```
 
 The interactive map reveals that incidents are highly concentrated in specific regions, especially across parts of Africa and the Middle East.
@@ -409,303 +417,3 @@ This global analysis provides a comprehensive overview of the security challenge
 - [Mali](mali.qmd)
 - [South Sudan](southsudan.qmd)
 - [Sudan](sudan.qmd)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### delete 
-
-# Global Breakdown Across Key Variables
-
-Before diving into individual country profiles, we want to first examine global trends across the key variables in the dataset—such as attack type, context, actor involvement, motive, etc. By analyzing these patterns at a global scale, we can establish an overall understanding of how security incidents are documented, what types of information are commonly missing or uncertain, and which trends emerge across countries. This foundation will help us better interpret the nuances of each country's data in the following sections.
-
-## Types of Injuries and Their Contexts
-
-Understanding how different attack types affect aid workers is crucial for response planning and preparedness. Each method of violence—whether gunfire, explosives, or abduction—carries unique risks and medical implications.
-
-```{python}
-#| echo: false
-
-attack_counts = df['means_of_attack'].value_counts().reset_index()
-attack_counts.columns = ['Attack Type', 'Count']
-attack_counts = attack_counts.sort_values('Count', ascending=False)
-
-fig_attacks = px.bar(
-    attack_counts,
-    x='Attack Type',
-    y='Count',
-    title='Security Incidents by Attack Type',
-    height=450
-)
-
-fig_attacks.update_traces(marker_color=palette["primary"])
-
-fig_attacks.update_layout(
-    xaxis_title=None,
-    yaxis_title="Number of Incidents",
-    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
-)
-
-fig_attacks.show()
-
-```
-
-### Common Attack Types
-
-- **Shooting**: Gunfire directed at individuals or vehicles, often during ambushes.
-
-- **Kidnapping**: Abduction for ransom, leverage, or forced cooperation.
-
-- **Bodily Assault**: Physical violence such as beatings.
-
-- **Aerial Bombardment / Shelling**: Explosives from air or artillery that may strike aid targets.
-
-- **Kidnap-Killing**: Abductions ending in execution.
-
-- **Roadside / Vehicle-borne IEDs**: Explosives planted on roads or in cars.
-
-- **Other Explosives**: Includes grenades, landmines, or suicide devices.
-
-## Attack Contexts
-
-Understanding the context of each security incident helps identify common risk environments and inform response planning. Ambushes and individual attacks are among the most frequent, while raids and detentions reflect more organized or prolonged threats. These distinctions guide preparedness strategies, from route planning to physical site protection.
-
-```{python}
-#| label: attack-contexts
-#| echo: false
-context_counts = df['attack_context'].value_counts().reset_index()
-context_counts.columns = ['Attack Context', 'Count']
-
-context_counts = context_counts.sort_values('Count', ascending=False)
-
-fig_context = px.bar(
-    context_counts,
-    x='Attack Context',
-    y='Count',
-    title='Security Incidents by Attack Context',
-    height=450
-)
-
-fig_context.update_traces(marker_color=palette["primary"])
-
-fig_context.update_layout(
-    xaxis_title=None,
-    yaxis_title="Number of Incidents",
-    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
-)
-
-fig_context.show()
-```
-
-- **Combat/Crossfire**: Occurs when aid workers are caught between opposing armed groups during active fighting.
-
-- **Ambush**: Sudden, premeditated attacks—often while traveling—posing high risk due to surprise and mobility.
-
-- **Individual Attack**: Targeted violence against specific aid workers, often outside group or convoy settings.
-
-- **Raid**: Coordinated intrusion into compounds or facilities with the intent to steal, intimidate, or harm.
-
-- **Detention**: When personnel are held—formally or informally—by state or non-state actors, sometimes for leverage.
-
-## Nationals vs. Internationals
-
-Aid workers from local communities often face greater risks than their international counterparts. This visualization compares casualties—killed, wounded, and kidnapped—by staff category.
-
-```{python}
-#| echo: false
-#| label: nationals-internationals
-
-casualties_data = {
-    'Category': ['Nationals', 'Internationals'],
-    'Killed': [
-        df['nationals_killed'].sum(),
-        df['internationals_killed'].sum()
-    ],
-    'Wounded': [
-        df['nationals_wounded'].sum(),
-        df['internationals_wounded'].sum()
-    ],
-    'Kidnapped': [
-        df['nationals_kidnapped'].sum(),
-        df['internationals_kidnapped'].sum()
-    ]
-}
-
-casualties_df = pd.DataFrame(casualties_data)
-casualties_long = pd.melt(
-    casualties_df,
-    id_vars=['Category'],
-    value_vars=['Killed', 'Wounded', 'Kidnapped'],
-    var_name='Status',
-    value_name='Count'
-)
-
-fig_casualties = px.bar(
-    casualties_long,
-    x='Category',
-    y='Count',
-    color='Status',
-    title='Casualties by Nationality Category',
-    barmode='stack',
-    height=500,
-    color_discrete_map={
-        'Killed': palette["danger"], 
-        'Wounded': palette["primary"], 
-        'Kidnapped': palette["secondary"]
-    }
-)
-
-fig_casualties.update_layout(
-    xaxis_title=None,
-    yaxis_title="Number of People",
-    legend_title_text=None,
-    title={
-        'text': 'Casualties by Nationality Category',
-        'y': 0.95,  # lower to avoid cutoff
-        'x': 0.5,
-        'xanchor': 'center',
-        'yanchor': 'top',
-        'font': {'size': 17}
-    },
-    margin=dict(t=80)  # add top margin
-)
-
-fig_casualties.show()
-
-```
-
-- **Nationals**: Local staff face the majority of casualties, likely due to higher numbers, greater exposure, and fewer protective resources.
-
-- **Internationals**: Though better protected, they are often targeted for kidnapping due to political visibility or ransom value.
-
-These differences emphasize the need for inclusive protection strategies tailored to both national and international aid workers.
-
-### Factors Contributing to Disparity
-
-1.  **Numbers and Exposure**: Locals far outnumber internationals in most areas
-2.  **Access to Protection**: Internationals often have enhanced security measures and evacuation options
-3.  **Targeting Patterns**: Some actors specifically avoid targeting internationals due to potential international consequences
-4.  **Risk Profiles**: Internationals may have more restricted movement in high-threat areas
-
-### Kidnapping Trends
-
--   Kidnapping represents a relatively small proportion of overall casualties
--   However, internationals face a disproportionate kidnapping risk in many contexts due to:
-    -   Higher perceived ransom value
-    -   Political leverage potential
-    -   Media attention
-
-### Location Trends
-
-Certain locations are consistently more vulnerable to security incidents than others. This breakdown highlights where aid workers are most at risk.
-
-```{python}
-#| label: location
-#| echo: false
-context_counts = df['location'].value_counts().reset_index()
-context_counts.columns = ['Location', 'Count']
-
-context_counts = context_counts.sort_values('Count', ascending=False)
-
-fig_context = px.bar(
-    context_counts,
-    x='Location',
-    y='Count',
-    title='Security Incidents by Location',
-    height=450
-)
-
-fig_context.update_traces(marker_color=palette["primary"])
-
-fig_context.update_layout(
-    xaxis_title=None,
-    yaxis_title="Number of Incidents",
-    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
-)
-
-fig_context.show()
-```
-
-- **Road**: The high number of incidents on roads could be due to several factors, such as more exposure and visibility of potential targets, less controlled environment compared to other locations, vulnerable transportation of valuable goods or information, etc.
-
-## Gender Distribution of Affected Individuals
-
-Understanding how security incidents affect different gender groups provides important insights into vulnerability patterns and protection needs.
-
-```{python}
-#| label: gender-analysis
-#| echo: false
-gender_cols = ['gender_male', 'gender_female']
-
-gender_totals = {
-    'Gender': ['Male', 'Female'],
-    'Count': [
-        df['gender_male'].sum(),
-        df['gender_female'].sum()
-    ]
-}
-
-gender_df = pd.DataFrame(gender_totals)
-
-fig_gender = px.bar(
-    gender_df,
-    x='Gender',
-    y='Count',
-    title='Gender Distribution of Affected Individuals',
-    height=450
-)
-
-fig_gender.update_traces(marker_color=palette["primary"])
-
-fig_gender.update_layout(
-    xaxis_title=None,
-    yaxis_title="Number of Individuals"
-)
-
-fig_gender.show()
-```
-
-### Analysis of Gender Patterns
-
-The gender distribution of individuals affected by security incidents reveals several significant patterns:
-
-### Male Predominance
-
--   Males constitute the majority of individuals affected by security incidents
--   The disparity may reflect different exposure levels due to gender roles in some contexts
-
-### Contributing Factors
-
-1.  **Occupational Exposure**: Males may be overrepresented in certain high-risk professions. Armed groups may specifically target men for recruitment, detention, or elimination as potential threats.
-2.  **Mobility Patterns**: Gender differences in freedom of movement may affect exposure to risks.
-3.  **Targeting Patterns**: In some contexts, males may be specifically targeted.
-4.  **Reporting Biases**: Incidents affecting females may be underreported in some settings. This data may underrepresent violence against women, particularly sexual violence, is often underreported in conflict zones due to stigma and limited access to reporting mechanisms.
-

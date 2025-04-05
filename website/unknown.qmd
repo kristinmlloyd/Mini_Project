@@ -97,7 +97,9 @@ This study analyzes a dataset of humanitarian security incidents across eight co
 
 For each country and field, we calculate the percentage of incidents with "Unknown" values. This allows us to identify patterns in data completeness and potential systematic biases in reporting.
 
-## Data Completeness by Country
+# Data Completeness by Country
+
+The chart reveals significant variation in data completeness across countries. Sudan leads with over 40% of relevant fields missing, followed by DR Congo and Afghanistan, each exceeding 35%. These high rates suggest either limited access to reliable data in volatile regions or weak reporting infrastructure. Countries like the Syrian Arab Republic and Occupied Palestinian Territories show comparatively lower missingness, potentially due to better-established monitoring systems or more centralized data collection efforts.
 
 ```{python}
 
@@ -150,7 +152,7 @@ def calculate_known_unknown(df, columns):
 summary_df = calculate_known_unknown(filtered_df, columns_to_check)
 
 # Plot
-plt.figure(figsize=(6, 4))
+plt.figure(figsize=(5, 3))
 plt.barh(summary_df["country"], summary_df["pct_known"], color="#64C1FF", label="Known")
 plt.barh(summary_df["country"], summary_df["pct_unknown"], left=summary_df["pct_known"], color="#FF5252", label="Unknown")
 plt.xlabel("Proportion of Attribute Values")
@@ -164,13 +166,19 @@ plt.show()
 
 ```
 
-The chart reveals significant variation in data completeness across countries. Sudan leads with over 40% of relevant fields missing, followed by DR Congo and Afghanistan, each exceeding 35%. These high rates suggest either limited access to reliable data in volatile regions or weak reporting infrastructure. Countries like the Syrian Arab Republic and Occupied Palestinian Territories show comparatively lower missingness, potentially due to better-established monitoring systems or more centralized data collection efforts.
-
 This missingness pattern has important implications:
 
 - **Cross-country comparisons**: Analysis comparing conflict patterns across countries should acknowledge that information gaps may be driving apparent differences
 - **Trend identification**: Areas with higher missing data may show artificially low counts of specific attack types or perpetrators
 - **Underreporting bias**: The true security situation may be worse than reported, particularly in countries with higher information gaps
+
+_________________________________________________________________________________________________
+
+This heatmap reveals that missing data is not evenly distributed across columns or countries. Key patterns include:
+
+- **Perpetrator information gaps**: Fields related to those responsible for incidents—specifically actor type, actor name, and motive—consistently show the highest rates of unknown values.
+- **Country-specific patterns**: Sudan shows particularly high missingness across all fields, while the Occupied Palestinian Territories has better documentation overall.
+- **Relatively complete means of attacks, attack context, and location data**: Across most countries, this type of information is more consistently available than other fields.
 
 ```{python}
 #| echo: false
@@ -193,28 +201,34 @@ for country in countries:
 heatmap_data['average'] = heatmap_data[columns_to_check].mean(axis=1)
 heatmap_data = heatmap_data.sort_values('average', ascending=False)
 
-plt.figure(figsize=(5, 4))
+#| echo: false
+
+plt.figure(figsize=(4, 3))
 sns.heatmap(
     heatmap_data[columns_to_check],
     annot=False, 
     cmap="YlOrRd",
-    linewidths=0.5
+    linewidths=0.5,
+    cbar_kws={"shrink": 0.7},
+    xticklabels=True,
+    yticklabels=True
 )
-plt.title("% 'Unknown' Values by Country and Column")
+
+# Make axis label text smaller
+plt.xticks(fontsize=6)
+plt.yticks(fontsize=6)
+
+plt.title("% 'Unknown' Values by Country and Column", fontsize=8)
 plt.tight_layout()
 plt.show()
 
 ```
 
-This heatmap reveals that missing data is not evenly distributed across columns or countries. Key patterns include:
-
-- **Perpetrator information gaps**: Fields related to those responsible for incidents—specifically actor type, actor name, and motive—consistently show the highest rates of unknown values.
-- **Country-specific patterns**: Sudan shows particularly high missingness across all fields, while the Occupied Palestinian Territories has better documentation overall.
-- **Relatively complete location data**: Across most countries, location information is more consistently available than other fields.
-
 These patterns reflect the practical challenges of documenting security incidents in conflict zones, where identifying perpetrators often carries security risks for monitors and witnesses.
 
 ## Gender Analysis
+
+The chart reveals critical gaps in gender data collection across conflict-affected countries, with Sudan exhibiting the highest level of missing information. Syria leads in data completeness, yet nearly one-fifth of gender records remain undocumented. 
 
 ```{python}
 #| echo: false
@@ -237,26 +251,27 @@ target_countries = [
 filtered_df = df[df["country"].isin(target_countries)]
 
 summary = filtered_df.groupby("country")[["gender_female", "gender_male", "gender_unknown"]].sum().reset_index()
-
 summary["total"] = summary["gender_female"] + summary["gender_male"] + summary["gender_unknown"]
 summary["known"] = summary["gender_female"] + summary["gender_male"]
 summary["pct_known"] = summary["known"] / summary["total"]
 summary["pct_unknown"] = summary["gender_unknown"] / summary["total"]
-
 summary = summary.sort_values("pct_unknown", ascending=False)
 
-plt.figure(figsize=(6, 4))
+# Smaller plot with smaller fonts
+plt.figure(figsize=(4, 2.4))
 plt.barh(summary["country"], summary["pct_known"], color="#64C1FF", label="Known")
 plt.barh(summary["country"], summary["pct_unknown"], left=summary["pct_known"], color="#FF5252", label="Unknown")
-plt.xlabel("Proportion of Gender Data")
-plt.title("Gender Data Completeness by Country")
-plt.legend(loc="lower right")
-plt.gca().invert_yaxis()
-plt.tight_layout()
-plt.show()
-```
 
-The chart reveals critical gaps in gender data collection across conflict-affected countries, with Sudan exhibiting the highest level of missing information. Syria leads in data completeness, yet nearly one-fifth of gender records remain undocumented. 
+plt.xlabel("Proportion of Gender Data", fontsize=6)
+plt.title("Gender Data Completeness by Country", fontsize=7)
+plt.xticks(fontsize=6)
+plt.yticks(fontsize=6)
+plt.legend(loc="lower right", fontsize=5)
+plt.gca().invert_yaxis()
+plt.tight_layout(pad=0.3)
+plt.show()
+
+```
 
 **Emergency Response Priorities**: During humanitarian crises, responders often prioritize basic needs (e.g., food, water, shelter) over detailed demographic tracking.
 
@@ -264,7 +279,9 @@ The chart reveals critical gaps in gender data collection across conflict-affect
 
 **Legal and Social Norms**: In some countries, recognition of non-binary or transgender individuals is limited or criminalized, leading to exclusion or misclassification. This can result in either lumping into "unknown" or not recording the data at all.
 
-<h1>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h1>
+# Conclusion 
+
+<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
 
 Based on these findings, we recommend the following approaches:
 
@@ -284,51 +301,3 @@ Based on these findings, we recommend the following approaches:
 - **Transparency in derived conclusions**: When publishing analysis based on this data, clearly communicate the limitations and acknowledge how missing data may affect conclusions. This transparency builds credibility and encourages appropriate use of the findings.
 
 By implementing these recommendations, organizations can both improve the quality of security incident data and make more responsible use of existing information, despite its limitations.RetryClaude can make mistakes. Please double-check responses.
-
-## Data Summary
-
-```{python}
-#| echo: false
-
-# Define columns to check for "Unknown" values
-columns_to_check = ["means_of_attack", "attack_context", "location",
-    "motive", "actor_type", "actor_name"]
-
-# Calculate the count of unknown values for each record
-df_filtered["unknown_count"] = df_filtered[columns_to_check].apply(lambda row: (row == "Unknown").sum(), axis=1)
-
-# Calculate the total unknown values per country
-country_unknown = df_filtered.groupby('country')['unknown_count'].sum()
-
-# Calculate the total possible values (total incidents × number of fields checked)
-total_possible = df_filtered.groupby('country').size() * len(columns_to_check)
-
-# Calculate the percentage of unknown values for each country
-unknown_pct = (country_unknown / total_possible * 100).reindex(countries)
-
-# Create summary table
-summary_table = pd.DataFrame({
-    'Country': countries,
-    'Total Incidents': [country_totals.get(c, 0) for c in countries],
-    'Overall % Unknown': unknown_pct.reindex(countries).values,
-    'Avg Unknown Fields': df_filtered.groupby('country')['unknown_count'].mean().reindex(countries).values
-})
-
-# Format for display
-summary_table['Overall % Unknown'] = summary_table['Overall % Unknown'].round(1)
-summary_table['Avg Unknown Fields'] = summary_table['Avg Unknown Fields'].round(1)
-summary_table = summary_table.sort_values('Overall % Unknown', ascending=False)
-
-# Display as a styled table
-from IPython.display import display, HTML
-
-# Convert to HTML with styling
-html_table = summary_table.to_html(index=False, classes='table table-striped table-hover')
-styled_table = f"""
-<div style="font-size: 0.85em;">
-{html_table}
-</div>
-"""
-
-display(HTML(styled_table))
-```
