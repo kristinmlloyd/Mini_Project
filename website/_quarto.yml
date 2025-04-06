@@ -8,11 +8,11 @@ website:
     search: true
     left:
       - href: intro.qmd
-        text: Introduction
+        text: Executive Summary
       - href: data_cleaning.qmd
         text: Data Cleaning
       - href: international.qmd
-        text: International Analysis
+        text: Global Analysis
       - text: Individual Country Analysis
         menu: 
           - href: palestine.qmd

@@ -20,7 +20,7 @@ execute:
 
 ### 🔹 Core Pages
 
-- [**Introduction**](index.qmd)  
+- [**Introduction**](intro.qmd)  
   Overview of the project goals, data source (AWSD), key research questions, and why analyzing violence against aid workers matters.
 
 - [**Data Cleaning**](data_cleaning.qmd)  

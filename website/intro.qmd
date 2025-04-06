@@ -65,7 +65,7 @@ flowchart TD
 
 ## Methodology
 
-This project is broken into three main parts. First, we conduct an international analysis of all countries to uncover global trends in humanitarian security incidents. Next, we take a closer look at eight contemporary conflict hotspots—Afghanistan, Democratic Republic of Congo (DRC), Mali, Palestine, Somalia, South Sudan, Sudan, and Syria—to explore country-specific patterns and challenges. Lastly, throughout our analysis, we encountered a significant number of unknown values; we examine the implications of this missing data and reflect on how uncertainty shapes our understanding of humanitarian risk.
+This project is broken into three main parts. First, we conduct a global analysis of all countries to uncover global trends in humanitarian security incidents. Next, we take a closer look at eight contemporary conflict hotspots—Afghanistan, Democratic Republic of Congo (DRC), Mali, Palestine, Somalia, South Sudan, Sudan, and Syria—to explore country-specific patterns and challenges. Lastly, throughout our analysis, we encountered a significant number of unknown values; we examine the implications of this missing data and reflect on how uncertainty shapes our understanding of humanitarian risk.
 
 # Regional Focus: Eight Contemporary Hotspots
 
