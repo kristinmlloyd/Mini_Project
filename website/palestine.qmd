@@ -104,7 +104,7 @@ HTML(html)
 
 # Executive Summary
 
-![](images/palestine2.png){width=200px}
+![](images/palestineflag.png){width=200px}
 
 This analysis examines security incidents in the Occupied Palestinian Territories from 2002 to 2025, revealing significant patterns and trends. Key findings include:
 
@@ -271,7 +271,7 @@ fig_attacks = px.bar(
     orientation='h'
 )
 
-fig_attacks.update_traces(marker_color=palette["primary"])
+fig_attacks.update_traces(marker_color=palette["secondary"])
 
 fig_attacks.update_layout(
     yaxis={'categoryorder': 'total ascending'},
@@ -284,13 +284,13 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
-1. **Aerial bombardment** is the most common type of attack in the Occupied Palestinian Territories, followed by shooting incidents. This distribution offers important insights:
+**Aerial bombardment** is the most common type of attack in the Occupied Palestinian Territories, followed by shooting incidents. This distribution offers important insights:
 
-2.  **Military nature of conflict**: The predominance of aerial bombardment suggests a significant role of military forces with air capabilities in the conflict.
+- **Military nature of conflict**: The predominance of aerial bombardment suggests a significant role of military forces with air capabilities in the conflict.
 
-3.  **Diversity of threats**: Beyond the top two methods, the data shows a range of attack types including shelling, bodily assault, and various forms of explosives.
+- **Diversity of threats**: Beyond the top two methods, the data shows a range of attack types including shelling, bodily assault, and various forms of explosives.
 
-4.  **Civilian vulnerability**: Many of these attack types affect wide areas, putting civilians at significant risk even when not directly targeted.
+- **Civilian vulnerability**: Many of these attack types affect wide areas, putting humanitarian aid at significant risk even when not directly targeted.
 
 ## Attack Contexts
 
@@ -306,38 +306,41 @@ context_counts = context_counts.sort_values('Count', ascending=False)
 
 fig_context = px.bar(
     context_counts,
-    x='Attack Context',
-    y='Count',
+    x='Count',
+    y='Attack Context',
     title=None,
-    height=450
+    height=450,
+    orientation='h'
 )
 
-fig_context.update_traces(marker_color=palette["primary"])
+fig_context.update_traces(marker_color=palette["secondary"])
 
 fig_context.update_layout(
-    xaxis_title=None,
-    yaxis_title="Number of Incidents",
-    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
+    xaxis_title="Number of Incidents",
+    yaxis_title=None,
+    yaxis=dict(categoryorder='total ascending'),  # <-- ensures most at top
+    margin=dict(l=150, r=20, t=30, b=30)
 )
 
 fig_context.show()
+
 ```
 
 ### Analysis of Attack Contexts
 
 Combat/Crossfire is overwhelmingly the most common context for security incidents, accounting for over 100 incidents. This finding has important implications:
 
-1.  **Collateral impact**: Many incidents occur during active combat situations where individuals are caught between opposing forces rather than being directly targeted.
+- **Collateral impact**: Many incidents occur during active combat situations where individuals are caught between opposing forces rather than being directly targeted.
 
-2.  **Conflict zone risks**: Being in or near active conflict zones represents the greatest security risk in the region.
+- **Conflict zone risks**: Being in or near active conflict zones represents the greatest security risk in the region.
 
-3.  **Security planning**: Different contexts require different security approaches - avoiding combat zones entirely may be more effective than other security measures.
+- **Security planning**: Different contexts require different security approaches - avoiding combat zones entirely may be more effective than other security measures.
 
 ## Location of Attack
 
 ```{python}
 #| label: fig-attack-locations
-#| fig-cap: "Most common attack locations"
+#| fig-cap: "Security incidents by attack location"
 #| echo: false
 
 # Get top 10 most frequent locations
@@ -355,7 +358,7 @@ fig_locations = px.bar(
     orientation='h'
 )
 
-fig_locations.update_traces(marker_color="#FFBD59")  # <- updated color
+fig_locations.update_traces(marker_color="#64C1FF")  # <- updated color
 
 fig_locations.update_layout(
     yaxis={'categoryorder': 'total ascending'},
@@ -445,26 +448,84 @@ This pattern is not unusual in conflict zones, where local populations typically
 ## Top 5 Most Impactful Security Incidents
 
 ```{python}
-#| label: tbl-top-incidents
-#| tbl-cap: "Most impactful security incidents (by total affected)"
+#| label: tbl-interactive-incidents
 #| echo: false
 
+import plotly.graph_objects as go
+from IPython.display import display, HTML
+
 if not country_data.empty and 'total_affected' in country_data.columns:
-    top5_incidents = country_data.sort_values(by='total_affected', ascending=False).head(5)
+    # Sort the entire dataset by total_affected
+    sorted_incidents = country_data.sort_values(by='total_affected', ascending=False)
     
+    # Select display columns and rename them
     display_cols = ['year', 'location', 'total_affected', 'total_killed', 'total_wounded', 'attack_context', 'actor_type']
     column_names = {
-        'year': 'Year', 
-        'location': 'Location', 
+        'year': 'Year',
+        'location': 'Location',
         'total_affected': 'Total Affected',
-        'total_killed': 'Killed', 
+        'total_killed': 'Killed',
         'total_wounded': 'Wounded',
         'attack_context': 'Context',
         'actor_type': 'Actor Type'
     }
     
-    display_df = top5_incidents[display_cols].rename(columns=column_names)
-    display(display_df)
+    # Prepare the display dataframe
+    display_df = sorted_incidents[display_cols].rename(columns=column_names)
+    
+    # Create an interactive table with Plotly
+    fig = go.Figure(data=[go.Table(
+        header=dict(
+            values=list(column_names.values()),
+            fill_color='#A1083B',
+            align='left',
+            font=dict(color='white', size=14),
+            height=40
+        ),
+        cells=dict(
+            values=[display_df[col] for col in display_df.columns],
+            fill_color=[['#F99301' if i < 5 else '#f9f9f9' for i in range(len(display_df))]],
+            align='left',
+            font=dict(color=['black' if i < 5 else '#333333' for i in range(len(display_df))], size=12),
+            height=30
+        )
+    )])
+    
+    # Update layout for better appearance with fixed height for scrolling
+    fig.update_layout(
+        title={
+            'text': 'Security Incidents Ranked by Impact',
+            'y': 0.98,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font': {'size': 20}
+        },
+        margin=dict(l=20, r=20, t=60, b=20),
+        height=600,  # Fixed height to enable scrolling
+        width=900
+    )
+    
+    # Add a note about the highlighted rows
+    fig.add_annotation(
+        x=0,
+        y=-0.15,
+        xref='paper',
+        yref='paper',
+        text="<i>Top 5 most impactful incidents are highlighted. Scroll to view all incidents.</i>",
+        showarrow=False,
+        font=dict(size=12),
+        align='left'
+    )
+    
+    # Save and display the figure
+    fig.write_html("images/interactive_incidents_table.html",
+                  include_plotlyjs='cdn',
+                  config={'scrollZoom': True})
+    fig.show()
+    
+    # Removed the display(HTML(search_html)) line and the search_html variable
+
 ```
 
 ### Analysis of Major Incidents
@@ -473,11 +534,11 @@ The table above highlights the five most impactful security incidents in the Occ
 
 These major incidents share several characteristics:
 
-1.  **Recent escalation**: Most of the high-impact incidents occurred during the 2023-2024 conflict escalation.
+- **Recent escalation**: Most of the high-impact incidents occurred during the 2023-2024 conflict escalation.
 
-2.  **High casualty rates**: These incidents resulted in significant casualties, showing the intensity of the recent conflict.
+- **High casualty rates**: These incidents resulted in significant casualties, showing the intensity of the recent conflict.
 
-3.  **Combat contexts**: Most occurred in combat/crossfire situations, consistent with the broader pattern of incidents in the region.
+- **Combat contexts**: Most occurred in combat/crossfire situations, consistent with the broader pattern of incidents in the region.
 
 For more detailed information on the Israeli-Palestinian conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict).
 
@@ -495,7 +556,7 @@ This analysis of security incidents in the Occupied Palestinian Territories reve
 
 4.  **Combat as primary context**: Most incidents occur during active combat situations, suggesting that conflict avoidance is a critical security strategy.
 
-<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
+## 💡 Recommendations
 
 These findings have important implications for security planning, humanitarian programming, and policy development:
 
@@ -509,11 +570,6 @@ These findings have important implications for security planning, humanitarian p
 
 -   Prioritize protection measures for local staff, who face disproportionate security risks
 
-### For Policy Development
-
--   Support accountability mechanisms for documenting and addressing security incidents
--   Promote conflict resolution initiatives to address the root causes of the escalating violence
-
 ### For Future Research
 
 -   Continue monitoring security trends, especially given the recent escalation
@@ -521,5 +577,3 @@ These findings have important implications for security planning, humanitarian p
 -   Examine the effectiveness of different security measures in reducing casualties
 
 By providing a data-driven understanding of security patterns in the Occupied Palestinian Territories, this analysis aims to contribute to safer and more effective operations in this challenging environment.
-
-## References

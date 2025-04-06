@@ -29,8 +29,8 @@ Around the world, humanitarian aid workers risk their lives to assist communitie
 This research explores global patterns of violence against humanitarian personnel using data from the **Aid Worker Security Database (AWSD)**. By examining incident patterns across time, geography, and conflict contexts, we uncover both universal trends and context-specific threats that shape the security landscape for aid operations worldwide. Each record in the dataset includes:
 
 - **Temporal and geographic data**: Incident date, location, coordinates
-- **Organizational details**: Type of agency affected, staff nationality
-- **Incident specifics**: Attack type, context, perpetrators, motives
+- **Organizational details**: Staff nationality
+- **Incident specifics**: Attack type, context, and location
 - **Impact metrics**: Numbers killed, wounded, kidnapped
 
 The AWSD is considered the gold standard for humanitarian security data and is used by researchers, policy makers, and security practitioners worldwide.
@@ -455,11 +455,11 @@ Humanitarian security threats vary widely, with common attack methods including 
 
 ### Political Transitions Create Vulnerability Windows
 
-Security incidents consistently spike during power transitions, though the specific relationship varies:
+Security incidents consistently spike during political turmoil. Contributing factors identified in our analysis include:
 
-- **Peace agreements** sometimes correlate with increased incidents 
-- **Coups and regime changes** usually lead to immediate security deterioration 
-- **Territorial control shifts** create new vulnerability patterns 
+- **Peace agreements**
+- **Coups and regime changes** 
+- **Territorial control shifts** 
 
 ```{=html}
 <style>
@@ -717,13 +717,13 @@ plt.show()
 - **Security strategies must be context-specific**  
   Patterns of violence vary widely by country—kidnappings, ambushes, aerial bombardments—making one-size-fits-all protocols ineffective.
 - **National staff face disproportionate risk**  
-  Across all regions, national personnel experience 5–10 times more casualties than international staff, raising urgent ethical and operational concerns.
+  Across all regions, national personnel experience more casualties than international staff, raising urgent ethical and operational concerns.
 - **Political transitions increase risk**  
   Security incidents often spike during leadership changes, peace deals, or shifts in territorial control, creating windows of heightened vulnerability.
 - **Lower incident counts don't always signal improvement**  
   A decline in reported attacks may reflect aid withdrawal or underreporting, especially in high-unknown-data contexts—not necessarily increased safety.
 - **Data gaps obscure key risks**  
-  In many countries, over one-third of records lack crucial context, limiting the ability to design fully informed security strategies.
+  In many countries, records lack crucial context, limiting the ability to design fully informed security strategies.
 
 ## Recommendations for Humanitarian Organizations
 
@@ -740,13 +740,7 @@ plt.show()
 - **In urban conflict or aerial threat zones** (e.g., Syria, Palestine): Invest in shelter infrastructure and real-time conflict tracking.
 - **In high kidnap-risk regions** (e.g., Afghanistan, Somalia, Mali): Emphasize low-profile operations, staff movement protocols, and abduction response training.
 
-### Policy Advocacy
-
-- Support accountability for attacks on aid workers through legal action and diplomatic pressure.
-- Promote safe corridors and humanitarian access agreements, especially in contested or shifting zones.
-- Advocate for continued investment in context-appropriate security infrastructure, staff training, and incident reporting systems.
-
-## Recommendations for Future Research
+## 💡 Recommendations for Future Research
 
 - Investigate differences in outcomes and risk between local and international personnel.
 - Evaluate which security practices are most effective across different conflict types.

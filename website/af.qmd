@@ -51,7 +51,7 @@ execute:
 #| label: setup
 #| include: false
 #| echo: false
-# Import required libraries
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -107,7 +107,7 @@ HTML(html)
 
 # Executive Summary
 
-![](images/af2.png){width=200px}
+![](images/afflag.png){width=200px}
 
 # Background: The Conflict
 
@@ -274,7 +274,7 @@ fig_attacks = px.bar(
     orientation='h'
 )
 
-fig_attacks.update_traces(marker_color=palette["primary"])
+fig_attacks.update_traces(marker_color=palette["secondary"])
 
 fig_attacks.update_layout(
     yaxis={'categoryorder': 'total ascending'},
@@ -287,11 +287,9 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
-1. **Kidnapping dominance**: The high frequency of kidnapping incidents reflects Afghanistan's complex security environment where abductions serve multiple purposes - from financial gain through ransoms to political leverage. This creates significant risks for both international and local personnel.
+- **Kidnapping dominance**: The high frequency of kidnapping incidents reflects Afghanistan's complex security environment where abductions serve multiple purposes - from financial gain through ransoms to political leverage. This creates significant risks for both international and local personnel.
 
-2. **Armed violence**: Shooting incidents represent the second most frequent attack type, indicating the widespread availability of firearms and their regular use in security incidents. This aligns with Afghanistan's history of armed conflict and the proliferation of weapons.
-
-3. **IED threat**: Both vehicle-borne and roadside IEDs appear in the mid-range of attack methods, representing a significant but not dominant threat. These sophisticated attack methods typically indicate organized armed group activity.
+- **Armed violence**: Shooting incidents represent the second most frequent attack type, indicating the widespread availability of firearms and their regular use in security incidents. This aligns with Afghanistan's history of armed conflict and the proliferation of weapons.
 
 ## Attack Contexts
 
@@ -307,31 +305,30 @@ context_counts = context_counts.sort_values('Count', ascending=False)
 
 fig_context = px.bar(
     context_counts,
-    x='Attack Context',
-    y='Count',
+    x='Count',
+    y='Attack Context',
     title=None,
-    height=450
+    height=450,
+    orientation='h'
 )
 
-fig_context.update_traces(marker_color=palette["primary"])
+fig_context.update_traces(marker_color=palette["secondary"])
 
 fig_context.update_layout(
-    xaxis_title=None,
-    yaxis_title="Number of Incidents",
-    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
+    xaxis_title="Number of Incidents",
+    yaxis_title=None,
+    yaxis=dict(categoryorder='total ascending'),  # <-- ensures most at top
+    margin=dict(l=150, r=20, t=30, b=30)
 )
 
 fig_context.show()
+
 ```
 
 ### Analysis of Attack Contexts
 
-Key Findings:
-
-- Combat/crossfire represents a significant proportion of incidents, indicating the ongoing active conflict environment
-- Direct targeted attacks account for many incidents, showing deliberate targeting rather than collateral impact
-- Ambushes feature prominently, highlighting risks along travel routes and during movements
-- Raids on facilities demonstrate vulnerabilities of fixed installations and compounds
+- **Ambushes** represent a significant proportion of incidents, indicating the ongoing active conflict environment
+- **Direct targeted attacks and raids** account for many incidents, showing deliberate targeting rather than collateral impact
 
 ## Location of Attack
 
@@ -355,7 +352,7 @@ fig_locations = px.bar(
     orientation='h'
 )
 
-fig_locations.update_traces(marker_color="#FFBD59")  # <- updated color
+fig_locations.update_traces(marker_color="#64C1FF")  # <- updated color
 
 fig_locations.update_layout(
     yaxis={'categoryorder': 'total ascending'},
@@ -368,7 +365,8 @@ fig_locations.show()
 
 ### Analysis of Attack Locations
 
-The majority of incidents occurred on roads and in unknown locations, highlighting persistent risks during travel and gaps in situational reporting.
+- **Roads** are the most common setting for incidents, underscoring ongoing risks associated with travel.
+- A significant number of incidents are marked as unknown, revealing critical gaps in situational reporting and data collection.
 
 # Human Impact of Security Incidents {#sec-impact}
 
@@ -432,43 +430,94 @@ fig_stacked.show()
 
 The stacked bar chart reveals a stark disparity in how security incidents affect different population groups in Afghanistan:
 
-- Afghan nationals have suffered significantly higher casualties across all categories, with roughly 440 killed, 350 wounded, and 430 kidnapped
-- International personnel have experienced far fewer casualties, approximately 90 total across all categories
-- The ratio of nationals to internationals affected is about 10:1
+- Afghan nationals have suffered significantly higher casualties across all categories
 
-This pattern is not unusual in conflict zones, where local populations typically bear the brunt of violence. However, the scale of the difference is notable and has important implications:
-
-1. **Protection needs**: The disproportionate impact on locals highlights the critical need for civilian protection measures that extend beyond international personnel.
-
-2. **Humanitarian considerations**: The high casualty rates among Afghan nationals underscore the humanitarian dimension of the conflict, beyond the security of aid workers.
-
-3. **Risk differentials**: The relatively lower casualties among internationals may reflect differences in exposure, protection measures, or targeting patterns.
+This pattern is not unusual in conflict zones, where local populations typically bear the brunt of violence. However, the scale of the difference is notable.
 
 # Major Incidents {#sec-major}
 
 ## Top 5 Most Impactful Security Incidents
 
 ```{python}
-#| label: tbl-top-incidents
-#| tbl-cap: "Most impactful security incidents (by total affected)"
+
+#| label: tbl-interactive-incidents
 #| echo: false
 
+import plotly.graph_objects as go
+from IPython.display import display, HTML
+
 if not country_data.empty and 'total_affected' in country_data.columns:
-    top5_incidents = country_data.sort_values(by='total_affected', ascending=False).head(5)
+    # Sort the entire dataset by total_affected
+    sorted_incidents = country_data.sort_values(by='total_affected', ascending=False)
     
+    # Select display columns and rename them
     display_cols = ['year', 'location', 'total_affected', 'total_killed', 'total_wounded', 'attack_context', 'actor_type']
     column_names = {
-        'year': 'Year', 
-        'location': 'Location', 
+        'year': 'Year',
+        'location': 'Location',
         'total_affected': 'Total Affected',
-        'total_killed': 'Killed', 
+        'total_killed': 'Killed',
         'total_wounded': 'Wounded',
         'attack_context': 'Context',
         'actor_type': 'Actor Type'
     }
     
-    display_df = top5_incidents[display_cols].rename(columns=column_names)
-    display(display_df)
+    # Prepare the display dataframe
+    display_df = sorted_incidents[display_cols].rename(columns=column_names)
+    
+    # Create an interactive table with Plotly
+    fig = go.Figure(data=[go.Table(
+        header=dict(
+            values=list(column_names.values()),
+            fill_color='#A1083B',
+            align='left',
+            font=dict(color='white', size=14),
+            height=40
+        ),
+        cells=dict(
+            values=[display_df[col] for col in display_df.columns],
+            fill_color=[['#F99301' if i < 5 else '#f9f9f9' for i in range(len(display_df))]],
+            align='left',
+            font=dict(color=['black' if i < 5 else '#333333' for i in range(len(display_df))], size=12),
+            height=30
+        )
+    )])
+    
+    # Update layout for better appearance with fixed height for scrolling
+    fig.update_layout(
+        title={
+            'text': 'Security Incidents Ranked by Impact',
+            'y': 0.98,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font': {'size': 20}
+        },
+        margin=dict(l=20, r=20, t=60, b=20),
+        height=600,  # Fixed height to enable scrolling
+        width=900
+    )
+    
+    # Add a note about the highlighted rows
+    fig.add_annotation(
+        x=0,
+        y=-0.15,
+        xref='paper',
+        yref='paper',
+        text="<i>Top 5 most impactful incidents are highlighted. Scroll to view all incidents.</i>",
+        showarrow=False,
+        font=dict(size=12),
+        align='left'
+    )
+    
+    # Save and display the figure
+    fig.write_html("images/interactive_incidents_table.html",
+                  include_plotlyjs='cdn',
+                  config={'scrollZoom': True})
+    fig.show()
+    
+    # Removed the display(HTML(search_html)) line and the search_html variable
+
 ```
 
 ### Analysis of Major Incidents
@@ -476,10 +525,8 @@ if not country_data.empty and 'total_affected' in country_data.columns:
 The table above highlights the five most impactful security incidents in Afghanistan based on the total number of people affected. These high-casualty events reveal several important patterns:
 
 -   The most severe incident occurred in 2015 at a project site, resulting in 49 casualties (14 killed and 35 wounded), indicating the vulnerability of development projects in Afghanistan
--   Office/compound locations feature prominently in the data, appearing twice in the top five incidents (in 2021 and 2009), suggesting that fixed facilities remain high-value targets
--   Road incidents also pose significant risks, as shown by the 2009 incident with 16 affected individuals, likely representing a kidnapping event given the absence of killed or wounded
 -   The incidents span from 2009 to 2021, demonstrating that high-impact security events have been a persistent feature of the Afghan security landscape across different phases of the conflict
--   Three of the five incidents resulted in fatalities, while two incidents (both with 12 affected individuals) show no deaths or injuries, suggesting these were likely kidnapping incidents
+-   Three of the five top incidents resulted in fatalities, while two incidents (both with 12 affected individuals) show no deaths or injuries, suggesting these were likely kidnapping incidents
 
 These high-impact events, while relatively rare, account for a disproportionate share of total casualties.
 
@@ -499,7 +546,7 @@ This analysis of security incidents in Afghanistan reveals several critical patt
 
 4.  **Kidnapping dynamics**: Afghanistan shows a distinctive pattern of kidnapping incidents, particularly along roads and transport routes.
 
-<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
+## 💡 Recommendations 
 
 These findings suggest specific approaches for operating in the Afghan context:
 
@@ -515,12 +562,6 @@ These findings suggest specific approaches for operating in the Afghan context:
 -   Balance operational effectiveness with security considerations when determining fixed vs. mobile programming
 -   Invest in local acceptance strategies, especially given the changing political landscape
 -   Develop contingency plans for periods of heightened risk
-
-### For Policy Development
-
--   Support coordinated security information sharing platforms among humanitarian actors
--   Advocate for humanitarian access in high-risk areas through diplomatic channels
--   Encourage donor flexibility regarding security costs in project budgets
 
 ### For Future Research
 

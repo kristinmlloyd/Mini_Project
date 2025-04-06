@@ -268,7 +268,7 @@ fig_attacks = px.bar(
     orientation='h'
 )
 
-fig_attacks.update_traces(marker_color=palette["primary"])
+fig_attacks.update_traces(marker_color=palette["secondary"])
 
 fig_attacks.update_layout(
     yaxis={'categoryorder': 'total ascending'},
@@ -281,7 +281,7 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
-This bar chart reveals that kidnapping and shooting are the predominant attack methods in the DRC conflict. Bodily assault represents the third most common tactic. The high prevalence of kidnappings aligns with documented tactics by armed groups in eastern DRC, particularly by militia groups seeking ransom or using abductions to intimidate local populations and establish territorial control.
+Kidnapping and shooting are the predominant attack methods in the DRC conflict. Bodily assault represents the third most common tactic. The high prevalence of kidnappings aligns with documented tactics by armed groups in eastern DRC, particularly by militia groups seeking ransom or using abductions to intimidate local populations and establish territorial control.
 
 ## Attack Contexts
 
@@ -297,18 +297,20 @@ context_counts = context_counts.sort_values('Count', ascending=False)
 
 fig_context = px.bar(
     context_counts,
-    x='Attack Context',
-    y='Count',
+    x='Count',
+    y='Attack Context',
     title=None,
-    height=450
+    height=450,
+    orientation='h'
 )
 
-fig_context.update_traces(marker_color=palette["primary"])
+fig_context.update_traces(marker_color=palette["secondary"])
 
 fig_context.update_layout(
-    xaxis_title=None,
-    yaxis_title="Number of Incidents",
-    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
+    xaxis_title="Number of Incidents",
+    yaxis_title=None,
+    yaxis=dict(categoryorder='total ascending'),  # <-- ensures most at top
+    margin=dict(l=150, r=20, t=30, b=30)
 )
 
 fig_context.show()
@@ -340,7 +342,7 @@ fig_locations = px.bar(
     orientation='h'
 )
 
-fig_locations.update_traces(marker_color="#FFBD59")  # <- updated color
+fig_locations.update_traces(marker_color="#64C1FF")  # <- updated color
 
 fig_locations.update_layout(
     yaxis={'categoryorder': 'total ascending'},
@@ -423,31 +425,88 @@ The significantly higher rate of kidnappings among nationals compared to other c
 ## Top 5 Most Impactful Security Incidents
 
 ```{python}
-#| label: tbl-top-incidents
-#| tbl-cap: "Most impactful security incidents (by total affected)"
+#| label: tbl-interactive-incidents
 #| echo: false
 
+import plotly.graph_objects as go
+from IPython.display import display, HTML
+
 if not country_data.empty and 'total_affected' in country_data.columns:
-    top5_incidents = country_data.sort_values(by='total_affected', ascending=False).head(5)
+    # Sort the entire dataset by total_affected
+    sorted_incidents = country_data.sort_values(by='total_affected', ascending=False)
     
+    # Select display columns and rename them
     display_cols = ['year', 'location', 'total_affected', 'total_killed', 'total_wounded', 'attack_context', 'actor_type']
     column_names = {
-        'year': 'Year', 
-        'location': 'Location', 
+        'year': 'Year',
+        'location': 'Location',
         'total_affected': 'Total Affected',
-        'total_killed': 'Killed', 
+        'total_killed': 'Killed',
         'total_wounded': 'Wounded',
         'attack_context': 'Context',
         'actor_type': 'Actor Type'
     }
     
-    display_df = top5_incidents[display_cols].rename(columns=column_names)
-    display(display_df)
+    # Prepare the display dataframe
+    display_df = sorted_incidents[display_cols].rename(columns=column_names)
+    
+    # Create an interactive table with Plotly
+    fig = go.Figure(data=[go.Table(
+        header=dict(
+            values=list(column_names.values()),
+            fill_color='#A1083B',
+            align='left',
+            font=dict(color='white', size=14),
+            height=40
+        ),
+        cells=dict(
+            values=[display_df[col] for col in display_df.columns],
+            fill_color=[['#F99301' if i < 5 else '#f9f9f9' for i in range(len(display_df))]],
+            align='left',
+            font=dict(color=['black' if i < 5 else '#333333' for i in range(len(display_df))], size=12),
+            height=30
+        )
+    )])
+    
+    # Update layout for better appearance with fixed height for scrolling
+    fig.update_layout(
+        title={
+            'text': 'Security Incidents Ranked by Impact',
+            'y': 0.98,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font': {'size': 20}
+        },
+        margin=dict(l=20, r=20, t=60, b=20),
+        height=600,  # Fixed height to enable scrolling
+        width=900
+    )
+    
+    # Add a note about the highlighted rows
+    fig.add_annotation(
+        x=0,
+        y=-0.15,
+        xref='paper',
+        yref='paper',
+        text="<i>Top 5 most impactful incidents are highlighted. Scroll to view all incidents.</i>",
+        showarrow=False,
+        font=dict(size=12),
+        align='left'
+    )
+    
+    # Save and display the figure
+    fig.write_html("images/interactive_incidents_table.html",
+                  include_plotlyjs='cdn',
+                  config={'scrollZoom': True})
+    fig.show()
+    
+    # Removed the display(HTML(search_html)) line and the search_html variable
 ```
 
 ### Analysis of Major Incidents
 
-The table reveals a pattern of security incidents in the DRC spanning two decades (1997-2017), with road attacks being most frequent, suggesting the particular vulnerability of transportation routes in the conflict zone, while the deadliest incident occurred during the 1997 First Congo War period with 10 fatalities.
+The table reveals a pattern of security incidents in the DRC spanning two decades (1997-2017). The deadliest incident occurred during the 1997 First Congo War period with 10 fatalities.
 
 For more detailed information on the Israeli-Palestinian conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/violence-democratic-republic-congo).
 
@@ -467,7 +526,7 @@ This analysis of security incidents in the Democratic Republic of Congo reveals 
 
 5.  **Geographic vulnerabilities**: Road networks and transportation routes emerge as particularly high-risk areas, with the majority of major incidents occurring during movement.
 
-<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
+## 💡 Recommendations
 
 These findings suggest specific approaches for operating in the DRC context:
 
@@ -477,28 +536,18 @@ These findings suggest specific approaches for operating in the DRC context:
 -   Establish robust communication networks with regular check-in procedures during movements
 -   Develop specific anti-kidnapping protocols and train staff on prevention and response
 -   Consider armed escorts on high-risk routes where appropriate and legally permissible
--   Establish clear security thresholds that trigger operational suspensions
 
 ### For Humanitarian Organizations
 
 -   Balance operational presence with a thorough understanding of conflict dynamics in each area
--   Invest in community acceptance strategies by engaging with local leaders and communities
 -   Consider remote programming models in areas with highest kidnapping risks
 -   Prioritize national staff security with equal investment in protection measures
 -   Develop context-specific security training focusing on ambush prevention and response
 
-### For Policy Development
-
--   Advocate for protected humanitarian corridors in high-risk areas
--   Support enhanced coordination mechanisms for security information sharing
--   Engage with donors on realistic security costs in project budgets
--   Develop systematic approaches to engaging with armed groups for humanitarian access
--   Promote accountability for attacks against humanitarian workers
-
 ### For Future Research
 
--   Investigate the relationship between mineral resource extraction and security incidents
 -   Analyze the effectiveness of different security approaches in reducing kidnapping risks
 -   Examine the long-term trends in security following major political transitions
--   Study the impact of UN peacekeeping presence on humanitarian security incident patterns
 -   Research community-based protection mechanisms that have proven effective in the DRC context
+
+By providing a data-driven understanding of security patterns in the DR Congo, this analysis aims to contribute to safer and more effective operations in this challenging environment.

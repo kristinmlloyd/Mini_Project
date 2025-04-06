@@ -289,7 +289,7 @@ fig_attacks = px.bar(
     orientation='h'
 )
 
-fig_attacks.update_traces(marker_color=palette["primary"])
+fig_attacks.update_traces(marker_color=palette["secondary"])
 
 fig_attacks.update_layout(
     yaxis={'categoryorder': 'total ascending'},
@@ -318,18 +318,20 @@ context_counts = context_counts.sort_values('Count', ascending=False)
 
 fig_context = px.bar(
     context_counts,
-    x='Attack Context',
-    y='Count',
+    x='Count',
+    y='Attack Context',
     title=None,
-    height=450
+    height=450,
+    orientation='h'
 )
 
-fig_context.update_traces(marker_color=palette["primary"])
+fig_context.update_traces(marker_color=palette["secondary"])
 
 fig_context.update_layout(
-    xaxis_title=None,
-    yaxis_title="Number of Incidents",
-    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
+    xaxis_title="Number of Incidents",
+    yaxis_title=None,
+    yaxis=dict(categoryorder='total ascending'),  # <-- ensures most at top
+    margin=dict(l=150, r=20, t=30, b=30)
 )
 
 fig_context.show()
@@ -361,7 +363,7 @@ fig_locations = px.bar(
     orientation='h'
 )
 
-fig_locations.update_traces(marker_color="#FFBD59")  # <- updated color
+fig_locations.update_traces(marker_color="#64C1FF")  # <- updated color
 
 fig_locations.update_layout(
     yaxis={'categoryorder': 'total ascending'},
@@ -444,26 +446,82 @@ The dramatic disparity highlights how South Sudanese civilians bear the overwhel
 ## Top 5 Most Impactful Security Incidents
 
 ```{python}
-#| label: tbl-top-incidents
-#| tbl-cap: "Most impactful security incidents (by total affected)"
+#| label: tbl-interactive-incidents
 #| echo: false
 
+import plotly.graph_objects as go
+from IPython.display import display, HTML
+
 if not country_data.empty and 'total_affected' in country_data.columns:
-    top5_incidents = country_data.sort_values(by='total_affected', ascending=False).head(5)
+    # Sort the entire dataset by total_affected
+    sorted_incidents = country_data.sort_values(by='total_affected', ascending=False)
     
+    # Select display columns and rename them
     display_cols = ['year', 'location', 'total_affected', 'total_killed', 'total_wounded', 'attack_context', 'actor_type']
     column_names = {
-        'year': 'Year', 
-        'location': 'Location', 
+        'year': 'Year',
+        'location': 'Location',
         'total_affected': 'Total Affected',
-        'total_killed': 'Killed', 
+        'total_killed': 'Killed',
         'total_wounded': 'Wounded',
         'attack_context': 'Context',
         'actor_type': 'Actor Type'
     }
     
-    display_df = top5_incidents[display_cols].rename(columns=column_names)
-    display(display_df)
+    # Prepare the display dataframe
+    display_df = sorted_incidents[display_cols].rename(columns=column_names)
+    
+    # Create an interactive table with Plotly
+    fig = go.Figure(data=[go.Table(
+        header=dict(
+            values=list(column_names.values()),
+            fill_color='#A1083B',
+            align='left',
+            font=dict(color='white', size=14),
+            height=40
+        ),
+        cells=dict(
+            values=[display_df[col] for col in display_df.columns],
+            fill_color=[['#F99301' if i < 5 else '#f9f9f9' for i in range(len(display_df))]],
+            align='left',
+            font=dict(color=['black' if i < 5 else '#333333' for i in range(len(display_df))], size=12),
+            height=30
+        )
+    )])
+    
+    # Update layout for better appearance with fixed height for scrolling
+    fig.update_layout(
+        title={
+            'text': 'Security Incidents Ranked by Impact',
+            'y': 0.98,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font': {'size': 20}
+        },
+        margin=dict(l=20, r=20, t=60, b=20),
+        height=600,  # Fixed height to enable scrolling
+        width=900
+    )
+    
+    # Add a note about the highlighted rows
+    fig.add_annotation(
+        x=0,
+        y=-0.15,
+        xref='paper',
+        yref='paper',
+        text="<i>Top 5 most impactful incidents are highlighted. Scroll to view all incidents.</i>",
+        showarrow=False,
+        font=dict(size=12),
+        align='left'
+    )
+    
+    # Save and display the figure
+    fig.write_html("images/interactive_incidents_table.html",
+                  include_plotlyjs='cdn',
+                  config={'scrollZoom': True})
+    fig.show()
+
 ```
 
 ### Analysis of Major Incidents
@@ -488,7 +546,7 @@ This analysis of security incidents in South Sudan reveals several critical patt
 
 5.  **Access constraints mask security deterioration**: The recent decline in incidents appears to reflect restricted humanitarian access rather than improved security conditions, as overall violence continues to intensify.
 
-<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
+## 💡 Recommendations
 
 ### For Security Planning
 

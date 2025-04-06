@@ -111,11 +111,11 @@ This report examines patterns in security incidents affecting humanitarian worke
 
 Key findings include:
 
-- **Aerial bombardment and shelling are the most frequent attack methods**, reflecting state-driven warfare and urban conflict.
-- **Combat and crossfire dominate the context**, indicating that most incidents occur near frontlines rather than through targeted violence.
-- **Ambushes and raids continue to pose risks**, especially during movement through contested areas.
-- **National staff face disproportionate risk**, with the vast majority of casualties across all categories.
-- **High-impact incidents are concentrated at project sites and compounds**, reinforcing the need for fixed-site preparedness.
+- Aerial bombardment and shelling are the most frequent attack methods, reflecting state-driven warfare and urban conflict.
+- Combat and crossfire dominate the context, indicating that most incidents occur near frontlines rather than through targeted violence.
+- Ambushes and raids continue to pose risks, especially during movement through contested areas.
+- National staff face disproportionate risk, with the vast majority of casualties across all categories.
+- High-impact incidents are concentrated at project sites and compounds, reinforcing the need for fixed-site preparedness.
 
 These trends highlight the urgency of conflict-sensitive planning, improved duty-of-care for national staff, and sustained policy advocacy to protect humanitarian access in Syria.
 
@@ -290,7 +290,7 @@ fig_attacks = px.bar(
 )
 
 # Set all bars to primary color
-fig_attacks.update_traces(marker_color=palette["primary"])
+fig_attacks.update_traces(marker_color=palette["secondary"])
 
 # Configure layout
 fig_attacks.update_layout(
@@ -304,11 +304,7 @@ fig_attacks.show()
 
 ### Analysis of Attack Methods
 
-### Analysis of Attack Methods
-
-**Aerial bombardment** is the most frequently reported attack method, followed by **shelling**, making Syria unique among conflict zones where indirect fire and airstrikes dominate the threat landscape. These tactics reflect state-level military engagement and urban warfare dynamics, especially during regime offensives.
-
-**Shooting** and **kidnapping** also appear prominently, pointing to both conventional ground combat and targeted abduction of humanitarian personnel. Lower-frequency methods such as **bodily assault**, **vehicle-borne IEDs**, and **landmines** indicate a wide tactical range used by both state and non-state actors.
+Aerial bombardment is the most frequently reported attack method, followed by shelling, making Syria unique among conflict zones where indirect fire and airstrikes dominate the threat landscape. These tactics reflect state-level military engagement and urban warfare dynamics, especially during regime offensives. Shooting and kidnapping also appear prominently, pointing to both conventional ground combat and targeted abduction of humanitarian personnel. 
 
 This distribution underscores the need for protective infrastructure in high-risk areas, early-warning systems during aerial campaigns, and mobility protocols to avoid exposure during bombardments and shelling.
 
@@ -326,18 +322,20 @@ context_counts = context_counts.sort_values('Count', ascending=False)
 
 fig_context = px.bar(
     context_counts,
-    x='Attack Context',
-    y='Count',
+    x='Count',
+    y='Attack Context',
     title=None,
-    height=450
+    height=450,
+    orientation='h'
 )
 
-fig_context.update_traces(marker_color=palette["primary"])
+fig_context.update_traces(marker_color=palette["secondary"])
 
 fig_context.update_layout(
-    xaxis_title=None,
-    yaxis_title="Number of Incidents",
-    xaxis={'categoryorder': 'total descending', 'tickangle': 45}
+    xaxis_title="Number of Incidents",
+    yaxis_title=None,
+    yaxis=dict(categoryorder='total ascending'),  # <-- ensures most at top
+    margin=dict(l=150, r=20, t=30, b=30)
 )
 
 fig_context.show()
@@ -345,11 +343,7 @@ fig_context.show()
 
 ### Analysis of Attack Contexts
 
-**Combat or crossfire** is by far the most common context of security incidents in Syria, reflecting the country’s prolonged urban warfare and front-line volatility. This indicates that many humanitarian actors are unintentionally caught in large-scale hostilities, rather than being directly targeted.
-
-Other contexts such as **individual attacks**, **ambushes**, and **raids** occur less frequently but still represent deliberate violence, especially against aid staff in transit or localized settings. A significant number of incidents are listed as **unknown**, pointing to information gaps in chaotic environments.
-
-The dominance of combat-related contexts underscores the urgent need for real-time conflict mapping, coordination with protection clusters, and protocols for operations near frontlines or contested zones.
+Combat or crossfire is by far the most common context of security incidents in Syria, reflecting the country’s prolonged urban warfare and front-line volatility. This indicates that many humanitarian actors are unintentionally caught in large-scale hostilities, rather than being directly targeted.
 
 ## Location of Attack
 
@@ -373,7 +367,7 @@ fig_locations = px.bar(
     orientation='h'
 )
 
-fig_locations.update_traces(marker_color="#FFBD59")  # <- updated color
+fig_locations.update_traces(marker_color="#64C1FF")  # <- updated color
 
 fig_locations.update_layout(
     yaxis={'categoryorder': 'total ascending'},
@@ -386,7 +380,7 @@ fig_locations.show()
 
 ### Analysis of Attack Locations
 
-most attacks occurred at project sites, on roads, and in public locations—highlighting the widespread insecurity across operational, transit, and civilian spaces.
+Most attacks occurred at project sites, on roads, and in public locations, highlighting the widespread insecurity across operational, transit, and civilian spaces.
 
 # Human Impact of Security Incidents {#sec-impact}
 
@@ -453,48 +447,96 @@ fig_stacked.show()
 
 ### Analysis of Casualty Patterns
 
-The overwhelming majority of casualties in Syria are **nationals**, who account for nearly all reported deaths, injuries, and kidnappings. This reflects their greater exposure to conflict zones and frontline operations compared to international staff, who typically work in more secure or urban environments.
-
-The high number of **national fatalities** suggests that many incidents are either highly lethal or occur in areas with limited access to emergency care. In contrast, **international casualties remain minimal**, likely due to stronger protection protocols, lower deployment in high-risk zones, and more rapid evacuation options.
-
-These disparities highlight the urgent need for equitable duty-of-care policies and enhanced security measures for national staff, who remain the backbone of humanitarian efforts in Syria’s most dangerous regions.
+The overwhelming majority of casualties in Syria are nationals, who account for nearly all reported deaths, injuries, and kidnappings. The high number of national fatalities suggests that many incidents are either highly lethal or occur in areas with limited access to emergency care.
 
 # Major Incidents {#sec-major}
 
 ## Top 5 Most Impactful Security Incidents
 
 ```{python}
-#| label: tbl-top-incidents
-#| tbl-cap: "Most impactful security incidents (by total affected)"
+#| label: tbl-interactive-incidents
 #| echo: false
 
+import plotly.graph_objects as go
+from IPython.display import display, HTML
+
 if not country_data.empty and 'total_affected' in country_data.columns:
-    top5_incidents = country_data.sort_values(by='total_affected', ascending=False).head(5)
+    # Sort the entire dataset by total_affected
+    sorted_incidents = country_data.sort_values(by='total_affected', ascending=False)
     
-    # Select and rename columns for display
+    # Select display columns and rename them
     display_cols = ['year', 'location', 'total_affected', 'total_killed', 'total_wounded', 'attack_context', 'actor_type']
     column_names = {
-        'year': 'Year', 
-        'location': 'Location', 
+        'year': 'Year',
+        'location': 'Location',
         'total_affected': 'Total Affected',
-        'total_killed': 'Killed', 
+        'total_killed': 'Killed',
         'total_wounded': 'Wounded',
         'attack_context': 'Context',
         'actor_type': 'Actor Type'
     }
     
-    display_df = top5_incidents[display_cols].rename(columns=column_names)
-    display(display_df)
+    # Prepare the display dataframe
+    display_df = sorted_incidents[display_cols].rename(columns=column_names)
+    
+    # Create an interactive table with Plotly
+    fig = go.Figure(data=[go.Table(
+        header=dict(
+            values=list(column_names.values()),
+            fill_color='#A1083B',
+            align='left',
+            font=dict(color='white', size=14),
+            height=40
+        ),
+        cells=dict(
+            values=[display_df[col] for col in display_df.columns],
+            fill_color=[['#F99301' if i < 5 else '#f9f9f9' for i in range(len(display_df))]],
+            align='left',
+            font=dict(color=['black' if i < 5 else '#333333' for i in range(len(display_df))], size=12),
+            height=30
+        )
+    )])
+    
+    # Update layout for better appearance with fixed height for scrolling
+    fig.update_layout(
+        title={
+            'text': 'Security Incidents Ranked by Impact',
+            'y': 0.98,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font': {'size': 20}
+        },
+        margin=dict(l=20, r=20, t=60, b=20),
+        height=600,  # Fixed height to enable scrolling
+        width=900
+    )
+    
+    # Add a note about the highlighted rows
+    fig.add_annotation(
+        x=0,
+        y=-0.15,
+        xref='paper',
+        yref='paper',
+        text="<i>Top 5 most impactful incidents are highlighted. Scroll to view all incidents.</i>",
+        showarrow=False,
+        font=dict(size=12),
+        align='left'
+    )
+    
+    # Save and display the figure
+    fig.write_html("images/interactive_incidents_table.html",
+                  include_plotlyjs='cdn',
+                  config={'scrollZoom': True})
+    fig.show()
 ```
 
 ### Analysis of Major Incidents
 
-The most severe incidents in Syria primarily occurred at **project sites** and **compounds**, with nearly all involving **combat or crossfire**:
+The most severe incidents in Syria primarily occurred at **project sites**, with nearly all involving **combat or crossfire**:
 
 - The deadliest incidents occurred in **2016 and 2017**, each resulting in 9 fatalities with no survivors—highlighting the intensity of direct armed clashes.
 - The highest total casualty incident in **2013** left 11 people wounded at a project site, suggesting exposure to indiscriminate violence rather than targeted attack.
-- While most top incidents occurred in work-related facilities, one 2013 **ambush on a road** highlights persistent risks during movement, even when fatalities were avoided.
-- All incidents involved **combat zones**, underscoring the blurred lines between humanitarian operations and active conflict environments in Syria.
 
 These events emphasize the critical need for conflict-sensitive planning, real-time situational awareness, and investment in protective infrastructure at operational sites.
 
@@ -504,11 +546,11 @@ For more detailed information on the Syrian conflict timeline, see the [Council 
 
 ## Key Findings
 
-- **Incident patterns mirror key conflict events**, including spikes during ISIS expansion, regime offensives, and the 2024 collapse of Assad's government.
-- **Aerial attacks and indirect fire dominate the attack profile**, setting Syria apart from ground-focused conflicts.
-- **Most incidents occur during combat or crossfire**, rather than direct targeting of humanitarian actors.
-- **Nationals account for the vast majority of deaths, injuries, and kidnappings**, indicating significant disparities in exposure and risk.
-- **Project sites and offices are common locations for major incidents**, especially in heavily militarized zones.
+1. **Incident patterns mirror key conflict events**, including spikes during ISIS expansion, regime offensives, and the 2024 collapse of Assad's government.
+2. **Aerial attacks and indirect fire dominate the attack profile**, setting Syria apart from ground-focused conflicts.
+3. **Most incidents occur during combat or crossfire**, rather than direct targeting of humanitarian actors.
+4. **Nationals account for the vast majority of deaths, injuries, and kidnappings**, indicating significant disparities in exposure and risk.
+5. **Project sites and offices are common locations for major incidents**, especially in heavily militarized zones.
 
 ## Recommendations
 
@@ -523,12 +565,6 @@ For more detailed information on the Syrian conflict timeline, see the [Council 
 - Provide personal protective equipment and conflict awareness training to national staff in volatile areas.
 - Strengthen coordination with local actors and communities to improve incident reporting and early warnings.
 - Scale up remote programming in areas with ongoing aerial bombardment or crossfire.
-
-### For Policy Development
-
-- Advocate for international enforcement of humanitarian access protections, particularly in aerial bombardment zones.
-- Support diplomatic efforts that promote ceasefires and demilitarized corridors for humanitarian operations.
-- Back UN and independent investigations into attacks on aid workers and facilities.
 
 ### For Future Research
 
