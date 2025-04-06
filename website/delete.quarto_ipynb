@@ -1,0 +1,78 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Security Incidents Analysis: Global Patterns and Trends\"\n",
+        "format: \n",
+        "  html:\n",
+        "    code-fold: true\n",
+        "    toc: true\n",
+        "    toc-depth: 3\n",
+        "    number-sections: true\n",
+        "    theme: cosmo\n",
+        "    fig-width: 9\n",
+        "    fig-height: 6\n",
+        "    fig-dpi: 300\n",
+        "    self-contained: true\n",
+        "execute:\n",
+        "  warning: false\n",
+        "  message: false\n",
+        "---"
+      ],
+      "id": "3eb29af6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: setup\n",
+        "#| include: false\n",
+        "\n",
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns\n",
+        "import folium\n",
+        "from folium.plugins import MarkerCluster\n",
+        "from matplotlib.colors import LinearSegmentedColormap\n",
+        "import warnings\n",
+        "import plotly.express as px\n",
+        "import plotly.graph_objects as go\n",
+        "from IPython.display import display\n",
+        "\n",
+        "plt.rcParams['figure.figsize'] = (10, 6)\n",
+        "warnings.filterwarnings('ignore', category=FutureWarning)\n",
+        "sns.set_theme(style=\"whitegrid\")\n",
+        "\n",
+        "palette = {\"primary\": \"#FFBD59\", \"secondary\": \"#64C1FF\", \"danger\": \"#FF5252\"}\n",
+        "\n",
+        "df = pd.read_csv(\"data/security_incidents_cleaned.csv\")\n",
+        "country_data = df[df['country'] == 'Occupied Palestinian Territories']"
+      ],
+      "id": "setup",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "make an interactive map where i can add my own image as a marker for a security incident\n"
+      ],
+      "id": "4bbe7a6d"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/opt/miniconda3/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

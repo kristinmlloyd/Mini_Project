@@ -1,0 +1,586 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Security Incidents Data Cleaning\"\n",
+        "format: \n",
+        "  html:\n",
+        "    embed-resources: true\n",
+        "    code-fold: true\n",
+        "    toc: true\n",
+        "    toc-depth: 3\n",
+        "    toc-title: \"Contents\"\n",
+        "    code-tools: true\n",
+        "    error: false  \n",
+        "---\n",
+        "\n",
+        "\n",
+        "![](images/broom.png){width=150px}\n",
+        "\n",
+        "## 1. Introduction\n",
+        "\n",
+        "This document outlines the data cleaning process for the security incidents dataset. We'll examine the data structure, identify and address missing values, and prepare the dataset for analysis of broad trends in aid worker incidents by country, year, and organization type.\n",
+        "\n",
+        "The cleaning process follows a systematic approach:\n",
+        "\n",
+        "1. Loading and initial inspection\n",
+        "2. Handling missing values\n",
+        "3. Duplicate detection and removal\n",
+        "4. Data type optimization\n",
+        "5. Outlier analysis and handling\n",
+        "6. Geographic data validation\n",
+        "7. Final dataset preparation\n",
+        "\n",
+        "## 2. Loading and Initial Inspection\n",
+        "\n",
+        "First, let's load the dataset and standardize the column names for consistency.\n"
+      ],
+      "id": "4d361574"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: load-data\n",
+        "\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "import seaborn as sns\n",
+        "\n",
+        "df = pd.read_csv(\"data/security_incidents.csv\")\n",
+        "\n",
+        "df.columns = df.columns.str.strip().str.lower().str.replace(\" \", \"_\")\n",
+        "\n",
+        "df.head(1)"
+      ],
+      "id": "load-data",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: basic-info\n",
+        "\n",
+        "rows, cols = df.shape\n",
+        "print(f\"The dataset contains {rows} rows and {cols} columns.\")"
+      ],
+      "id": "basic-info",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 3. Handling Missing Values\n",
+        "\n",
+        "To better understand which variables have missing values, we'll create a visualization showing the percentage of missing values per column.\n"
+      ],
+      "id": "e98bbc11"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "missing_values = df.isnull().sum()\n",
+        "missing_percent = (missing_values / len(df) * 100).round(2)\n",
+        "\n",
+        "missing_df = pd.DataFrame({\n",
+        "    'Missing Values': missing_values,\n",
+        "    'Percentage': missing_percent\n",
+        "})\n",
+        "\n",
+        "print(\"Columns with missing values:\")\n",
+        "missing_df[missing_df['Missing Values'] > 0].sort_values('Missing Values', ascending=False)\n",
+        "\n",
+        "if missing_values.sum() > 0:\n",
+        "    plt.figure(figsize=(12, 6))\n",
+        "    sns.heatmap(df.isnull(), cbar=False, cmap='viridis', yticklabels=False)\n",
+        "    plt.title('Missing Values Heatmap')\n",
+        "    plt.tight_layout()\n",
+        "    plt.show()"
+      ],
+      "id": "85334516",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: missing-values-viz\n",
+        "\n",
+        "missing_percent = (df.isna().sum() / len(df)) * 100\n",
+        "missing_percent = missing_percent[missing_percent > 0].sort_values(ascending=True)\n",
+        "\n",
+        "plt.figure(figsize=(7, 4))\n",
+        "missing_percent.plot(kind='barh', color='#64C1FF')\n",
+        "plt.title(\"Percentage of Missing Values per Column\")\n",
+        "plt.xlabel(\"Percent Missing (%)\")\n",
+        "plt.tight_layout()\n",
+        "plt.grid(axis='x', linestyle='--', alpha=0.5)\n",
+        "plt.show()"
+      ],
+      "id": "missing-values-viz",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### 3.1 Strategy for Missing Values\n",
+        "\n",
+        "Based on our exploration, we have identified several columns with high proportions of missing values:\n",
+        "\n",
+        "- `City` (over 20% missing)\n",
+        "- `District`, `Day`, and `Region` (significant proportions missing)\n",
+        "\n",
+        "Since our analysis focus is on broad trends by country, year, and organization type, we will:\n",
+        "\n",
+        "1. Remove granular fields with limited analytical value for our specific goals\n",
+        "2. Leave the remaining minimal missing values as-is, as they're sparse and likely random\n"
+      ],
+      "id": "dfe95f9e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: remove-columns\n",
+        "\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "columns_to_drop = ['day', 'month', 'district', 'city', 'region', 'country_code', 'incident_id']\n",
+        "df.drop(columns=columns_to_drop, inplace=True)\n",
+        "\n",
+        "# Recalculate missing values after dropping columns\n",
+        "missing_percent = (df.isna().sum() / len(df)) * 100\n",
+        "missing_percent = missing_percent[missing_percent > 0].sort_values(ascending=True)\n",
+        "\n",
+        "# Visualize the remaining missing values\n",
+        "plt.figure(figsize=(7, 4))\n",
+        "missing_percent.plot(kind='barh', color='#64C1FF')\n",
+        "plt.title(\"Percentage of Missing Values After Column Removal\")\n",
+        "plt.xlabel(\"Percent Missing (%)\")\n",
+        "plt.tight_layout()\n",
+        "plt.grid(axis='x', linestyle='--', alpha=0.5)\n",
+        "plt.show()"
+      ],
+      "id": "remove-columns",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "missing_values = df.isnull().sum()\n",
+        "missing_percent = (missing_values / len(df) * 100).round(2)\n",
+        "\n",
+        "missing_df = pd.DataFrame({\n",
+        "    'Missing Values': missing_values,\n",
+        "    'Percentage': missing_percent\n",
+        "})\n",
+        "\n",
+        "print(\"Columns with missing values:\")\n",
+        "missing_df[missing_df['Missing Values'] > 0].sort_values('Missing Values', ascending=False)\n",
+        "\n",
+        "# Visualize missing values if any exist\n",
+        "if missing_values.sum() > 0:\n",
+        "    plt.figure(figsize=(12, 6))\n",
+        "    sns.heatmap(df.isnull(), cbar=False, cmap='viridis', yticklabels=False)\n",
+        "    plt.title('Missing Values Heatmap')\n",
+        "    plt.tight_layout()\n",
+        "    plt.show()"
+      ],
+      "id": "b82f5db8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### 3.2 Missing Values Decision\n",
+        "\n",
+        "Since the highest missing value percentage is now less than 0.5%, and the remaining missing data is sparse, likely random, and not concentrated in critical columns, we've decided:\n",
+        "\n",
+        "- No imputation is necessary\n",
+        "- Leave these values as-is (NaN), as most analysis tools handle them gracefully\n",
+        "- Imputing could introduce unnecessary bias given the small percentage\n",
+        "\n",
+        "## 4. Handling Duplicates\n",
+        "\n",
+        "Let's identify and remove duplicate records that could skew our analysis.\n"
+      ],
+      "id": "9950c194"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: duplicate-detection\n",
+        "\n",
+        "duplicated_mask = df.duplicated(keep=False)\n",
+        "duplicates = df[duplicated_mask]\n",
+        "\n",
+        "duplicate_count = len(duplicates)\n",
+        "print(f\"Total number of duplicated rows: {duplicate_count}\")\n",
+        "\n",
+        "duplicate_patterns = df[duplicated_mask].groupby(df.columns.tolist()).size().reset_index()\n",
+        "duplicate_patterns = duplicate_patterns.rename(columns={0: 'occurrence_count'})\n",
+        "\n",
+        "duplicate_patterns = duplicate_patterns.sort_values('occurrence_count', ascending=False)\n",
+        "\n",
+        "unique_duplicate_patterns = len(duplicate_patterns)\n",
+        "print(f\"Number of unique duplicate patterns: {unique_duplicate_patterns}\")\n",
+        "\n",
+        "occurrence_summary = duplicate_patterns['occurrence_count'].value_counts().sort_index()\n",
+        "print(\"\\nOccurrence pattern summary:\")\n",
+        "for count, frequency in occurrence_summary.items():\n",
+        "    print(f\"  {frequency} record(s) appear {count} times each\")"
+      ],
+      "id": "duplicate-detection",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Based on the duplicate analysis results, we need to remove duplicates from the dataset. The pattern of duplications (with some records appearing up to 13 times) suggests systematic duplication issues that could significantly skew our analysis.\n"
+      ],
+      "id": "6c632dac"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: remove-duplicates\n",
+        "\n",
+        "original_count = len(df)\n",
+        "\n",
+        "df = df.drop_duplicates()\n",
+        "\n",
+        "removed_count = original_count - len(df)\n",
+        "removal_percentage = (removed_count / original_count) * 100\n",
+        "\n",
+        "print(f\"Removed {removed_count} duplicate rows ({removal_percentage:.2f}% of dataset)\")\n",
+        "print(f\"Dataset now contains {len(df)} unique records\")"
+      ],
+      "id": "remove-duplicates",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 5. Data Type Optimization\n",
+        "\n",
+        "Most data types in this dataset are appropriate, but there are a few minor adjustments that could be made for consistency:\n"
+      ],
+      "id": "ec842091"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: data-types\n",
+        "\n",
+        "df.dtypes"
+      ],
+      "id": "data-types",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### 5.1 Data Type Conversion\n",
+        "\n",
+        "The following columns could benefit from data type conversion:\n",
+        "\n",
+        "| Column          | Current | Suggested | Reason                          |\n",
+        "|-----------------|---------|-----------|----------------------------------|\n",
+        "| `icrc`          | float64 | int64     | Counts should be integers        |\n",
+        "| `nrcs_and_ifrc` | float64 | int64     | Counts should be integers        |\n",
+        "| `nngo`          | float64 | int64     | Counts should be integers        |\n"
+      ],
+      "id": "384f8ce5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: convert-data-types\n",
+        "\n",
+        "count_columns = ['icrc', 'nrcs_and_ifrc', 'nngo']\n",
+        "for col in count_columns:\n",
+        "    if col in df.columns:\n",
+        "        df[col] = df[col].fillna(0).astype(int)\n",
+        "\n",
+        "df[count_columns].dtypes"
+      ],
+      "id": "convert-data-types",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 6. Outlier Analysis and Handling\n",
+        "\n",
+        "Let's identify and visualize outliers in the dataset to better understand extreme values in our security incidents data.\n"
+      ],
+      "id": "bab375b4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: outlier-summary\n",
+        "\n",
+        "import warnings\n",
+        "warnings.filterwarnings('ignore', category=FutureWarning)\n",
+        "# Function to detect outliers using IQR method\n",
+        "def detect_outliers(df, column):\n",
+        "    q1 = df[column].quantile(0.25)\n",
+        "    q3 = df[column].quantile(0.75)\n",
+        "    iqr = q3 - q1\n",
+        "    lower_bound = q1 - 1.5 * iqr\n",
+        "    upper_bound = q3 + 1.5 * iqr\n",
+        "    \n",
+        "    outliers = df[(df[column] < lower_bound) | (df[column] > upper_bound)]\n",
+        "    return outliers, lower_bound, upper_bound\n",
+        "\n",
+        "excluded_cols = ['year']\n",
+        "numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns\n",
+        "numeric_cols = [col for col in numeric_cols if col not in excluded_cols]\n",
+        "\n",
+        "outlier_summary = pd.DataFrame(columns=['Column', 'Total', 'Outliers', 'Percentage'])\n",
+        "\n",
+        "for col in numeric_cols:\n",
+        "    outliers, _, _ = detect_outliers(df, col)\n",
+        "    \n",
+        "    new_row = {\n",
+        "        'Column': col,\n",
+        "        'Total': len(df),\n",
+        "        'Outliers': len(outliers),\n",
+        "        'Percentage': len(outliers) / len(df) * 100\n",
+        "    }\n",
+        "    outlier_summary = pd.concat([outlier_summary, pd.DataFrame([new_row])], ignore_index=True)\n",
+        "\n",
+        "outlier_summary = outlier_summary.sort_values('Percentage', ascending=True)\n",
+        "\n",
+        "plt.figure(figsize=(7,4))\n",
+        "plt.barh(outlier_summary['Column'], outlier_summary['Percentage'], color='#64C1FF')\n",
+        "plt.title('Percentage of Outliers by Column')\n",
+        "plt.xlabel('Percentage of Values Identified as Outliers')\n",
+        "plt.grid(axis='x', linestyle='--', alpha=0.7)\n",
+        "plt.tight_layout()\n",
+        "plt.show()"
+      ],
+      "id": "outlier-summary",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### 6.1 Visualization of Key Outliers\n",
+        "\n",
+        "Let's visualize the distribution and outliers for the most important columns:\n"
+      ],
+      "id": "4f7eb5d0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: outlier-boxplots\n",
+        "\n",
+        "top_cols = outlier_summary.head(6)['Column'].tolist()\n",
+        "\n",
+        "# Create boxplots for top outlier columns\n",
+        "plt.figure(figsize=(10, 6))\n",
+        "for i, col in enumerate(top_cols, 1):\n",
+        "    plt.subplot(2, 3, i)\n",
+        "    sns.boxplot(y=df[col], color='#64C1FF')\n",
+        "    plt.title(f'Box Plot: {col}')\n",
+        "    plt.grid(linestyle='--', alpha=0.7)\n",
+        "plt.tight_layout()\n",
+        "plt.show()"
+      ],
+      "id": "outlier-boxplots",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### 6.2 Outlier Handling Strategy\n",
+        "\n",
+        "In security incident data, outliers often represent real extreme events (like major attacks) rather than errors. For our analysis:\n",
+        "\n",
+        "1. We'll flag high-impact incidents rather than removing them\n",
+        "2. This allows us to analyze with or without extreme events as needed\n"
+      ],
+      "id": "950ece1d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: flag-high-impact\n",
+        "\n",
+        "df['high_impact'] = False\n",
+        "\n",
+        "for col in ['total_killed', 'total_wounded', 'total_kidnapped', 'total_affected']:\n",
+        "    if col in df.columns:\n",
+        "        threshold = df[col].quantile(0.99)\n",
+        "        df.loc[df[col] > threshold, 'high_impact'] = True\n",
+        "\n",
+        "high_impact_count = df['high_impact'].sum()\n",
+        "print(f\"Flagged {high_impact_count} high-impact incidents ({high_impact_count/len(df)*100:.2f}% of dataset)\")\n",
+        "\n",
+        "if 'total_affected' in df.columns:\n",
+        "    print(\"\\nTop 5 most severe incidents:\")\n",
+        "    display(df.sort_values('total_affected', ascending=False).head(5)[\n",
+        "        ['year', 'country', 'total_affected', 'total_killed', 'total_wounded', 'total_kidnapped']])"
+      ],
+      "id": "flag-high-impact",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 7. Geographic Data Validation\n",
+        "\n",
+        "Let's verify that our latitude and longitude values are within valid ranges.\n"
+      ],
+      "id": "a5d71fa5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: validate-coordinates\n",
+        "\n",
+        "# Check if latitude and longitude values are within valid ranges\n",
+        "# Valid ranges: Latitude (-90 to 90), Longitude (-180 to 180)\n",
+        "\n",
+        "invalid_lat = df[(df['latitude'] < -90) | (df['latitude'] > 90)].shape[0]\n",
+        "invalid_lon = df[(df['longitude'] < -180) | (df['longitude'] > 180)].shape[0]\n",
+        "\n",
+        "print(f\"Invalid latitude values (outside -90 to 90): {invalid_lat}\")\n",
+        "print(f\"Invalid longitude values (outside -180 to 180): {invalid_lon}\")\n",
+        "\n",
+        "lat_min, lat_max = df['latitude'].min(), df['latitude'].max()\n",
+        "lon_min, lon_max = df['longitude'].min(), df['longitude'].max()\n",
+        "\n",
+        "print(f\"\\nLatitude range: {lat_min} to {lat_max}\")\n",
+        "print(f\"Longitude range: {lon_min} to {lon_max}\")\n",
+        "\n",
+        "plt.figure(figsize=(7,4))\n",
+        "plt.scatter(df['longitude'], df['latitude'], alpha=0.5, s=3)\n",
+        "plt.title('Geographic Distribution of Incidents')\n",
+        "plt.xlabel('Longitude')\n",
+        "plt.ylabel('Latitude')\n",
+        "plt.xlim(-180, 180)\n",
+        "plt.ylim(-90, 90)\n",
+        "plt.grid(True)\n",
+        "plt.tight_layout()\n",
+        "plt.show()"
+      ],
+      "id": "validate-coordinates",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "There are 0 invalid latitudes and longitudes, so we do not have to handle those outliers. All geographic coordinates are within valid ranges and suitable for mapping and spatial analysis.\n",
+        "\n",
+        "## 8. Final Dataset Summary\n",
+        "\n",
+        "Let's examine our cleaned dataset:\n"
+      ],
+      "id": "61db1792"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: final-summary\n",
+        "\n",
+        "print(f\"Final dataset shape: {df.shape}\")\n",
+        "print(\"\\nColumns in the cleaned dataset:\")\n",
+        "print(df.columns.tolist())\n",
+        "print(\"\\nSummary statistics:\")\n",
+        "df.describe()"
+      ],
+      "id": "final-summary",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 9. Conclusion\n",
+        "\n",
+        "The data cleaning process for the security incidents dataset has:\n",
+        "\n",
+        "1. Standardized column names for consistency\n",
+        "2. Removed granular fields with limited analytical value\n",
+        "3. Addressed minimal remaining missing values by leaving them as-is\n",
+        "4. Removed 28 duplicate records from 5 unique patterns\n",
+        "5. Optimized data types for count-based columns\n",
+        "6. Identified and flagged high-impact incidents for flexible analysis\n",
+        "7. Validated geographic coordinates, confirming all are within valid ranges\n",
+        "\n",
+        "The dataset is now ready for exploratory data analysis and modeling to identify trends in aid worker security incidents by country, year, and organization type.\n"
+      ],
+      "id": "a8479830"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: save-dataset\n",
+        "#| eval: false\n",
+        "#| echo: false\n",
+        "\n",
+        "df.to_csv(\"data/security_incidents_cleaned.csv\", index=False)"
+      ],
+      "id": "save-dataset",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/opt/miniconda3/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

@@ -134,7 +134,7 @@ Mali's crisis began with the 2012 Tuareg rebellion, triggered by fighters and we
 -   **2013-2019**: Gradual expansion of jihadist groups into central Mali
 -   **2015-2020**: Deployment of UN peacekeeping mission MINUSMA across northern regions
 
-Years of marginalization in northern regions, weak governance, and corruption created fertile ground for extremist recruitment among disenfranchised populations.
+Years of marginalization in northern regions, weak governance, and corruption created fertile ground for danger.
 
 ## Recent Escalation 
 
@@ -142,8 +142,6 @@ Mali's security has deteriorated rapidly since the 2020-2021 military coups. The
 
 -   **2022**: Junta cuts ties with France and hires Wagner Group mercenaries
 -   **2022**: Moura massacre with over 300 civilian deaths
--   **2023**: Expulsion of UN peacekeepers creating a security vacuum
--   **100%+** increase in attacks since UN withdrawal began
 -   Renewed fighting with Tuareg separatists in northeast regions
 -   JNIM jihadist group controlling northern territories
 -   Humanitarian crisis with thousands displaced
@@ -336,13 +334,13 @@ fig_context.show()
 
 ### Analysis of Attack Contexts
 
-There is a significant gap between ambushes and the second most common category. This disparity highlights how armed groups in Mali have strategically prioritized ambush tactics, likely due to their effectiveness along the country's limited road networks. *source*
+There is a significant gap between ambushes and the second most common category. This disparity highlights how armed groups in Mali have strategically prioritized ambush tactics, likely due to their effectiveness along the country's limited road networks [@britannicaMaliTransport].
 
 ## Location of Attack
 
 ```{python}
 #| label: fig-attack-locations
-#| fig-cap: "Most common attack locations"
+#| fig-cap: "Security incidents by attack locations"
 #| echo: false
 
 # Get top 10 most frequent locations
@@ -373,7 +371,7 @@ fig_locations.show()
 
 ### Analysis of Attack Locations
 
-The vast majority of incidents occurred on roads, underscoring the heightened dangers faced by aid workers during travel and transportation.
+The vast majority of incidents occurred on roads, underscoring the heightened dangers faced by aid workers during travel and transportation. As mentioned above, Mali has a very limited road network. 
 
 # Human Impact of Security Incidents {#sec-impact}
 
@@ -523,7 +521,7 @@ if not country_data.empty and 'total_affected' in country_data.columns:
 
 ### Analysis of Major Incidents
 
-This table displays five significant security incidents in Mali from 2018 to 2024, highlighting the evolution of the conflict. The incidents in public locations (2018) and at project sites (2022) each affected 9 individuals, suggesting targeted attacks on civilian gatherings and humanitarian operations. Road incidents in 2020 and 2024 each affected 6 people. 
+This table displays all security incidents in Mali from 2018 to 2024, highlighting the evolution of the conflict. The top incidents in public locations (2018) and at project sites (2022) each affected 9 individuals, suggesting targeted attacks on civilian gatherings and humanitarian operations. Road incidents in 2020 and 2024 each affected 6 people. 
 
 For more detailed information on the Mali conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/violent-extremism-sahel).
 
@@ -558,13 +556,6 @@ This analysis reveals several critical trends in Mali's security environment:
 -   Invest in remote management capabilities for periods of limited access
 -   Prioritize national staff security with equal protection measures
 -   Develop flexible programming models adaptable to changing security conditions
-
-### For Policy Development
-
--   Advocate for humanitarian access in engagements with all armed actors
--   Support regional security approaches spanning Mali, Burkina Faso and Niger
--   Engage donors on realistic security costs and operational flexibility
--   Promote accountability for attacks against humanitarian workers
 
 ### For Future Research
 
