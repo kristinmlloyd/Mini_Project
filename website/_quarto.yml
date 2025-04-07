@@ -32,7 +32,7 @@ website:
           - href: sudan.qmd
             text: Sudan
       - href: unknown.qmd
-        text: Exploring the Unknown
+        text: Missing Pieces
       - href: appendix.qmd
         text: Appendix
       - href: llm.qmd

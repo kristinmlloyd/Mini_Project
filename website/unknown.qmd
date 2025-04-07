@@ -278,9 +278,7 @@ plt.show()
 
 **Reporting Biases**: Incidents affecting females may be underreported in some settings. This data may underrepresent violence against women, particularly sexual violence, is often underreported in conflict zones due to stigma and limited access to reporting mechanisms.
 
-# Conclusion 
-
-<h2>Recommendations <img src="images/light.png" width="60px" style="vertical-align:middle; margin-left:10px;"></h2>
+# 💡 Recommendations
 
 Based on these findings, we recommend the following approaches:
 
