@@ -63,11 +63,25 @@
     "text": "6.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1\n\n\n\n                                                \n\n\n\n\n\n\n6.1.1 Analysis of Major Incidents\nThe top five most impactful incidents span a wide timeframe—from the early 2000s during the height of the Darfur conflict to a recent event in 2023. Notably, several of the deadliest incidents occurred during roadside ambushes, highlighting the sustained vulnerability of transportation routes over decades. These high-impact events demonstrate the long-running and geographically dispersed nature of conflict in Sudan, with implications for both historical accountability and forward-looking risk mitigation.\nFor more detailed information on the Sudan conflict timeline, see the Council on Foreign Relations Conflict Tracker."
   },
   {
-    "objectID": "sudan.html#key-findings",
-    "href": "sudan.html#key-findings",
+    "objectID": "sudan.html#for-security-planning",
+    "href": "sudan.html#for-security-planning",
     "title": "Security Incidents in Sudan: Trends and Patterns",
-    "section": "7.1 Key Findings",
-    "text": "7.1 Key Findings\n\nIncident spikes align with political turmoil: Major increases in attacks correspond to events like the Darfur conflict (2004–2006), Bashir’s removal (2019), the 2021 military coup, and the 2023 civil war.\n2024 marks the deadliest year: The SAF counteroffensive resulted in the highest number of incidents recorded, reflecting intense territorial battles and large-scale attacks.\nShooting is the most common attack method: Followed by kidnapping and bodily assault, indicating a mix of military-style violence and targeted intimidation.\nAmbushes dominate attack contexts: The high frequency of ambushes suggests road travel is particularly dangerous and systematically targeted.\nSudanese nationals suffer the most: Nationals face significantly higher casualties than international staff, with a disproportionate number of deaths.\nLong-term risk on transport routes: From 2003 to 2023, major incidents consistently occur along roads, showing persistent vulnerability to roadside attacks across decades."
+    "section": "7.1 For Security Planning",
+    "text": "7.1 For Security Planning\n\nConduct regular route risk assessments, especially on roads with a history of ambushes.\nUse armed escorts for convoys in high-risk areas.\nTailor security protocols by region—urban areas like Khartoum vs. rural areas like Darfur.\nSet evacuation thresholds based on real-time shifts in territorial control."
+  },
+  {
+    "objectID": "sudan.html#for-humanitarian-organizations",
+    "href": "sudan.html#for-humanitarian-organizations",
+    "title": "Security Incidents in Sudan: Trends and Patterns",
+    "section": "7.2 For Humanitarian Organizations",
+    "text": "7.2 For Humanitarian Organizations\n\nEnhance security info-sharing between national and international partners.\nPre-position essential supplies in hard-to-reach regions.\nUse remote programming in RSF-held areas to reduce staff exposure.\nProvide mental health support for staff affected by violence."
+  },
+  {
+    "objectID": "sudan.html#for-future-research",
+    "href": "sudan.html#for-future-research",
+    "title": "Security Incidents in Sudan: Trends and Patterns",
+    "section": "7.3 For Future Research",
+    "text": "7.3 For Future Research\n\nStudy how shifts in control affect attack frequency and location.\nCompare risks faced by national vs. international staff.\nAssess damage to infrastructure like hospitals and clinics.\nEvaluate which diplomatic efforts improve humanitarian access.\n\nBy providing a data-driven understanding of security patterns in Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
   },
   {
     "objectID": "mali.html",
@@ -133,11 +147,25 @@
     "text": "7.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1\n\n\n\n                                                \n\n\n\n\n\n\n7.1.1 Analysis of Major Incidents\nThis table displays all security incidents in Mali from 2018 to 2024, highlighting the evolution of the conflict. The top incidents in public locations (2018) and at project sites (2022) each affected 9 individuals, suggesting targeted attacks on civilian gatherings and humanitarian operations. Road incidents in 2020 and 2024 each affected 6 people.\nFor more detailed information on the Mali conflict timeline, see the Council on Foreign Relations Conflict Tracker."
   },
   {
-    "objectID": "mali.html#key-findings",
-    "href": "mali.html#key-findings",
+    "objectID": "mali.html#for-security-planning",
+    "href": "mali.html#for-security-planning",
     "title": "Security Incidents in Mali: Trends and Patterns",
-    "section": "8.1 Key Findings",
-    "text": "8.1 Key Findings\nThis analysis reveals several critical trends in Mali’s security environment:\n\nPolitical instability drives insecurity: The 2020 coup marked a turning point, with incidents increasing fivefold compared to pre-coup periods.\nTargeted kidnapping operations: Mali shows a pattern of calculated kidnapping targeting humanitarian personnel for financial and strategic gains.\nRoad movement risks: Ambushes along limited transport corridors severely constrain humanitarian access.\nUnequal risk distribution: The casualty disparity between Malian and international personnel requires tailored security approaches.\nMisleading security metrics: Military withdrawals correlate with apparent improvements that actually represent reduced humanitarian presence."
+    "section": "8.1 For Security Planning",
+    "text": "8.1 For Security Planning\n\nImplement journey management systems with real-time risk assessments for ambush prevention\nEstablish early warning networks for intelligence on armed group movements\nCreate specialized anti-kidnapping protocols with comprehensive staff training\nDevelop clear security thresholds for program suspension in high-risk areas"
+  },
+  {
+    "objectID": "mali.html#for-humanitarian-organizations",
+    "href": "mali.html#for-humanitarian-organizations",
+    "title": "Security Incidents in Mali: Trends and Patterns",
+    "section": "8.2 For Humanitarian Organizations",
+    "text": "8.2 For Humanitarian Organizations\n\nBalance operational presence with community acceptance strategies\nInvest in remote management capabilities for periods of limited access\nPrioritize national staff security with equal protection measures\nDevelop flexible programming models adaptable to changing security conditions"
+  },
+  {
+    "objectID": "mali.html#for-future-research",
+    "href": "mali.html#for-future-research",
+    "title": "Security Incidents in Mali: Trends and Patterns",
+    "section": "8.3 For Future Research",
+    "text": "8.3 For Future Research\n\nExamine access negotiation effectiveness with different armed groups\nAnalyze the impact of foreign security actors (UN, France, Wagner) on humanitarian security\nStudy community protection strategies in areas where state authority has receded\nEvaluate digital technology applications for security management in high-risk environments"
   },
   {
     "objectID": "somolia.html",
@@ -208,6 +236,20 @@
     "title": "Security Incidents in Somolia: Trends and Patterns",
     "section": "7.1 Key Findings",
     "text": "7.1 Key Findings\n\nIncident surges reflect major conflict milestones, with peaks during Al-Shabaab’s territorial expansion and retaliatory attacks after foreign interventions.\nShooting and kidnapping dominate attack methods, pointing to both militarized violence and targeted abduction strategies.\nAmbushes are the most common context, especially along roads, posing high risks to mobile teams and convoys.\nNational staff face the highest risks, accounting for the overwhelming majority of deaths, injuries, and kidnappings.\nTop-impact incidents occur in roads and compounds, showing that both movement and fixed locations carry high security exposure.\nNon-state armed groups are responsible for all major attacks, indicating persistent insecurity even during periods of relative political calm."
+  },
+  {
+    "objectID": "somolia.html#recommendations",
+    "href": "somolia.html#recommendations",
+    "title": "Security Incidents in Somolia: Trends and Patterns",
+    "section": "7.2 💡 Recommendations",
+    "text": "7.2 💡 Recommendations\n\n7.2.1 For Security Planning\n\nRoutinely map ambush-prone roadways and update movement protocols for affected corridors.\nReinforce compound perimeters and conduct regular drills for shelter-in-place or raid response.\nEstablish early-warning systems tied to Al-Shabaab activity, especially before declared offensives or rainy seasons.\n\n\n\n7.2.2 For Humanitarian Organizations\n\nPrioritize national staff protection with tailored training, protective gear, and mental health services.\nBuild contingency supply caches in stable regions to reduce dependence on insecure roads.\nStrengthen coordination with local security actors and community leaders in high-risk areas.\n\n\n\n7.2.3 For Future Research\n\nExamine links between climate shocks (e.g., floods, droughts) and violence escalation.\nAnalyze the evolution of Al-Shabaab’s targeting tactics across operational zones.\nEvaluate the long-term impact of AMISOM and other interventions on humanitarian access and staff safety."
+  },
+  {
+    "objectID": "llm.html",
+    "href": "llm.html",
+    "title": "Large Language Model Log",
+    "section": "",
+    "text": "1 🤖 LLM Use Log\nThroughout this project, I used a large language model (LLM) as a collaborative tool to support various aspects of my analysis and presentation. Specifically:\n\nI used the LLM to reword and refine my own ideas, helping me express complex concepts more clearly while maintaining the original intent and tone.\nLLM’s assisted me in interpreting timelines and summarizing key events drawn from conflict tracker websites. This was particularly helpful when organizing country-specific narratives and understanding overlapping crises.\nI also leveraged the LLM to brainstorm and debug advanced interactive visualizations, especially those involving animation, filtering, and custom styling. While the model provided guidance, I actively engaged in the coding process and deepened my understanding of the tools and techniques involved.\n\nOverall, the LLM served as a learning companion, offering support without replacing the analytical or creative thinking that went into the work."
   },
   {
     "objectID": "data_cleaning.html#introduction",
@@ -434,18 +476,25 @@
     "text": "6.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1\n\n\n\n                                                \n\n\n\n\n\n\n6.1.1 Analysis of Major Incidents\nThe most severe incidents in Syria primarily occurred at project sites, with nearly all involving combat or crossfire:\n\nThe deadliest incidents occurred in 2016 and 2017, each resulting in 9 fatalities with no survivors—highlighting the intensity of direct armed clashes.\nThe highest total casualty incident in 2013 left 11 people wounded at a project site, suggesting exposure to indiscriminate violence rather than targeted attack.\n\nThese events emphasize the critical need for conflict-sensitive planning, real-time situational awareness, and investment in protective infrastructure at operational sites.\nFor more detailed information on the Syrian conflict timeline, see the Council on Foreign Relations Conflict Tracker."
   },
   {
-    "objectID": "syria.html#key-findings",
-    "href": "syria.html#key-findings",
+    "objectID": "syria.html#for-security-planning",
+    "href": "syria.html#for-security-planning",
     "title": "Security Incidents in Syrian Arab Republic: Trends and Patterns",
-    "section": "7.1 Key Findings",
-    "text": "7.1 Key Findings\n\nIncident patterns mirror key conflict events, including spikes during ISIS expansion, regime offensives, and the 2024 collapse of Assad’s government.\nAerial attacks and indirect fire dominate the attack profile, setting Syria apart from ground-focused conflicts.\nMost incidents occur during combat or crossfire, rather than direct targeting of humanitarian actors.\nNationals account for the vast majority of deaths, injuries, and kidnappings, indicating significant disparities in exposure and risk.\nProject sites and offices are common locations for major incidents, especially in heavily militarized zones."
+    "section": "7.1 For Security Planning",
+    "text": "7.1 For Security Planning\n\nMap and monitor high-risk areas near frontlines, with live updates on aerial activity and shelling zones.\nEstablish hardened infrastructure and underground shelters at compounds and project sites.\nDevelop rapid evacuation protocols tailored to conflict escalation patterns."
   },
   {
-    "objectID": "syria.html#recommendations",
-    "href": "syria.html#recommendations",
+    "objectID": "syria.html#for-humanitarian-organizations",
+    "href": "syria.html#for-humanitarian-organizations",
     "title": "Security Incidents in Syrian Arab Republic: Trends and Patterns",
-    "section": "7.2 Recommendations",
-    "text": "7.2 Recommendations\n\n7.2.1 For Security Planning\n\nMap and monitor high-risk areas near frontlines, with live updates on aerial activity and shelling zones.\nEstablish hardened infrastructure and underground shelters at compounds and project sites.\nDevelop rapid evacuation protocols tailored to conflict escalation patterns.\n\n\n\n7.2.2 For Humanitarian Organizations\n\nProvide personal protective equipment and conflict awareness training to national staff in volatile areas.\nStrengthen coordination with local actors and communities to improve incident reporting and early warnings.\nScale up remote programming in areas with ongoing aerial bombardment or crossfire.\n\n\n\n7.2.3 For Future Research\n\nAnalyze how territorial control shifts impact humanitarian security in real time.\nInvestigate long-term mental health outcomes for frontline national staff.\nStudy the role of infrastructure damage (e.g., hospitals, water, roads) on aid delivery and mobility."
+    "section": "7.2 For Humanitarian Organizations",
+    "text": "7.2 For Humanitarian Organizations\n\nProvide personal protective equipment and conflict awareness training to national staff in volatile areas.\nStrengthen coordination with local actors and communities to improve incident reporting and early warnings.\nScale up remote programming in areas with ongoing aerial bombardment or crossfire."
+  },
+  {
+    "objectID": "syria.html#for-future-research",
+    "href": "syria.html#for-future-research",
+    "title": "Security Incidents in Syrian Arab Republic: Trends and Patterns",
+    "section": "7.3 For Future Research",
+    "text": "7.3 For Future Research\n\nAnalyze how territorial control shifts impact humanitarian security in real time.\nInvestigate long-term mental health outcomes for frontline national staff.\nStudy the role of infrastructure damage (e.g., hospitals, water, roads) on aid delivery and mobility."
   },
   {
     "objectID": "unknown.html#background",
@@ -532,11 +581,18 @@
     "text": "6.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1\n\n\n\n                                                \n\n\n\n\n\n\n6.1.1 Analysis of Major Incidents\nRoad ambushes appear to be a common tactic, with three significant incidents on roads in 2018 affecting 10-12 people each. This aligns with the earlier analysis showing ambushes as the most frequent attack method. The sample shows multiple significant incidents in 2018, which aligns with the period following the signing of the Revitalized Peace Agreement. This suggests that despite political agreements at the national level, security incidents continued to threaten civilians and aid operations on the ground.\nFor more detailed information on the South Sudan conflict timeline, see the Council on Foreign Relations Conflict Tracker."
   },
   {
-    "objectID": "southsudan.html#key-findings",
-    "href": "southsudan.html#key-findings",
+    "objectID": "southsudan.html#for-security-planning",
+    "href": "southsudan.html#for-security-planning",
     "title": "Security Incidents in South Sudan: Trends and Patterns",
-    "section": "7.1 Key Findings",
-    "text": "7.1 Key Findings\nThis analysis of security incidents in South Sudan reveals several critical patterns with important operational implications:\n\nPolitical agreements don’t ensure security: Formal peace deals have repeatedly failed to improve humanitarian security, with incident levels paradoxically reaching their highest points after peace agreement signings.\nProfessional military tactics dominate: The prevalence of shootings and ambushes indicates coordinated operations by trained fighters rather than random violence, suggesting systematic targeting of humanitarian operations.\nInfrastructure limitations increase vulnerability: Limited road networks funnel humanitarian movements through predictable routes, enabling effective ambush operations by armed groups.\nNational staff bear highest risk: While all humanitarian workers face significant danger, South Sudanese nationals experience casualty rates over ten times higher than international staff.\nAccess constraints mask security deterioration: The recent decline in incidents appears to reflect restricted humanitarian access rather than improved security conditions, as overall violence continues to intensify."
+    "section": "7.1 For Security Planning",
+    "text": "7.1 For Security Planning\n\nDevelop specialized road movement protocols with multiple alternative routes when possible\nEstablish robust communications systems that function in remote areas with limited infrastructure\nCreate context-specific security trainings focusing on ambush prevention and response\nImplement staff tracking systems with regular check-in procedures during field movements\nInstall additional physical protection for vehicles operating in high-risk areas"
+  },
+  {
+    "objectID": "southsudan.html#for-humanitarian-organizations",
+    "href": "southsudan.html#for-humanitarian-organizations",
+    "title": "Security Incidents in South Sudan: Trends and Patterns",
+    "section": "7.2 For Humanitarian Organizations",
+    "text": "7.2 For Humanitarian Organizations\n\nEmphasize community acceptance strategies to mitigate targeting risks\nInvest in national staff security with equal protection measures and evacuation planning\nDevelop flexible programming modalities that can adapt to rapid security changes\nConsider operational partnerships that expand access while maintaining security standards\nBalance risk mitigation with humanitarian imperatives through principled engagement\n\n\n7.2.1 For Future Research\n\nInvestigate the relationship between political transitions and security incident patterns\nAnalyze the changing targeting patterns between national and international personnel\nExamine community-based protection mechanisms that have proven effective\nStudy the effectiveness of different security approaches in the South Sudan context\nExplore correlations between food insecurity and security incidents\n\nBy providing a data-driven understanding of security patterns in South Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
   },
   {
     "objectID": "intro.html#research-questions",
@@ -651,11 +707,25 @@
     "text": "6.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1\n\n\n\n                                                \n\n\n\n\n\n\n6.1.1 Analysis of Major Incidents\nThe table above highlights the five most impactful security incidents in Afghanistan based on the total number of people affected. These high-casualty events reveal several important patterns:\n\nThe most severe incident occurred in 2015 at a project site, resulting in 49 casualties (14 killed and 35 wounded), indicating the vulnerability of development projects in Afghanistan\nThe incidents span from 2009 to 2021, demonstrating that high-impact security events have been a persistent feature of the Afghan security landscape across different phases of the conflict\nThree of the five top incidents resulted in fatalities, while two incidents (both with 12 affected individuals) show no deaths or injuries, suggesting these were likely kidnapping incidents\n\nThese high-impact events, while relatively rare, account for a disproportionate share of total casualties.\nFor more detailed information on the Afghanistan conflict timeline, see the Council on Foreign Relations Conflict Tracker."
   },
   {
-    "objectID": "af.html#key-findings",
-    "href": "af.html#key-findings",
+    "objectID": "af.html#for-security-planning",
+    "href": "af.html#for-security-planning",
     "title": "Security Incidents in Afghanistan: Trends and Patterns",
-    "section": "7.1 Key Findings",
-    "text": "7.1 Key Findings\nThis analysis of security incidents in Afghanistan reveals several critical patterns and trends:\n\nChanging patterns over time: Security incidents peaked during intensive NATO operations (2010-2014) and have generally declined since, with further reduction following Taliban control in 2021.\nTargeted attacks predominate: Unlike Palestine’s collateral damage pattern, Afghanistan shows more deliberate targeting of humanitarian operations, particularly compounds and convoys.\nHigh-impact events: Major incidents at fixed locations account for a disproportionate share of casualties, highlighting the vulnerability of permanent facilities.\nKidnapping dynamics: Afghanistan shows a distinctive pattern of kidnapping incidents, particularly along roads and transport routes."
+    "section": "7.1 For Security Planning",
+    "text": "7.1 For Security Planning\n\nImplement robust physical security measures for compounds and offices\nDevelop comprehensive convoy security protocols with route risk assessments\nMaintain low-profile operations in high-risk areas\nEstablish clear kidnapping prevention and response procedures"
+  },
+  {
+    "objectID": "af.html#for-humanitarian-organizations",
+    "href": "af.html#for-humanitarian-organizations",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns",
+    "section": "7.2 For Humanitarian Organizations",
+    "text": "7.2 For Humanitarian Organizations\n\nBalance operational effectiveness with security considerations when determining fixed vs. mobile programming\nInvest in local acceptance strategies, especially given the changing political landscape\nDevelop contingency plans for periods of heightened risk"
+  },
+  {
+    "objectID": "af.html#for-future-research",
+    "href": "af.html#for-future-research",
+    "title": "Security Incidents in Afghanistan: Trends and Patterns",
+    "section": "7.3 For Future Research",
+    "text": "7.3 For Future Research\n\nExamine the relationship between political transitions and security incident patterns\nInvestigate the effectiveness of different security approaches in the post-2021 context\nCompare security incidents affecting humanitarian versus development actors\n\nBy providing a data-driven understanding of security patterns in Afghanistan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
   },
   {
     "objectID": "palestine.html",
@@ -721,11 +791,25 @@
     "text": "6.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1\n\n\n\n                                                \n\n\n\n\n\n\n6.1.1 Analysis of Major Incidents\nThe table above highlights the five most impactful security incidents in the Occupied Palestinian Territories based on the total number of people affected. The most severe incident occurred in October 2023, coinciding with the Hamas attack on October 7th and the subsequent Israeli military response.\nThese major incidents share several characteristics:\n\nRecent escalation: Most of the high-impact incidents occurred during the 2023-2024 conflict escalation.\nHigh casualty rates: These incidents resulted in significant casualties, showing the intensity of the recent conflict.\nCombat contexts: Most occurred in combat/crossfire situations, consistent with the broader pattern of incidents in the region.\n\nFor more detailed information on the Israeli-Palestinian conflict timeline, see the Council on Foreign Relations Conflict Tracker."
   },
   {
-    "objectID": "palestine.html#key-findings",
-    "href": "palestine.html#key-findings",
+    "objectID": "palestine.html#for-security-planning",
+    "href": "palestine.html#for-security-planning",
     "title": "Security Incidents in Palestine: Trends and Patterns",
-    "section": "7.1 Key Findings",
-    "text": "7.1 Key Findings\nThis analysis of security incidents in the Occupied Palestinian Territories reveals several critical patterns and trends:\n\nUnprecedented recent escalation: After nearly two decades of relatively stable incident levels, 2023-2024 saw a dramatic surge in security incidents, reflecting the intensity of the conflict following the October 7th attack.\nPredominant attack methods: Aerial bombardment and shooting incidents emerge as the most common types of attacks, highlighting the nature of military operations in the region.\nDisproportionate impact on locals: Palestinian nationals have suffered significantly higher casualties compared to international personnel, underscoring the humanitarian dimension of the conflict.\nCombat as primary context: Most incidents occur during active combat situations, suggesting that conflict avoidance is a critical security strategy."
+    "section": "7.1 For Security Planning",
+    "text": "7.1 For Security Planning\n\nDevelop protocols specifically addressing risks from aerial bombardment and crossfire situations\nImplement enhanced early warning systems to monitor combat zone developments\nEstablish clear evacuation procedures for areas at high risk of becoming combat zones"
+  },
+  {
+    "objectID": "palestine.html#for-humanitarian-organizations",
+    "href": "palestine.html#for-humanitarian-organizations",
+    "title": "Security Incidents in Palestine: Trends and Patterns",
+    "section": "7.2 For Humanitarian Organizations",
+    "text": "7.2 For Humanitarian Organizations\n\nPrioritize protection measures for local staff, who face disproportionate security risks"
+  },
+  {
+    "objectID": "palestine.html#for-future-research",
+    "href": "palestine.html#for-future-research",
+    "title": "Security Incidents in Palestine: Trends and Patterns",
+    "section": "7.3 For Future Research",
+    "text": "7.3 For Future Research\n\nContinue monitoring security trends, especially given the recent escalation\nInvestigate the specific factors contributing to the disproportionate impact on local populations\nExamine the effectiveness of different security measures in reducing casualties\n\nBy providing a data-driven understanding of security patterns in the Occupied Palestinian Territories, this analysis aims to contribute to safer and more effective operations in this challenging environment."
   },
   {
     "objectID": "international.html#annual-trends-at-a-glance",
@@ -733,6 +817,13 @@
     "title": "Security Incidents Analysis: Global Patterns and Trends",
     "section": "4.1 Annual Trends at a Glance",
     "text": "4.1 Annual Trends at a Glance\nThe chart below offers a simple view of yearly totals across all countries, showing how global incident volume has risen over time.\n\n\n                                                \n\n\nThe bar chart shows:\n\nA general upward trend in reported incidents\nDistinct spikes likely linked to global conflicts or regional escalations\nPossible influence from improved data collection and reporting\n\nTogether, these visuals underscore how fluid the security landscape is—and why real-time analysis and localized response strategies matter."
+  },
+  {
+    "objectID": "international.html#regional-trends-at-a-glance",
+    "href": "international.html#regional-trends-at-a-glance",
+    "title": "Security Incidents Analysis: Global Patterns and Trends",
+    "section": "4.2 Regional Trends at a Glance",
+    "text": "4.2 Regional Trends at a Glance\nBy examining individual countries, we can pinpoint emerging hotspots as well as regions showing signs of improved security.\nThe animated choropleth map below shows how the distribution of security incidents has shifted over the years. Darker colors indicate higher numbers of incidents.\n\n\n                                                \n\n\n\nThis visualization reveals several insights:\n\nSome countries that were previously security hotspots have shown improvement\nNew areas of concern have emerged in recent years\nThe total number of recorded incidents shows notable year-to-year variation\n\nYou can use the play button to animate the map through time, or manually select specific years using the slider."
   },
   {
     "objectID": "international.html#analyze-individual-countries",
@@ -826,178 +917,24 @@
     "text": "6.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1\n\n\n\n                                                \n\n\n\n\n\n\n6.1.1 Analysis of Major Incidents\nThe table reveals a pattern of security incidents in the DRC spanning two decades (1997-2017). The deadliest incident occurred during the 1997 First Congo War period with 10 fatalities.\nFor more detailed information on the Israeli-Palestinian conflict timeline, see the Council on Foreign Relations Conflict Tracker."
   },
   {
-    "objectID": "dr.html#key-findings",
-    "href": "dr.html#key-findings",
+    "objectID": "dr.html#for-security-planning",
+    "href": "dr.html#for-security-planning",
     "title": "Security Incidents in Democratic Republic of Congo: Trends and Patterns",
-    "section": "7.1 Key Findings",
-    "text": "7.1 Key Findings\nThis analysis of security incidents in the Democratic Republic of Congo reveals several critical patterns and trends:\n\nPolitical transitions impact security: Major surges in security incidents coincided with political transitions, notably after Tshisekedi took power in 2019, suggesting internal instability during power shifts.\nKidnapping as primary tactic: Unlike other conflict zones, the DRC shows a distinct pattern of kidnappings as the predominant means of attack, reflecting armed groups’ strategic priorities for funding and control.\nAmbush as primary context: Most security incidents occur during ambushes, highlighting the tactical approach of armed groups exploiting the region’s challenging geography and infrastructure limitations.\nDisproportionate impact on nationals: Congolese nationals face significantly higher risks of kidnapping compared to internationals, underscoring the unequal exposure to security threats.\nGeographic vulnerabilities: Road networks and transportation routes emerge as particularly high-risk areas, with the majority of major incidents occurring during movement."
+    "section": "7.1 For Security Planning",
+    "text": "7.1 For Security Planning\n\nImplement comprehensive journey management protocols with real-time risk assessments\nEstablish robust communication networks with regular check-in procedures during movements\nDevelop specific anti-kidnapping protocols and train staff on prevention and response\nConsider armed escorts on high-risk routes where appropriate and legally permissible"
   },
   {
-    "objectID": "somolia.html#recommendations",
-    "href": "somolia.html#recommendations",
-    "title": "Security Incidents in Somolia: Trends and Patterns",
-    "section": "7.2 💡 Recommendations",
-    "text": "7.2 💡 Recommendations\n\n7.2.1 For Security Planning\n\nRoutinely map ambush-prone roadways and update movement protocols for affected corridors.\nReinforce compound perimeters and conduct regular drills for shelter-in-place or raid response.\nEstablish early-warning systems tied to Al-Shabaab activity, especially before declared offensives or rainy seasons.\n\n\n\n7.2.2 For Humanitarian Organizations\n\nPrioritize national staff protection with tailored training, protective gear, and mental health services.\nBuild contingency supply caches in stable regions to reduce dependence on insecure roads.\nStrengthen coordination with local security actors and community leaders in high-risk areas.\n\n\n\n7.2.3 For Future Research\n\nExamine links between climate shocks (e.g., floods, droughts) and violence escalation.\nAnalyze the evolution of Al-Shabaab’s targeting tactics across operational zones.\nEvaluate the long-term impact of AMISOM and other interventions on humanitarian access and staff safety."
-  },
-  {
-    "objectID": "southsudan.html#recommendations",
-    "href": "southsudan.html#recommendations",
-    "title": "Security Incidents in South Sudan: Trends and Patterns",
-    "section": "7.2 💡 Recommendations",
-    "text": "7.2 💡 Recommendations\n\n7.2.1 For Security Planning\n\nDevelop specialized road movement protocols with multiple alternative routes when possible\nEstablish robust communications systems that function in remote areas with limited infrastructure\nCreate context-specific security trainings focusing on ambush prevention and response\nImplement staff tracking systems with regular check-in procedures during field movements\nInstall additional physical protection for vehicles operating in high-risk areas\n\n\n\n7.2.2 For Humanitarian Organizations\n\nEmphasize community acceptance strategies to mitigate targeting risks\nInvest in national staff security with equal protection measures and evacuation planning\nDevelop flexible programming modalities that can adapt to rapid security changes\nConsider operational partnerships that expand access while maintaining security standards\nBalance risk mitigation with humanitarian imperatives through principled engagement\n\n\n\n7.2.3 For Policy Development\n\nAdvocate for humanitarian spaces in future political negotiations and peace agreements\nSupport coordinated security information sharing platforms among humanitarian actors\nPromote accountability mechanisms for attacks against humanitarian personnel\nEngage donors on realistic security costs in project budgets\nMaintain humanitarian principles while navigating complex political dynamics\n\n\n\n7.2.4 For Future Research\n\nInvestigate the relationship between political transitions and security incident patterns\nAnalyze the changing targeting patterns between national and international personnel\nExamine community-based protection mechanisms that have proven effective\nStudy the effectiveness of different security approaches in the South Sudan context\nExplore correlations between food insecurity and security incidents\n\nBy providing a data-driven understanding of security patterns in South Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
-  },
-  {
-    "objectID": "international.html#regional-trends-at-a-glance",
-    "href": "international.html#regional-trends-at-a-glance",
-    "title": "Security Incidents Analysis: Global Patterns and Trends",
-    "section": "4.2 Regional Trends at a Glance",
-    "text": "4.2 Regional Trends at a Glance\nBy examining individual countries, we can pinpoint emerging hotspots as well as regions showing signs of improved security.\nThe animated choropleth map below shows how the distribution of security incidents has shifted over the years. Darker colors indicate higher numbers of incidents.\n\n\n                                                \n\n\n\nThis visualization reveals several insights:\n\nSome countries that were previously security hotspots have shown improvement\nNew areas of concern have emerged in recent years\nThe total number of recorded incidents shows notable year-to-year variation\n\nYou can use the play button to animate the map through time, or manually select specific years using the slider."
-  },
-  {
-    "objectID": "palestine.html#recommendations",
-    "href": "palestine.html#recommendations",
-    "title": "Security Incidents in Palestine: Trends and Patterns",
-    "section": "7.2 💡 Recommendations",
-    "text": "7.2 💡 Recommendations\nThese findings have important implications for security planning, humanitarian programming, and policy development:\n\n7.2.1 For Security Planning\n\nDevelop protocols specifically addressing risks from aerial bombardment and crossfire situations\nImplement enhanced early warning systems to monitor combat zone developments\nEstablish clear evacuation procedures for areas at high risk of becoming combat zones\n\n\n\n7.2.2 For Humanitarian Organizations\n\nPrioritize protection measures for local staff, who face disproportionate security risks\n\n\n\n7.2.3 For Future Research\n\nContinue monitoring security trends, especially given the recent escalation\nInvestigate the specific factors contributing to the disproportionate impact on local populations\nExamine the effectiveness of different security measures in reducing casualties\n\nBy providing a data-driven understanding of security patterns in the Occupied Palestinian Territories, this analysis aims to contribute to safer and more effective operations in this challenging environment."
-  },
-  {
-    "objectID": "af.html#recommendations",
-    "href": "af.html#recommendations",
-    "title": "Security Incidents in Afghanistan: Trends and Patterns",
-    "section": "7.2 💡 Recommendations",
-    "text": "7.2 💡 Recommendations\nThese findings suggest specific approaches for operating in the Afghan context:\n\n7.2.1 For Security Planning\n\nImplement robust physical security measures for compounds and offices\nDevelop comprehensive convoy security protocols with route risk assessments\nMaintain low-profile operations in high-risk areas\nEstablish clear kidnapping prevention and response procedures\n\n\n\n7.2.2 For Humanitarian Organizations\n\nBalance operational effectiveness with security considerations when determining fixed vs. mobile programming\nInvest in local acceptance strategies, especially given the changing political landscape\nDevelop contingency plans for periods of heightened risk\n\n\n\n7.2.3 For Future Research\n\nExamine the relationship between political transitions and security incident patterns\nInvestigate the effectiveness of different security approaches in the post-2021 context\nCompare security incidents affecting humanitarian versus development actors\n\nBy providing a data-driven understanding of security patterns in Afghanistan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
-  },
-  {
-    "objectID": "dr.html#recommendations",
-    "href": "dr.html#recommendations",
+    "objectID": "dr.html#for-humanitarian-organizations",
+    "href": "dr.html#for-humanitarian-organizations",
     "title": "Security Incidents in Democratic Republic of Congo: Trends and Patterns",
-    "section": "7.2 💡 Recommendations",
-    "text": "7.2 💡 Recommendations\nThese findings suggest specific approaches for operating in the DRC context:\n\n7.2.1 For Security Planning\n\nImplement comprehensive journey management protocols with real-time risk assessments\nEstablish robust communication networks with regular check-in procedures during movements\nDevelop specific anti-kidnapping protocols and train staff on prevention and response\nConsider armed escorts on high-risk routes where appropriate and legally permissible\n\n\n\n7.2.2 For Humanitarian Organizations\n\nBalance operational presence with a thorough understanding of conflict dynamics in each area\nConsider remote programming models in areas with highest kidnapping risks\nPrioritize national staff security with equal investment in protection measures\nDevelop context-specific security training focusing on ambush prevention and response\n\n\n\n7.2.3 For Future Research\n\nAnalyze the effectiveness of different security approaches in reducing kidnapping risks\nExamine the long-term trends in security following major political transitions\nResearch community-based protection mechanisms that have proven effective in the DRC context\n\nBy providing a data-driven understanding of security patterns in the DR Congo, this analysis aims to contribute to safer and more effective operations in this challenging environment."
-  },
-  {
-    "objectID": "mali.html#recommendations",
-    "href": "mali.html#recommendations",
-    "title": "Security Incidents in Mali: Trends and Patterns",
-    "section": "8.2 💡 Recommendations",
-    "text": "8.2 💡 Recommendations\n\n8.2.1 For Security Planning\n\nImplement journey management systems with real-time risk assessments for ambush prevention\nEstablish early warning networks for intelligence on armed group movements\nCreate specialized anti-kidnapping protocols with comprehensive staff training\nDevelop clear security thresholds for program suspension in high-risk areas\n\n\n\n8.2.2 For Humanitarian Organizations\n\nBalance operational presence with community acceptance strategies\nInvest in remote management capabilities for periods of limited access\nPrioritize national staff security with equal protection measures\nDevelop flexible programming models adaptable to changing security conditions\n\n\n\n8.2.3 For Future Research\n\nExamine access negotiation effectiveness with different armed groups\nAnalyze the impact of foreign security actors (UN, France, Wagner) on humanitarian security\nStudy community protection strategies in areas where state authority has receded\nEvaluate digital technology applications for security management in high-risk environments"
-  },
-  {
-    "objectID": "sudan.html#recommendations",
-    "href": "sudan.html#recommendations",
-    "title": "Security Incidents in Sudan: Trends and Patterns",
-    "section": "7.2 💡 Recommendations",
-    "text": "7.2 💡 Recommendations\n\n7.2.1 For Security Planning\n\nConduct regular route risk assessments, especially on roads with a history of ambushes.\nUse armed escorts for convoys in high-risk areas.\nTailor security protocols by region—urban areas like Khartoum vs. rural areas like Darfur.\nSet evacuation thresholds based on real-time shifts in territorial control.\n\n\n\n7.2.2 For Humanitarian Organizations\n\nEnhance security info-sharing between national and international partners.\nPre-position essential supplies in hard-to-reach regions.\nUse remote programming in RSF-held areas to reduce staff exposure.\nProvide mental health support for staff affected by violence.\n\n\n\n7.2.3 For Policy Development\n\nAdvocate for SAF–RSF-agreed humanitarian corridors, especially for road movements.\nSupport community protection in ethnically targeted zones.\nPush for accountability through documentation of attacks on civilians and aid workers.\nEnforce targeted sanctions against external suppliers of arms to RSF.\n\n\n\n7.2.4 For Future Research\n\nStudy how shifts in control affect attack frequency and location.\nCompare risks faced by national vs. international staff.\nAssess damage to infrastructure like hospitals and clinics.\nEvaluate which diplomatic efforts improve humanitarian access.\n\nBy providing a data-driven understanding of security patterns in Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
-  },
-  {
-    "objectID": "llm.html",
-    "href": "llm.html",
-    "title": "Large Language Model Log",
-    "section": "",
-    "text": "1 🤖 LLM Use Log\nThroughout this project, I used a large language model (LLM) as a collaborative tool to support various aspects of my analysis and presentation. Specifically:\n\nI used the LLM to reword and refine my own ideas, helping me express complex concepts more clearly while maintaining the original intent and tone.\nLLM’s assisted me in interpreting timelines and summarizing key events drawn from conflict tracker websites. This was particularly helpful when organizing country-specific narratives and understanding overlapping crises.\nI also leveraged the LLM to brainstorm and debug advanced interactive visualizations, especially those involving animation, filtering, and custom styling. While the model provided guidance, I actively engaged in the coding process and deepened my understanding of the tools and techniques involved.\n\nOverall, the LLM served as a learning companion, offering support without replacing the analytical or creative thinking that went into the work."
-  },
-  {
-    "objectID": "southsudan.html#for-security-planning",
-    "href": "southsudan.html#for-security-planning",
-    "title": "Security Incidents in South Sudan: Trends and Patterns",
-    "section": "7.1 For Security Planning",
-    "text": "7.1 For Security Planning\n\nDevelop specialized road movement protocols with multiple alternative routes when possible\nEstablish robust communications systems that function in remote areas with limited infrastructure\nCreate context-specific security trainings focusing on ambush prevention and response\nImplement staff tracking systems with regular check-in procedures during field movements\nInstall additional physical protection for vehicles operating in high-risk areas"
-  },
-  {
-    "objectID": "southsudan.html#for-humanitarian-organizations",
-    "href": "southsudan.html#for-humanitarian-organizations",
-    "title": "Security Incidents in South Sudan: Trends and Patterns",
     "section": "7.2 For Humanitarian Organizations",
-    "text": "7.2 For Humanitarian Organizations\n\nEmphasize community acceptance strategies to mitigate targeting risks\nInvest in national staff security with equal protection measures and evacuation planning\nDevelop flexible programming modalities that can adapt to rapid security changes\nConsider operational partnerships that expand access while maintaining security standards\nBalance risk mitigation with humanitarian imperatives through principled engagement\n\n\n7.2.1 For Future Research\n\nInvestigate the relationship between political transitions and security incident patterns\nAnalyze the changing targeting patterns between national and international personnel\nExamine community-based protection mechanisms that have proven effective\nStudy the effectiveness of different security approaches in the South Sudan context\nExplore correlations between food insecurity and security incidents\n\nBy providing a data-driven understanding of security patterns in South Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
+    "text": "7.2 For Humanitarian Organizations\n\nBalance operational presence with a thorough understanding of conflict dynamics in each area\nConsider remote programming models in areas with highest kidnapping risks\nPrioritize national staff security with equal investment in protection measures\nDevelop context-specific security training focusing on ambush prevention and response"
   },
   {
-    "objectID": "southsudan.html#for-policy-development",
-    "href": "southsudan.html#for-policy-development",
-    "title": "Security Incidents in South Sudan: Trends and Patterns",
-    "section": "7.3 For Policy Development",
-    "text": "7.3 For Policy Development\n\nAdvocate for humanitarian spaces in future political negotiations and peace agreements\nSupport coordinated security information sharing platforms among humanitarian actors\nPromote accountability mechanisms for attacks against humanitarian personnel\nEngage donors on realistic security costs in project budgets\nMaintain humanitarian principles while navigating complex political dynamics\n\n\n7.3.1 For Future Research\n\nInvestigate the relationship between political transitions and security incident patterns\nAnalyze the changing targeting patterns between national and international personnel\nExamine community-based protection mechanisms that have proven effective\nStudy the effectiveness of different security approaches in the South Sudan context\nExplore correlations between food insecurity and security incidents\n\nBy providing a data-driven understanding of security patterns in South Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
-  },
-  {
-    "objectID": "palestine.html#for-security-planning",
-    "href": "palestine.html#for-security-planning",
-    "title": "Security Incidents in Palestine: Trends and Patterns",
-    "section": "7.1 For Security Planning",
-    "text": "7.1 For Security Planning\n\nDevelop protocols specifically addressing risks from aerial bombardment and crossfire situations\nImplement enhanced early warning systems to monitor combat zone developments\nEstablish clear evacuation procedures for areas at high risk of becoming combat zones"
-  },
-  {
-    "objectID": "palestine.html#for-humanitarian-organizations",
-    "href": "palestine.html#for-humanitarian-organizations",
-    "title": "Security Incidents in Palestine: Trends and Patterns",
-    "section": "7.2 For Humanitarian Organizations",
-    "text": "7.2 For Humanitarian Organizations\n\nPrioritize protection measures for local staff, who face disproportionate security risks"
-  },
-  {
-    "objectID": "palestine.html#for-future-research",
-    "href": "palestine.html#for-future-research",
-    "title": "Security Incidents in Palestine: Trends and Patterns",
+    "objectID": "dr.html#for-future-research",
+    "href": "dr.html#for-future-research",
+    "title": "Security Incidents in Democratic Republic of Congo: Trends and Patterns",
     "section": "7.3 For Future Research",
-    "text": "7.3 For Future Research\n\nContinue monitoring security trends, especially given the recent escalation\nInvestigate the specific factors contributing to the disproportionate impact on local populations\nExamine the effectiveness of different security measures in reducing casualties\n\nBy providing a data-driven understanding of security patterns in the Occupied Palestinian Territories, this analysis aims to contribute to safer and more effective operations in this challenging environment."
-  },
-  {
-    "objectID": "mali.html#for-security-planning",
-    "href": "mali.html#for-security-planning",
-    "title": "Security Incidents in Mali: Trends and Patterns",
-    "section": "8.1 For Security Planning",
-    "text": "8.1 For Security Planning\n\nImplement journey management systems with real-time risk assessments for ambush prevention\nEstablish early warning networks for intelligence on armed group movements\nCreate specialized anti-kidnapping protocols with comprehensive staff training\nDevelop clear security thresholds for program suspension in high-risk areas"
-  },
-  {
-    "objectID": "mali.html#for-humanitarian-organizations",
-    "href": "mali.html#for-humanitarian-organizations",
-    "title": "Security Incidents in Mali: Trends and Patterns",
-    "section": "8.2 For Humanitarian Organizations",
-    "text": "8.2 For Humanitarian Organizations\n\nBalance operational presence with community acceptance strategies\nInvest in remote management capabilities for periods of limited access\nPrioritize national staff security with equal protection measures\nDevelop flexible programming models adaptable to changing security conditions"
-  },
-  {
-    "objectID": "mali.html#for-future-research",
-    "href": "mali.html#for-future-research",
-    "title": "Security Incidents in Mali: Trends and Patterns",
-    "section": "8.3 For Future Research",
-    "text": "8.3 For Future Research\n\nExamine access negotiation effectiveness with different armed groups\nAnalyze the impact of foreign security actors (UN, France, Wagner) on humanitarian security\nStudy community protection strategies in areas where state authority has receded\nEvaluate digital technology applications for security management in high-risk environments"
-  },
-  {
-    "objectID": "syria.html#for-security-planning",
-    "href": "syria.html#for-security-planning",
-    "title": "Security Incidents in Syrian Arab Republic: Trends and Patterns",
-    "section": "7.1 For Security Planning",
-    "text": "7.1 For Security Planning\n\nMap and monitor high-risk areas near frontlines, with live updates on aerial activity and shelling zones.\nEstablish hardened infrastructure and underground shelters at compounds and project sites.\nDevelop rapid evacuation protocols tailored to conflict escalation patterns."
-  },
-  {
-    "objectID": "syria.html#for-humanitarian-organizations",
-    "href": "syria.html#for-humanitarian-organizations",
-    "title": "Security Incidents in Syrian Arab Republic: Trends and Patterns",
-    "section": "7.2 For Humanitarian Organizations",
-    "text": "7.2 For Humanitarian Organizations\n\nProvide personal protective equipment and conflict awareness training to national staff in volatile areas.\nStrengthen coordination with local actors and communities to improve incident reporting and early warnings.\nScale up remote programming in areas with ongoing aerial bombardment or crossfire."
-  },
-  {
-    "objectID": "syria.html#for-future-research",
-    "href": "syria.html#for-future-research",
-    "title": "Security Incidents in Syrian Arab Republic: Trends and Patterns",
-    "section": "7.3 For Future Research",
-    "text": "7.3 For Future Research\n\nAnalyze how territorial control shifts impact humanitarian security in real time.\nInvestigate long-term mental health outcomes for frontline national staff.\nStudy the role of infrastructure damage (e.g., hospitals, water, roads) on aid delivery and mobility."
-  },
-  {
-    "objectID": "sudan.html#for-security-planning",
-    "href": "sudan.html#for-security-planning",
-    "title": "Security Incidents in Sudan: Trends and Patterns",
-    "section": "7.1 For Security Planning",
-    "text": "7.1 For Security Planning\n\nConduct regular route risk assessments, especially on roads with a history of ambushes.\nUse armed escorts for convoys in high-risk areas.\nTailor security protocols by region—urban areas like Khartoum vs. rural areas like Darfur.\nSet evacuation thresholds based on real-time shifts in territorial control."
-  },
-  {
-    "objectID": "sudan.html#for-humanitarian-organizations",
-    "href": "sudan.html#for-humanitarian-organizations",
-    "title": "Security Incidents in Sudan: Trends and Patterns",
-    "section": "7.2 For Humanitarian Organizations",
-    "text": "7.2 For Humanitarian Organizations\n\nEnhance security info-sharing between national and international partners.\nPre-position essential supplies in hard-to-reach regions.\nUse remote programming in RSF-held areas to reduce staff exposure.\nProvide mental health support for staff affected by violence."
-  },
-  {
-    "objectID": "sudan.html#for-future-research",
-    "href": "sudan.html#for-future-research",
-    "title": "Security Incidents in Sudan: Trends and Patterns",
-    "section": "7.3 For Future Research",
-    "text": "7.3 For Future Research\n\nStudy how shifts in control affect attack frequency and location.\nCompare risks faced by national vs. international staff.\nAssess damage to infrastructure like hospitals and clinics.\nEvaluate which diplomatic efforts improve humanitarian access.\n\nBy providing a data-driven understanding of security patterns in Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
+    "text": "7.3 For Future Research\n\nAnalyze the effectiveness of different security approaches in reducing kidnapping risks\nExamine the long-term trends in security following major political transitions\nResearch community-based protection mechanisms that have proven effective in the DRC context\n\nBy providing a data-driven understanding of security patterns in the DR Congo, this analysis aims to contribute to safer and more effective operations in this challenging environment."
   }
 ]
