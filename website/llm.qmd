@@ -19,10 +19,10 @@ execute:
 
 # 🤖 LLM Use Log
 
-Throughout this project, I used a large language model (LLM) as a collaborative tool to support various aspects of my analysis and presentation. Specifically:
+Used a large language model (LLM) as a collaborative tool to support various aspects of the analysis and presentation. Specifically:
 
-- I used the LLM to reword and refine my own ideas, helping me express complex concepts more clearly while maintaining the original intent and tone.
-- LLM's assisted me in interpreting timelines and summarizing key events drawn from conflict tracker websites. This was particularly helpful when organizing country-specific narratives and understanding overlapping crises.
-- I also leveraged the LLM to brainstorm and debug advanced interactive visualizations, especially those involving animation, filtering, and custom styling. While the model provided guidance, I actively engaged in the coding process and deepened my understanding of the tools and techniques involved.
+- Used the LLM to reword and refine my own ideas, helping to express complex concepts more clearly while maintaining the original intent and tone.
+- LLM's assisted in interpreting timelines and summarizing key events drawn from conflict tracker websites. This was particularly helpful when organizing country-specific narratives and understanding overlapping crises.
+- Leveraged the LLM to brainstorm and debug advanced interactive visualizations, especially those involving animation, filtering, and custom styling. While the model provided guidance, I actively engaged in the coding process and deepened my understanding of the tools and techniques involved.
 
 Overall, the LLM served as a learning companion, offering support without replacing the analytical or creative thinking that went into the work.
