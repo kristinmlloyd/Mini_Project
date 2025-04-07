@@ -542,35 +542,21 @@ These major incidents share several characteristics:
 
 For more detailed information on the Israeli-Palestinian conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict).
 
-# Conclusions and Recommendations {#sec-conclusions}
-
-## Key Findings
-
-This analysis of security incidents in the Occupied Palestinian Territories reveals several critical patterns and trends:
-
-1.  **Unprecedented recent escalation**: After nearly two decades of relatively stable incident levels, 2023-2024 saw a dramatic surge in security incidents, reflecting the intensity of the conflict following the October 7th attack.
-
-2.  **Predominant attack methods**: Aerial bombardment and shooting incidents emerge as the most common types of attacks, highlighting the nature of military operations in the region.
-
-3.  **Disproportionate impact on locals**: Palestinian nationals have suffered significantly higher casualties compared to international personnel, underscoring the humanitarian dimension of the conflict.
-
-4.  **Combat as primary context**: Most incidents occur during active combat situations, suggesting that conflict avoidance is a critical security strategy.
-
-## 💡 Recommendations
+# 💡 Recommendations
 
 These findings have important implications for security planning, humanitarian programming, and policy development:
 
-### For Security Planning
+## For Security Planning
 
 -   Develop protocols specifically addressing risks from aerial bombardment and crossfire situations
 -   Implement enhanced early warning systems to monitor combat zone developments
 -   Establish clear evacuation procedures for areas at high risk of becoming combat zones
 
-### For Humanitarian Organizations
+## For Humanitarian Organizations
 
 -   Prioritize protection measures for local staff, who face disproportionate security risks
 
-### For Future Research
+## For Future Research
 
 -   Continue monitoring security trends, especially given the recent escalation
 -   Investigate the specific factors contributing to the disproportionate impact on local populations

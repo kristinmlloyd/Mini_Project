@@ -542,31 +542,21 @@ These events emphasize the critical need for conflict-sensitive planning, real-t
 
 For more detailed information on the Syrian conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/conflict-syria).
 
-# Conclusions and Recommendations {#sec-conclusions}
+# Recommendations
 
-## Key Findings
-
-1. **Incident patterns mirror key conflict events**, including spikes during ISIS expansion, regime offensives, and the 2024 collapse of Assad's government.
-2. **Aerial attacks and indirect fire dominate the attack profile**, setting Syria apart from ground-focused conflicts.
-3. **Most incidents occur during combat or crossfire**, rather than direct targeting of humanitarian actors.
-4. **Nationals account for the vast majority of deaths, injuries, and kidnappings**, indicating significant disparities in exposure and risk.
-5. **Project sites and offices are common locations for major incidents**, especially in heavily militarized zones.
-
-## Recommendations
-
-### For Security Planning 
+## For Security Planning 
 
 - Map and monitor high-risk areas near frontlines, with live updates on aerial activity and shelling zones.
 - Establish hardened infrastructure and underground shelters at compounds and project sites.
 - Develop rapid evacuation protocols tailored to conflict escalation patterns.
 
-### For Humanitarian Organizations
+## For Humanitarian Organizations
 
 - Provide personal protective equipment and conflict awareness training to national staff in volatile areas.
 - Strengthen coordination with local actors and communities to improve incident reporting and early warnings.
 - Scale up remote programming in areas with ongoing aerial bombardment or crossfire.
 
-### For Future Research
+## For Future Research
 
 - Analyze how territorial control shifts impact humanitarian security in real time.
 - Investigate long-term mental health outcomes for frontline national staff.

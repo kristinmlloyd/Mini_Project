@@ -116,7 +116,7 @@ This analysis examines security incidents affecting humanitarian operations in S
 
 -   **Road networks as danger zones**: Transportation routes represent the most dangerous operational environment, with major incidents frequently occurring during road movements.
 
--   **Recent decline masks deterioration**: The sharp drop in reported incidents since 2022 coincides with increased intercommunal violence and likely reflects reduced humanitarian presence rather than improved security.
+-   **Recent decline masks deterioration**: The sharp drop in reported incidents since 2022 coincides with increased intercommunal violence and might reflect reduced humanitarian presence rather than improved security.
 
 These findings have significant implications for humanitarian operations in South Sudan as the country faces renewed political tensions, severe food insecurity, and spillover risks from neighboring Sudan's conflict.
 
@@ -124,29 +124,13 @@ These findings have significant implications for humanitarian operations in Sout
 
 ## Historical Context
 
-Sudan gained independence in 1956, but divisions between the wealthier north and less-developed south led to decades of conflict. Following two civil wars, South Sudan gained independence in 2011 after 99 percent voted for separation. The new state quickly descended into turmoil as weak governance and ethnic tensions erupted [@cfr_southsudan]. Major developments included:
-
--   **1956**: Sudan gains independence with deep north-south divisions
--   **1983-2005**: Second Sudanese Civil War claims over 2 million lives
--   **2011**: South Sudan gains independence following referendum
--   **December 2013**: Civil war erupts when President Kiir accuses Vice President Machar of coup plot
--   **2013-2018**: Conflict kills approximately 400,000 people and displaces 4 million
--   **2018**: Revitalized peace agreement signed between Kiir and Machar
--   **2020**: Unity government formed after multiple delays
-
-The conflict resulted in widespread atrocities as armed groups targeted civilians along ethnic lines, committed sexual violence, and recruited child soldiers.
+Sudan gained independence in 1956, but long-standing divisions between the north and south led to decades of conflict. After two civil wars, South Sudan became an independent nation in 2011 following an overwhelming vote for separation. However, the country soon fell into crisis as political rivalry and ethnic tensions sparked a brutal civil war in 2013. Despite a peace agreement in 2018 and the formation of a unity government in 2020, the conflict has left deep scars, with widespread displacement, violence against civilians, and ongoing instability.
 
 ## Recent Escalation
 
-South Sudan has experienced a dramatic deterioration in security and humanitarian conditions:
+Since early 2024, South Sudan has seen a sharp decline in security and humanitarian conditions. Intercommunal violence escalated, prompting the deployment of additional peacekeepers, while fighting in neighboring Sudan disrupted a key oil pipeline, slashing state revenue. In 2025, clashes between government and opposition forces intensified. South Sudan has experienced a dramatic deterioration in security and humanitarian conditions:
 
--   **Early 2024**: Deployment of additional peacekeepers following surge in intercommunal violence
--   **Mid-2024**: Oil pipeline damage from Sudan fighting cuts nearly two-thirds of state revenue
--   **January 2025**: Clashes between government forces (SSPDF) and opposition forces (SPLA/IO)
--   **February 2025**: Escalation of fighting in Upper Nile state
--   **March 4, 2025**: Militia forces overrun army base in Nasir
--   **March 7, 2025**: Failed UN extraction attempt results in deaths of prominent general and dozens of soldiers
--   **7.7+ million** people facing severe food insecurity—the worst in the country's history
+-   7.7+ million people facing severe food insecurity—the worst in the country's history
 -   Widespread flooding since May 2024 threatening millions more
 -   Elections postponed to 2026 amid growing political tensions
 -   Possible spillover from Sudan's conflict into border regions
@@ -345,7 +329,7 @@ The prevalence of ambushes highlights the tactical nature of much of the violenc
 
 ```{python}
 #| label: fig-attack-locations
-#| fig-cap: "Most common attack locations"
+#| fig-cap: "Security incidents by attack locations"
 #| echo: false
 
 # Get top 10 most frequent locations
@@ -530,25 +514,9 @@ Road ambushes appear to be a common tactic, with three significant incidents on 
 
 For more detailed information on the South Sudan conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/civil-war-south-sudan).
 
-# Conclusions and Recommendations {#sec-conclusions}
+# 💡 Recommendations
 
-## Key Findings
-
-This analysis of security incidents in South Sudan reveals several critical patterns with important operational implications:
-
-1.  **Political agreements don't ensure security**: Formal peace deals have repeatedly failed to improve humanitarian security, with incident levels paradoxically reaching their highest points after peace agreement signings.
-
-2.  **Professional military tactics dominate**: The prevalence of shootings and ambushes indicates coordinated operations by trained fighters rather than random violence, suggesting systematic targeting of humanitarian operations.
-
-3.  **Infrastructure limitations increase vulnerability**: Limited road networks funnel humanitarian movements through predictable routes, enabling effective ambush operations by armed groups.
-
-4.  **National staff bear highest risk**: While all humanitarian workers face significant danger, South Sudanese nationals experience casualty rates over ten times higher than international staff.
-
-5.  **Access constraints mask security deterioration**: The recent decline in incidents appears to reflect restricted humanitarian access rather than improved security conditions, as overall violence continues to intensify.
-
-## 💡 Recommendations
-
-### For Security Planning
+## For Security Planning
 
 -   Develop specialized road movement protocols with multiple alternative routes when possible
 -   Establish robust communications systems that function in remote areas with limited infrastructure
@@ -556,21 +524,13 @@ This analysis of security incidents in South Sudan reveals several critical patt
 -   Implement staff tracking systems with regular check-in procedures during field movements
 -   Install additional physical protection for vehicles operating in high-risk areas
 
-### For Humanitarian Organizations
+## For Humanitarian Organizations
 
 -   Emphasize community acceptance strategies to mitigate targeting risks
 -   Invest in national staff security with equal protection measures and evacuation planning
 -   Develop flexible programming modalities that can adapt to rapid security changes
 -   Consider operational partnerships that expand access while maintaining security standards
 -   Balance risk mitigation with humanitarian imperatives through principled engagement
-
-### For Policy Development
-
--   Advocate for humanitarian spaces in future political negotiations and peace agreements
--   Support coordinated security information sharing platforms among humanitarian actors
--   Promote accountability mechanisms for attacks against humanitarian personnel
--   Engage donors on realistic security costs in project budgets
--   Maintain humanitarian principles while navigating complex political dynamics
 
 ### For Future Research
 

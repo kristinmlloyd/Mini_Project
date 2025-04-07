@@ -532,38 +532,24 @@ These high-impact events, while relatively rare, account for a disproportionate 
 
 For more detailed information on the Afghanistan conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/war-afghanistan).
 
-# Conclusions and Recommendations {#sec-conclusions}
-
-## Key Findings
-
-This analysis of security incidents in Afghanistan reveals several critical patterns and trends:
-
-1.  **Changing patterns over time**: Security incidents peaked during intensive NATO operations (2010-2014) and have generally declined since, with further reduction following Taliban control in 2021.
-
-2.  **Targeted attacks predominate**: Unlike Palestine's collateral damage pattern, Afghanistan shows more deliberate targeting of humanitarian operations, particularly compounds and convoys.
-
-3.  **High-impact events**: Major incidents at fixed locations account for a disproportionate share of casualties, highlighting the vulnerability of permanent facilities.
-
-4.  **Kidnapping dynamics**: Afghanistan shows a distinctive pattern of kidnapping incidents, particularly along roads and transport routes.
-
-## 💡 Recommendations 
+# 💡 Recommendations 
 
 These findings suggest specific approaches for operating in the Afghan context:
 
-### For Security Planning
+## For Security Planning
 
 -   Implement robust physical security measures for compounds and offices
 -   Develop comprehensive convoy security protocols with route risk assessments
 -   Maintain low-profile operations in high-risk areas
 -   Establish clear kidnapping prevention and response procedures
 
-### For Humanitarian Organizations
+## For Humanitarian Organizations
 
 -   Balance operational effectiveness with security considerations when determining fixed vs. mobile programming
 -   Invest in local acceptance strategies, especially given the changing political landscape
 -   Develop contingency plans for periods of heightened risk
 
-### For Future Research
+## For Future Research
 
 -   Examine the relationship between political transitions and security incident patterns
 -   Investigate the effectiveness of different security approaches in the post-2021 context

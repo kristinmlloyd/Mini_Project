@@ -328,7 +328,7 @@ Ambushes are by far the most frequent attack context, significantly surpassing o
 
 ```{python}
 #| label: fig-attack-locations
-#| fig-cap: "Most common attack locations"
+#| fig-cap: "Security incidents by attack locations"
 #| echo: false
 
 # Get top 10 most frequent locations
@@ -511,41 +511,23 @@ The top five most impactful incidents span a wide timeframe—from the early 200
 
 For more detailed information on the Sudan conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/power-struggle-sudan).
 
-# Conclusions and Recommendations {#sec-conclusions}
+# 💡 Recommendations
 
-## Key Findings
-
-- **Incident spikes align with political turmoil**: Major increases in attacks correspond to events like the Darfur conflict (2004–2006), Bashir’s removal (2019), the 2021 military coup, and the 2023 civil war.
-- **2024 marks the deadliest year**: The SAF counteroffensive resulted in the highest number of incidents recorded, reflecting intense territorial battles and large-scale attacks.
-- **Shooting is the most common attack method**: Followed by kidnapping and bodily assault, indicating a mix of military-style violence and targeted intimidation.
-- **Ambushes dominate attack contexts**: The high frequency of ambushes suggests road travel is particularly dangerous and systematically targeted.
-- **Sudanese nationals suffer the most**: Nationals face significantly higher casualties than international staff, with a disproportionate number of deaths.
-- **Long-term risk on transport routes**: From 2003 to 2023, major incidents consistently occur along roads, showing persistent vulnerability to roadside attacks across decades.
-
-## 💡 Recommendations
-
-### For Security Planning
+## For Security Planning
 
 - Conduct regular route risk assessments, especially on roads with a history of ambushes.
 - Use armed escorts for convoys in high-risk areas.
 - Tailor security protocols by region—urban areas like Khartoum vs. rural areas like Darfur.
 - Set evacuation thresholds based on real-time shifts in territorial control.
 
-### For Humanitarian Organizations
+## For Humanitarian Organizations
 
 - Enhance security info-sharing between national and international partners.
 - Pre-position essential supplies in hard-to-reach regions.
 - Use remote programming in RSF-held areas to reduce staff exposure.
 - Provide mental health support for staff affected by violence.
 
-### For Policy Development
-
-- Advocate for SAF–RSF-agreed humanitarian corridors, especially for road movements.
-- Support community protection in ethnically targeted zones.
-- Push for accountability through documentation of attacks on civilians and aid workers.
-- Enforce targeted sanctions against external suppliers of arms to RSF.
-
-### For Future Research
+## For Future Research
 
 - Study how shifts in control affect attack frequency and location.
 - Compare risks faced by national vs. international staff.

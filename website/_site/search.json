@@ -46,7 +46,7 @@
     "href": "sudan.html#location-of-attack",
     "title": "Security Incidents in Sudan: Trends and Patterns",
     "section": "4.3 Location of Attack",
-    "text": "4.3 Location of Attack\n\n\n\n\n                                                \n\n\nFigure 4: Most common attack locations\n\n\n\n\n\n4.3.1 Analysis of Attack Locations\nMost humanitarian incidents occurred on roads and project sites, with a high share of unknown locations."
+    "text": "4.3 Location of Attack\n\n\n\n\n                                                \n\n\nFigure 4: Security incidents by attack locations\n\n\n\n\n\n4.3.1 Analysis of Attack Locations\nMost humanitarian incidents occurred on roads and project sites, with a high share of unknown locations."
   },
   {
     "objectID": "sudan.html#casualties-by-category",
@@ -60,7 +60,7 @@
     "href": "sudan.html#top-5-most-impactful-security-incidents",
     "title": "Security Incidents in Sudan: Trends and Patterns",
     "section": "6.1 Top 5 Most Impactful Security Incidents",
-    "text": "6.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1: Most impactful security incidents (by total affected)\n\n\n\n\n\n\n\n\n\n\nYear\nLocation\nTotal Affected\nKilled\nWounded\nContext\nActor Type\n\n\n\n\n3778\n2023\nRoad\n18\n0\n18\nAmbush\nUnknown\n\n\n384\n2005\nRoad\n17\n0\n17\nAmbush\nUnknown\n\n\n377\n2005\nProject site\n15\n0\n15\nMob violence\nAid recipient\n\n\n260\n2003\nRoad\n10\n8\n2\nAmbush\nUnknown\n\n\n507\n2006\nUnknown\n8\n0\n8\nAmbush\nUnknown\n\n\n\n\n\n\n\n\n\n\n\n6.1.1 Analysis of Major Incidents\nThe top five most impactful incidents span a wide timeframe—from the early 2000s during the height of the Darfur conflict to a recent event in 2023. Notably, several of the deadliest incidents occurred during roadside ambushes, highlighting the sustained vulnerability of transportation routes over decades. These high-impact events demonstrate the long-running and geographically dispersed nature of conflict in Sudan, with implications for both historical accountability and forward-looking risk mitigation.\nFor more detailed information on the Sudan conflict timeline, see the Council on Foreign Relations Conflict Tracker."
+    "text": "6.1 Top 5 Most Impactful Security Incidents\n\n\n\n\nTable 1\n\n\n\n                                                \n\n\n\n\n\n\n6.1.1 Analysis of Major Incidents\nThe top five most impactful incidents span a wide timeframe—from the early 2000s during the height of the Darfur conflict to a recent event in 2023. Notably, several of the deadliest incidents occurred during roadside ambushes, highlighting the sustained vulnerability of transportation routes over decades. These high-impact events demonstrate the long-running and geographically dispersed nature of conflict in Sudan, with implications for both historical accountability and forward-looking risk mitigation.\nFor more detailed information on the Sudan conflict timeline, see the Council on Foreign Relations Conflict Tracker."
   },
   {
     "objectID": "sudan.html#key-findings",
@@ -452,7 +452,7 @@
     "href": "unknown.html#background",
     "title": "Missing Data Patterns in Humanitarian Security Incidents",
     "section": "2.1 Background",
-    "text": "2.1 Background\nHumanitarian security incident data provide crucial insights into patterns of violence in conflict zones, helping organizations protect staff, allocate resources, and advocate for civilian protection. However, these datasets often contain substantial information gaps due to access limitations, security concerns, and reporting infrastructure challenges. This analysis explores patterns of missing data across different countries and incident attributes, revealing how information gaps may affect our understanding of humanitarian crises. By identifying where data is most consistently missing, we can better contextualize findings and understand the limitations of conflict monitoring systems."
+    "text": "2.1 Background\nHumanitarian security incident data provide crucial insights into patterns of violence in conflict zones, helping organizations protect staff, allocate resources, and advocate for civilian protection. However, these datasets often contain substantial information gaps due to access limitations, security concerns, and reporting infrastructure challenges.\nThis analysis explores patterns of missing data across different countries and incident attributes, revealing how information gaps may affect our understanding of humanitarian crises. By identifying where data is most consistently missing, we can better contextualize findings and understand the limitations of conflict monitoring systems."
   },
   {
     "objectID": "unknown.html#methodology",
@@ -466,7 +466,7 @@
     "href": "unknown.html#gender-analysis",
     "title": "Missing Data Patterns in Humanitarian Security Incidents",
     "section": "3.1 Gender Analysis",
-    "text": "3.1 Gender Analysis\nThe chart reveals critical gaps in gender data collection across conflict-affected countries, with Sudan exhibiting the highest level of missing information. Syria leads in data completeness, yet nearly one-fifth of gender records remain undocumented.\n\n\n\n\n\n\n\n\n\nEmergency Response Priorities: During humanitarian crises, responders often prioritize basic needs (e.g., food, water, shelter) over detailed demographic tracking.\nReporting Biases: Incidents affecting females may be underreported in some settings. This data may underrepresent violence against women, particularly sexual violence, is often underreported in conflict zones due to stigma and limited access to reporting mechanisms.\nLegal and Social Norms: In some countries, recognition of non-binary or transgender individuals is limited or criminalized, leading to exclusion or misclassification. This can result in either lumping into “unknown” or not recording the data at all."
+    "text": "3.1 Gender Analysis\nThe chart reveals critical gaps in gender data collection across conflict-affected countries, with Sudan exhibiting the highest level of missing information. Syria leads in data completeness, yet nearly one-fifth of gender records remain undocumented.\n\n\n\n\n\n\n\n\n\nEmergency Response Priorities: During humanitarian crises, responders often prioritize basic needs (e.g., food, water, shelter) over detailed demographic tracking.\nReporting Biases: Incidents affecting females may be underreported in some settings. This data may underrepresent violence against women, particularly sexual violence, is often underreported in conflict zones due to stigma and limited access to reporting mechanisms."
   },
   {
     "objectID": "southsudan.html",
@@ -480,14 +480,14 @@
     "href": "southsudan.html#historical-context",
     "title": "Security Incidents in South Sudan: Trends and Patterns",
     "section": "2.1 Historical Context",
-    "text": "2.1 Historical Context\nSudan gained independence in 1956, but divisions between the wealthier north and less-developed south led to decades of conflict. Following two civil wars, South Sudan gained independence in 2011 after 99 percent voted for separation. The new state quickly descended into turmoil as weak governance and ethnic tensions erupted (Foreign Relations 2024). Major developments included:\n\n1956: Sudan gains independence with deep north-south divisions\n1983-2005: Second Sudanese Civil War claims over 2 million lives\n2011: South Sudan gains independence following referendum\nDecember 2013: Civil war erupts when President Kiir accuses Vice President Machar of coup plot\n2013-2018: Conflict kills approximately 400,000 people and displaces 4 million\n2018: Revitalized peace agreement signed between Kiir and Machar\n2020: Unity government formed after multiple delays\n\nThe conflict resulted in widespread atrocities as armed groups targeted civilians along ethnic lines, committed sexual violence, and recruited child soldiers."
+    "text": "2.1 Historical Context\nSudan gained independence in 1956, but long-standing divisions between the north and south led to decades of conflict. After two civil wars, South Sudan became an independent nation in 2011 following an overwhelming vote for separation. However, the country soon fell into crisis as political rivalry and ethnic tensions sparked a brutal civil war in 2013. Despite a peace agreement in 2018 and the formation of a unity government in 2020, the conflict has left deep scars, with widespread displacement, violence against civilians, and ongoing instability."
   },
   {
     "objectID": "southsudan.html#recent-escalation",
     "href": "southsudan.html#recent-escalation",
     "title": "Security Incidents in South Sudan: Trends and Patterns",
     "section": "2.2 Recent Escalation",
-    "text": "2.2 Recent Escalation\nSouth Sudan has experienced a dramatic deterioration in security and humanitarian conditions:\n\nEarly 2024: Deployment of additional peacekeepers following surge in intercommunal violence\nMid-2024: Oil pipeline damage from Sudan fighting cuts nearly two-thirds of state revenue\nJanuary 2025: Clashes between government forces (SSPDF) and opposition forces (SPLA/IO)\nFebruary 2025: Escalation of fighting in Upper Nile state\nMarch 4, 2025: Militia forces overrun army base in Nasir\nMarch 7, 2025: Failed UN extraction attempt results in deaths of prominent general and dozens of soldiers\n7.7+ million people facing severe food insecurity—the worst in the country’s history\nWidespread flooding since May 2024 threatening millions more\nElections postponed to 2026 amid growing political tensions\nPossible spillover from Sudan’s conflict into border regions\n\n\nMap of Incidents \n\n\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook"
+    "text": "2.2 Recent Escalation\nSince early 2024, South Sudan has seen a sharp decline in security and humanitarian conditions. Intercommunal violence escalated, prompting the deployment of additional peacekeepers, while fighting in neighboring Sudan disrupted a key oil pipeline, slashing state revenue. In 2025, clashes between government and opposition forces intensified. South Sudan has experienced a dramatic deterioration in security and humanitarian conditions:\n\n7.7+ million people facing severe food insecurity—the worst in the country’s history\nWidespread flooding since May 2024 threatening millions more\nElections postponed to 2026 amid growing political tensions\nPossible spillover from Sudan’s conflict into border regions\n\n\nMap of Incidents \n\n\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook"
   },
   {
     "objectID": "southsudan.html#incident-frequency-over-time",
@@ -515,7 +515,7 @@
     "href": "southsudan.html#location-of-attack",
     "title": "Security Incidents in South Sudan: Trends and Patterns",
     "section": "4.3 Location of Attack",
-    "text": "4.3 Location of Attack\n\n\n\n\n                                                \n\n\nFigure 4: Most common attack locations\n\n\n\n\n\n4.3.1 Analysis of Attack Locations\nThe majority of attacks on humanitarian workers occurred on roads, followed by public locations, highlighting extreme vulnerability during travel and in everyday environments."
+    "text": "4.3 Location of Attack\n\n\n\n\n                                                \n\n\nFigure 4: Security incidents by attack locations\n\n\n\n\n\n4.3.1 Analysis of Attack Locations\nThe majority of attacks on humanitarian workers occurred on roads, followed by public locations, highlighting extreme vulnerability during travel and in everyday environments."
   },
   {
     "objectID": "southsudan.html#casualties-by-category",
@@ -746,14 +746,14 @@
     "href": "appendix.html",
     "title": "Appendix",
     "section": "",
-    "text": "Executive Summaryn\nOverview of the project goals, data source (AWSD), key research questions, and why analyzing violence against aid workers matters.\nData Cleaning\nDetails on how the raw data was processed and standardized for analysis, including missing value handling and variable selection.\nInternational Analysis\nA global-level overview comparing trends, attack types, and humanitarian impact across multiple conflict-affected countries.\nExploring the Unknown\nInvestigates patterns of missing or “Unknown” data in security reports—revealing systematic information gaps by country and attribute.\n\n\n\n\nCountry-specific deep dives, each including historical context, temporal and spatial trends, attack characteristics, casualty patterns, and strategic recommendations:\n\n🇵🇸 Palestine\nFocus on the October 2023 escalation and impacts of aerial bombardment on aid operations in Gaza and the West Bank.\n🇦🇫 Afghanistan\nTracks violence across regimes—from Taliban rule to NATO presence to the current Islamic Emirate—highlighting shifts in targeting patterns.\n🇨🇩 DR Congo\nExplores complex violence in eastern DRC driven by armed groups, with a focus on mobility risks and localized conflict dynamics.\n🇸🇾 Syria\nAnalyzes conflict phases from civil war to regime collapse in 2024, with emphasis on aerial attacks and frontline crossfire incidents.\n🇸🇴 Somalia\nDetails threats from Al-Shabaab, patterns of ambushes and kidnappings, and the impact of climate shocks on humanitarian security.\n🇲🇱 Mali\nHighlights post-coup violence, the rise in kidnapping, and the shift from international to local staff exposure following MINUSMA withdrawal.\n🇸🇸 South Sudan\nInvestigates intercommunal conflict, targeted attacks on convoys, and the relationship between aid presence and violence.\n🇸🇩 Sudan\nFocuses on the humanitarian fallout from the 2023 civil war, including documentation challenges and increasing targeting of aid facilities.\n\n\n\n\n\nLLM Log\nA running log of how large language models were used throughout the project for analysis, text generation, and research assistance."
+    "text": "Executive Summary\nOverview of the project goals, data source (AWSD), key research questions, and why analyzing violence against aid workers matters.\nData Cleaning\nDetails on how the raw data was processed for analysis, including missing value handling and variable selection.\nGlobal Analysis\nA global-level analysis of trends, followed by the identification of countries with the highest number of security incidents for deeper investigation.\nExploring the Unknown\nInvestigates patterns of missing or “Unknown” data in security reports, revealing systematic information gaps by country and attribute.\n\n\n\n\nCountry-specific deep dives, each including historical context, temporal and spatial trends, attack characteristics, casualty patterns, and strategic recommendations:\n\n🇵🇸 Palestine\nFocus on the October 2023 escalation and impacts of aerial bombardment on aid operations in Gaza and the West Bank.\n🇦🇫 Afghanistan\nTracks violence across regimes—from Taliban rule to NATO presence to the current Islamic Emirate—highlighting shifts in targeting patterns.\n🇨🇩 DR Congo\nExplores complex violence in eastern DRC driven by armed groups, with a focus on mobility risks and localized conflict dynamics.\n🇸🇾 Syria\nAnalyzes conflict phases from civil war to regime collapse in 2024, with emphasis on aerial attacks and frontline crossfire incidents.\n🇸🇴 Somalia\nDetails threats from Al-Shabaab, patterns of ambushes and kidnappings, and the impact of climate shocks on humanitarian security.\n🇲🇱 Mali\nHighlights post-coup violence, the rise in kidnapping, and the shift from international to local staff exposure following MINUSMA withdrawal.\n🇸🇸 South Sudan\nInvestigates intercommunal conflict, targeted attacks on convoys, and the relationship between aid presence and violence.\n🇸🇩 Sudan\nFocuses on the humanitarian fallout from the 2023 civil war, including documentation challenges and increasing targeting of aid facilities.\n\n\n\n\n\nLLM Log\nA running log of how large language models were used throughout the project for analysis, text generation, and research assistance."
   },
   {
     "objectID": "appendix.html#project-sections",
     "href": "appendix.html#project-sections",
     "title": "Appendix",
     "section": "",
-    "text": "Executive Summaryn\nOverview of the project goals, data source (AWSD), key research questions, and why analyzing violence against aid workers matters.\nData Cleaning\nDetails on how the raw data was processed and standardized for analysis, including missing value handling and variable selection.\nInternational Analysis\nA global-level overview comparing trends, attack types, and humanitarian impact across multiple conflict-affected countries.\nExploring the Unknown\nInvestigates patterns of missing or “Unknown” data in security reports—revealing systematic information gaps by country and attribute.\n\n\n\n\nCountry-specific deep dives, each including historical context, temporal and spatial trends, attack characteristics, casualty patterns, and strategic recommendations:\n\n🇵🇸 Palestine\nFocus on the October 2023 escalation and impacts of aerial bombardment on aid operations in Gaza and the West Bank.\n🇦🇫 Afghanistan\nTracks violence across regimes—from Taliban rule to NATO presence to the current Islamic Emirate—highlighting shifts in targeting patterns.\n🇨🇩 DR Congo\nExplores complex violence in eastern DRC driven by armed groups, with a focus on mobility risks and localized conflict dynamics.\n🇸🇾 Syria\nAnalyzes conflict phases from civil war to regime collapse in 2024, with emphasis on aerial attacks and frontline crossfire incidents.\n🇸🇴 Somalia\nDetails threats from Al-Shabaab, patterns of ambushes and kidnappings, and the impact of climate shocks on humanitarian security.\n🇲🇱 Mali\nHighlights post-coup violence, the rise in kidnapping, and the shift from international to local staff exposure following MINUSMA withdrawal.\n🇸🇸 South Sudan\nInvestigates intercommunal conflict, targeted attacks on convoys, and the relationship between aid presence and violence.\n🇸🇩 Sudan\nFocuses on the humanitarian fallout from the 2023 civil war, including documentation challenges and increasing targeting of aid facilities.\n\n\n\n\n\nLLM Log\nA running log of how large language models were used throughout the project for analysis, text generation, and research assistance."
+    "text": "Executive Summary\nOverview of the project goals, data source (AWSD), key research questions, and why analyzing violence against aid workers matters.\nData Cleaning\nDetails on how the raw data was processed for analysis, including missing value handling and variable selection.\nGlobal Analysis\nA global-level analysis of trends, followed by the identification of countries with the highest number of security incidents for deeper investigation.\nExploring the Unknown\nInvestigates patterns of missing or “Unknown” data in security reports, revealing systematic information gaps by country and attribute.\n\n\n\n\nCountry-specific deep dives, each including historical context, temporal and spatial trends, attack characteristics, casualty patterns, and strategic recommendations:\n\n🇵🇸 Palestine\nFocus on the October 2023 escalation and impacts of aerial bombardment on aid operations in Gaza and the West Bank.\n🇦🇫 Afghanistan\nTracks violence across regimes—from Taliban rule to NATO presence to the current Islamic Emirate—highlighting shifts in targeting patterns.\n🇨🇩 DR Congo\nExplores complex violence in eastern DRC driven by armed groups, with a focus on mobility risks and localized conflict dynamics.\n🇸🇾 Syria\nAnalyzes conflict phases from civil war to regime collapse in 2024, with emphasis on aerial attacks and frontline crossfire incidents.\n🇸🇴 Somalia\nDetails threats from Al-Shabaab, patterns of ambushes and kidnappings, and the impact of climate shocks on humanitarian security.\n🇲🇱 Mali\nHighlights post-coup violence, the rise in kidnapping, and the shift from international to local staff exposure following MINUSMA withdrawal.\n🇸🇸 South Sudan\nInvestigates intercommunal conflict, targeted attacks on convoys, and the relationship between aid presence and violence.\n🇸🇩 Sudan\nFocuses on the humanitarian fallout from the 2023 civil war, including documentation challenges and increasing targeting of aid facilities.\n\n\n\n\n\nLLM Log\nA running log of how large language models were used throughout the project for analysis, text generation, and research assistance."
   },
   {
     "objectID": "delete.html",
@@ -894,5 +894,110 @@
     "title": "Large Language Model Log",
     "section": "",
     "text": "1 🤖 LLM Use Log\nThroughout this project, I used a large language model (LLM) as a collaborative tool to support various aspects of my analysis and presentation. Specifically:\n\nI used the LLM to reword and refine my own ideas, helping me express complex concepts more clearly while maintaining the original intent and tone.\nLLM’s assisted me in interpreting timelines and summarizing key events drawn from conflict tracker websites. This was particularly helpful when organizing country-specific narratives and understanding overlapping crises.\nI also leveraged the LLM to brainstorm and debug advanced interactive visualizations, especially those involving animation, filtering, and custom styling. While the model provided guidance, I actively engaged in the coding process and deepened my understanding of the tools and techniques involved.\n\nOverall, the LLM served as a learning companion, offering support without replacing the analytical or creative thinking that went into the work."
+  },
+  {
+    "objectID": "southsudan.html#for-security-planning",
+    "href": "southsudan.html#for-security-planning",
+    "title": "Security Incidents in South Sudan: Trends and Patterns",
+    "section": "7.1 For Security Planning",
+    "text": "7.1 For Security Planning\n\nDevelop specialized road movement protocols with multiple alternative routes when possible\nEstablish robust communications systems that function in remote areas with limited infrastructure\nCreate context-specific security trainings focusing on ambush prevention and response\nImplement staff tracking systems with regular check-in procedures during field movements\nInstall additional physical protection for vehicles operating in high-risk areas"
+  },
+  {
+    "objectID": "southsudan.html#for-humanitarian-organizations",
+    "href": "southsudan.html#for-humanitarian-organizations",
+    "title": "Security Incidents in South Sudan: Trends and Patterns",
+    "section": "7.2 For Humanitarian Organizations",
+    "text": "7.2 For Humanitarian Organizations\n\nEmphasize community acceptance strategies to mitigate targeting risks\nInvest in national staff security with equal protection measures and evacuation planning\nDevelop flexible programming modalities that can adapt to rapid security changes\nConsider operational partnerships that expand access while maintaining security standards\nBalance risk mitigation with humanitarian imperatives through principled engagement\n\n\n7.2.1 For Future Research\n\nInvestigate the relationship between political transitions and security incident patterns\nAnalyze the changing targeting patterns between national and international personnel\nExamine community-based protection mechanisms that have proven effective\nStudy the effectiveness of different security approaches in the South Sudan context\nExplore correlations between food insecurity and security incidents\n\nBy providing a data-driven understanding of security patterns in South Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
+  },
+  {
+    "objectID": "southsudan.html#for-policy-development",
+    "href": "southsudan.html#for-policy-development",
+    "title": "Security Incidents in South Sudan: Trends and Patterns",
+    "section": "7.3 For Policy Development",
+    "text": "7.3 For Policy Development\n\nAdvocate for humanitarian spaces in future political negotiations and peace agreements\nSupport coordinated security information sharing platforms among humanitarian actors\nPromote accountability mechanisms for attacks against humanitarian personnel\nEngage donors on realistic security costs in project budgets\nMaintain humanitarian principles while navigating complex political dynamics\n\n\n7.3.1 For Future Research\n\nInvestigate the relationship between political transitions and security incident patterns\nAnalyze the changing targeting patterns between national and international personnel\nExamine community-based protection mechanisms that have proven effective\nStudy the effectiveness of different security approaches in the South Sudan context\nExplore correlations between food insecurity and security incidents\n\nBy providing a data-driven understanding of security patterns in South Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
+  },
+  {
+    "objectID": "palestine.html#for-security-planning",
+    "href": "palestine.html#for-security-planning",
+    "title": "Security Incidents in Palestine: Trends and Patterns",
+    "section": "7.1 For Security Planning",
+    "text": "7.1 For Security Planning\n\nDevelop protocols specifically addressing risks from aerial bombardment and crossfire situations\nImplement enhanced early warning systems to monitor combat zone developments\nEstablish clear evacuation procedures for areas at high risk of becoming combat zones"
+  },
+  {
+    "objectID": "palestine.html#for-humanitarian-organizations",
+    "href": "palestine.html#for-humanitarian-organizations",
+    "title": "Security Incidents in Palestine: Trends and Patterns",
+    "section": "7.2 For Humanitarian Organizations",
+    "text": "7.2 For Humanitarian Organizations\n\nPrioritize protection measures for local staff, who face disproportionate security risks"
+  },
+  {
+    "objectID": "palestine.html#for-future-research",
+    "href": "palestine.html#for-future-research",
+    "title": "Security Incidents in Palestine: Trends and Patterns",
+    "section": "7.3 For Future Research",
+    "text": "7.3 For Future Research\n\nContinue monitoring security trends, especially given the recent escalation\nInvestigate the specific factors contributing to the disproportionate impact on local populations\nExamine the effectiveness of different security measures in reducing casualties\n\nBy providing a data-driven understanding of security patterns in the Occupied Palestinian Territories, this analysis aims to contribute to safer and more effective operations in this challenging environment."
+  },
+  {
+    "objectID": "mali.html#for-security-planning",
+    "href": "mali.html#for-security-planning",
+    "title": "Security Incidents in Mali: Trends and Patterns",
+    "section": "8.1 For Security Planning",
+    "text": "8.1 For Security Planning\n\nImplement journey management systems with real-time risk assessments for ambush prevention\nEstablish early warning networks for intelligence on armed group movements\nCreate specialized anti-kidnapping protocols with comprehensive staff training\nDevelop clear security thresholds for program suspension in high-risk areas"
+  },
+  {
+    "objectID": "mali.html#for-humanitarian-organizations",
+    "href": "mali.html#for-humanitarian-organizations",
+    "title": "Security Incidents in Mali: Trends and Patterns",
+    "section": "8.2 For Humanitarian Organizations",
+    "text": "8.2 For Humanitarian Organizations\n\nBalance operational presence with community acceptance strategies\nInvest in remote management capabilities for periods of limited access\nPrioritize national staff security with equal protection measures\nDevelop flexible programming models adaptable to changing security conditions"
+  },
+  {
+    "objectID": "mali.html#for-future-research",
+    "href": "mali.html#for-future-research",
+    "title": "Security Incidents in Mali: Trends and Patterns",
+    "section": "8.3 For Future Research",
+    "text": "8.3 For Future Research\n\nExamine access negotiation effectiveness with different armed groups\nAnalyze the impact of foreign security actors (UN, France, Wagner) on humanitarian security\nStudy community protection strategies in areas where state authority has receded\nEvaluate digital technology applications for security management in high-risk environments"
+  },
+  {
+    "objectID": "syria.html#for-security-planning",
+    "href": "syria.html#for-security-planning",
+    "title": "Security Incidents in Syrian Arab Republic: Trends and Patterns",
+    "section": "7.1 For Security Planning",
+    "text": "7.1 For Security Planning\n\nMap and monitor high-risk areas near frontlines, with live updates on aerial activity and shelling zones.\nEstablish hardened infrastructure and underground shelters at compounds and project sites.\nDevelop rapid evacuation protocols tailored to conflict escalation patterns."
+  },
+  {
+    "objectID": "syria.html#for-humanitarian-organizations",
+    "href": "syria.html#for-humanitarian-organizations",
+    "title": "Security Incidents in Syrian Arab Republic: Trends and Patterns",
+    "section": "7.2 For Humanitarian Organizations",
+    "text": "7.2 For Humanitarian Organizations\n\nProvide personal protective equipment and conflict awareness training to national staff in volatile areas.\nStrengthen coordination with local actors and communities to improve incident reporting and early warnings.\nScale up remote programming in areas with ongoing aerial bombardment or crossfire."
+  },
+  {
+    "objectID": "syria.html#for-future-research",
+    "href": "syria.html#for-future-research",
+    "title": "Security Incidents in Syrian Arab Republic: Trends and Patterns",
+    "section": "7.3 For Future Research",
+    "text": "7.3 For Future Research\n\nAnalyze how territorial control shifts impact humanitarian security in real time.\nInvestigate long-term mental health outcomes for frontline national staff.\nStudy the role of infrastructure damage (e.g., hospitals, water, roads) on aid delivery and mobility."
+  },
+  {
+    "objectID": "sudan.html#for-security-planning",
+    "href": "sudan.html#for-security-planning",
+    "title": "Security Incidents in Sudan: Trends and Patterns",
+    "section": "7.1 For Security Planning",
+    "text": "7.1 For Security Planning\n\nConduct regular route risk assessments, especially on roads with a history of ambushes.\nUse armed escorts for convoys in high-risk areas.\nTailor security protocols by region—urban areas like Khartoum vs. rural areas like Darfur.\nSet evacuation thresholds based on real-time shifts in territorial control."
+  },
+  {
+    "objectID": "sudan.html#for-humanitarian-organizations",
+    "href": "sudan.html#for-humanitarian-organizations",
+    "title": "Security Incidents in Sudan: Trends and Patterns",
+    "section": "7.2 For Humanitarian Organizations",
+    "text": "7.2 For Humanitarian Organizations\n\nEnhance security info-sharing between national and international partners.\nPre-position essential supplies in hard-to-reach regions.\nUse remote programming in RSF-held areas to reduce staff exposure.\nProvide mental health support for staff affected by violence."
+  },
+  {
+    "objectID": "sudan.html#for-future-research",
+    "href": "sudan.html#for-future-research",
+    "title": "Security Incidents in Sudan: Trends and Patterns",
+    "section": "7.3 For Future Research",
+    "text": "7.3 For Future Research\n\nStudy how shifts in control affect attack frequency and location.\nCompare risks faced by national vs. international staff.\nAssess damage to infrastructure like hospitals and clinics.\nEvaluate which diplomatic efforts improve humanitarian access.\n\nBy providing a data-driven understanding of security patterns in Sudan, this analysis aims to contribute to safer and more effective operations in this challenging environment."
   }
 ]

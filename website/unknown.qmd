@@ -69,10 +69,10 @@ This analysis examines patterns of missing data ("Unknown" values) in humanitari
 
 Key findings include:
 
-- **Substantial data gaps**: Between 25% and 45% of critical incident details are missing across the countries analyzed, with Sudan showing the highest rate of unknown values (over 40%).
+- **Substantial data gaps**: Critical incident details are missing across the countries analyzed, with Sudan showing the highest rate of unknown values (over 40%).
 - **Country-specific reporting challenges**: Sudan, DR Congo, and Afghanistan demonstrate the highest proportions of missing data, suggesting specific challenges in information collection in these environments.
 - **Systematic information biases**: Perpetrator information (actor identity and type) and attack motives are consistently the most incomplete fields across all countries, creating a systematic accountability gap.
-- **Uneven documentation quality**: Location data is generally more complete than other fields, suggesting focused reporting priorities on "where" incidents occur rather than "who" is responsible.
+- **Uneven documentation quality**: Location, means of attack, and attack context data is generally more complete than other fields, suggesting focused reporting priorities on "what" incidents occur rather than "who" is responsible.
 - **Data reliability variation**: The reliability of security analysis varies significantly by country, with Occupied Palestinian Territories and Syrian Arab Republic data appearing more complete than other conflict zones.
 
 This missingness is not random but follows patterns that reflect both operational constraints in conflict environments and potential reporting biases. These systematic gaps must be explicitly acknowledged when conducting cross-country comparisons or analyzing perpetrator accountability.
@@ -82,6 +82,7 @@ This missingness is not random but follows patterns that reflect both operationa
 ## Background
 
 Humanitarian security incident data provide crucial insights into patterns of violence in conflict zones, helping organizations protect staff, allocate resources, and advocate for civilian protection. However, these datasets often contain substantial information gaps due to access limitations, security concerns, and reporting infrastructure challenges.
+
 This analysis explores patterns of missing data across different countries and incident attributes, revealing how information gaps may affect our understanding of humanitarian crises. By identifying where data is most consistently missing, we can better contextualize findings and understand the limitations of conflict monitoring systems.
 
 ## Methodology
@@ -276,8 +277,6 @@ plt.show()
 **Emergency Response Priorities**: During humanitarian crises, responders often prioritize basic needs (e.g., food, water, shelter) over detailed demographic tracking.
 
 **Reporting Biases**: Incidents affecting females may be underreported in some settings. This data may underrepresent violence against women, particularly sexual violence, is often underreported in conflict zones due to stigma and limited access to reporting mechanisms.
-
-**Legal and Social Norms**: In some countries, recognition of non-binary or transgender individuals is limited or criminalized, leading to exclusion or misclassification. This can result in either lumping into "unknown" or not recording the data at all.
 
 # Conclusion 
 

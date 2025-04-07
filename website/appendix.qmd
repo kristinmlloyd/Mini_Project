@@ -20,17 +20,17 @@ execute:
 
 ### 🔹 Core Pages
 
-- [**Executive Summaryn**](intro.qmd)  
+- [**Executive Summary**](intro.qmd)  
   Overview of the project goals, data source (AWSD), key research questions, and why analyzing violence against aid workers matters.
 
 - [**Data Cleaning**](data_cleaning.qmd)  
-  Details on how the raw data was processed and standardized for analysis, including missing value handling and variable selection.
+  Details on how the raw data was processed for analysis, including missing value handling and variable selection.
 
-- [**International Analysis**](international.qmd)  
-  A global-level overview comparing trends, attack types, and humanitarian impact across multiple conflict-affected countries.
+- [**Global Analysis**](international.qmd)  
+  A global-level analysis of trends, followed by the identification of countries with the highest number of security incidents for deeper investigation.
 
 - [**Exploring the Unknown**](unknown.qmd)  
-  Investigates patterns of missing or "Unknown" data in security reports—revealing systematic information gaps by country and attribute.
+  Investigates patterns of missing or "Unknown" data in security reports, revealing systematic information gaps by country and attribute.
 
 ### 🌍 Individual Country Analysis  
 Country-specific deep dives, each including historical context, temporal and spatial trends, attack characteristics, casualty patterns, and strategic recommendations:

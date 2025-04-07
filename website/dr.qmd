@@ -510,41 +510,25 @@ The table reveals a pattern of security incidents in the DRC spanning two decade
 
 For more detailed information on the Israeli-Palestinian conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/violence-democratic-republic-congo).
 
-# Conclusions and Recommendations {#sec-conclusions}
-
-## Key Findings
-
-This analysis of security incidents in the Democratic Republic of Congo reveals several critical patterns and trends:
-
-1.  **Political transitions impact security**: Major surges in security incidents coincided with political transitions, notably after Tshisekedi took power in 2019, suggesting internal instability during power shifts.
-
-2.  **Kidnapping as primary tactic**: Unlike other conflict zones, the DRC shows a distinct pattern of kidnappings as the predominant means of attack, reflecting armed groups' strategic priorities for funding and control.
-
-3.  **Ambush as primary context**: Most security incidents occur during ambushes, highlighting the tactical approach of armed groups exploiting the region's challenging geography and infrastructure limitations.
-
-4.  **Disproportionate impact on nationals**: Congolese nationals face significantly higher risks of kidnapping compared to internationals, underscoring the unequal exposure to security threats.
-
-5.  **Geographic vulnerabilities**: Road networks and transportation routes emerge as particularly high-risk areas, with the majority of major incidents occurring during movement.
-
-## 💡 Recommendations
+# 💡 Recommendations
 
 These findings suggest specific approaches for operating in the DRC context:
 
-### For Security Planning
+## For Security Planning
 
 -   Implement comprehensive journey management protocols with real-time risk assessments
 -   Establish robust communication networks with regular check-in procedures during movements
 -   Develop specific anti-kidnapping protocols and train staff on prevention and response
 -   Consider armed escorts on high-risk routes where appropriate and legally permissible
 
-### For Humanitarian Organizations
+## For Humanitarian Organizations
 
 -   Balance operational presence with a thorough understanding of conflict dynamics in each area
 -   Consider remote programming models in areas with highest kidnapping risks
 -   Prioritize national staff security with equal investment in protection measures
 -   Develop context-specific security training focusing on ambush prevention and response
 
-### For Future Research
+## For Future Research
 
 -   Analyze the effectiveness of different security approaches in reducing kidnapping risks
 -   Examine the long-term trends in security following major political transitions

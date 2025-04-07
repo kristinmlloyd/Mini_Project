@@ -525,39 +525,23 @@ This table displays all security incidents in Mali from 2018 to 2024, highlighti
 
 For more detailed information on the Mali conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/violent-extremism-sahel).
 
-# Conclusions and Recommendations {#sec-conclusions}
+# 💡 Recommendations
 
-## Key Findings
-
-This analysis reveals several critical trends in Mali's security environment:
-
-1.  **Political instability drives insecurity**: The 2020 coup marked a turning point, with incidents increasing fivefold compared to pre-coup periods.
-
-2.  **Targeted kidnapping operations**: Mali shows a pattern of calculated kidnapping targeting humanitarian personnel for financial and strategic gains.
-
-3.  **Road movement risks**: Ambushes along limited transport corridors severely constrain humanitarian access.
-
-4.  **Unequal risk distribution**: The casualty disparity between Malian and international personnel requires tailored security approaches.
-
-5.  **Misleading security metrics**: Military withdrawals correlate with apparent improvements that actually represent reduced humanitarian presence.
-
-## 💡 Recommendations
-
-### For Security Planning
+## For Security Planning
 
 -   Implement journey management systems with real-time risk assessments for ambush prevention
 -   Establish early warning networks for intelligence on armed group movements
 -   Create specialized anti-kidnapping protocols with comprehensive staff training
 -   Develop clear security thresholds for program suspension in high-risk areas
 
-### For Humanitarian Organizations
+## For Humanitarian Organizations
 
 -   Balance operational presence with community acceptance strategies
 -   Invest in remote management capabilities for periods of limited access
 -   Prioritize national staff security with equal protection measures
 -   Develop flexible programming models adaptable to changing security conditions
 
-### For Future Research
+## For Future Research
 
 -   Examine access negotiation effectiveness with different armed groups
 -   Analyze the impact of foreign security actors (UN, France, Wagner) on humanitarian security
