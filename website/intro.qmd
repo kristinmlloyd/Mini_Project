@@ -710,6 +710,8 @@ plt.subplots_adjust(left=0.32, right=0.82)
 plt.show()
 ```
 
+Due to uneven documentation quality, we prioritized variables with higher data completeness—namely location, means of attack, and attack context—as the main points of analysis, reflecting a reporting emphasis on “what” happened rather than “who” was responsible.
+
 # Conclusions and Recommendations
 
 ## Implications from Key Findings

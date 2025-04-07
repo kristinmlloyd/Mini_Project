@@ -179,7 +179,7 @@ This heatmap reveals that missing data is not evenly distributed across columns 
 
 - **Perpetrator information gaps**: Fields related to those responsible for incidents—specifically actor type, actor name, and motive—consistently show the highest rates of unknown values.
 - **Country-specific patterns**: Sudan shows particularly high missingness across all fields, while the Occupied Palestinian Territories has better documentation overall.
-- **Relatively complete means of attacks, attack context, and location data**: Across most countries, this type of information is more consistently available than other fields.
+- **Relatively complete means of attack, attack context, and location data**: Across most countries, this type of information is more consistently available than other fields.
 
 ```{python}
 #| echo: false
@@ -299,4 +299,4 @@ Based on these findings, we recommend the following approaches:
 - **Pattern analysis of unknowns**: Rather than treating "Unknown" values as simply missing, analyze their patterns and correlations to gain insights about the conditions under which information gaps occur. This meta-analysis can reveal important contextual factors affecting documentation.
 - **Transparency in derived conclusions**: When publishing analysis based on this data, clearly communicate the limitations and acknowledge how missing data may affect conclusions. This transparency builds credibility and encourages appropriate use of the findings.
 
-By implementing these recommendations, organizations can both improve the quality of security incident data and make more responsible use of existing information, despite its limitations.RetryClaude can make mistakes. Please double-check responses.
+By implementing these recommendations, organizations can both improve the quality of security incident data and make more responsible use of existing information, despite its limitations.
