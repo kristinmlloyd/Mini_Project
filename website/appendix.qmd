@@ -63,3 +63,7 @@ Country-specific deep dives, each including historical context, temporal and spa
 
 - [**LLM Log**](llm.qmd)  
   A running log of how large language models were used throughout the project for analysis, text generation, and research assistance.
+
+### Commit History
+
+![](images/commits.png)
