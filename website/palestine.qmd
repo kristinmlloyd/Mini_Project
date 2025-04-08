@@ -371,7 +371,7 @@ fig_locations.show()
 
 ### Analysis of Attack Locations
 
-Most incidents occurred at project sites, roads, and public locations, but a large share remain unidentified
+Most incidents occurred at **project sites**, on **roads**, and in **public spaces**, though a significant portion remain at unidentified locations.
 
 # Human Impact of Security Incidents {#sec-impact}
 
