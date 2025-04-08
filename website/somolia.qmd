@@ -533,32 +533,21 @@ These findings reinforce the need for proactive security protocols, especially f
 
 For more detailed information on the Somolian conflict timeline, see the [Council on Foreign Relations Conflict Tracker](https://www.cfr.org/global-conflict-tracker/conflict/al-shabab-somalia).
 
-# Conclusions and Recommendations {#sec-conclusions}
+# 💡 Recommendations
 
-## Key Findings
-
-1. **Incident surges reflect major conflict milestones**, with peaks during Al-Shabaab’s territorial expansion and retaliatory attacks after foreign interventions.
-2. **Shooting and kidnapping dominate attack methods**, pointing to both militarized violence and targeted abduction strategies.
-3. **Ambushes are the most common context**, especially along roads, posing high risks to mobile teams and convoys.
-4. **National staff face the highest risks**, accounting for the overwhelming majority of deaths, injuries, and kidnappings.
-5. **Top-impact incidents occur in roads and compounds**, showing that both movement and fixed locations carry high security exposure.
-6. **Non-state armed groups are responsible for all major attacks**, indicating persistent insecurity even during periods of relative political calm.
-
-## 💡 Recommendations
-
-### For Security Planning
+## For Security Planning
 
 - Routinely map ambush-prone roadways and update movement protocols for affected corridors.
 - Reinforce compound perimeters and conduct regular drills for shelter-in-place or raid response.
 - Establish early-warning systems tied to Al-Shabaab activity, especially before declared offensives or rainy seasons.
 
-### For Humanitarian Organizations
+## For Humanitarian Organizations
 
 - Prioritize national staff protection with tailored training, protective gear, and mental health services.
 - Build contingency supply caches in stable regions to reduce dependence on insecure roads.
 - Strengthen coordination with local security actors and community leaders in high-risk areas.
 
-### For Future Research
+## For Future Research
 
 - Examine links between climate shocks (e.g., floods, droughts) and violence escalation.
 - Analyze the evolution of Al-Shabaab’s targeting tactics across operational zones.
